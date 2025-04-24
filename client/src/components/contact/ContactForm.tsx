@@ -97,7 +97,7 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
     // Convert string to number for apartmentId
     const formData: InquiryFormData = {
       ...data,
-      apartmentId: data.apartmentId ? parseInt(data.apartmentId) : undefined,
+      apartmentId: data.apartmentId && data.apartmentId !== "none" ? parseInt(data.apartmentId) : undefined,
     };
     mutation.mutate(formData);
   };
@@ -172,7 +172,7 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="">
+                        <SelectItem value="none">
                           {t("contact.form.notSure")}
                         </SelectItem>
                         {apartments.map((apartment) => (

@@ -6,7 +6,7 @@ const enTranslation = {
   "nav.contact": "Contact",
   
   // Home Page
-  "home.hero.welcome": "Welcome to Apartmani Ivančević",
+  "home.hero.welcome": "Welcome to Apartments Ivančević",
   "home.hero.subheading": "Your home on Korčula",
   "home.hero.description": "Experience the beauty of the Adriatic coast in our family-owned apartments, just steps away from crystal-clear waters and breathtaking views.",
   "home.hero.viewApartments": "View Apartments",
@@ -83,7 +83,7 @@ const enTranslation = {
   "footer.navigation": "Navigation",
   "footer.contact": "Contact",
   "footer.followUs": "Follow Us",
-  "footer.copyright": "© 2023 Apartmani Ivančević. All rights reserved.",
+  "footer.copyright": "© 2025 Apartments Ivančević. All rights reserved.",
   "footer.privacy": "Privacy Policy",
   "footer.terms": "Terms of Service",
   

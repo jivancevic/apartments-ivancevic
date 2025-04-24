@@ -21,7 +21,7 @@ const Header = () => {
           <div>
             <Link href="/" className="flex items-center">
               <span className="text-primary font-heading font-bold text-2xl">
-                Apartmani Ivančević
+                {t("home.hero.welcome").replace("Welcome to ", "")}
               </span>
             </Link>
           </div>

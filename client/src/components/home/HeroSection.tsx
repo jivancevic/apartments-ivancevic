@@ -8,7 +8,7 @@ const HeroSection = () => {
     <section id="home" className="relative bg-neutral-dark h-[80vh] min-h-[600px]">
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1565111928471-a3a9dded12e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+          src="https://images.unsplash.com/photo-of-gray-concrete-establishment-near-the-body-of-water-Wxqxfy5QnNo?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
           alt="Korčula coastline" 
           className="w-full h-full object-cover"
         />
@@ -27,15 +27,11 @@ const HeroSection = () => {
             {t("home.hero.description")}
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/apartments">
-              <a className="bg-primary hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-md transition-colors">
-                {t("home.hero.viewApartments")}
-              </a>
+            <Link href="/apartments" className="bg-primary hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-md transition-colors">
+              {t("home.hero.viewApartments")}
             </Link>
-            <Link href="/contact">
-              <a className="bg-white hover:bg-gray-100 text-primary font-medium py-3 px-6 rounded-md transition-colors">
-                {t("home.hero.sendInquiry")}
-              </a>
+            <Link href="/contact" className="bg-white hover:bg-gray-100 text-primary font-medium py-3 px-6 rounded-md transition-colors">
+              {t("home.hero.sendInquiry")}
             </Link>
           </div>
         </div>

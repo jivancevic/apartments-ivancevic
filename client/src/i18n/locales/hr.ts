@@ -31,6 +31,8 @@ const hrTranslation = {
   // Apartments Page
   "apartments.title": "Naši apartmani",
   "apartments.amenities": "Sadržaji",
+  "apartments.location": "Lokacija",
+  "apartments.mapPlaceholder": "Interaktivna karta se učitava...",
   "apartments.price": "Cijena po noćenju",
   "apartments.lowSeason": "Niska sezona",
   "apartments.highSeason": "Visoka sezona",

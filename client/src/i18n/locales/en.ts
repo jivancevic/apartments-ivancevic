@@ -26,6 +26,8 @@ const enTranslation = {
   // Apartments Page
   "apartments.title": "Our Apartments",
   "apartments.amenities": "Amenities",
+  "apartments.location": "Location",
+  "apartments.mapPlaceholder": "Interactive map loading...",
   "apartments.price": "Price per night",
   "apartments.lowSeason": "Low Season",
   "apartments.highSeason": "High Season",

@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "wouter";
 import { Apartment, Booking } from "@/types";
 import ApartmentGallery from "./ApartmentGallery";
-import Calendar from "@/components/ui/Calendar";
+import { Calendar } from "@/components/ui/calendar";
 import AmenityIcon from "@/components/ui/AmenityIcon";
 import useLanguage from "@/hooks/useLanguage";
 import { useQuery } from "@tanstack/react-query";
@@ -17,7 +17,7 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
   const { currentLanguage } = useLanguage();
   
   // Fetch bookings for this apartment
-  const { data: bookings, isLoading } = useQuery({
+  const { data: bookings, isLoading } = useQuery<Booking[]>({
     queryKey: [`/api/apartments/${apartment.id}/bookings`],
   });
 
@@ -99,16 +99,17 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
           )}
         </div>
 
-        <div className="mb-6 rounded-lg overflow-  hidden">
-          <iframe
-            title="Apartment Location"
-            src={`https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${encodeURIComponent(apartment.location)}`}
-            width="100%"
-            height="250"
-            style={{ border: 0 }}
-            loading="lazy"
-            allowFullScreen
-          ></iframe>
+        {/* Location */}
+        <h4 className="font-heading font-semibold text-lg mb-3">
+          {t("apartments.location")}
+        </h4>
+        <div className="mb-2 text-gray-700">
+          <p>{apartment.location}</p>
+        </div>
+        <div className="mb-6 rounded-lg overflow-hidden shadow-md">
+          <div className="bg-neutral p-2 text-center text-sm text-gray-500">
+            {t("apartments.mapPlaceholder")}
+          </div>
         </div>
         
         {/* Prices */}

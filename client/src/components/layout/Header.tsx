@@ -49,6 +49,9 @@ const Header = () => {
             <Link href="/apartments" className="font-heading font-medium hover:text-primary transition-colors">
               {t("nav.apartments")}
             </Link>
+            <Link href="/about" className="font-heading font-medium hover:text-primary transition-colors">
+              {t("nav.about")}
+            </Link>
             <Link href="/visit" className="font-heading font-medium hover:text-primary transition-colors">
               {t("nav.visit")}
             </Link>

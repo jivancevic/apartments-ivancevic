@@ -84,7 +84,22 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      textShadow: {
+        sm: '2px 2px 2px rgba(0, 0, 0, 0.9)',
+        DEFAULT: '2px 2px 4px rgba(0, 0, 0, 0.8)',
+        lg: '1px 1px 2px rgba(0, 0, 0, 1)',
+      },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography"),
+           function ({ matchUtilities, theme }) {
+             matchUtilities(
+               {
+                 'text-shadow': (value) => ({
+                   textShadow: value,
+                 }),
+               },
+               { values: theme('textShadow') }
+             )
+           }],
 } satisfies Config;

@@ -2,6 +2,7 @@ const hrTranslation = {
   // Navigation
   "nav.home": "Početna",
   "nav.apartments": "Apartmani",
+  "nav.about": "O nama",
   "nav.visit": "Što posjetiti",
   "nav.contact": "Kontakt",
 
@@ -25,7 +26,7 @@ const hrTranslation = {
     "Besplatno privatno parkiralište za sve naše goste tijekom boravka.",
   "features.views.title": "Prekrasni pogledi",
   "features.views.description":
-    "Uživajte u zadivljujućim pogledima na more i planine s balkona naših apartmana.",
+    "Uživajte u zadivljujućim pogledima na Stari Grad i more s balkona naših apartmana.",
 
   // Apartments Page
   "apartments.title": "Naši apartmani",
@@ -81,9 +82,9 @@ const hrTranslation = {
   // Contact Information
   "contact.info.email": "Email",
   "contact.info.phone": "Telefon",
-  "contact.info.father": "Otac",
-  "contact.info.mother": "Majka",
-  "contact.info.son": "Sin",
+  "contact.info.vicko": "Vicko",
+  "contact.info.mirica": "Mirica",
+  "contact.info.josip": "Josip",
   "contact.info.address": "Adresa",
 
   // Footer
@@ -92,7 +93,7 @@ const hrTranslation = {
   "footer.navigation": "Navigacija",
   "footer.contact": "Kontakt",
   "footer.followUs": "Pratite nas",
-  "footer.copyright": "© 2023 Apartmani Ivančević. Sva prava pridržana.",
+  "footer.copyright": "© 2025 Apartmani Ivančević. Sva prava pridržana.",
   "footer.privacy": "Politika privatnosti",
   "footer.terms": "Uvjeti korištenja",
 
@@ -105,6 +106,23 @@ const hrTranslation = {
   "calendar.days.sat": "Su",
   "calendar.days.sun": "Ne",
 
+  // About Page
+  "about.title": "O Apartmanima Ivančević",
+  "about.family.title": "Obitelj Ivančević",
+  "about.family.story1": "Dobrodošli u naše obiteljske apartmane na prekrasnoj Korčuli. Već više od tri generacije, obitelj Ivančević prima goste u naš mali rajski kutak na jadranskoj obali.",
+  "about.family.story2": "Ono što je započelo kao mali obiteljski dom preraslo je u zbirku od devet jedinstvenih apartmana, od kojih je svaki dizajniran i održavan s pažnjom i detaljima od strane različitih članova naše obitelji.",
+  "about.family.story3": "Ponosimo se pružanjem osobnog pristupa vašem iskustvu odmora, dijeljenjem lokalnih preporuka i osiguravanjem svega što vam je potrebno za nezaboravan boravak.",
+  "about.mission.title": "Naša misija",
+  "about.mission.description": "Naš cilj je pružiti autentičnu hrvatsku gostoljubivost i udoban smještaj koji omogućuje našim gostima da dožive pravu ljepotu i kulturu otoka Korčule.",
+  "about.history.title": "Naša povijest",
+  "about.history.paragraph1": "Obitelj Ivančević ima duboke korijene na Korčuli, s našim precima koji žive na ovom prekrasnom otoku već generacijama. Naši apartmani započeli su kao mali obiteljski pothvat 1980-ih godina.",
+  "about.history.paragraph2": "Tijekom godina proširili smo i renovirali naše nekretnine, uvijek održavajući autentični karakter uz dodavanje modernih sadržaja kako bismo osigurali vašu udobnost.",
+  "about.history.paragraph3": "Danas nastavljamo našu obiteljsku tradiciju gostoljubivosti, dočekujući goste iz cijelog svijeta da dožive naš dio hrvatskog raja.",
+  "about.korculaHistory.title": "O Korčuli",
+  "about.korculaHistory.paragraph1": "Korčula je jedan od najljepših otoka u Jadranskom moru, poznat po gustim šumama, šarmantnim selima i srednjovjekovnom gradu Korčuli, često nazvanom 'Mali Dubrovnik'.",
+  "about.korculaHistory.paragraph2": "Otok ima bogatu povijest koja seže u doba starih Grka. Također se tvrdi da je rodno mjesto slavnog istraživača Marka Pola.",
+  "about.korculaHistory.paragraph3": "Danas Korčula nudi savršen spoj povijesti, kulture, prekrasnih plaža, lokalne kuhinje i izvrsnih vina, čineći je idealnim odredištem za putnike koji traže autentično hrvatsko iskustvo.",
+  
   // Form Validation
   "validation.required": "Ovo polje je obavezno",
   "validation.email": "Unesite važeću email adresu",

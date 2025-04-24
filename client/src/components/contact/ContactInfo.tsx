@@ -31,21 +31,21 @@ const ContactInfo = () => {
             <div>
               <div className="font-medium">{t("contact.info.phone")}</div>
               <div className="mb-1">
-                {t("contact.info.father")}: 
-                <a href="tel:+38598765432" className="text-primary hover:underline ml-1">
-                  +385 98 765 4321
+                {t("contact.info.vicko")}: 
+                <a href="tel:+38598660645" className="text-primary hover:underline ml-1">
+                  +385 98 6606 45
                 </a>
               </div>
               <div className="mb-1">
-                {t("contact.info.mother")}: 
-                <a href="tel:+38598765433" className="text-primary hover:underline ml-1">
-                  +385 98 765 4322
+                {t("contact.info.mirica")}: 
+                <a href="tel:+385976830150" className="text-primary hover:underline ml-1">
+                  +385 97 6830 150
                 </a>
               </div>
               <div>
-                {t("contact.info.son")}: 
-                <a href="tel:+38598765434" className="text-primary hover:underline ml-1">
-                  +385 98 765 4323
+                {t("contact.info.josip")}: 
+                <a href="tel:+385915162223" className="text-primary hover:underline ml-1">
+                  +385 91 516 2223
                 </a>
               </div>
             </div>
@@ -57,7 +57,7 @@ const ContactInfo = () => {
             </div>
             <div>
               <div className="font-medium">{t("contact.info.address")}</div>
-              <div>Korčula 25, 20260 Korčula</div>
+              <div>Ul. Ante Starčevića 1, 20260 Korčula</div>
               <div>Croatia</div>
             </div>
           </div>
@@ -67,8 +67,8 @@ const ContactInfo = () => {
       {/* Map */}
       <div className="relative h-80 bg-neutral rounded-lg overflow-hidden">
         <iframe
-          title="Apartmani Ivančević Location"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46566.25800235376!2d16.88986538359375!3d42.95583899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a75ac4099c23d%3A0x50ce2af4b3db5056!2zS29yxI11bGEsIENyb2F0aWE!5e0!3m2!1sen!2sus!4v1625685663290!5m2!1sen!2sus"
+          title="Apartments Ivančević Location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.5525423497606!2d17.132241975471516!3d42.95820129710443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5025347a0fa9%3A0xc1b4d6a3ec89d93e!2zVWwuIEFudGUgU3RhcsSNZXZpxIdhIDEsIDIwMjYwLCBLb3LEjXVsYQ!5e1!3m2!1sen!2shr!4v1745507221489!5m2!1sen!2shr"
           width="100%"
           height="100%"
           style={{ border: 0 }}

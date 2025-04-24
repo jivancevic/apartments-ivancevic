@@ -98,6 +98,18 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
             </div>
           )}
         </div>
+
+        <div className="mb-6 rounded-lg overflow-  hidden">
+          <iframe
+            title="Apartment Location"
+            src={`https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${encodeURIComponent(apartment.location)}`}
+            width="100%"
+            height="250"
+            style={{ border: 0 }}
+            loading="lazy"
+            allowFullScreen
+          ></iframe>
+        </div>
         
         {/* Prices */}
         <div className="bg-neutral p-4 rounded-lg mb-6">

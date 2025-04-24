@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-8 md:mb-0">
             <div className="font-heading font-bold text-2xl mb-4">
-              Apartmani Ivančević
+              {t("home.hero.welcome")}
             </div>
             <p className="max-w-md">
               {t("footer.description")}
@@ -58,8 +58,8 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+38598765432" className="hover:underline">
-                    +385 98 765 4321
+                  <a href="tel:+38598660645" className="hover:underline">
+                    +385 98 6606 45 (Vicko)
                   </a>
                 </li>
               </ul>

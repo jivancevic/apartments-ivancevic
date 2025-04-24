@@ -124,17 +124,18 @@ export class MemStorage implements IStorage {
   private seedApartments() {
     const sampleApartments: InsertApartment[] = [
       {
-        nameEn: "Apartment 1 (Sea View)",
-        nameHr: "Apartman 1 (Pogled na more)",
-        descriptionEn: "A beautiful apartment with stunning sea views from the private balcony. Perfect for couples or small families looking for comfort and tranquility.",
-        descriptionHr: "Prekrasan apartman s nevjerojatnim pogledom na more s privatnog balkona. Savršen za parove ili manje obitelji koje traže udobnost i mir.",
-        mainImage: "/images/apartments/apt1-main.jpg",
+        nameEn: "Magical Oasis",
+        nameHr: "Magical Oasis",
+        descriptionEn: "Discover a blend of ancient allure and modern luxury in our 35m² Korčula apartment. Nestled in the heart of the Old Town, right beside the storied Kanavelic Tower, this charming space boasts authentic stone walls, evoking tales of yesteryears. Though it radiates old-world charm, rest assured, it's equipped with contemporary comforts: 2 ACs,  2 TVs, BT soundbar, dishwasher, washer, and dryer. Dive into Korčula's rich past while indulging in today's conveniences in this enchanting retreat.",
+        descriptionHr: "Otkrij spoj drevnog šarma i moderne udobnosti u našem apartmanu od 35 m² u Korčuli. Smješten u srcu Starog grada, odmah pokraj povijesne Kule Kanavelić, ovaj šarmantni prostor krase autentični kameni zidovi koji prizivaju priče prošlih vremena. Iako odiše duhom starine, opremljen je svim suvremenim pogodnostima: 2 klima uređaja, 2 televizora, Bluetooth zvučnici, perilica posuđa, perilica i sušilica rublja. Uživajte u bogatoj prošlosti Korčule uz udobnosti današnjice u ovom očaravajućem kutku.",
+        mainImage: "/images/apartments/apat1-main.jpeg",
         images: [
-          "/images/apartments/apt1-1.jpg",
-          "/images/apartments/apt1-2.jpg",
-          "/images/apartments/apt1-3.jpg",
-          "/images/apartments/apt1-4.jpg"
+          "/images/apartments/apat1-1.jpeg",
+          "/images/apartments/apat1-2.jpeg",
+          "/images/apartments/apat1-3.jpeg",
+          "/images/apartments/apat1-4.jpeg"
         ],
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.35815949195765!2d17.13583210884043!3d42.96238425612054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a517549e08c53%3A0x20f6b511dabd88db!2sMagical%20Oasis%20for%20two%20in%20Korcula%20Old%20Town!5e0!3m2!1sen!2shr!4v1745508164244!5m2!1sen!2shr",
         price: 80,
         priceHigh: 120,
         pricePeak: 150,

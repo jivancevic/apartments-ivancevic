@@ -8,22 +8,22 @@ const HeroSection = () => {
     <section id="home" className="relative bg-neutral-dark h-[80vh] min-h-[600px]">
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-of-gray-concrete-establishment-near-the-body-of-water-Wxqxfy5QnNo?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+          src="/images/korcula.jpg"
           alt="Korčula coastline" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-neutral-dark bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-black/40"></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10 h-full flex flex-col justify-center">
         <div className="max-w-2xl text-white">
-          <h1 className="font-heading font-bold text-4xl md:text-5xl lg:text-6xl mb-6">
+          <h1 className="text-white text-shadow font-heading font-bold text-4xl md:text-5xl lg:text-6xl mb-6">
             {t("home.hero.welcome")}
           </h1>
-          <h2 className="font-heading font-medium text-2xl md:text-3xl mb-8">
+          <h2 className="text-white text-shadow font-heading font-medium text-2xl md:text-3xl mb-8">
             {t("home.hero.subheading")}
           </h2>
-          <p className="text-lg md:text-xl mb-8 max-w-lg">
+          <p className="text-white text-shadow-lg text-lg md:text-xl mb-8 max-w-lg">
             {t("home.hero.description")}
           </p>
           <div className="flex flex-wrap gap-4">

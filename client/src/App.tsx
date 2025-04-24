@@ -9,6 +9,7 @@ import i18n from "./i18n";
 // Pages
 import Home from "@/pages/Home";
 import Apartments from "@/pages/Apartments";
+import About from "@/pages/About";
 import Visit from "@/pages/Visit";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
@@ -25,6 +26,7 @@ function Router() {
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/apartments" component={Apartments} />
+          <Route path="/about" component={About} />
           <Route path="/visit" component={Visit} />
           <Route path="/contact" component={Contact} />
           <Route component={NotFound} />

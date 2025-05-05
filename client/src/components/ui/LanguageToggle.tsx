@@ -21,7 +21,7 @@ const LanguageToggle = () => {
         className={`font-medium mr-2 ${currentLang === 'en' ? 'opacity-100' : 'opacity-50'}`}
         aria-label="Switch to English"
       >
-        EN
+        EN🇬🇧
       </button>
       <span>|</span>
       <button
@@ -29,7 +29,7 @@ const LanguageToggle = () => {
         className={`font-medium ml-2 ${currentLang === 'hr' ? 'opacity-100' : 'opacity-50'}`}
         aria-label="Switch to Croatian"
       >
-        HR
+        HR🇭🇷
       </button>
     </>
   );

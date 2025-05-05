@@ -1,16 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ApartmentGalleryProps {
-  mainImage: string;
-  images: string[];
+  imagesPath: string;
 }
 
-const ApartmentGallery = ({ mainImage, images }: ApartmentGalleryProps) => {
-  // Combine main image with gallery images
-  const allImages = [mainImage, ...images];
+const ApartmentGallery = ({ imagesPath }: ApartmentGalleryProps) => {
+  const [images, setImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
-  const currentImage = allImages[currentImageIndex];
+  const currentImage = images[currentImageIndex] || "";
+  
+  useEffect(() => {
+    // In a real application, we would fetch the list of images from the server
+    // For now, we'll generate paths for 5 sample images in alphabetical order
+    const baseUrl = imagesPath.endsWith('/') ? imagesPath : `${imagesPath}/`;
+    const generatedImages = [
+      `${baseUrl}1.jpg`,
+      `${baseUrl}2.jpg`,
+      `${baseUrl}3.jpg`,
+      `${baseUrl}4.jpg`,
+      `${baseUrl}5.jpg`,
+    ];
+    
+    setImages(generatedImages);
+  }, [imagesPath]);
 
   const handleThumbnailClick = (index: number) => {
     setCurrentImageIndex(index);
@@ -18,15 +31,23 @@ const ApartmentGallery = ({ mainImage, images }: ApartmentGalleryProps) => {
 
   const handlePrevious = () => {
     setCurrentImageIndex((prevIndex) => 
-      prevIndex === 0 ? allImages.length - 1 : prevIndex - 1
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   };
 
   const handleNext = () => {
     setCurrentImageIndex((prevIndex) => 
-      prevIndex === allImages.length - 1 ? 0 : prevIndex + 1
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
   };
+
+  if (images.length === 0) {
+    return (
+      <div className="aspect-video bg-neutral mb-4 rounded-lg flex items-center justify-center">
+        <p className="text-gray-500">Loading images...</p>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -57,13 +78,13 @@ const ApartmentGallery = ({ mainImage, images }: ApartmentGalleryProps) => {
         
         {/* Image Counter */}
         <div className="absolute bottom-2 right-2 bg-black/60 text-white text-sm px-2 py-1 rounded">
-          {currentImageIndex + 1} / {allImages.length}
+          {currentImageIndex + 1} / {images.length}
         </div>
       </div>
       
       {/* Thumbnails */}
       <div className="grid grid-cols-4 gap-4">
-        {allImages.slice(0, 4).map((image, index) => (
+        {images.slice(0, 4).map((image: string, index: number) => (
           <div
             key={index}
             className={`aspect-square bg-neutral rounded-lg overflow-hidden cursor-pointer transition-all ${

@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Wifi, Utensils, Snowflake, Tv, Wind, Droplets, 
-  ParkingMeter, Network, UmbrellaIcon, Volume2, Mountain
+  ParkingMeter, Network, Umbrella, Volume2, Mountain
 } from 'lucide-react';
 
 interface AmenityIconProps {
@@ -34,7 +34,7 @@ const AmenityIcon: React.FC<AmenityIconProps> = ({ icon, className = "" }) => {
     case 'tree':
       return <Network {...defaultProps} />;
     case 'umbrella-beach':
-      return <UmbrellaIcon {...defaultProps} />;
+      return <Umbrella {...defaultProps} />;
     case 'volume-off':
       return <Volume2 {...defaultProps} />;
     case 'mountain':

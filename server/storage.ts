@@ -150,10 +150,14 @@ export class MemStorage implements IStorage {
         otherAmenities: []
       },
       {
-        nameEn: "Apartment 2 (Garden)",
-        nameHr: "Apartman 2 (Vrt)",
-        descriptionEn: "A charming apartment with private garden access, perfect for families or groups who want to enjoy outdoor space during their stay.",
-        descriptionHr: "Šarmantan apartman s pristupom privatnom vrtu, savršen za obitelji ili grupe koje žele uživati u vanjskom prostoru tijekom boravka.",
+        nameEn: "Saint Roko",
+        nameHr: "Sveti Roko",
+        descriptionEn: `Old town St. Roko offers accommodations in Korčula, a few steps from Marco Polo Birth House and a 1-minute walk from St. Marc Cathedral in Korcula. This apartment provides air-conditioned accommodations with free Wifi. The property is a few steps from Beach Zakerjan and within 70 yards of the city center.
+
+The apartment features 1 bedroom, a fully equipped kitchen with a microwave, a washing machine, and 1 bathroom with a hair dryer and free toiletries. Towels and bed linen are featured in the apartment. For added privacy, the accommodation has a private entrance and soundproofing.`,
+        descriptionHr: `Apartman Sveti Roko nudi smještaj u Korčuli, na nekoliko koraka od kuće Marka Pola i jednu minutu hoda od katedrale sv. Marka. Apartman je klimatiziran i ima besplatan WiFi. Nalazi se svega nekoliko koraka od plaže Zakerjan i unutar 70 metara od samog centra grada.
+
+Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećnicom, perilicu rublja te kupaonicu s fenom za kosu. Ručnici i posteljina su osigurani. Za dodatnu privatnost, smještaj ima zaseban ulaz i zvučnu izolaciju.`,
         mainImage: "/images/apartments/apt2-main.jpg",
         images: [
           "/images/apartments/apt2-1.jpg",
@@ -161,6 +165,7 @@ export class MemStorage implements IStorage {
           "/images/apartments/apt2-3.jpg",
           "/images/apartments/apt2-4.jpg"
         ],
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartment%20St.%20Roko!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
         price: 70,
         priceHigh: 110,
         pricePeak: 140,

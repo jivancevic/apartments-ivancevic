@@ -18,7 +18,7 @@ const FeatureSection = ({ features }: FeatureSectionProps) => {
           {features.map((feature, index) => (
             <div key={index} className="flex flex-col items-center text-center">
               <div className="bg-primary bg-opacity-10 p-4 rounded-full mb-4">
-                <AmenityIcon icon={feature.icon} className="text-3xl text-primary" />
+                <AmenityIcon icon={feature.icon} className="text-3xl text-white" />
               </div>
               <h3 className="font-heading font-semibold text-xl mb-2">
                 {currentLanguage === "en" ? feature.titleEn : feature.titleHr}

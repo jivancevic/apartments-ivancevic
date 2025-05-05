@@ -19,7 +19,12 @@ const Header = () => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div>
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center space-x-2">
+              <img
+                src="/images/logo.png"
+                alt="Apartmani Ivančević Logo"
+                className="h-10 w-auto"
+              />
               <span className="text-primary font-heading font-bold text-2xl">
                 {t("home.hero.welcome")}
               </span>

@@ -25,7 +25,7 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
       {/* Gallery */}
       <div className="lg:col-span-2">
-        <ApartmentGallery mainImage={apartment.mainImage} images={apartment.images} />
+        <ApartmentGallery imagesPath={apartment.imagesPath} />
       </div>
       
       {/* Details */}
@@ -103,13 +103,17 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
         <h4 className="font-heading font-semibold text-lg mb-3">
           {t("apartments.location")}
         </h4>
-        <div className="mb-2 text-gray-700">
-          <p>{apartment.location}</p>
-        </div>
-        <div className="mb-6 rounded-lg overflow-hidden shadow-md">
-          <div className="bg-neutral p-2 text-center text-sm text-gray-500">
-            {t("apartments.mapPlaceholder")}
-          </div>
+        <div className="relative h-80 bg-neutral rounded-lg overflow-hidden">
+          <iframe
+            title="Apartmani Ivančević Location"
+            src={`${apartment.location}`}
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
         
         {/* Prices */}

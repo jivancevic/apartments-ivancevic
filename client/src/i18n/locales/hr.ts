@@ -91,7 +91,7 @@ const hrTranslation = {
 
   // Footer
   "footer.description":
-    "Doživite ljepotu otoka Korčule u našim obiteljskim apartmanima. Savršena lokacija, prekrasni pogledi i hrvatska gostoljubivost.",
+    "Doživite ljepotu otoka Korčule u našim obiteljskim apartmanima. Savršena lokacija, prekrasni pogledi i otočka gostoljubivost.",
   "footer.navigation": "Navigacija",
   "footer.contact": "Kontakt",
   "footer.followUs": "Pratite nas",
@@ -109,21 +109,15 @@ const hrTranslation = {
   "calendar.days.sun": "Ne",
 
   // About Page
-  "about.title": "O Apartmanima Ivančević",
-  "about.family.title": "Obitelj Ivančević",
-  "about.family.story1": "Dobrodošli u naše obiteljske apartmane na prekrasnoj Korčuli. Već više od tri generacije, obitelj Ivančević prima goste u naš mali rajski kutak na jadranskoj obali.",
-  "about.family.story2": "Ono što je započelo kao mali obiteljski dom preraslo je u zbirku od devet jedinstvenih apartmana, od kojih je svaki dizajniran i održavan s pažnjom i detaljima od strane različitih članova naše obitelji.",
-  "about.family.story3": "Ponosimo se pružanjem osobnog pristupa vašem iskustvu odmora, dijeljenjem lokalnih preporuka i osiguravanjem svega što vam je potrebno za nezaboravan boravak.",
-  "about.mission.title": "Naša misija",
-  "about.mission.description": "Naš cilj je pružiti autentičnu hrvatsku gostoljubivost i udoban smještaj koji omogućuje našim gostima da dožive pravu ljepotu i kulturu otoka Korčule.",
-  "about.history.title": "Naša povijest",
-  "about.history.paragraph1": "Obitelj Ivančević ima duboke korijene na Korčuli, s našim precima koji žive na ovom prekrasnom otoku već generacijama. Naši apartmani započeli su kao mali obiteljski pothvat 1980-ih godina.",
-  "about.history.paragraph2": "Tijekom godina proširili smo i renovirali naše nekretnine, uvijek održavajući autentični karakter uz dodavanje modernih sadržaja kako bismo osigurali vašu udobnost.",
-  "about.history.paragraph3": "Danas nastavljamo našu obiteljsku tradiciju gostoljubivosti, dočekujući goste iz cijelog svijeta da dožive naš dio hrvatskog raja.",
-  "about.korculaHistory.title": "O Korčuli",
-  "about.korculaHistory.paragraph1": "Korčula je jedan od najljepših otoka u Jadranskom moru, poznat po gustim šumama, šarmantnim selima i srednjovjekovnom gradu Korčuli, često nazvanom 'Mali Dubrovnik'.",
-  "about.korculaHistory.paragraph2": "Otok ima bogatu povijest koja seže u doba starih Grka. Također se tvrdi da je rodno mjesto slavnog istraživača Marka Pola.",
-  "about.korculaHistory.paragraph3": "Danas Korčula nudi savršen spoj povijesti, kulture, prekrasnih plaža, lokalne kuhinje i izvrsnih vina, čineći je idealnim odredištem za putnike koji traže autentično hrvatsko iskustvo.",
+  "about.title": "O nama",
+  "about.family.title": "Dobrodošli u Apartmane Ivančević!",
+  "about.family.story1": "Mi smo obitelj Ivančević – Mirica, Vicko i naša djeca Josip, Roko i Tonka. Ovdje živimo, radimo i s ponosom vodimo naše apartmane, koje smo godinama gradili i uređivali, s puno ljubavi i truda.",
+  "about.family.story2": "Vicko i ja smo inženjeri brodogradnje, navikli na rad, preciznost i konkretne rezultate. No kako je život na otoku nepredvidiv, željeli smo imati pouzdan plan B i osigurati bolju budućnost za svoju djecu. Tako smo odlučili otvoriti vrata svog doma gostima iz cijelog svijeta – i nismo požalili.",
+  "about.family.story3": "Ne dolazimo iz svijeta turizma, ali zato nudimo iskrenost, jednostavnost i toplu ljudsku riječ. Uvijek volimo popričati s gostima, podijeliti priču o Korčuli, preporučiti skrivene plaže i restorane koje lokalci vole.",
+  "about.family.story4": "Svi naši apartmani nalaze se u neposrednoj blizini Starog grada, i svi nose dio naše priče. Mi ih osobno čistimo, održavamo, popravljamo kad treba, i svakog gosta dočekujemo kao prijatelja. Ako nešto zatreba tijekom vašeg boravka – tu smo.",
+  "about.family.story5": "Sve što radimo, radimo s idejom da se naši gosti osjećaju dobrodošlo, opušteno i sigurno. Nismo savršeni, ali se trudimo biti najbolji domaćini kakve bismo i sami voljeli imati.",
+  "about.family.story6": "Za nas ovo nije samo posao – ovo je način da čestito živimo, upoznamo divne ljude i pokažemo svijetu zašto toliko volimo naš otok.",
+  "about.family.story7": "Dobro došli – i nadamo se da ćemo i vas moći ugostiti! 🤍",
   
   // Form Validation
   "validation.required": "Ovo polje je obavezno",

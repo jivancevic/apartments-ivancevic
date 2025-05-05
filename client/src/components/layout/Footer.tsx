@@ -35,6 +35,11 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/about" className="hover:underline">
+                    {t("nav.about")}
+                  </Link>
+                </li>
+                <li>
                   <Link href="/visit" className="hover:underline">
                     {t("nav.visit")}
                   </Link>

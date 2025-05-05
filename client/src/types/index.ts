@@ -7,7 +7,7 @@ export interface Apartment {
   descriptionHr: string;
   mainImage: string;
   images: string[];
-  location: string;
+  location?: string;
   price: number;
   priceHigh: number;
   pricePeak: number;

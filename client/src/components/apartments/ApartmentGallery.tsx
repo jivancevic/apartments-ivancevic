@@ -2,28 +2,38 @@ import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ApartmentGalleryProps {
-  imagesPath: string;
+  imagesPath?: string;
+  mainImage?: string;
+  images?: string[];
 }
 
-const ApartmentGallery = ({ imagesPath }: ApartmentGalleryProps) => {
+const ApartmentGallery = ({ imagesPath, mainImage, images: propImages }: ApartmentGalleryProps) => {
   const [images, setImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const currentImage = images[currentImageIndex] || "";
   
   useEffect(() => {
-    // In a real application, we would fetch the list of images from the server
-    // For now, we'll generate paths for 5 sample images in alphabetical order
-    const baseUrl = imagesPath.endsWith('/') ? imagesPath : `${imagesPath}/`;
-    const generatedImages = [
-      `${baseUrl}1.jpg`,
-      `${baseUrl}2.jpg`,
-      `${baseUrl}3.jpg`,
-      `${baseUrl}4.jpg`,
-      `${baseUrl}5.jpg`,
-    ];
+    // If direct images were provided, use those
+    if (propImages && propImages.length > 0) {
+      const allImages = mainImage ? [mainImage, ...propImages] : propImages;
+      setImages(allImages);
+      return;
+    }
     
-    setImages(generatedImages);
-  }, [imagesPath]);
+    // Otherwise generate from imagesPath (if available)
+    if (imagesPath) {
+      const baseUrl = imagesPath.endsWith('/') ? imagesPath : `${imagesPath}/`;
+      const generatedImages = [
+        `${baseUrl}1.jpg`,
+        `${baseUrl}2.jpg`,
+        `${baseUrl}3.jpg`,
+        `${baseUrl}4.jpg`,
+        `${baseUrl}5.jpg`,
+      ];
+      
+      setImages(generatedImages);
+    }
+  }, [imagesPath, mainImage, propImages]);
 
   const handleThumbnailClick = (index: number) => {
     setCurrentImageIndex(index);

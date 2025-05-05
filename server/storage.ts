@@ -128,13 +128,9 @@ export class MemStorage implements IStorage {
         nameHr: "Magical Oasis",
         descriptionEn: "Discover a blend of ancient allure and modern luxury in our 35m² Korčula apartment. Nestled in the heart of the Old Town, right beside the storied Kanavelic Tower, this charming space boasts authentic stone walls, evoking tales of yesteryears. Though it radiates old-world charm, rest assured, it's equipped with contemporary comforts: 2 ACs,  2 TVs, BT soundbar, dishwasher, washer, and dryer. Dive into Korčula's rich past while indulging in today's conveniences in this enchanting retreat.",
         descriptionHr: "Otkrij spoj drevnog šarma i moderne udobnosti u našem apartmanu od 35 m² u Korčuli. Smješten u srcu Starog grada, odmah pokraj povijesne Kule Kanavelić, ovaj šarmantni prostor krase autentični kameni zidovi koji prizivaju priče prošlih vremena. Iako odiše duhom starine, opremljen je svim suvremenim pogodnostima: 2 klima uređaja, 2 televizora, Bluetooth zvučnici, perilica posuđa, perilica i sušilica rublja. Uživajte u bogatoj prošlosti Korčule uz udobnosti današnjice u ovom očaravajućem kutku.",
-        mainImage: "/images/apartments/apat1-main.jpeg",
-        images: [
-          "/images/apartments/apat1-1.jpeg",
-          "/images/apartments/apat1-2.jpeg",
-          "/images/apartments/apat1-3.jpeg",
-          "/images/apartments/apat1-4.jpeg"
-        ],
+        imagesPath: "/images/apartments/apt1/",
+        bookingUrl: "https://www.booking.com/hotel/hr/magical-oasis.html",
+        airbnbUrl: "https://www.airbnb.com/rooms/12345678",
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.35815949195765!2d17.13583210884043!3d42.96238425612054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a517549e08c53%3A0x20f6b511dabd88db!2sMagical%20Oasis%20for%20two%20in%20Korcula%20Old%20Town!5e0!3m2!1sen!2shr!4v1745508164244!5m2!1sen!2shr",
         price: 80,
         priceHigh: 120,
@@ -158,13 +154,8 @@ The apartment features 1 bedroom, a fully equipped kitchen with a microwave, a w
         descriptionHr: `Apartman Sveti Roko nudi smještaj u Korčuli, na nekoliko koraka od kuće Marka Pola i jednu minutu hoda od katedrale sv. Marka. Apartman je klimatiziran i ima besplatan WiFi. Nalazi se svega nekoliko koraka od plaže Zakerjan i unutar 70 metara od samog centra grada.
 
 Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećnicom, perilicu rublja te kupaonicu s fenom za kosu. Ručnici i posteljina su osigurani. Za dodatnu privatnost, smještaj ima zaseban ulaz i zvučnu izolaciju.`,
-        mainImage: "/images/apartments/apt2-main.jpg",
-        images: [
-          "/images/apartments/apt2-1.jpg",
-          "/images/apartments/apt2-2.jpg",
-          "/images/apartments/apt2-3.jpg",
-          "/images/apartments/apt2-4.jpg"
-        ],
+        imagesPath: "/images/apartments/apt2/",
+        bookingUrl: "https://www.booking.com/hotel/hr/apartment-st-roko-korcula.html",
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartment%20St.%20Roko!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
         price: 70,
         priceHigh: 110,
@@ -184,13 +175,9 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         nameHr: "Apartman 3 (Balkon)",
         descriptionEn: "Spacious apartment with a large balcony, perfect for enjoying morning coffee or evening drinks with a beautiful view.",
         descriptionHr: "Prostrani apartman s velikim balkonom, savršen za uživanje u jutarnjoj kavi ili večernjem piću s prekrasnim pogledom.",
-        mainImage: "/images/apartments/apt3-main.jpg",
-        images: [
-          "/images/apartments/apt3-1.jpg",
-          "/images/apartments/apt3-2.jpg",
-          "/images/apartments/apt3-3.jpg",
-          "/images/apartments/apt3-4.jpg"
-        ],
+        imagesPath: "/images/apartments/apt3/",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartmani%20Ivan%C4%8Devi%C4%87!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
+        airbnbUrl: "https://www.airbnb.com/rooms/45678901",
         price: 75,
         priceHigh: 115,
         pricePeak: 145,
@@ -209,13 +196,8 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         nameHr: "Apartman 4 (Obiteljski)",
         descriptionEn: "A spacious family apartment with two bedrooms, ideal for families or groups looking for extra space and comfort during their vacation.",
         descriptionHr: "Prostrani obiteljski apartman s dvije spavaće sobe, idealan za obitelji ili grupe koje traže dodatni prostor i udobnost tijekom odmora.",
-        mainImage: "/images/apartments/apt4-main.jpg",
-        images: [
-          "/images/apartments/apt4-1.jpg",
-          "/images/apartments/apt4-2.jpg",
-          "/images/apartments/apt4-3.jpg",
-          "/images/apartments/apt4-4.jpg"
-        ],
+        imagesPath: "/images/apartments/apt4/",
+        bookingUrl: "https://www.booking.com/hotel/hr/apartment-family.html",
         price: 90,
         priceHigh: 130,
         pricePeak: 160,

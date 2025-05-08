@@ -10,30 +10,52 @@ interface ApartmentGalleryProps {
 const ApartmentGallery = ({ imagesPath, mainImage, images: propImages }: ApartmentGalleryProps) => {
   const [images, setImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const currentImage = images[currentImageIndex] || "";
   
   useEffect(() => {
-    // If direct images were provided, use those
-    if (propImages && propImages.length > 0) {
-      const allImages = mainImage ? [mainImage, ...propImages] : propImages;
-      setImages(allImages);
+    if (!imagesPath) {
+      setIsLoading(false);
       return;
     }
     
-    // Otherwise generate from imagesPath (if available)
-    if (imagesPath) {
-      const baseUrl = imagesPath.endsWith('/') ? imagesPath : `${imagesPath}/`;
-      const generatedImages = [
-        `${baseUrl}1.jpg`,
-        `${baseUrl}2.jpg`,
-        `${baseUrl}3.jpg`,
-        `${baseUrl}4.jpg`,
-        `${baseUrl}5.jpg`,
-      ];
-      
-      setImages(generatedImages);
+    // Function to check if an image exists using fetch HEAD request
+    async function checkImageExists(url: string): Promise<boolean> {
+      try {
+        const response = await fetch(url, { method: 'HEAD' });
+        return response.ok;
+      } catch (error) {
+        return false;
+      }
     }
-  }, [imagesPath, mainImage, propImages]);
+    
+    // Function to load images dynamically
+    async function loadImages() {
+      setIsLoading(true);
+      const foundImages: string[] = [];
+      // Using non-null assertion since we've already checked
+      const path = imagesPath!;
+      const normalizedPath = path.endsWith("/") ? path : `${path}/`;
+      
+      // Try to load up to 20 images
+      for (let i = 1; i <= 20; i++) {
+        const imageUrl = `${normalizedPath}${i}.jpg`;
+        const exists = await checkImageExists(imageUrl);
+        
+        if (exists) {
+          foundImages.push(imageUrl);
+        } else {
+          // Stop checking when an image doesn't exist
+          break;
+        }
+      }
+      
+      setImages(foundImages);
+      setIsLoading(false);
+    }
+    
+    loadImages();
+  }, [imagesPath]);
 
   const handleThumbnailClick = (index: number) => {
     setCurrentImageIndex(index);
@@ -51,10 +73,18 @@ const ApartmentGallery = ({ imagesPath, mainImage, images: propImages }: Apartme
     );
   };
 
-  if (images.length === 0) {
+  if (isLoading) {
     return (
       <div className="aspect-video bg-neutral mb-4 rounded-lg flex items-center justify-center">
         <p className="text-gray-500">Loading images...</p>
+      </div>
+    );
+  }
+  
+  if (images.length === 0) {
+    return (
+      <div className="aspect-video bg-neutral mb-4 rounded-lg flex items-center justify-center">
+        <p className="text-gray-500">No images available</p>
       </div>
     );
   }

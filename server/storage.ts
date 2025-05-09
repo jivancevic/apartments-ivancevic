@@ -489,9 +489,9 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         icalUrls: [
           "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd24cd0dbd2911faab332fcfd90"
         ],
-        price: 55,
-        priceHigh: 85,
-        pricePeak: 115,
+        basePeakPrice: 110,
+        priceMultiplier: "1.05",
+        cleaningFee: 40,
         hasWifi: true,
         hasKitchen: true,
         hasAC: true,

@@ -11,12 +11,28 @@ import { Card, CardContent } from "@/components/ui/card";
 import { calculateNightlyPrice, calculateStayPrice, getSeasonType, getSeasonalPrices, SeasonType, getSeasonName } from "@/lib/pricing";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
+// Create a type that ensures all required properties are present
+type ApartmentWithRequiredProps = Apartment & {
+  location: string;
+  basePeakPrice: number;
+  priceMultiplier: string;
+  cleaningFee: number;
+};
+
 interface BookingCalendarProps {
   bookings: Booking[];
   apartment: Apartment;
 }
 
 const BookingCalendar = ({ bookings, apartment }: BookingCalendarProps) => {
+  // Ensure required properties with defaults
+  const apartmentWithDefaults: ApartmentWithRequiredProps = {
+    ...apartment,
+    location: apartment.location || "",
+    basePeakPrice: apartment.basePeakPrice || 110,
+    priceMultiplier: apartment.priceMultiplier || "1.0",
+    cleaningFee: apartment.cleaningFee || 40
+  };
   const { t } = useTranslation();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
@@ -31,7 +47,7 @@ const BookingCalendar = ({ bookings, apartment }: BookingCalendarProps) => {
   } | null>(null);
 
   // Calculate seasonal prices
-  const seasonalPrices = getSeasonalPrices(apartment);
+  const seasonalPrices = getSeasonalPrices(apartmentWithDefaults);
   
   // Convert booking dates from strings to Date objects if needed
   const parsedBookings = bookings.map(booking => ({
@@ -152,7 +168,7 @@ const BookingCalendar = ({ bookings, apartment }: BookingCalendarProps) => {
   // Calculate price summary when selection changes
   useEffect(() => {
     if (selectedStartDate && selectedEndDate) {
-      const summary = calculateStayPrice(apartment, selectedStartDate, selectedEndDate);
+      const summary = calculateStayPrice(apartmentWithDefaults, selectedStartDate, selectedEndDate);
       setPriceSummary({
         totalNights: summary.totalNights,
         subtotal: summary.subtotal,
@@ -163,7 +179,7 @@ const BookingCalendar = ({ bookings, apartment }: BookingCalendarProps) => {
     } else {
       setPriceSummary(null);
     }
-  }, [selectedStartDate, selectedEndDate, apartment]);
+  }, [selectedStartDate, selectedEndDate, apartment, apartmentWithDefaults]);
 
   return (
     <div>
@@ -227,7 +243,7 @@ const BookingCalendar = ({ bookings, apartment }: BookingCalendarProps) => {
           const isBooked = isDateBooked(day);
           const isPast = isDatePast(day);
           const selectable = isDateSelectable(day);
-          const price = calculateNightlyPrice(apartment, day);
+          const price = calculateNightlyPrice(apartmentWithDefaults, day);
           const seasonType = getSeasonType(day);
           const isStart = selectedStartDate && isSameDay(day, selectedStartDate);
           const isEnd = selectedEndDate && isSameDay(day, selectedEndDate);

@@ -124,6 +124,33 @@ const hrTranslation = {
   "validation.email": "Unesite važeću email adresu",
   "validation.checkOut": "Datum odlaska mora biti nakon datuma dolaska",
   "validation.future": "Datum mora biti u budućnosti",
+  
+  // Search Page
+  "search.title": "Pronađite savršen apartman",
+  "search.checkIn": "Dolazak",
+  "search.checkOut": "Odlazak",
+  "search.guests": "Gosti",
+  "search.guest": "Gost",
+  "search.selectDate": "Odaberite datum",
+  "search.selectGuests": "Odaberite broj gostiju",
+  "search.searchButton": "Pretraži",
+  "search.loading": "Tražimo dostupne apartmane...",
+  "search.noResults": "Nema dostupnih apartmana za odabrane datume",
+  "search.tryDifferent": "Pokušajte s drugim datumima ili brojem gostiju",
+  "search.resultsFound": "{{count}} apartman pronađen",
+  "search.resultsFound_plural": "{{count}} apartmana pronađeno",
+  "search.viewDetails": "Pogledaj detalje",
+  "search.totalPrice": "ukupna cijena",
+  "search.enterCriteria": "Unesite datume putovanja i broj gostiju za pretragu dostupnih apartmana",
+  
+  // Apartment Details
+  "apartment.maxGuests": "{{count}} Gost",
+  "apartment.maxGuests_plural": "{{count}} Gostiju",
+  
+  // Common
+  "common.noImage": "Slika nije dostupna",
+  "nights": "noćenje",
+  "nights_plural": "noćenja",
 };
 
 export default hrTranslation;

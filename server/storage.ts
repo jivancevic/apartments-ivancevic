@@ -320,6 +320,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         basePeakPrice: 110,
         priceMultiplier: "2.20",
         cleaningFee: 80,
+        maxGuests: 4,
         hasWifi: true,
         hasKitchen: true,
         hasAC: true,

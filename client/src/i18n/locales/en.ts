@@ -122,7 +122,6 @@ const enTranslation = {
   "search.checkOut": "Check-out",
   "search.guests": "Guests",
   "search.guest": "Guest",
-  "search.guests": "Guests",
   "search.selectDate": "Select a date",
   "search.selectGuests": "Select guests",
   "search.searchButton": "Search",

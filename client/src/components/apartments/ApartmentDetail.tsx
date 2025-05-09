@@ -29,7 +29,7 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
     icalBookings, 
     isLoading: isLoadingIcal, 
     error: icalError 
-  } = useIcalFeeds(apartment.id, apartment.icalUrls);
+  } = useIcalFeeds(apartment.id, apartment.icalUrls || []);
   
   // Determine if we're loading any bookings data
   const isLoading = isLoadingApi || isLoadingIcal;

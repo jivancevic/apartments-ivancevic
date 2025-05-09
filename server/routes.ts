@@ -2,6 +2,7 @@ import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertInquirySchema } from "@shared/schema";
+import fetch from "node-fetch";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API routes with /api prefix
@@ -48,6 +49,86 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(bookings);
     } catch (error) {
       res.status(500).json({ message: 'Error fetching bookings' });
+    }
+  });
+  
+  // Get iCal bookings for a specific apartment
+  app.get('/api/apartments/:id/ical-bookings', async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: 'Invalid apartment ID' });
+      }
+      
+      const apartment = await storage.getApartment(id);
+      if (!apartment) {
+        return res.status(404).json({ message: 'Apartment not found' });
+      }
+      
+      // Check if apartment has icalUrls property and it has items
+      const icalUrls = (apartment as any).icalUrls;
+      if (!icalUrls || !Array.isArray(icalUrls) || icalUrls.length === 0) {
+        return res.json([]);
+      }
+      
+      import('ical').then(async (ical) => {
+        try {
+          const allBookings = [];
+        
+          for (const url of apartment.icalUrls) {
+            try {
+              // Fetch the iCal feed with appropriate timeout
+              const controller = new AbortController();
+              const timeoutId = setTimeout(() => controller.abort(), 10000);
+              
+              const response = await fetch(url, { 
+                signal: controller.signal,
+                headers: {
+                  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                }
+              });
+              
+              clearTimeout(timeoutId);
+              
+              if (!response.ok) {
+                console.error(`Failed to fetch iCal feed for apartment ${id} from ${url}: ${response.statusText}`);
+                continue; // Skip this feed but continue with others
+              }
+              
+              const data = await response.text();
+              const parsedCal = ical.parseICS(data);
+              
+              for (const event of Object.values(parsedCal)) {
+                if (event.type === 'VEVENT' && event.start && event.end) {
+                  allBookings.push({
+                    id: Math.floor(Math.random() * 1000000), 
+                    apartmentId: id,
+                    startDate: event.start.toISOString(),
+                    endDate: event.end.toISOString()
+                  });
+                }
+              }
+            } catch (fetchError) {
+              console.error(`Error with iCal feed for apartment ${id} from ${url}:`, fetchError);
+              // Continue with other feeds even if this one fails
+            }
+          }
+          
+          res.json(allBookings);
+        } catch (error) {
+          console.error(`Error processing iCal bookings for apartment ${id}:`, error);
+          res.status(500).json({ 
+            message: 'Error processing iCal bookings',
+            error: error.message 
+          });
+        }
+      }).catch(error => {
+        console.error('Error importing ical module:', error);
+        res.status(500).json({ message: 'Server error processing iCal feeds' });
+      });
+    } catch (error) {
+      console.error(`Error fetching iCal bookings for apartment ${req.params.id}:`, error);
+      res.status(500).json({ message: 'Error fetching iCal bookings' });
     }
   });
   
@@ -101,6 +182,50 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json(inquiry);
     } catch (error) {
       res.status(500).json({ message: 'Error submitting inquiry' });
+    }
+  });
+  
+  // Proxy for iCal feeds to avoid CORS issues
+  app.get('/api/proxy-ical', async (req: Request, res: Response) => {
+    try {
+      const url = req.query.url as string;
+      
+      if (!url) {
+        return res.status(400).json({ message: 'Missing URL parameter' });
+      }
+      
+      console.log(`Proxying iCal feed from: ${url}`);
+      
+      // Fetch the iCal feed with appropriate timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 seconds timeout
+      
+      try {
+        const response = await fetch(url, { 
+          signal: controller.signal,
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+          }
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) {
+          console.error(`Failed to fetch iCal feed: ${response.status} ${response.statusText}`);
+          return res.status(response.status).json({ 
+            message: `Failed to fetch iCal feed: ${response.statusText}` 
+          });
+        }
+        
+        const data = await response.text();
+        res.type('text/calendar').send(data);
+      } catch (fetchError) {
+        clearTimeout(timeoutId);
+        throw fetchError;
+      }
+    } catch (error) {
+      console.error('Error proxying iCal feed:', error);
+      res.status(500).json({ message: 'Failed to proxy iCal feed' });
     }
   });
   

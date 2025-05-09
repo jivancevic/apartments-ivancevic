@@ -20,6 +20,9 @@ export interface Apartment {
   hasParking: boolean;
   hasGarden: boolean;
   otherAmenities?: string[];
+  bookingUrl?: string | null;
+  airbnbUrl?: string | null;
+  icalUrls?: string[];
 }
 
 // Booking type definitions

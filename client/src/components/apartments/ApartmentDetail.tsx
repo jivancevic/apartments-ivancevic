@@ -2,11 +2,13 @@ import { useTranslation } from "react-i18next";
 import { Link } from "wouter";
 import { Apartment, Booking } from "@/types";
 import ApartmentGallery from "./ApartmentGallery";
-import { Calendar } from "@/components/ui/calendar";
+import Calendar from "@/components/ui/Calendar";
 import AmenityIcon from "@/components/ui/AmenityIcon";
 import useLanguage from "@/hooks/useLanguage";
+import { useIcalFeeds } from "@/hooks/useIcalFeeds";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
+import { AlertCircle } from "lucide-react";
 
 interface ApartmentDetailProps {
   apartment: Apartment;

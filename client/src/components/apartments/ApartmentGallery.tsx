@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 interface ApartmentGalleryProps {
   mainImage?: string;
@@ -10,6 +10,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
   const [images, setImages] = useState<string[]>(propImages || []);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const currentImage = images[currentImageIndex] || "";
   const thumbnailsContainerRef = useRef<HTMLDivElement>(null);
   const thumbnailRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -39,6 +40,20 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
     }
   }, [currentImageIndex]);
 
+  // Listen for escape key to close modal
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && showModal) {
+        setShowModal(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleEscKey);
+    return () => {
+      window.removeEventListener('keydown', handleEscKey);
+    };
+  }, [showModal]);
+
   const handleThumbnailClick = (index: number) => {
     setCurrentImageIndex(index);
   };
@@ -53,6 +68,21 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
     setCurrentImageIndex((prevIndex) => 
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
+  };
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  // Close modal when clicking outside the image
+  const handleModalBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      closeModal();
+    }
   };
 
   if (isLoading) {
@@ -78,7 +108,8 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         <img
           src={currentImage}
           alt="Apartment view"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover cursor-pointer"
+          onClick={openModal}
         />
         
         {/* Navigation Arrows */}
@@ -104,28 +135,82 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         </div>
       </div>
       
-      {/* Thumbnails - Horizontal Scrollable */}
-      <div 
-        ref={thumbnailsContainerRef}
-        className="flex space-x-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200"
-        style={{ scrollbarWidth: 'thin' }}
-      >
-        {images.map((image: string, index: number) => (
-          <div
-            key={index}
-            ref={el => thumbnailRefs.current[index] = el}
-            className={`flex-none w-20 h-20 bg-neutral rounded-lg overflow-hidden cursor-pointer transition-all ${
-              currentImageIndex === index ? "ring-2 ring-primary scale-95" : "hover:scale-95"
-            }`}
-            onClick={() => handleThumbnailClick(index)}
+      {/* Thumbnails - Fixed Width Container showing exactly 4 Thumbnails */}
+      <div className="grid grid-cols-4 gap-2 mb-4">
+        <div className="col-span-4 h-20 relative overflow-hidden rounded-lg">
+          <div 
+            ref={thumbnailsContainerRef}
+            className="absolute inset-0 flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 pb-3"
           >
-            <img
-              src={image}
-              alt={`Apartment thumbnail ${index + 1}`}
-              className="w-full h-full object-cover"
-            />
+            {images.map((image: string, index: number) => (
+              <div
+                key={index}
+                ref={el => thumbnailRefs.current[index] = el}
+                className={`flex-none w-[calc(25%-1.5px)] h-full bg-neutral rounded-lg overflow-hidden cursor-pointer transition-all ${
+                  currentImageIndex === index ? "ring-2 ring-primary scale-95" : "hover:scale-95"
+                }`}
+                onClick={() => handleThumbnailClick(index)}
+              >
+                <img
+                  src={image}
+                  alt={`Apartment thumbnail ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+      </div>
+
+      {/* Image Modal/Lightbox with Animations */}
+      <div 
+        className={`fixed inset-0 bg-black/80 z-50 flex items-center justify-center transition-opacity duration-300 ease-in-out ${
+          showModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={handleModalBackdropClick}
+      >
+        <div className={`relative max-w-[90vw] max-h-[90vh] transition-transform duration-300 ${
+          showModal ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+        }`}>
+          <button
+            onClick={closeModal}
+            className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white rounded-full p-2 transition-all z-10"
+            aria-label="Close modal"
+          >
+            <X className="h-6 w-6" />
+          </button>
+          
+          <img
+            src={currentImage}
+            alt="Large view"
+            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-xl"
+          />
+          
+          {/* Modal Navigation */}
+          <div className="absolute inset-x-0 bottom-0 flex justify-between px-4 py-2">
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePrevious();
+              }}
+              className="bg-black/60 hover:bg-black/80 text-white rounded-full p-2 transition-all"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+            
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNext();
+              }}
+              className="bg-black/60 hover:bg-black/80 text-white rounded-full p-2 transition-all"
+              aria-label="Next image"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

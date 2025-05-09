@@ -170,14 +170,12 @@ export class MemStorage implements IStorage {
         descriptionEn: "Discover a blend of ancient allure and modern luxury in our 35m² Korčula apartment. Nestled in the heart of the Old Town, right beside the storied Kanavelic Tower, this charming space boasts authentic stone walls, evoking tales of yesteryears. Though it radiates old-world charm, rest assured, it's equipped with contemporary comforts: 2 ACs,  2 TVs, BT soundbar, dishwasher, washer, and dryer. Dive into Korčula's rich past while indulging in today's conveniences in this enchanting retreat.",
         descriptionHr: "Otkrij spoj drevnog šarma i moderne udobnosti u našem apartmanu od 35 m² u Korčuli. Smješten u srcu Starog grada, odmah pokraj povijesne Kule Kanavelić, ovaj šarmantni prostor krase autentični kameni zidovi koji prizivaju priče prošlih vremena. Iako odiše duhom starine, opremljen je svim suvremenim pogodnostima: 2 klima uređaja, 2 televizora, Bluetooth zvučnici, perilica posuđa, perilica i sušilica rublja. Uživajte u bogatoj prošlosti Korčule uz udobnosti današnjice u ovom očaravajućem kutku.",
         images: [
-          "/images/apartments/magical-oasis/1.jpg",
-          "/images/apartments/magical-oasis/2.jpg",
-          "/images/apartments/magical-oasis/3.jpg",
-          "/images/apartments/magical-oasis/4.jpg",
-          "/images/apartments/magical-oasis/5.jpg",
-          "/images/apartments/magical-oasis/6.jpg",
-          "/images/apartments/magical-oasis/7.jpg",
-          "/images/apartments/magical-oasis/8.jpg"
+          "/images/apartments/magical-oasis/1.png",
+          "/images/apartments/magical-oasis/2.png",
+          "/images/apartments/magical-oasis/3.png",
+          "/images/apartments/magical-oasis/4.png",
+          "/images/apartments/magical-oasis/5.png",
+          "/images/apartments/magical-oasis/6.png"
         ],
         bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
         airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
@@ -205,12 +203,15 @@ The apartment features 1 bedroom, a fully equipped kitchen with a microwave, a w
 
 Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećnicom, perilicu rublja te kupaonicu s fenom za kosu. Ručnici i posteljina su osigurani. Za dodatnu privatnost, smještaj ima zaseban ulaz i zvučnu izolaciju.`,
         images: [
-          "/images/apartments/apt2/1.jpg",
-          "/images/apartments/apt2/2.jpg",
-          "/images/apartments/apt2/3.jpg",
-          "/images/apartments/apt2/4.jpg",
-          "/images/apartments/apt2/5.jpg",
-          "/images/apartments/apt2/6.jpg"
+          "/images/apartments/st-roko/1.jpg",
+          "/images/apartments/st-roko/2.jpg",
+          "/images/apartments/st-roko/3.jpg",
+          "/images/apartments/st-roko/4.jpg",
+          "/images/apartments/st-roko/5.jpg",
+          "/images/apartments/st-roko/6.jpg",
+          "/images/apartments/st-roko/4.jpg",
+          "/images/apartments/st-roko/5.jpg",
+          "/images/apartments/st-roko/6.jpg"
         ],
         bookingUrl: "https://www.booking.com/hotel/hr/apartment-st-roko-korcula.html",
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartment%20St.%20Roko!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",

@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { Bed, Wifi, Wind, Tv, Mountain, Car, Palmtree, Users } from "lucide-react";
+import { Bed, Wifi, Wind, Tv, Mountain, Car, Palmtree, Users, Mail } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
+import SearchBar from "@/components/search/SearchBar";
 import { calculateStayPrice } from "@/lib/pricing";
 import { Apartment, Booking } from "@/types";
 import { getQueryFn } from "@/lib/queryClient";
@@ -170,8 +172,27 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
     );
   }
 
+  // For redirecting to contact page with prefilled info
+  const [, setLocation] = useLocation();
+
+  // Create search bar with current search criteria
+  const handleSearch = () => {
+    // This doesn't trigger a re-render as we're just using the component functions
+    // The SearchBar component handles the navigation internally
+  };
+
   return (
     <div className="space-y-6">
+      {/* Search bar to modify search parameters */}
+      <div className="mb-8 bg-gray-50 rounded-lg p-4 border">
+        <h2 className="text-lg font-medium mb-3">{t("search.modifySearch")}</h2>
+        <SearchBar 
+          initialCheckIn={checkIn} 
+          initialCheckOut={checkOut} 
+          initialGuests={guests} 
+        />
+      </div>
+      
       <h2 className="text-2xl font-bold">
         {t("search.resultsFound", { count: filteredApartments.length })}
       </h2>
@@ -190,6 +211,7 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
             icalUrls: apartment.icalUrls || null
           };
           const priceSummary = calculateStayPrice(apartmentWithDefaults, checkIn, checkOut);
+          const averageNightlyPrice = priceSummary.averagePerNight;
           
           const apartmentName = currentLanguage === "hr" 
             ? apartment.nameHr 
@@ -201,6 +223,21 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
           
           // Get first image as main image or use the mainImage if specified
           const mainImage = apartment.mainImage || (apartment.images && apartment.images.length > 0 ? apartment.images[0] : undefined);
+          
+          // Create URL for contact page with prefilled data
+          const contactSearchParams = new URLSearchParams({
+            apartmentId: apartment.id.toString(),
+            checkIn: checkIn.toISOString(),
+            checkOut: checkOut.toISOString(),
+          });
+          const contactUrl = `/contact?${contactSearchParams.toString()}`;
+          
+          // Create URL for apartment page with dates
+          const apartmentSearchParams = new URLSearchParams({
+            checkIn: checkIn.toISOString(),
+            checkOut: checkOut.toISOString(),
+          });
+          const apartmentUrl = `/apartments?${apartmentSearchParams.toString()}#${getApartmentSlug(apartment.id)}`;
           
           return (
             <Card key={apartment.id} className="overflow-hidden">
@@ -272,8 +309,8 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
                     )}
                   </div>
                   
-                  <div className="flex items-end justify-between mt-auto">
-                    <div className="text-sm">
+                  <div className="flex flex-col md:flex-row items-stretch md:items-end justify-between mt-auto">
+                    <div className="text-sm mb-3 md:mb-0">
                       <div className="text-gray-600">
                         {format(checkIn, "MMM d")} – {format(checkOut, "MMM d, yyyy")}
                         <span className="mx-1">•</span>
@@ -282,14 +319,27 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
                       <div className="font-bold text-lg">
                         €{priceSummary.total} <span className="text-xs font-normal">{t("search.totalPrice")}</span>
                       </div>
+                      <div className="text-xs text-gray-500">
+                        €{Math.round(averageNightlyPrice)} {t("search.perNight")}
+                      </div>
                     </div>
                     
-                    <Link 
-                      to={`/apartments#${getApartmentSlug(apartment.id)}`} 
-                      className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition"
-                    >
-                      {t("search.viewDetails")}
-                    </Link>
+                    <div className="flex flex-wrap gap-2">
+                      <Link 
+                        to={contactUrl}
+                        className="flex items-center gap-1 bg-white border border-primary text-primary px-3 py-2 rounded-md hover:bg-gray-50 transition"
+                      >
+                        <Mail className="h-4 w-4" />
+                        {t("search.sendInquiry")}
+                      </Link>
+                      
+                      <Link 
+                        to={apartmentUrl}
+                        className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition"
+                      >
+                        {t("search.viewDetails")}
+                      </Link>
+                    </div>
                   </div>
                 </CardContent>
               </div>

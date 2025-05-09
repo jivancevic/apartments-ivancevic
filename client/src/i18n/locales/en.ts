@@ -136,7 +136,10 @@ const enTranslation = {
   "search.resultsFound": "{{count}} apartment found",
   "search.resultsFound_plural": "{{count}} apartments found",
   "search.viewDetails": "View Details",
+  "search.sendInquiry": "Send Inquiry",
   "search.totalPrice": "total price",
+  "search.perNight": "per night",
+  "search.modifySearch": "Modify search",
   "search.enterCriteria": "Please enter your travel dates and number of guests to search for available apartments",
   
   // Apartment Details

@@ -117,10 +117,10 @@ const SearchBar = ({
         setCheckIn(date);
         // Don't close calendar, continue selecting check-out
       } else {
-        // Set check-out and close calendar
+        // Set check-out but keep calendar open
         setCheckOut(date);
-        setIsCalendarOpen(false);
-        setSelectingCheckIn(true); // Reset for next time
+        // Reset to check-in selection mode for the next selection
+        setSelectingCheckIn(true);
       }
     }
   };
@@ -189,7 +189,7 @@ const SearchBar = ({
             <div className="flex items-center justify-between px-3">
               <button 
                 type="button"
-                className="flex items-center justify-center h-6 w-6 rounded-full hover:bg-gray-100 disabled:opacity-50"
+                className="group"
                 onClick={() => {
                   const currentGuests = parseInt(guests);
                   if (currentGuests > 1) {
@@ -199,17 +199,17 @@ const SearchBar = ({
                 disabled={parseInt(guests) <= 1}
                 aria-label={t("search.decreaseGuests")}
               >
-                <span className="text-xl font-medium">-</span>
+                <span className="text-xl font-medium flex items-center justify-center h-6 w-6 rounded-full group-hover:bg-gray-100 group-disabled:opacity-50 transition-colors">-</span>
               </button>
               
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 min-w-[60px] justify-center">
                 <Users className="h-4 w-4 text-gray-500" />
                 <span>{guests} {parseInt(guests) === 1 ? t("search.guest") : t("search.guests")}</span>
               </div>
               
               <button 
                 type="button"
-                className="flex items-center justify-center h-6 w-6 rounded-full hover:bg-gray-100 disabled:opacity-50"
+                className="group"
                 onClick={() => {
                   const currentGuests = parseInt(guests);
                   if (currentGuests < 6) {
@@ -219,7 +219,7 @@ const SearchBar = ({
                 disabled={parseInt(guests) >= 6}
                 aria-label={t("search.increaseGuests")}
               >
-                <span className="text-xl font-medium">+</span>
+                <span className="text-xl font-medium flex items-center justify-center h-6 w-6 rounded-full group-hover:bg-gray-100 group-disabled:opacity-50 transition-colors">+</span>
               </button>
             </div>
           </div>

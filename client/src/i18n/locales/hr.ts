@@ -145,7 +145,10 @@ const hrTranslation = {
   "search.resultsFound": "{{count}} apartman pronađen",
   "search.resultsFound_plural": "{{count}} apartmana pronađeno",
   "search.viewDetails": "Pogledaj detalje",
+  "search.sendInquiry": "Pošalji upit",
   "search.totalPrice": "ukupna cijena",
+  "search.perNight": "po noći",
+  "search.modifySearch": "Promijeni pretragu",
   "search.enterCriteria": "Unesite datume putovanja i broj gostiju za pretragu dostupnih apartmana",
   
   // Apartment Details

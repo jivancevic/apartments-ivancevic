@@ -5,12 +5,18 @@ export interface Apartment {
   nameHr: string;
   descriptionEn: string;
   descriptionHr: string;
-  mainImage: string;
+  mainImage?: string;
   images: string[];
   location?: string;
-  price: number;
-  priceHigh: number;
-  pricePeak: number;
+  // New dynamic pricing fields
+  basePeakPrice?: number;
+  priceMultiplier?: string;
+  cleaningFee?: number;
+  // Legacy pricing fields (keeping for backward compatibility)
+  price?: number;
+  priceHigh?: number;
+  pricePeak?: number;
+  // Amenities
   hasWifi: boolean;
   hasKitchen: boolean;
   hasAC: boolean;
@@ -20,6 +26,7 @@ export interface Apartment {
   hasParking: boolean;
   hasGarden: boolean;
   otherAmenities?: string[];
+  // Booking links
   bookingUrl?: string | null;
   airbnbUrl?: string | null;
   icalUrls?: string[];

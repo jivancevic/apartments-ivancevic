@@ -147,8 +147,8 @@ export function calculateNightlyPrice(apartment: Apartment, date: Date): number 
   const seasonRateMultiplier = SEASON_RATE_MULTIPLIERS[seasonType];
   
   // Get the apartment's multiplier (from schema if available, or from constants)
-  const apartmentMultiplier = parseFloat(apartment.priceMultiplier) || 
-    APARTMENT_MULTIPLIERS[apartment.nameEn] || 1.0;
+  const apartmentMultiplier = apartment.priceMultiplier ? parseFloat(apartment.priceMultiplier) : 
+    (APARTMENT_MULTIPLIERS[apartment.nameEn] || 1.0);
   
   // Get the base peak price (from schema if available, or the Sea apartment's base price)
   const basePeakPrice = apartment.basePeakPrice || 110;

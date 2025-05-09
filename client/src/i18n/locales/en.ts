@@ -118,6 +118,7 @@ const enTranslation = {
   
   // Search Page
   "search.title": "Find Your Perfect Apartment",
+  "search.findYourStay": "Find your perfect stay",
   "search.checkIn": "Check-in",
   "search.checkOut": "Check-out",
   "search.guests": "Guests",
@@ -125,6 +126,8 @@ const enTranslation = {
   "search.selectDate": "Select a date",
   "search.selectGuests": "Select guests",
   "search.searchButton": "Search",
+  "search.decreaseGuests": "Decrease number of guests",
+  "search.increaseGuests": "Increase number of guests",
   "search.loading": "Finding available apartments...",
   "search.noResults": "No apartments available for these dates",
   "search.tryDifferent": "Please try different dates or guest count",

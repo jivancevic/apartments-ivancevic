@@ -127,6 +127,7 @@ const hrTranslation = {
   
   // Search Page
   "search.title": "Pronađite savršen apartman",
+  "search.findYourStay": "Pronađite savršen smještaj",
   "search.checkIn": "Dolazak",
   "search.checkOut": "Odlazak",
   "search.guests": "Gosti",
@@ -134,6 +135,8 @@ const hrTranslation = {
   "search.selectDate": "Odaberite datum",
   "search.selectGuests": "Odaberite broj gostiju",
   "search.searchButton": "Pretraži",
+  "search.decreaseGuests": "Smanjite broj gostiju",
+  "search.increaseGuests": "Povećajte broj gostiju",
   "search.loading": "Tražimo dostupne apartmane...",
   "search.noResults": "Nema dostupnih apartmana za odabrane datume",
   "search.tryDifferent": "Pokušajte s drugim datumima ili brojem gostiju",

@@ -128,6 +128,8 @@ const enTranslation = {
   "search.searchButton": "Search",
   "search.decreaseGuests": "Decrease number of guests",
   "search.increaseGuests": "Increase number of guests",
+  "search.selectCheckIn": "Select check-in date",
+  "search.selectCheckOut": "Select check-out date",
   "search.loading": "Finding available apartments...",
   "search.noResults": "No apartments available for these dates",
   "search.tryDifferent": "Please try different dates or guest count",

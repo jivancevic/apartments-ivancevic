@@ -6,7 +6,7 @@ const HeroSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="home" className="relative bg-neutral-dark min-h-[90vh] py-16">
+    <section id="home" className="relative bg-neutral-dark min-h-[90vh] flex items-center">
       <div className="absolute inset-0 z-0">
         <img 
           src="/images/korcula.jpg"
@@ -16,7 +16,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
       
-      <div className="container mx-auto px-4 relative z-10 h-full flex flex-col justify-center">
+      <div className="container mx-auto px-4 relative z-10 py-16 flex flex-col justify-center">
         <div className="lg:flex lg:items-center lg:justify-between">
           {/* Left Column - Content */}
           <div className="text-white lg:max-w-[48%]">
@@ -51,7 +51,10 @@ const HeroSection = () => {
         
         {/* Search bar for mobile and tablets - below buttons */}
         <div className="lg:hidden mt-8">
-          <SearchBar />
+          <div className="bg-white/95 backdrop-blur-sm p-4 rounded-lg shadow-lg">
+            <h3 className="text-primary font-medium text-lg mb-3">{t("search.findYourStay")}</h3>
+            <SearchBar />
+          </div>
         </div>
       </div>
     </section>

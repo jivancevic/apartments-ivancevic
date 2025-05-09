@@ -137,6 +137,8 @@ const hrTranslation = {
   "search.searchButton": "Pretraži",
   "search.decreaseGuests": "Smanjite broj gostiju",
   "search.increaseGuests": "Povećajte broj gostiju",
+  "search.selectCheckIn": "Odaberite datum dolaska",
+  "search.selectCheckOut": "Odaberite datum odlaska",
   "search.loading": "Tražimo dostupne apartmane...",
   "search.noResults": "Nema dostupnih apartmana za odabrane datume",
   "search.tryDifferent": "Pokušajte s drugim datumima ili brojem gostiju",

@@ -1,8 +1,9 @@
-import type { Express, Request, Response } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertInquirySchema } from "@shared/schema";
 import fetch from "node-fetch";
+import * as ical from 'ical';
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API routes with /api prefix
@@ -72,9 +73,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       try {
-        // Dynamically import the ical library
-        const icalModule = await import('ical');
-        
         const allBookings = [];
       
         for (const url of icalUrls) {
@@ -96,8 +94,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
             
             const data = await response.text();
             
-            // Use the parse function from the ical module
-            const parsedCal = icalModule.parseICS(data);
+            // Use the globally imported ical module
+            const parsedCal = ical.parseICS(data);
             
             for (const key in parsedCal) {
               const event = parsedCal[key];

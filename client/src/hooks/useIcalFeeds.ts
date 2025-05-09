@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Booking } from '@/types';
+import { useQuery } from '@tanstack/react-query';
 
 interface IcalCache {
   bookings: Booking[];
@@ -15,6 +16,19 @@ export function useIcalFeeds(apartmentId: number, icalUrls?: string[]) {
   const [error, setError] = useState<string | null>(null);
   const [icalBookings, setIcalBookings] = useState<Booking[]>([]);
 
+  // Use React Query to fetch iCal bookings from server endpoint
+  const { 
+    data: bookingsData,
+    isLoading: isQueryLoading,
+    error: queryError
+  } = useQuery<any[]>({
+    queryKey: [`/api/apartments/${apartmentId}/ical-bookings`],
+    // Only run query if there are iCalUrls
+    enabled: !!icalUrls && icalUrls.length > 0,
+    staleTime: CACHE_TTL, // Cache for 1 hour
+  });
+
+  // Process the results
   useEffect(() => {
     // If no iCal URLs, return early
     if (!icalUrls || icalUrls.length === 0) {
@@ -22,55 +36,34 @@ export function useIcalFeeds(apartmentId: number, icalUrls?: string[]) {
       return;
     }
 
-    const fetchIcalBookings = async () => {
-      setIsLoading(true);
-      setError(null);
-      
+    // Handle error state
+    if (queryError) {
+      console.error('Error fetching iCal bookings:', queryError);
+      setError(queryError instanceof Error ? queryError.message : 'Unknown error fetching iCal bookings');
+      return;
+    }
+
+    // Process data
+    if (bookingsData) {
       try {
-        const now = Date.now();
-        
-        // Check cache first using apartmentId as the key
-        const cached = icalCache.get(apartmentId);
-        if (cached && now - cached.timestamp < CACHE_TTL) {
-          setIcalBookings(cached.bookings);
-          setIsLoading(false);
-          return;
-        }
-
-        // Fetch from server endpoint that handles all the parsing
-        const response = await fetch(`/api/apartments/${apartmentId}/ical-bookings`);
-        
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || 'Failed to fetch iCal bookings');
-        }
-
-        const bookings = await response.json();
-        
         // Convert ISO string dates to Date objects
-        const parsedBookings = bookings.map((booking: any) => ({
+        const parsedBookings = bookingsData.map((booking: any) => ({
           ...booking,
           startDate: new Date(booking.startDate),
           endDate: new Date(booking.endDate)
         }));
 
-        // Cache the results
-        icalCache.set(apartmentId, {
-          bookings: parsedBookings,
-          timestamp: now
-        });
-
         setIcalBookings(parsedBookings);
+        setError(null);
       } catch (err) {
-        console.error('Error fetching iCal bookings:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error fetching iCal bookings');
-      } finally {
-        setIsLoading(false);
+        console.error('Error processing iCal bookings:', err);
+        setError(err instanceof Error ? err.message : 'Unknown error processing iCal bookings');
       }
-    };
+    }
 
-    fetchIcalBookings();
-  }, [apartmentId, icalUrls?.length]); // Only depends on apartmentId and icalUrls array length, not contents
+    // Update loading status
+    setIsLoading(isQueryLoading);
+  }, [apartmentId, icalUrls, bookingsData, isQueryLoading, queryError]);
 
   return { icalBookings, isLoading, error };
 }

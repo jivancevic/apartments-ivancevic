@@ -5,11 +5,11 @@ import { format, addMonths, startOfMonth, endOfMonth, eachDayOfInterval, getDay 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-interface CalendarProps {
+interface BookingCalendarProps {
   bookings: Booking[];
 }
 
-const BookingCalendar = ({ bookings }: CalendarProps) => {
+const BookingCalendar = ({ bookings }: BookingCalendarProps) => {
   const { t } = useTranslation();
   const [currentDate, setCurrentDate] = useState(new Date());
   

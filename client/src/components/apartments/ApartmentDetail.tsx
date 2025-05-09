@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "wouter";
 import { Apartment, Booking } from "@/types";
 import ApartmentGallery from "./ApartmentGallery";
-import Calendar from "@/components/ui/Calendar";
+import BookingCalendar from "@/components/ui/booking-calendar";
 import AmenityIcon from "@/components/ui/AmenityIcon";
 import useLanguage from "@/hooks/useLanguage";
 import { useIcalFeeds } from "@/hooks/useIcalFeeds";
@@ -201,7 +201,7 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
                 </div>
               )}
               
-              <Calendar bookings={allBookings} />
+              <BookingCalendar bookings={allBookings} />
               
               {apartment.icalUrls && apartment.icalUrls.length > 0 && (
                 <div className="mt-2 text-xs text-gray-500">

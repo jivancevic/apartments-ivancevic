@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "wouter";
+import SearchBar from "@/components/search/SearchBar";
 
 const HeroSection = () => {
   const { t } = useTranslation();
@@ -26,6 +27,12 @@ const HeroSection = () => {
           <p className="text-white text-shadow-lg text-lg md:text-xl mb-8 max-w-lg">
             {t("home.hero.description")}
           </p>
+          
+          {/* Search bar */}
+          <div className="mb-8 max-w-4xl">
+            <SearchBar />
+          </div>
+          
           <div className="flex flex-wrap gap-4">
             <Link href="/apartments" className="bg-primary hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-md transition-colors">
               {t("home.hero.viewApartments")}

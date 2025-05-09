@@ -15,9 +15,26 @@ const Apartments = () => {
   const checkInParam = params.get("checkIn");
   const checkOutParam = params.get("checkOut");
   
-  // Parse dates from URL parameters
-  const checkIn = checkInParam ? new Date(checkInParam) : undefined;
-  const checkOut = checkOutParam ? new Date(checkOutParam) : undefined;
+  // Parse dates from URL parameters, supporting both full ISO format and cleaner YYYY-MM-DD format
+  const checkIn = checkInParam ? (() => {
+    // Check if the format is already YYYY-MM-DD (no time component)
+    if (checkInParam.length === 10) {
+      // Make sure the date is set to midnight in local timezone for consistency
+      const date = new Date(checkInParam + 'T00:00:00');
+      return date;
+    }
+    return new Date(checkInParam);
+  })() : undefined;
+  
+  const checkOut = checkOutParam ? (() => {
+    // Check if the format is already YYYY-MM-DD (no time component)
+    if (checkOutParam.length === 10) {
+      // Make sure the date is set to midnight in local timezone for consistency
+      const date = new Date(checkOutParam + 'T00:00:00');
+      return date;
+    }
+    return new Date(checkOutParam);
+  })() : undefined;
   
   // Fetch apartments data
   const { data: apartments, isLoading, error } = useQuery({

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
 
@@ -7,11 +7,12 @@ import SearchResults from "@/components/search/SearchResults";
 
 const Search = () => {
   const { t } = useTranslation();
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   
   const [checkIn, setCheckIn] = useState<Date | null>(null);
   const [checkOut, setCheckOut] = useState<Date | null>(null);
   const [guests, setGuests] = useState<number>(2);
+  const [searchTrigger, setSearchTrigger] = useState<number>(0);
   
   // Parse URL query parameters
   useEffect(() => {
@@ -34,6 +35,24 @@ const Search = () => {
     }
   }, [location]);
   
+  // Handle search button click from SearchBar
+  const handleSearch = useCallback((newCheckIn: Date, newCheckOut: Date, newGuests: number) => {
+    setCheckIn(newCheckIn);
+    setCheckOut(newCheckOut);
+    setGuests(newGuests);
+    
+    // Force refresh of search results by incrementing searchTrigger
+    setSearchTrigger(prev => prev + 1);
+    
+    // Update URL with clean date format (YYYY-MM-DD)
+    const formattedCheckIn = newCheckIn.toISOString().split('T')[0];
+    const formattedCheckOut = newCheckOut.toISOString().split('T')[0];
+    
+    // Update URL without full reload
+    const newUrl = `/search?checkIn=${formattedCheckIn}&checkOut=${formattedCheckOut}&guests=${newGuests}`;
+    setLocation(newUrl, { replace: true });
+  }, [setLocation]);
+  
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">{t("search.title")}</h1>
@@ -45,11 +64,13 @@ const Search = () => {
           initialCheckIn={checkIn || undefined}
           initialCheckOut={checkOut || undefined}
           initialGuests={guests}
+          onSearch={handleSearch}
         />
       </div>
       
       {(checkIn && checkOut) ? (
         <SearchResults 
+          key={searchTrigger} // Force re-render when search is triggered
           checkIn={checkIn} 
           checkOut={checkOut} 
           guests={guests} 

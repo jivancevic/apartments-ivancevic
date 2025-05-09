@@ -17,13 +17,15 @@ interface SearchBarProps {
   initialCheckIn?: Date;
   initialCheckOut?: Date;
   initialGuests?: number;
+  onSearch?: (checkIn: Date, checkOut: Date, guests: number) => void;
 }
 
 const SearchBar = ({ 
   className = "", 
   initialCheckIn,
   initialCheckOut,
-  initialGuests
+  initialGuests,
+  onSearch
 }: SearchBarProps) => {
   const { t } = useTranslation();
   const [location, setLocation] = useLocation();
@@ -55,10 +57,21 @@ const SearchBar = ({
   const handleSearch = () => {
     if (!checkIn || !checkOut) return;
     
+    // Use custom handler if provided (for direct search page use)
+    if (onSearch) {
+      onSearch(checkIn, checkOut, parseInt(guests));
+      return;
+    }
+    
+    // Otherwise use default navigation behavior
+    // Format dates for cleaner URLs (YYYY-MM-DD)
+    const formattedCheckIn = checkIn.toISOString().split('T')[0];
+    const formattedCheckOut = checkOut.toISOString().split('T')[0];
+    
     // Navigate to search results with query parameters
     const searchParams = new URLSearchParams({
-      checkIn: checkIn.toISOString(),
-      checkOut: checkOut.toISOString(),
+      checkIn: formattedCheckIn,
+      checkOut: formattedCheckOut,
       guests: guests
     });
     
@@ -226,13 +239,15 @@ const SearchBar = ({
         </div>
         
         {/* Search button */}
-        <Button 
-          type="button" 
-          onClick={handleSearch}
-          className="bg-primary hover:bg-primary/90 text-white h-11 flex-shrink-0"
-        >
-          {t("search.searchButton")}
-        </Button>
+        <div className="flex-shrink-0">
+          <Button 
+            type="button" 
+            onClick={handleSearch}
+            className="bg-primary hover:bg-primary/90 text-white h-11 w-full"
+          >
+            {t("search.searchButton")}
+          </Button>
+        </div>
       </div>
       
       {/* Unified Calendar Popover */}

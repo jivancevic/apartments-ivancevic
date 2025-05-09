@@ -15,18 +15,18 @@ const hrTranslation = {
   "home.hero.sendInquiry": "Pošaljite upit",
 
   // Features
-  "features.beach.title": "Blizu plaže",
-  "features.beach.description":
-    "Samo 5 minuta hoda do prekrasnih šljunčanih plaža s kristalno čistom vodom.",
-  "features.quiet.title": "Mirno područje",
-  "features.quiet.description":
-    "Smješteno u mirnom susjedstvu, savršeno za opuštanje daleko od buke.",
-  "features.parking.title": "Besplatni parking",
-  "features.parking.description":
-    "Besplatno privatno parkiralište za sve naše goste tijekom boravka.",
-  "features.views.title": "Prekrasni pogledi",
-  "features.views.description":
-    "Uživajte u zadivljujućim pogledima na Stari Grad i more s balkona naših apartmana.",
+  "features.welcome.title": "Osobna dobrodošlica",
+  "features.welcome.description":
+    "Osobno pozdravljamo svakog gosta i uvijek smo dostupni pomoći vam da uživate u Korčuli kao lokalci.",
+  "features.cleanliness.title": "Besprijekorna čistoća",
+  "features.cleanliness.description":
+    "Sami čistimo i pripremamo svaki apartman kako bismo osigurali da je sve besprijekorno, svježe i spremno za vaš boravak.",
+  "features.location.title": "Jedinstvena lokacija",
+  "features.location.description":
+    "Svi naši apartmani su samo nekoliko trenutaka od korčulanskog povijesnog Starog grada — dovoljno blizu za istraživanje, dovoljno daleko za odmor.",
+  "features.experience.title": "Pravo lokalno iskustvo",
+  "features.experience.description":
+    "Od lokalnih savjeta do skrivenih plaža, pomoći ćemo vam da doživite Korčulu kao pravi lokalac.",
 
   // Apartments Page
   "apartments.title": "Naši apartmani",

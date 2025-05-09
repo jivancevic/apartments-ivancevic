@@ -1,7 +1,8 @@
 import React from 'react';
 import { 
   Wifi, Utensils, Snowflake, Tv, Wind, Droplets, 
-  ParkingMeter, Network, Umbrella, Volume2, Mountain
+  ParkingMeter, Network, Umbrella, Volume2, Mountain,
+  Handshake, Sparkles, MapPin, Compass
 } from 'lucide-react';
 
 interface AmenityIconProps {

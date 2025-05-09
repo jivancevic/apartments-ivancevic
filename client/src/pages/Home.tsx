@@ -10,32 +10,32 @@ const Home = () => {
   // Define features with icons and translations
   const features: Feature[] = [
     {
-      icon: "umbrella-beach",
-      titleEn: t("features.beach.title"),
-      titleHr: "Blizu plaže",
-      descriptionEn: t("features.beach.description"),
-      descriptionHr: "Samo 5 minuta hoda do prekrasnih šljunčanih plaža s kristalno čistom vodom."
+      icon: "handshake",
+      titleEn: t("features.welcome.title"),
+      titleHr: t("features.welcome.title"),
+      descriptionEn: t("features.welcome.description"),
+      descriptionHr: t("features.welcome.description")
     },
     {
-      icon: "volume-off",
-      titleEn: t("features.quiet.title"),
-      titleHr: "Mirno područje",
-      descriptionEn: t("features.quiet.description"),
-      descriptionHr: "Smješteno u mirnom susjedstvu, savršeno za opuštanje daleko od buke."
+      icon: "sparkles",
+      titleEn: t("features.cleanliness.title"),
+      titleHr: t("features.cleanliness.title"),
+      descriptionEn: t("features.cleanliness.description"),
+      descriptionHr: t("features.cleanliness.description")
     },
     {
-      icon: "parking",
-      titleEn: t("features.parking.title"),
-      titleHr: "Besplatni parking",
-      descriptionEn: t("features.parking.description"),
-      descriptionHr: "Besplatno privatno parkiralište za sve naše goste tijekom boravka."
+      icon: "map-pin",
+      titleEn: t("features.location.title"),
+      titleHr: t("features.location.title"),
+      descriptionEn: t("features.location.description"),
+      descriptionHr: t("features.location.description")
     },
     {
-      icon: "mountain",
-      titleEn: t("features.views.title"),
-      titleHr: "Prekrasni pogledi",
-      descriptionEn: t("features.views.description"),
-      descriptionHr: "Uživajte u zadivljujućim pogledima na more i planine s balkona naših apartmana."
+      icon: "compass",
+      titleEn: t("features.experience.title"),
+      titleHr: t("features.experience.title"),
+      descriptionEn: t("features.experience.description"),
+      descriptionHr: t("features.experience.description")
     }
   ];
 

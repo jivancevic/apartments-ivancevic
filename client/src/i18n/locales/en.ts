@@ -14,14 +14,14 @@ const enTranslation = {
   "home.hero.sendInquiry": "Send Booking Inquiry",
   
   // Features
-  "features.beach.title": "Close to Beach",
-  "features.beach.description": "Just a 5-minute walk to the beautiful pebble beaches with crystal clear water.",
-  "features.quiet.title": "Quiet Area",
-  "features.quiet.description": "Located in a peaceful neighborhood, perfect for relaxation away from noise.",
-  "features.parking.title": "Free Parking",
-  "features.parking.description": "Complimentary private parking for all our guests during their stay.",
-  "features.views.title": "Great Views",
-  "features.views.description": "Enjoy breathtaking city and sea views from our apartment balconies.",
+  "features.welcome.title": "Personal Welcome",
+  "features.welcome.description": "We personally greet every guest and are always available to help you enjoy Korčula like a local.",
+  "features.cleanliness.title": "Spotless Cleanliness",
+  "features.cleanliness.description": "We clean and prepare each apartment ourselves to ensure everything is spotless, fresh, and ready for your stay.",
+  "features.location.title": "Unique Location",
+  "features.location.description": "All our apartments are just moments from Korčula's historic Old Town — close enough to explore, far enough to rest.",
+  "features.experience.title": "True Local Experience",
+  "features.experience.description": "From local tips to hidden beaches, we'll help you experience Korčula like a true insider.",
   
   // Apartments Page
   "apartments.title": "Our Apartments",

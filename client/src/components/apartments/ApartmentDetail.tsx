@@ -37,8 +37,13 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
   // Combine bookings from API and iCal feeds
   const allBookings = useMemo(() => {
     const api = apiBookings || [];
-    return [...api, ...icalBookings];
+    console.log("📅 API bookings:", api);
+    console.log("📅 iCal bookings:", icalBookings);
+    const merged = [...api, ...icalBookings];
+    console.log("📅 All bookings passed to calendar:", merged);
+    return merged;
   }, [apiBookings, icalBookings]);
+
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

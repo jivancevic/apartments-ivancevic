@@ -5,6 +5,7 @@ import ApartmentTabs from "@/components/apartments/ApartmentTabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
+import { Apartment } from "@/types";
 
 const Apartments = () => {
   const { t } = useTranslation();
@@ -37,7 +38,7 @@ const Apartments = () => {
   })() : undefined;
   
   // Fetch apartments data
-  const { data: apartments, isLoading, error } = useQuery({
+  const { data: apartments, isLoading, error } = useQuery<Apartment[]>({
     queryKey: ['/api/apartments'],
   });
 

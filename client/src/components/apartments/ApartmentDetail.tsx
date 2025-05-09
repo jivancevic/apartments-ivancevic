@@ -210,9 +210,9 @@ const ApartmentDetail = ({ apartment, selectedDates }: ApartmentDetailProps) => 
         
         <Link 
           href={`/contact?apartmentId=${apartment.id}${
-            selectedDates?.checkIn ? `&checkIn=${selectedDates.checkIn.toISOString()}` : ''
+            selectedDates?.checkIn ? `&checkIn=${selectedDates.checkIn.toISOString().split('T')[0]}` : ''
           }${
-            selectedDates?.checkOut ? `&checkOut=${selectedDates.checkOut.toISOString()}` : ''
+            selectedDates?.checkOut ? `&checkOut=${selectedDates.checkOut.toISOString().split('T')[0]}` : ''
           }`}
           className="block w-full bg-primary hover:bg-blue-600 text-white text-center font-medium py-3 px-6 rounded-md transition-colors">
           {t("apartments.sendInquiry")}

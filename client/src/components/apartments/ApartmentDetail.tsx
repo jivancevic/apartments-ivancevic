@@ -212,10 +212,9 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
           )}
         </div>
         
-        <Link href={`/contact?apartment=${apartment.id}`}>
-          <a className="block w-full bg-primary hover:bg-blue-600 text-white text-center font-medium py-3 px-6 rounded-md transition-colors">
-            {t("apartments.sendInquiry")}
-          </a>
+        <Link href={`/contact?apartment=${apartment.id}`} 
+          className="block w-full bg-primary hover:bg-blue-600 text-white text-center font-medium py-3 px-6 rounded-md transition-colors">
+          {t("apartments.sendInquiry")}
         </Link>
       </div>
     </div>

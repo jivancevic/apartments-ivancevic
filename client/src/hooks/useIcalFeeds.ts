@@ -1,69 +1,51 @@
-import { useState, useEffect } from 'react';
-import { Booking } from '@/types';
-import { useQuery } from '@tanstack/react-query';
+import { useMemo } from "react";
+import { Booking } from "@/types";
+import { useQuery } from "@tanstack/react-query";
 
-interface IcalCache {
-  bookings: Booking[];
-  timestamp: number;
-}
-
-// Cache to store iCal data with timestamps
-const icalCache = new Map<number, IcalCache>();
-const CACHE_TTL = 60 * 60 * 1000; // 1 hour in milliseconds
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes in milliseconds
 
 export function useIcalFeeds(apartmentId: number, icalUrls?: string[]) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [icalBookings, setIcalBookings] = useState<Booking[]>([]);
-
+  // Check if we should enable the query
+  const shouldFetch = !!icalUrls && icalUrls.length > 0;
+  
   // Use React Query to fetch iCal bookings from server endpoint
-  const { 
+  const {
     data: bookingsData,
-    isLoading: isQueryLoading,
-    error: queryError
+    isLoading,
+    error: queryError,
   } = useQuery<any[]>({
     queryKey: [`/api/apartments/${apartmentId}/ical-bookings`],
-    // Only run query if there are iCalUrls
-    enabled: !!icalUrls && icalUrls.length > 0,
-    staleTime: CACHE_TTL, // Cache for 1 hour
+    enabled: shouldFetch,
+    staleTime: CACHE_TTL,
   });
-
-  // Process the results
-  useEffect(() => {
-    // If no iCal URLs, return early
-    if (!icalUrls || icalUrls.length === 0) {
-      setIcalBookings([]);
-      return;
+  
+  // Process the data with useMemo to avoid unnecessary calculations
+  const icalBookings = useMemo(() => {
+    if (!bookingsData) return [];
+    
+    try {
+      // Convert ISO string dates to Date objects
+      return bookingsData.map((booking: any) => ({
+        ...booking,
+        startDate: new Date(booking.startDate),
+        endDate: new Date(booking.endDate),
+      }));
+    } catch (err) {
+      console.error("Error processing iCal bookings:", err);
+      return [];
     }
-
-    // Handle error state
-    if (queryError) {
-      console.error('Error fetching iCal bookings:', queryError);
-      setError(queryError instanceof Error ? queryError.message : 'Unknown error fetching iCal bookings');
-      return;
-    }
-
-    // Process data
-    if (bookingsData) {
-      try {
-        // Convert ISO string dates to Date objects
-        const parsedBookings = bookingsData.map((booking: any) => ({
-          ...booking,
-          startDate: new Date(booking.startDate),
-          endDate: new Date(booking.endDate)
-        }));
-
-        setIcalBookings(parsedBookings);
-        setError(null);
-      } catch (err) {
-        console.error('Error processing iCal bookings:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error processing iCal bookings');
-      }
-    }
-
-    // Update loading status
-    setIsLoading(isQueryLoading);
-  }, [apartmentId, icalUrls, bookingsData, isQueryLoading, queryError]);
-
-  return { icalBookings, isLoading, error };
+  }, [bookingsData]);
+  
+  // Format the error message
+  const error = queryError 
+    ? (queryError instanceof Error 
+        ? queryError.message 
+        : "Unknown error fetching iCal bookings")
+    : null;
+  
+  return { 
+    icalBookings, 
+    isLoading, 
+    error 
+  };
 }

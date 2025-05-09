@@ -25,6 +25,7 @@ export const apartments = pgTable("apartments", {
   hasParking: boolean("has_parking").notNull().default(true),
   hasGarden: boolean("has_garden").notNull().default(false),
   otherAmenities: text("other_amenities").array(),
+  icalUrls: text("ical_urls").array(),
 });
 
 // Define Booking schema

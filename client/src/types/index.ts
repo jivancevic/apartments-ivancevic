@@ -5,17 +5,13 @@ export interface Apartment {
   nameHr: string;
   descriptionEn: string;
   descriptionHr: string;
-  mainImage?: string;
+  mainImage?: string; // Client-only field
   images: string[];
   location: string;
-  // New dynamic pricing fields
+  // Dynamic pricing fields
   basePeakPrice: number;
   priceMultiplier: string;
   cleaningFee: number;
-  // Legacy pricing fields (keeping for backward compatibility)
-  price?: number;
-  priceHigh?: number;
-  pricePeak?: number;
   // Guest capacity
   maxGuests: number;
   // Amenities
@@ -27,11 +23,11 @@ export interface Apartment {
   hasSeaView: boolean;
   hasParking: boolean;
   hasGarden: boolean;
-  otherAmenities?: string[];
+  otherAmenities: string[] | null;
   // Booking links
-  bookingUrl?: string | null;
-  airbnbUrl?: string | null;
-  icalUrls?: string[];
+  bookingUrl: string | null;
+  airbnbUrl: string | null;
+  icalUrls: string[] | null;
 }
 
 // Booking type definitions

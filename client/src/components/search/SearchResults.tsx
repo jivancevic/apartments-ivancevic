@@ -79,14 +79,36 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
 
       // Check for booking conflicts
       const isAvailable = !apartmentBookings.some((booking: Booking) => {
-        const bookingStart = new Date(booking.startDate);
-        const bookingEnd = new Date(booking.endDate);
+        // Ensure we have Date objects for comparison
+        const bookingStart = booking.startDate instanceof Date 
+          ? booking.startDate 
+          : new Date(booking.startDate);
+        
+        const bookingEnd = booking.endDate instanceof Date 
+          ? booking.endDate 
+          : new Date(booking.endDate);
+          
+        // Reset hours to compare dates only, not times
+        const normalizedCheckIn = new Date(checkIn);
+        normalizedCheckIn.setHours(0, 0, 0, 0);
+        
+        const normalizedCheckOut = new Date(checkOut);
+        normalizedCheckOut.setHours(0, 0, 0, 0);
+        
+        const normalizedBookingStart = new Date(bookingStart);
+        normalizedBookingStart.setHours(0, 0, 0, 0);
+        
+        const normalizedBookingEnd = new Date(bookingEnd);
+        normalizedBookingEnd.setHours(0, 0, 0, 0);
         
         // Check if there's an overlap between the booking and the selected dates
         return (
-          (checkIn >= bookingStart && checkIn < bookingEnd) || // Check-in during a booking
-          (checkOut > bookingStart && checkOut <= bookingEnd) || // Check-out during a booking
-          (checkIn <= bookingStart && checkOut >= bookingEnd) // Selected dates completely contain a booking
+          // Check-in during a booking
+          (normalizedCheckIn >= normalizedBookingStart && normalizedCheckIn < normalizedBookingEnd) || 
+          // Check-out during a booking
+          (normalizedCheckOut > normalizedBookingStart && normalizedCheckOut <= normalizedBookingEnd) || 
+          // Selected dates completely contain a booking
+          (normalizedCheckIn <= normalizedBookingStart && normalizedCheckOut >= normalizedBookingEnd)
         );
       });
 
@@ -139,7 +161,17 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
       <div className="space-y-4">
         {filteredApartments.map((apartment) => {
           // Calculate price for the stay
-          const priceSummary = calculateStayPrice(apartment, checkIn, checkOut);
+          // Make sure apartment has required properties for price calculation
+          const apartmentWithDefaults = {
+            ...apartment,
+            location: apartment.location || "",
+            basePeakPrice: apartment.basePeakPrice || 110,
+            priceMultiplier: apartment.priceMultiplier || "1.0",
+            cleaningFee: apartment.cleaningFee || 40,
+            maxGuests: apartment.maxGuests || 4,
+            icalUrls: apartment.icalUrls || null
+          };
+          const priceSummary = calculateStayPrice(apartmentWithDefaults, checkIn, checkOut);
           
           const apartmentName = currentLanguage === "hr" 
             ? apartment.nameHr 

@@ -39,7 +39,12 @@ const Search = () => {
       <h1 className="text-3xl font-bold mb-6">{t("search.title")}</h1>
       
       <div className="mb-8">
-        <SearchBar className="max-w-full" />
+        <SearchBar 
+          className="max-w-full" 
+          initialCheckIn={checkIn || undefined}
+          initialCheckOut={checkOut || undefined}
+          initialGuests={guests}
+        />
       </div>
       
       {(checkIn && checkOut) ? (

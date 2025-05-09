@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
 import { format, addDays } from "date-fns";
@@ -21,19 +21,43 @@ import {
 
 interface SearchBarProps {
   className?: string;
+  initialCheckIn?: Date;
+  initialCheckOut?: Date;
+  initialGuests?: number;
 }
 
-const SearchBar = ({ className = "" }: SearchBarProps) => {
+const SearchBar = ({ 
+  className = "", 
+  initialCheckIn,
+  initialCheckOut,
+  initialGuests
+}: SearchBarProps) => {
   const { t } = useTranslation();
-  const [, setLocation] = useLocation();
+  const [location, setLocation] = useLocation();
   
   // Default to current date and a week later
   const today = new Date();
   const nextWeek = addDays(today, 7);
   
-  const [checkIn, setCheckIn] = useState<Date>(today);
-  const [checkOut, setCheckOut] = useState<Date>(nextWeek);
-  const [guests, setGuests] = useState<string>("2");
+  const [checkIn, setCheckIn] = useState<Date>(initialCheckIn || today);
+  const [checkOut, setCheckOut] = useState<Date>(initialCheckOut || nextWeek);
+  const [guests, setGuests] = useState<string>(initialGuests?.toString() || "2");
+  
+  // Update the form when URL parameters change
+  useEffect(() => {
+    // Only update if initialValues are provided (from URL parameters)
+    if (initialCheckIn) {
+      setCheckIn(initialCheckIn);
+    }
+    
+    if (initialCheckOut) {
+      setCheckOut(initialCheckOut);
+    }
+    
+    if (initialGuests) {
+      setGuests(initialGuests.toString());
+    }
+  }, [initialCheckIn, initialCheckOut, initialGuests]);
   
   const handleSearch = () => {
     if (!checkIn || !checkOut) return;

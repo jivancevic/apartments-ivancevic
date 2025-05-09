@@ -138,45 +138,47 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
         </div>
         
         {/* Calendar with booking links */}
-        <div className="flex justify-between items-center mb-3">
-          <h4 className="font-heading font-semibold text-lg">
-            {t("apartments.availability")}
-          </h4>
-          
-          <div className="flex gap-2">
-            {apartment.bookingUrl && (
-              <a 
-                href={apartment.bookingUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block p-2 rounded-md hover:opacity-75 transition-opacity"
-                aria-label="Book on Booking.com"
-              >
-                <img src="/icons/booking.svg" alt="Booking.com" className="h-6 w-6" />
-              </a>
-            )}
+        <div className="mb-6">
+          <div className="flex justify-between items-center mb-3">
+            <h4 className="font-heading font-semibold text-lg">
+              {t("apartments.availability")}
+            </h4>
             
-            {apartment.airbnbUrl && (
-              <a 
-                href={apartment.airbnbUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block p-2 rounded-md hover:opacity-75 transition-opacity"
-                aria-label="Book on Airbnb"
-              >
-                <img src="/icons/airbnb.svg" alt="Airbnb" className="h-6 w-6" />
-              </a>
-            )}
+            <div className="flex items-center">
+              {apartment.bookingUrl && (
+                <a 
+                  href={apartment.bookingUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="ml-3 hover:opacity-75 transition-opacity"
+                  aria-label="Book on Booking.com"
+                >
+                  <img src="/icons/booking.svg" alt="Booking.com" className="w-6 h-6" />
+                </a>
+              )}
+              
+              {apartment.airbnbUrl && (
+                <a 
+                  href={apartment.airbnbUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="ml-3 hover:opacity-75 transition-opacity"
+                  aria-label="Book on Airbnb"
+                >
+                  <img src="/icons/airbnb.svg" alt="Airbnb" className="w-6 h-6" />
+                </a>
+              )}
+            </div>
           </div>
+          
+          {isLoading ? (
+            <Skeleton className="h-32 w-full" />
+          ) : (
+            <div className="bg-neutral p-4 rounded-lg">
+              <Calendar bookings={bookings || []} />
+            </div>
+          )}
         </div>
-        
-        {isLoading ? (
-          <Skeleton className="h-32 w-full mb-6" />
-        ) : (
-          <div className="mb-6 bg-neutral p-4 rounded-lg">
-            <Calendar bookings={bookings || []} />
-          </div>
-        )}
         
         <Link href={`/contact?apartment=${apartment.id}`}>
           <a className="block w-full bg-primary hover:bg-blue-600 text-white text-center font-medium py-3 px-6 rounded-md transition-colors">

@@ -61,6 +61,7 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        airbnb: '#ff5a5f',
       },
       keyframes: {
         "accordion-down": {

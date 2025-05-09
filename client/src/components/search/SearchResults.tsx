@@ -9,7 +9,6 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import SearchBar from "@/components/search/SearchBar";
 import { calculateStayPrice } from "@/lib/pricing";
 import { Apartment, Booking } from "@/types";
 import { getQueryFn } from "@/lib/queryClient";
@@ -174,27 +173,8 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
     );
   }
 
-  // Create search bar with current search criteria
-  const handleSearch = () => {
-    // This doesn't trigger a re-render as we're just using the component functions
-    // The SearchBar component handles the navigation internally
-  };
-
   return (
     <div className="space-y-6">
-      {/* Search parameters summary */}
-      <div className="mb-8 bg-gray-50 rounded-lg p-4 border">
-        <h2 className="text-lg font-medium mb-2">{t("search.currentSearch")}</h2>
-        <div className="flex flex-wrap gap-3">
-          <div className="bg-white px-3 py-1.5 rounded border text-sm">
-            {format(checkIn, "MMM d, yyyy")} — {format(checkOut, "MMM d, yyyy")}
-          </div>
-          <div className="bg-white px-3 py-1.5 rounded border text-sm">
-            {t("search.guestsCount", { count: guests })}
-          </div>
-        </div>
-      </div>
-      
       <h2 className="text-2xl font-bold">
         {t("search.resultsFound", { count: filteredApartments.length })}
       </h2>

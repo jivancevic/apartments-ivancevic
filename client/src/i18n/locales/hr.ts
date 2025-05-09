@@ -149,6 +149,9 @@ const hrTranslation = {
   "search.totalPrice": "ukupna cijena",
   "search.perNight": "po noći",
   "search.modifySearch": "Promijeni pretragu",
+  "search.currentSearch": "Trenutni kriteriji pretrage",
+  "search.guestsCount": "{{count}} gost",
+  "search.guestsCount_plural": "{{count}} gostiju",
   "search.enterCriteria": "Unesite datume putovanja i broj gostiju za pretragu dostupnih apartmana",
   
   // Apartment Details

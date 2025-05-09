@@ -11,8 +11,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { AlertCircle } from "lucide-react";
 import { useMemo } from "react";
 
+interface SelectedDates {
+  checkIn?: Date;
+  checkOut?: Date;
+}
+
 interface ApartmentDetailProps {
   apartment: Apartment;
+  selectedDates?: SelectedDates;
 }
 
 const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {

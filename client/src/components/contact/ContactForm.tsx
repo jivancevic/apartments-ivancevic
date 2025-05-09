@@ -33,9 +33,19 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
   const { toast } = useToast();
   const [location, setLocation] = useLocation();
   
-  // Get apartment ID from query string
+  // Get parameters from query string
   const params = new URLSearchParams(location.split("?")[1] || "");
-  const preselectedApartmentId = params.get("apartment");
+  const preselectedApartmentId = params.get("apartmentId") || params.get("apartment");
+  
+  // Get prefilled dates if available
+  const checkInParam = params.get("checkIn");
+  const checkOutParam = params.get("checkOut");
+  
+  // Parse dates from URL parameters
+  const initialCheckIn = checkInParam ? new Date(checkInParam) : new Date();
+  const initialCheckOut = checkOutParam 
+    ? new Date(checkOutParam) 
+    : new Date(new Date().setDate(new Date().getDate() + 7));
 
   // Create a schema for form validation
   const formSchema = z.object({
@@ -66,8 +76,8 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
       phone: "",
       apartmentId: preselectedApartmentId || "",
       message: "",
-      checkIn: new Date(),
-      checkOut: new Date(new Date().setDate(new Date().getDate() + 7)),
+      checkIn: initialCheckIn,
+      checkOut: initialCheckOut,
     },
   });
 

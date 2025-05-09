@@ -17,11 +17,17 @@ const APARTMENT_SLUGS: Record<string, number> = {
   'lara': 9
 };
 
-interface ApartmentTabsProps {
-  apartments: Apartment[];
+interface SelectedDates {
+  checkIn?: Date;
+  checkOut?: Date;
 }
 
-const ApartmentTabs = ({ apartments }: ApartmentTabsProps) => {
+interface ApartmentTabsProps {
+  apartments: Apartment[];
+  selectedDates?: SelectedDates;
+}
+
+const ApartmentTabs = ({ apartments, selectedDates }: ApartmentTabsProps) => {
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
   
@@ -97,7 +103,10 @@ const ApartmentTabs = ({ apartments }: ApartmentTabsProps) => {
             key={apartment.id}
             className={activeTab === apartment.id ? "block" : "hidden"}
           >
-            <ApartmentDetail apartment={apartment} />
+            <ApartmentDetail 
+              apartment={apartment} 
+              selectedDates={selectedDates}
+            />
           </div>
         ))}
       </div>

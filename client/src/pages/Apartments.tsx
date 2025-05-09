@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "wouter";
 import ApartmentTabs from "@/components/apartments/ApartmentTabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -7,6 +8,16 @@ import { AlertCircle } from "lucide-react";
 
 const Apartments = () => {
   const { t } = useTranslation();
+  const [location] = useLocation();
+  
+  // Extract date parameters from URL
+  const params = new URLSearchParams(location.split("?")[1] || "");
+  const checkInParam = params.get("checkIn");
+  const checkOutParam = params.get("checkOut");
+  
+  // Parse dates from URL parameters
+  const checkIn = checkInParam ? new Date(checkInParam) : undefined;
+  const checkOut = checkOutParam ? new Date(checkOutParam) : undefined;
   
   // Fetch apartments data
   const { data: apartments, isLoading, error } = useQuery({
@@ -40,7 +51,15 @@ const Apartments = () => {
           </Alert>
         )}
         
-        {apartments && <ApartmentTabs apartments={apartments} />}
+        {apartments && (
+          <ApartmentTabs 
+            apartments={apartments} 
+            selectedDates={{ 
+              checkIn: checkIn,
+              checkOut: checkOut
+            }}
+          />
+        )}
       </div>
     </section>
   );

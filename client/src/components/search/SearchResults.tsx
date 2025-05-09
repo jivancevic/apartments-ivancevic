@@ -12,6 +12,24 @@ import { calculateStayPrice } from "@/lib/pricing";
 import { Apartment, Booking } from "@/types";
 import { getQueryFn } from "@/lib/queryClient";
 
+// Mapping of apartment IDs to slugs
+const APARTMENT_SLUGS: Record<number, string> = {
+  1: 'magical-oasis',
+  2: 'saint-roko',
+  3: 'ismaelli',
+  4: 'lavander',
+  5: 'sun',
+  6: 'sea',
+  7: 'beach',
+  8: 'nika',
+  9: 'lara'
+};
+
+// Get apartment slug from ID
+const getApartmentSlug = (id: number): string => {
+  return APARTMENT_SLUGS[id] || `apartment-${id}`;
+};
+
 interface SearchResultsProps {
   checkIn: Date;
   checkOut: Date;
@@ -266,7 +284,10 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
                       </div>
                     </div>
                     
-                    <Link to={`/apartments#apartment-${apartment.id}`} className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition">
+                    <Link 
+                      to={`/apartments#${getApartmentSlug(apartment.id)}`} 
+                      className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition"
+                    >
                       {t("search.viewDetails")}
                     </Link>
                   </div>

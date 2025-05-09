@@ -11,13 +11,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 interface SearchBarProps {
   className?: string;
@@ -129,26 +122,49 @@ const SearchBar = ({
           </Popover>
         </div>
         
-        {/* Guests selection */}
+        {/* Guests selection with +/- buttons */}
         <div className="w-full md:w-36">
-          <Select value={guests} onValueChange={setGuests}>
-            <SelectTrigger className="h-11">
-              <div className="flex items-center gap-2">
-                <Users className="h-4 w-4" />
-                <div className="flex flex-col items-start">
-                  <span className="text-xs text-muted-foreground">{t("search.guests")}</span>
-                  <SelectValue placeholder={t("search.selectGuests")} />
-                </div>
+          <div className="border rounded-md h-11 flex flex-col">
+            <div className="px-3 py-1">
+              <span className="text-xs text-muted-foreground">{t("search.guests")}</span>
+            </div>
+            <div className="flex items-center justify-between px-3">
+              <button 
+                type="button"
+                className="flex items-center justify-center h-6 w-6 rounded-full hover:bg-gray-100 disabled:opacity-50"
+                onClick={() => {
+                  const currentGuests = parseInt(guests);
+                  if (currentGuests > 1) {
+                    setGuests((currentGuests - 1).toString());
+                  }
+                }}
+                disabled={parseInt(guests) <= 1}
+                aria-label={t("search.decreaseGuests")}
+              >
+                <span className="text-xl font-medium">-</span>
+              </button>
+              
+              <div className="flex items-center gap-1">
+                <Users className="h-4 w-4 text-gray-500" />
+                <span>{guests} {parseInt(guests) === 1 ? t("search.guest") : t("search.guests")}</span>
               </div>
-            </SelectTrigger>
-            <SelectContent>
-              {[1, 2, 3, 4, 5, 6].map((num) => (
-                <SelectItem key={num} value={num.toString()}>
-                  {num} {num === 1 ? t("search.guest") : t("search.guests")}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+              
+              <button 
+                type="button"
+                className="flex items-center justify-center h-6 w-6 rounded-full hover:bg-gray-100 disabled:opacity-50"
+                onClick={() => {
+                  const currentGuests = parseInt(guests);
+                  if (currentGuests < 6) {
+                    setGuests((currentGuests + 1).toString());
+                  }
+                }}
+                disabled={parseInt(guests) >= 6}
+                aria-label={t("search.increaseGuests")}
+              >
+                <span className="text-xl font-medium">+</span>
+              </button>
+            </div>
+          </div>
         </div>
         
         {/* Search button */}

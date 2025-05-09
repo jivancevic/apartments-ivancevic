@@ -40,7 +40,14 @@ const hrTranslation = {
   "apartments.availability": "Dostupnost",
   "apartments.booked": "Rezervirano",
   "apartments.available": "Dostupno",
+  "apartments.selected": "Odabrano",
   "apartments.sendInquiry": "Pošaljite upit",
+  "apartments.calendarInstructions": "Kliknite da odaberete datum dolaska i odlaska. Pogledajte trenutni izračun cijene ispod.",
+  "apartments.nights": "{{count}} noćenje",
+  "apartments.nights_plural": "{{count}} noćenja",
+  "apartments.cleaningFee": "Naknada za čišćenje",
+  "apartments.total": "Ukupno",
+  "apartments.averageNight": "Prosječno po noći",
 
   // Amenities
   "amenities.wifi": "Besplatni Wi-Fi",

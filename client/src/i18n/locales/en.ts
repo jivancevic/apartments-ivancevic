@@ -35,7 +35,14 @@ const enTranslation = {
   "apartments.availability": "Availability",
   "apartments.booked": "Booked",
   "apartments.available": "Available",
+  "apartments.selected": "Selected",
   "apartments.sendInquiry": "Send Inquiry",
+  "apartments.calendarInstructions": "Click to select your check-in and check-out dates. See instant price calculation below.",
+  "apartments.nights": "{{count}} night",
+  "apartments.nights_plural": "{{count}} nights",
+  "apartments.cleaningFee": "Cleaning fee",
+  "apartments.total": "Total",
+  "apartments.averageNight": "Average per night",
   
   // Amenities
   "amenities.wifi": "Free Wi-Fi",

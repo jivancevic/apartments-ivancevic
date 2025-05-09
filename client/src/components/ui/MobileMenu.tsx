@@ -21,11 +21,11 @@ const MobileMenu = ({ onClose }: MobileMenuProps) => {
       <Link href="/apartments" onClick={handleClick} className="block px-4 py-2 font-heading font-medium hover:bg-neutral">
         {t("nav.apartments")}
       </Link>
-      <Link href="/about" onClick={handleClick} className="block px-4 py-2 font-heading font-medium hover:bg-neutral">
-        {t("nav.about")}
-      </Link>
       <Link href="/visit" onClick={handleClick} className="block px-4 py-2 font-heading font-medium hover:bg-neutral">
         {t("nav.visit")}
+      </Link>
+      <Link href="/about" onClick={handleClick} className="block px-4 py-2 font-heading font-medium hover:bg-neutral">
+        {t("nav.about")}
       </Link>
       <Link href="/contact" onClick={handleClick} className="block px-4 py-2 font-heading font-medium hover:bg-neutral">
         {t("nav.contact")}

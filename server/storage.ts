@@ -263,8 +263,8 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         otherAmenities: []
       },
       {
-        nameEn: "Apartment 4 (Family)",
-        nameHr: "Apartman 4 (Obiteljski)",
+        nameEn: "Lavander",
+        nameHr: "Lavanda",
         descriptionEn: "A spacious family apartment with two bedrooms, ideal for families or groups looking for extra space and comfort during their vacation.",
         descriptionHr: "Prostrani obiteljski apartman s dvije spavaće sobe, idealan za obitelji ili grupe koje traže dodatni prostor i udobnost tijekom odmora.",
         images: [
@@ -291,8 +291,8 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         otherAmenities: ["Bunk beds", "Two bathrooms"]
       },
       {
-        nameEn: "Apartment 5 (Studio)",
-        nameHr: "Apartman 5 (Studio)",
+        nameEn: "Sun",
+        nameHr: "Sunce",
         descriptionEn: "A cozy studio apartment perfect for solo travelers or couples who want a comfortable base for exploring the island of Korčula.",
         descriptionHr: "Udoban studio apartman savršen za samostalne putnike ili parove koji žele udobnu bazu za istraživanje otoka Korčule.",
         images: [
@@ -317,8 +317,8 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         otherAmenities: []
       },
       {
-        nameEn: "Apartment 6 (Deluxe)",
-        nameHr: "Apartman 6 (Deluxe)",
+        nameEn: "Sea",
+        nameHr: "More",
         descriptionEn: "Our premium offering with luxury amenities, spacious living areas, and panoramic sea views for the most discerning travelers.",
         descriptionHr: "Naša premium ponuda s luksuznim sadržajima, prostranim dnevnim boravkom i panoramskim pogledom na more za najzahtjevnije putnike.",
         images: [
@@ -346,8 +346,8 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         otherAmenities: ["Premium Furniture", "Coffee Machine", "Smart Home System"]
       },
       {
-        nameEn: "Apartment 7 (Romantic)",
-        nameHr: "Apartman 7 (Romantični)",
+        nameEn: "Beach",
+        nameHr: "Plaža",
         descriptionEn: "Specially designed for couples, this intimate apartment offers romance and privacy with a private terrace perfect for sunset dinners.",
         descriptionHr: "Posebno dizajniran za parove, ovaj intimni apartman nudi romantiku i privatnost s privatnom terasom savršenom za večere uz zalazak sunca.",
         images: [
@@ -373,18 +373,25 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         otherAmenities: ["Romantic Lighting", "Wine Cooler"]
       },
       {
-        nameEn: "Apartment 8 (Attic)",
-        nameHr: "Apartman 8 (Potkrovlje)",
+        nameEn: "Nika",
+        nameHr: "Nika",
         descriptionEn: "Charming attic apartment with unique architecture, skylights, and a cozy atmosphere perfect for those seeking something different.",
         descriptionHr: "Šarmantni potkrovni apartman s jedinstvenom arhitekturom, krovnim prozorima i ugodnom atmosferom savršen za one koji traže nešto drugačije.",
         images: [
-          "/images/apartments/apt8/1.jpg",
-          "/images/apartments/apt8/2.jpg",
-          "/images/apartments/apt8/3.jpg",
-          "/images/apartments/apt8/4.jpg"
+          "/images/apartments/nika/view.webp",
+          "/images/apartments/nika/living-room.webp",
+          "/images/apartments/nika/dining-room.webp",
+          "/images/apartments/nika/kitchen.webp",
+          "/images/apartments/nika/table.webp",
+          "/images/apartments/nika/room2.webp",
+          "/images/apartments/nika/room2-2.webp",
+          "/images/apartments/nika/room-view.webp",
+          "/images/apartments/nika/room1.webp",
+          "/images/apartments/nika/balcony.webp"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartmani%20Ivan%C4%8Devi%C4%87!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
-        bookingUrl: "https://www.booking.com/hotel/hr/apartment-attic.html",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.4167420755093!2d17.127484875471605!3d42.961486396894585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a516bb56b95d3%3A0x2758c0e472e4450c!2sApartments%20Giuliani!5e1!3m2!1sen!2sit!4v1746801360640!5m2!1sen!2sit",
+        bookingUrl: "https://www.booking.com/hotel/hr/apartmani-lara-i-nika.html",
+        airbnbUrl: "https://www.booking.com/hotel/hr/apartment-attic.html",
         price: 70,
         priceHigh: 110,
         pricePeak: 140,
@@ -399,8 +406,8 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         otherAmenities: ["Reading Nook", "Skylights"]
       },
       {
-        nameEn: "Apartment 9 (Economy)",
-        nameHr: "Apartman 9 (Ekonomski)",
+        nameEn: "Lara",
+        nameHr: "Lara",
         descriptionEn: "Budget-friendly option with all essential amenities and comfortable furnishings, perfect for travelers watching their spending.",
         descriptionHr: "Opcija prilagođena budžetu sa svim osnovnim sadržajima i udobnim namještajem, savršena za putnike koji paze na potrošnju.",
         images: [

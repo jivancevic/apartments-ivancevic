@@ -7,17 +7,17 @@ export interface Apartment {
   descriptionHr: string;
   mainImage?: string;
   images: string[];
-  location?: string;
+  location: string;
   // New dynamic pricing fields
-  basePeakPrice?: number;
-  priceMultiplier?: string;
-  cleaningFee?: number;
+  basePeakPrice: number;
+  priceMultiplier: string;
+  cleaningFee: number;
   // Legacy pricing fields (keeping for backward compatibility)
   price?: number;
   priceHigh?: number;
   pricePeak?: number;
   // Guest capacity
-  maxGuests?: number;
+  maxGuests: number;
   // Amenities
   hasWifi: boolean;
   hasKitchen: boolean;

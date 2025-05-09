@@ -301,7 +301,13 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         nameHr: "Apartman 7 (Romantični)",
         descriptionEn: "Specially designed for couples, this intimate apartment offers romance and privacy with a private terrace perfect for sunset dinners.",
         descriptionHr: "Posebno dizajniran za parove, ovaj intimni apartman nudi romantiku i privatnost s privatnom terasom savršenom za večere uz zalazak sunca.",
-        imagesPath: "/images/apartments/apt7/",
+        images: [
+          "/images/apartments/apt7/1.jpg",
+          "/images/apartments/apt7/2.jpg",
+          "/images/apartments/apt7/3.jpg",
+          "/images/apartments/apt7/4.jpg",
+          "/images/apartments/apt7/5.jpg"
+        ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartmani%20Ivan%C4%8Devi%C4%87!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
         airbnbUrl: "https://www.airbnb.com/rooms/67890123",
         price: 85,
@@ -322,7 +328,12 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         nameHr: "Apartman 8 (Potkrovlje)",
         descriptionEn: "Charming attic apartment with unique architecture, skylights, and a cozy atmosphere perfect for those seeking something different.",
         descriptionHr: "Šarmantni potkrovni apartman s jedinstvenom arhitekturom, krovnim prozorima i ugodnom atmosferom savršen za one koji traže nešto drugačije.",
-        imagesPath: "/images/apartments/apt8/",
+        images: [
+          "/images/apartments/apt8/1.jpg",
+          "/images/apartments/apt8/2.jpg",
+          "/images/apartments/apt8/3.jpg",
+          "/images/apartments/apt8/4.jpg"
+        ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartmani%20Ivan%C4%8Devi%C4%87!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
         bookingUrl: "https://www.booking.com/hotel/hr/apartment-attic.html",
         price: 70,
@@ -343,7 +354,12 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         nameHr: "Apartman 9 (Ekonomski)",
         descriptionEn: "Budget-friendly option with all essential amenities and comfortable furnishings, perfect for travelers watching their spending.",
         descriptionHr: "Opcija prilagođena budžetu sa svim osnovnim sadržajima i udobnim namještajem, savršena za putnike koji paze na potrošnju.",
-        imagesPath: "/images/apartments/apt9/",
+        images: [
+          "/images/apartments/apt9/1.jpg",
+          "/images/apartments/apt9/2.jpg",
+          "/images/apartments/apt9/3.jpg",
+          "/images/apartments/apt9/4.jpg"
+        ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartmani%20Ivan%C4%8Devi%C4%87!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
         airbnbUrl: "https://www.airbnb.com/rooms/78901234",
         price: 55,

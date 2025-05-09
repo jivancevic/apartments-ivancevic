@@ -1,61 +1,43 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ApartmentGalleryProps {
-  imagesPath?: string;
   mainImage?: string;
   images?: string[];
 }
 
-const ApartmentGallery = ({ imagesPath, mainImage, images: propImages }: ApartmentGalleryProps) => {
-  const [images, setImages] = useState<string[]>([]);
+const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryProps) => {
+  const [images, setImages] = useState<string[]>(propImages || []);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const currentImage = images[currentImageIndex] || "";
+  const thumbnailsContainerRef = useRef<HTMLDivElement>(null);
+  const thumbnailRefs = useRef<(HTMLDivElement | null)[]>([]);
   
+  // Initialize thumbnailRefs with the correct length
   useEffect(() => {
-    if (!imagesPath) {
-      setIsLoading(false);
-      return;
-    }
-    
-    // Function to check if an image exists using fetch HEAD request
-    async function checkImageExists(url: string): Promise<boolean> {
-      try {
-        const response = await fetch(url, { method: 'HEAD' });
-        return response.ok;
-      } catch (error) {
-        return false;
-      }
-    }
-    
-    // Function to load images dynamically
-    async function loadImages() {
-      setIsLoading(true);
-      const foundImages: string[] = [];
-      // Using non-null assertion since we've already checked
-      const path = imagesPath!;
-      const normalizedPath = path.endsWith("/") ? path : `${path}/`;
-      
-      // Try to load up to 20 images
-      for (let i = 1; i <= 20; i++) {
-        const imageUrl = `${normalizedPath}${i}.png`;
-        const exists = await checkImageExists(imageUrl);
-        
-        if (exists) {
-          foundImages.push(imageUrl);
-        } else {
-          // Stop checking when an image doesn't exist
-          break;
-        }
-      }
-      
-      setImages(foundImages);
+    thumbnailRefs.current = Array(images.length).fill(null);
+  }, [images.length]);
+  
+  // Set images when propImages change
+  useEffect(() => {
+    if (propImages && propImages.length > 0) {
+      setImages(propImages);
       setIsLoading(false);
     }
-    
-    loadImages();
-  }, [imagesPath]);
+  }, [propImages]);
+
+  // Scroll selected thumbnail into view
+  useEffect(() => {
+    const selectedThumbnail = thumbnailRefs.current[currentImageIndex];
+    if (selectedThumbnail && thumbnailsContainerRef.current) {
+      selectedThumbnail.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+      });
+    }
+  }, [currentImageIndex]);
 
   const handleThumbnailClick = (index: number) => {
     setCurrentImageIndex(index);
@@ -122,12 +104,17 @@ const ApartmentGallery = ({ imagesPath, mainImage, images: propImages }: Apartme
         </div>
       </div>
       
-      {/* Thumbnails */}
-      <div className="grid grid-cols-4 gap-4">
-        {images.slice(0, 4).map((image: string, index: number) => (
+      {/* Thumbnails - Horizontal Scrollable */}
+      <div 
+        ref={thumbnailsContainerRef}
+        className="flex space-x-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200"
+        style={{ scrollbarWidth: 'thin' }}
+      >
+        {images.map((image: string, index: number) => (
           <div
             key={index}
-            className={`aspect-square bg-neutral rounded-lg overflow-hidden cursor-pointer transition-all ${
+            ref={el => thumbnailRefs.current[index] = el}
+            className={`flex-none w-20 h-20 bg-neutral rounded-lg overflow-hidden cursor-pointer transition-all ${
               currentImageIndex === index ? "ring-2 ring-primary scale-95" : "hover:scale-95"
             }`}
             onClick={() => handleThumbnailClick(index)}

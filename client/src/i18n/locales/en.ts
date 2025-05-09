@@ -114,7 +114,35 @@ const enTranslation = {
   "validation.required": "This field is required",
   "validation.email": "Please enter a valid email address",
   "validation.checkOut": "Check-out date must be after check-in date",
-  "validation.future": "Date must be in the future"
+  "validation.future": "Date must be in the future",
+  
+  // Search Page
+  "search.title": "Find Your Perfect Apartment",
+  "search.checkIn": "Check-in",
+  "search.checkOut": "Check-out",
+  "search.guests": "Guests",
+  "search.guest": "Guest",
+  "search.guests": "Guests",
+  "search.selectDate": "Select a date",
+  "search.selectGuests": "Select guests",
+  "search.searchButton": "Search",
+  "search.loading": "Finding available apartments...",
+  "search.noResults": "No apartments available for these dates",
+  "search.tryDifferent": "Please try different dates or guest count",
+  "search.resultsFound": "{{count}} apartment found",
+  "search.resultsFound_plural": "{{count}} apartments found",
+  "search.viewDetails": "View Details",
+  "search.totalPrice": "total price",
+  "search.enterCriteria": "Please enter your travel dates and number of guests to search for available apartments",
+  
+  // Apartment Details
+  "apartment.maxGuests": "{{count}} Guest",
+  "apartment.maxGuests_plural": "{{count}} Guests",
+  
+  // Common
+  "common.noImage": "No image available",
+  "nights": "night",
+  "nights_plural": "nights"
 };
 
 export default enTranslation;

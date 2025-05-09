@@ -14,6 +14,7 @@ export const apartments = pgTable("apartments", {
   basePeakPrice: integer("base_peak_price").notNull().default(110),
   priceMultiplier: text("price_multiplier").notNull().default("1.0"),
   cleaningFee: integer("cleaning_fee").notNull().default(40),
+  maxGuests: integer("max_guests").notNull().default(4),
   bookingUrl: text("booking_url"),
   airbnbUrl: text("airbnb_url"),
   hasWifi: boolean("has_wifi").notNull().default(true),

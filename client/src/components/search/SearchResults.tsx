@@ -32,7 +32,7 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
 
   // Fetch all bookings (across all apartments for simplicity)
   const fetchAllBookings = async () => {
-    if (!apartments) return [];
+    if (!apartments || !Array.isArray(apartments)) return [];
     
     const bookingsPromises = apartments.map((apartment: Apartment) => 
       fetch(`/api/apartments/${apartment.id}/bookings`).then(res => res.json())
@@ -61,7 +61,10 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
   });
 
   useEffect(() => {
-    if (!apartments || !allBookings) return;
+    if (!apartments || !Array.isArray(apartments) || !allBookings || !Array.isArray(allBookings)) {
+      setFilteredApartments([]);
+      return;
+    }
 
     const filtered = apartments.filter((apartment: Apartment) => {
       // Filter by guest capacity

@@ -12,6 +12,7 @@ import Apartments from "@/pages/Apartments";
 import About from "@/pages/About";
 import Visit from "@/pages/Visit";
 import Contact from "@/pages/Contact";
+import Search from "@/pages/Search";
 import NotFound from "@/pages/not-found";
 
 // Layout
@@ -29,6 +30,7 @@ function Router() {
           <Route path="/about" component={About} />
           <Route path="/visit" component={Visit} />
           <Route path="/contact" component={Contact} />
+          <Route path="/search" component={Search} />
           <Route component={NotFound} />
         </Switch>
       </main>

@@ -371,7 +371,6 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         descriptionEn: "Air-conditioned, 3 stars studio apartment for 2 people in the centre of town. Living room - kitchen, balcony. Fitted with satellite/TV, DVD, washing machine and other necessary facilities. Living area 28m2 + balcony 6,5m2.",
         descriptionHr: "Klimatizirani studio apartman s 3 zvjezdice za 2 osobe, u samom centru grada. Dnevni boravak s kuhinjom, balkon. Opremljen satelitskom TV, DVD uređajem, perilicom rublja i svim potrebnim sadržajima. Površina 28 m² + balkon 6,5 m².",
         images: [
-          "/images/apartments/sea/balcony.webp",
           "/images/apartments/sea/bedroom.webp",
           "/images/apartments/sea/exterior.webp",
           "/images/apartments/sea/location.webp",

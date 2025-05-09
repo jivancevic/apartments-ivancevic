@@ -137,7 +137,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
   }
 
   return (
-    <div ref={galleryRef} className="gallery-container pt-3 lg:pt-0">
+    <div ref={galleryRef} className="gallery-container pt-4 md:pt-6">
       {/* Main Image with Navigation Arrows */}
       <div className="relative w-full aspect-video bg-neutral mb-4 rounded-lg overflow-hidden group">
         <img

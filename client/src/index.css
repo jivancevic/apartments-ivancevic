@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 :root {
+  --header-height: 72px; /* Logo (h-10 = 40px) + padding (py-4 = 32px) = 72px */
+}
+
+:root {
       --background: 0 0% 100%;
 --foreground: 20 14.3% 4.1%;
 --muted: 60 4.8% 95.9%;

@@ -137,7 +137,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
   }
 
   return (
-    <div ref={galleryRef} className="gallery-container mb-8 lg:my-6">
+    <div ref={galleryRef} className="gallery-container">
       {/* Main Image with Navigation Arrows */}
       <div className="relative w-full aspect-video bg-neutral mb-4 rounded-lg overflow-hidden group">
         <img
@@ -170,18 +170,18 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         </div>
       </div>
       
-      {/* Thumbnails - Fixed Width Container showing exactly 4 Thumbnails with 16:9 aspect ratio */}
-      <div className="grid grid-cols-4 gap-2 mb-4 w-full">
-        <div className="col-span-4 relative overflow-hidden w-full">
+      {/* Responsive Thumbnails - adaptive to container width */}
+      <div className="w-full">
+        <div className="relative overflow-hidden w-full">
           <div 
             ref={thumbnailsContainerRef}
-            className="flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 pb-3 w-full"
+            className="flex flex-wrap gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 pb-3 w-full"
           >
             {images.map((image: string, index: number) => (
               <div
                 key={index}
                 ref={el => thumbnailRefs.current[index] = el}
-                className={`flex-none w-[calc(25%-1.5px)] bg-neutral rounded-lg overflow-hidden cursor-pointer transition-all ${
+                className={`flex-none w-[calc(25%-1.5px)] sm:w-[calc(20%-1.6px)] md:w-[calc(16.66%-1.7px)] xl:w-[calc(14.28%-1.7px)] bg-neutral rounded-lg overflow-hidden cursor-pointer transition-all ${
                   currentImageIndex === index ? "ring-2 ring-primary scale-95" : "hover:scale-95"
                 }`}
                 onClick={() => handleThumbnailClick(index)}

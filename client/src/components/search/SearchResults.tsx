@@ -41,6 +41,8 @@ interface SearchResultsProps {
 const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
   const { t, i18n } = useTranslation();
   const currentLanguage = i18n.language;
+  // For redirecting to contact page with prefilled info - moved to top level
+  const [, setLocation] = useLocation();
   
   const [filteredApartments, setFilteredApartments] = useState<Apartment[]>([]);
 
@@ -171,9 +173,6 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
       </div>
     );
   }
-
-  // For redirecting to contact page with prefilled info
-  const [, setLocation] = useLocation();
 
   // Create search bar with current search criteria
   const handleSearch = () => {

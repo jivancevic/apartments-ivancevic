@@ -186,7 +186,7 @@ const SearchBar = ({
             <div className="px-3 py-0.5">
               <span className="text-xs text-muted-foreground">{t("search.guests")}</span>
             </div>
-            <div className="flex items-center justify-between px-3">
+            <div className="flex items-center justify-between px-3 pb-2">
               <button 
                 type="button"
                 className="group"
@@ -199,12 +199,12 @@ const SearchBar = ({
                 disabled={parseInt(guests) <= 1}
                 aria-label={t("search.decreaseGuests")}
               >
-                <span className="text-xl font-medium flex items-center justify-center h-6 w-6 rounded-full group-hover:bg-gray-100 group-disabled:opacity-50 transition-colors">-</span>
+                <span className="text-xl font-medium flex items-center justify-center h-6 w-6 rounded-full group-hover:bg-primary-100 group-disabled:opacity-50 transition-colors">-</span>
               </button>
               
               <div className="flex items-center gap-1 min-w-[60px] justify-center">
                 <Users className="h-4 w-4 text-gray-500" />
-                <span>{guests} {parseInt(guests) === 1 ? t("search.guest") : t("search.guests")}</span>
+                <span>{guests}</span>
               </div>
               
               <button 
@@ -219,7 +219,7 @@ const SearchBar = ({
                 disabled={parseInt(guests) >= 6}
                 aria-label={t("search.increaseGuests")}
               >
-                <span className="text-xl font-medium flex items-center justify-center h-6 w-6 rounded-full group-hover:bg-gray-100 group-disabled:opacity-50 transition-colors">+</span>
+                <span className="text-xl font-medium flex items-center justify-center h-6 w-6 rounded-full group-hover:bg-primary-100 group-disabled:opacity-50 transition-colors">+</span>
               </button>
             </div>
           </div>

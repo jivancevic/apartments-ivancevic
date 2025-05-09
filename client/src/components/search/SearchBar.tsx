@@ -150,43 +150,43 @@ const SearchBar = ({
 
   return (
     <div className={`bg-white border rounded-lg shadow-md p-3 ${className}`}>
-      <div className="flex flex-col md:flex-row gap-2 items-stretch">
+      <div className="flex flex-col md:flex-row gap-2 md:items-center">
         {/* Date range selection (unified) */}
         <div className="flex flex-col md:flex-row flex-1 gap-2">
           {/* Check-in date button */}
           <Button 
             variant="outline" 
-            className="flex-1 justify-start text-left font-normal h-11"
+            className="flex-1 justify-start text-left font-normal h-11 overflow-hidden whitespace-nowrap"
             onClick={openCheckInCalendar}
           >
-            <CalendarIcon className="mr-2 h-4 w-4" />
-            <div className="flex flex-col items-start">
-              <span className="text-xs text-muted-foreground">{t("search.checkIn")}</span>
-              <span>{checkIn ? format(checkIn, "MMM d, yyyy") : t("search.selectDate")}</span>
+            <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
+            <div className="flex flex-col items-start overflow-hidden">
+              <span className="text-xs text-muted-foreground w-full truncate">{t("search.checkIn")}</span>
+              <span className="w-full truncate">{checkIn ? format(checkIn, "MMM d, yyyy") : t("search.selectDate")}</span>
             </div>
           </Button>
           
           {/* Check-out date button */}
           <Button 
             variant="outline" 
-            className="flex-1 justify-start text-left font-normal h-11"
+            className="flex-1 justify-start text-left font-normal h-11 overflow-hidden whitespace-nowrap"
             onClick={openCheckOutCalendar}
           >
-            <CalendarIcon className="mr-2 h-4 w-4" />
-            <div className="flex flex-col items-start">
-              <span className="text-xs text-muted-foreground">{t("search.checkOut")}</span>
-              <span>{checkOut ? format(checkOut, "MMM d, yyyy") : t("search.selectDate")}</span>
+            <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
+            <div className="flex flex-col items-start overflow-hidden">
+              <span className="text-xs text-muted-foreground w-full truncate">{t("search.checkOut")}</span>
+              <span className="w-full truncate">{checkOut ? format(checkOut, "MMM d, yyyy") : t("search.selectDate")}</span>
             </div>
           </Button>
         </div>
         
         {/* Guests selection with +/- buttons */}
-        <div className="w-full md:w-36">
+        <div className="md:w-28 flex-shrink-0">
           <div className="border rounded-md h-11 flex flex-col justify-center">
             <div className="px-3 py-0.5">
               <span className="text-xs text-muted-foreground">{t("search.guests")}</span>
             </div>
-            <div className="flex items-center justify-between px-3 pb-2">
+            <div className="flex items-center justify-between px-3 pb-1">
               <button 
                 type="button"
                 className="group"
@@ -202,7 +202,7 @@ const SearchBar = ({
                 <span className="text-xl font-medium flex items-center justify-center h-6 w-6 rounded-full group-hover:bg-primary group-hover:text-white group-disabled:opacity-50 transition-colors">-</span>
               </button>
               
-              <div className="flex items-center gap-1 min-w-[60px] justify-center">
+              <div className="flex items-center gap-1 justify-center">
                 <Users className="h-4 w-4 text-gray-500" />
                 <span>{guests}</span>
               </div>
@@ -229,7 +229,7 @@ const SearchBar = ({
         <Button 
           type="button" 
           onClick={handleSearch}
-          className="bg-primary hover:bg-primary/90 text-white h-11"
+          className="bg-primary hover:bg-primary/90 text-white h-11 flex-shrink-0"
         >
           {t("search.searchButton")}
         </Button>

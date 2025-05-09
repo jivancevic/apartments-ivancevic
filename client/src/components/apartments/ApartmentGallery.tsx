@@ -135,27 +135,29 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         </div>
       </div>
       
-      {/* Thumbnails - Fixed Width Container showing exactly 4 Thumbnails */}
+      {/* Thumbnails - Fixed Width Container showing exactly 4 Thumbnails with 16:9 aspect ratio */}
       <div className="grid grid-cols-4 gap-2 mb-4">
-        <div className="col-span-4 h-20 relative overflow-hidden rounded-lg">
+        <div className="col-span-4 relative overflow-hidden">
           <div 
             ref={thumbnailsContainerRef}
-            className="absolute inset-0 flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 pb-3"
+            className="flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 pb-3"
           >
             {images.map((image: string, index: number) => (
               <div
                 key={index}
                 ref={el => thumbnailRefs.current[index] = el}
-                className={`flex-none w-[calc(25%-1.5px)] h-full bg-neutral rounded-lg overflow-hidden cursor-pointer transition-all ${
+                className={`flex-none w-[calc(25%-1.5px)] bg-neutral rounded-lg overflow-hidden cursor-pointer transition-all ${
                   currentImageIndex === index ? "ring-2 ring-primary scale-95" : "hover:scale-95"
                 }`}
                 onClick={() => handleThumbnailClick(index)}
               >
-                <img
-                  src={image}
-                  alt={`Apartment thumbnail ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
+                <div className="aspect-video w-full">
+                  <img
+                    src={image}
+                    alt={`Apartment thumbnail ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
             ))}
           </div>

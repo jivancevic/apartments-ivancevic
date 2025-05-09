@@ -66,7 +66,19 @@ export class MemStorage implements IStorage {
   
   async createApartment(apartment: InsertApartment): Promise<Apartment> {
     const id = this.apartmentId++;
-    const newApartment = { ...apartment, id };
+    // Ensure required fields are set to null when undefined
+    const bookingUrl = apartment.bookingUrl === undefined ? null : apartment.bookingUrl;
+    const airbnbUrl = apartment.airbnbUrl === undefined ? null : apartment.airbnbUrl;
+    const otherAmenities = apartment.otherAmenities === undefined ? null : apartment.otherAmenities;
+    
+    const newApartment = { 
+      ...apartment, 
+      id,
+      bookingUrl,
+      airbnbUrl,
+      otherAmenities
+    };
+    
     this.apartments.set(id, newApartment);
     return newApartment;
   }
@@ -93,7 +105,21 @@ export class MemStorage implements IStorage {
   async createInquiry(inquiry: InsertInquiry): Promise<Inquiry> {
     const id = this.inquiryId++;
     const createdAt = new Date();
-    const newInquiry = { ...inquiry, id, createdAt };
+    
+    // Ensure optional fields are set to null when undefined
+    const apartmentId = inquiry.apartmentId === undefined ? null : inquiry.apartmentId;
+    const phone = inquiry.phone === undefined ? null : inquiry.phone;
+    const message = inquiry.message === undefined ? null : inquiry.message;
+    
+    const newInquiry = { 
+      ...inquiry, 
+      id, 
+      createdAt,
+      apartmentId,
+      phone,
+      message
+    };
+    
     this.inquiries.set(id, newInquiry);
     return newInquiry;
   }
@@ -115,7 +141,22 @@ export class MemStorage implements IStorage {
   
   async createLocation(location: InsertLocation): Promise<Location> {
     const id = this.locationId++;
-    const newLocation = { ...location, id };
+    
+    // Ensure optional fields are set to null when undefined
+    const distanceEn = location.distanceEn === undefined ? null : location.distanceEn;
+    const distanceHr = location.distanceHr === undefined ? null : location.distanceHr;
+    const featureEn = location.featureEn === undefined ? null : location.featureEn;
+    const featureHr = location.featureHr === undefined ? null : location.featureHr;
+    
+    const newLocation = { 
+      ...location, 
+      id,
+      distanceEn,
+      distanceHr,
+      featureEn,
+      featureHr
+    };
+    
     this.locations.set(id, newLocation);
     return newLocation;
   }

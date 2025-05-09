@@ -139,26 +139,7 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
           ></iframe>
         </div>
         
-        {/* Prices */}
-        <div className="bg-neutral p-4 rounded-lg mb-6">
-          <h4 className="font-heading font-semibold text-lg mb-2">
-            {t("apartments.price")}
-          </h4>
-          <div className="flex justify-between items-center">
-            <div>
-              <div className="text-gray-600 text-sm">{t("apartments.lowSeason")}</div>
-              <div className="font-semibold">€{apartment.price}</div>
-            </div>
-            <div>
-              <div className="text-gray-600 text-sm">{t("apartments.highSeason")}</div>
-              <div className="font-semibold">€{apartment.priceHigh}</div>
-            </div>
-            <div>
-              <div className="text-gray-600 text-sm">{t("apartments.peakSeason")}</div>
-              <div className="font-semibold">€{apartment.pricePeak}</div>
-            </div>
-          </div>
-        </div>
+        {/* Prices are now dynamically shown in calendar */}
         
         {/* Calendar with booking links */}
         <div className="mb-6">
@@ -205,7 +186,7 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
                 </div>
               )}
               
-              <BookingCalendar bookings={allBookings} />
+              <BookingCalendar bookings={allBookings} apartment={apartment} />
               
               {apartment.icalUrls && apartment.icalUrls.length > 0 && (
                 <div className="mt-2 text-xs text-gray-500">

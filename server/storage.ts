@@ -179,6 +179,10 @@ export class MemStorage implements IStorage {
         ],
         bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
         airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
+        icalUrls: [
+          "https://ical.booking.com/v1/export/business_id/7493728437.ics",
+          "https://www.airbnb.com/calendar/ical/12345678.ics?s=a12b34c56de78f9g"
+        ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.35815949195765!2d17.13583210884043!3d42.96238425612054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a517549e08c53%3A0x20f6b511dabd88db!2sMagical%20Oasis%20for%20two%20in%20Korcula%20Old%20Town!5e0!3m2!1sen!2shr!4v1745508164244!5m2!1sen!2shr",
         price: 80,
         priceHigh: 120,

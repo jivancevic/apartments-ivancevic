@@ -9,6 +9,7 @@ import { useIcalFeeds } from "@/hooks/useIcalFeeds";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AlertCircle } from "lucide-react";
+import { useMemo } from "react";
 
 interface ApartmentDetailProps {
   apartment: Apartment;
@@ -18,10 +19,26 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
   
-  // Fetch bookings for this apartment
-  const { data: bookings, isLoading } = useQuery<Booking[]>({
+  // Fetch bookings for this apartment from API
+  const { data: apiBookings, isLoading: isLoadingApi } = useQuery<Booking[]>({
     queryKey: [`/api/apartments/${apartment.id}/bookings`],
   });
+  
+  // Fetch bookings from iCal feeds if available
+  const { 
+    icalBookings, 
+    isLoading: isLoadingIcal, 
+    error: icalError 
+  } = useIcalFeeds(apartment.id, apartment.icalUrls);
+  
+  // Determine if we're loading any bookings data
+  const isLoading = isLoadingApi || isLoadingIcal;
+  
+  // Combine bookings from API and iCal feeds
+  const allBookings = useMemo(() => {
+    const api = apiBookings || [];
+    return [...api, ...icalBookings];
+  }, [apiBookings, icalBookings]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -177,7 +194,20 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
             <Skeleton className="h-32 w-full" />
           ) : (
             <div className="bg-neutral p-4 rounded-lg">
-              <Calendar bookings={bookings || []} />
+              {icalError && (
+                <div className="flex items-center gap-2 text-red-500 text-sm mb-3 p-2 bg-red-50 rounded">
+                  <AlertCircle className="h-4 w-4" />
+                  <span>Error loading external calendars: {icalError}</span>
+                </div>
+              )}
+              
+              <Calendar bookings={allBookings} />
+              
+              {apartment.icalUrls && apartment.icalUrls.length > 0 && (
+                <div className="mt-2 text-xs text-gray-500">
+                  <span>External calendars synchronized: {apartment.icalUrls.length}</span>
+                </div>
+              )}
             </div>
           )}
         </div>

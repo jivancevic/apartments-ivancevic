@@ -170,12 +170,12 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         </div>
       </div>
       
-      {/* Responsive Thumbnails - adaptive to container width */}
+      {/* Single row of scrollable thumbnails */}
       <div className="w-full">
         <div className="relative overflow-hidden w-full">
           <div 
             ref={thumbnailsContainerRef}
-            className="flex flex-wrap gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 pb-3 w-full"
+            className="flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 pb-3 w-full"
           >
             {images.map((image: string, index: number) => (
               <div

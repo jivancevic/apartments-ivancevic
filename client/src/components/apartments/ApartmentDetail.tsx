@@ -46,7 +46,7 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
       {/* Gallery - Sticky on large screens */}
       <div className="lg:col-span-2">
-        <div className="lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:overflow-auto lg:pb-4">
+        <div className="lg:sticky lg:top-[4.5rem] lg:max-h-[calc(100vh-5.5rem)] lg:pb-4">
           <ApartmentGallery images={apartment.images} />
         </div>
       </div>

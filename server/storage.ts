@@ -177,13 +177,13 @@ export class MemStorage implements IStorage {
           "/images/apartments/magical-oasis/5.png",
           "/images/apartments/magical-oasis/6.png"
         ],
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.35815949195765!2d17.13583210884043!3d42.96238425612054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a517549e08c53%3A0x20f6b511dabd88db!2sMagical%20Oasis%20for%20two%20in%20Korcula%20Old%20Town!5e0!3m2!1sen!2shr!4v1745508164244!5m2!1sen!2shr",
         bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
         airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
         icalUrls: [
           "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e21284eed9fbea95b5d2dcc398220",
           "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd24cd0dbd2911faab332fcfd90"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.35815949195765!2d17.13583210884043!3d42.96238425612054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a517549e08c53%3A0x20f6b511dabd88db!2sMagical%20Oasis%20for%20two%20in%20Korcula%20Old%20Town!5e0!3m2!1sen!2shr!4v1745508164244!5m2!1sen!2shr",
         price: 80,
         priceHigh: 120,
         pricePeak: 150,
@@ -217,8 +217,13 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/st-roko/5.jpg",
           "/images/apartments/st-roko/6.jpg"
         ],
-        bookingUrl: "https://www.booking.com/hotel/hr/apartment-st-roko-korcula.html",
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartment%20St.%20Roko!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
+        bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
+        airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
+        icalUrls: [
+          "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e2124eed9fbea95b5d2dcc398220",
+          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd4cd0dbd2911faab332fcfd90"
+        ],
         price: 70,
         priceHigh: 110,
         pricePeak: 140,
@@ -245,9 +250,11 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/apt3/5.jpg"
         ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d414.28494504583205!2d17.13522756990842!3d42.96152961092943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a6c1cbb5f%3A0x2849d1dc0357a5b5!2sUl.%20Ismaelli%205%2C%2020260%2C%20Kor%C4%8Dula%2C%20Croatia!5e1!3m2!1sen!2sit!4v1746768250275!5m2!1sen!2sit",
-        airbnbUrl: "airbnb.com/h/korcula-old-town-palace-sunset-flat",
+        bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
+        airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
         icalUrls: [
-          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd24cd0dbd2911faab332fcfd90"
+          "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e212eed9fbea95b5d2dcc398220",
+          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7ddcd0dbd2911faab332fcfd90"
         ],
         price: 75,
         priceHigh: 115,
@@ -275,8 +282,13 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/apt4/5.jpg",
           "/images/apartments/apt4/6.jpg"
         ],
-        bookingUrl: "https://www.booking.com/hotel/hr/apartment-family.html",
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartmani%20Ivan%C4%8Devi%C4%87!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.55254234976!2d17.132241975471526!3d42.95820129710443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e1!3m2!1sen!2sit!4v1746808352324!5m2!1sen!2sit",
+        bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
+        airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
+        icalUrls: [
+          "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e212eed9fbea95b5d2dcc398220",
+          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7ddcd0dbd2911faab332fcfd90"
+        ],
         price: 90,
         priceHigh: 130,
         pricePeak: 160,
@@ -301,8 +313,13 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/apt5/3.jpg",
           "/images/apartments/apt5/4.jpg"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartmani%20Ivan%C4%8Devi%C4%87!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
-        airbnbUrl: "https://www.airbnb.com/rooms/56789012",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.55254234976!2d17.132241975471526!3d42.95820129710443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e1!3m2!1sen!2sit!4v1746808352324!5m2!1sen!2sit",
+        bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
+        airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
+        icalUrls: [
+          "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e212eed9fbea95b5d2dcc398220",
+          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7ddcd0dbd2911faab332fcfd90"
+        ],
         price: 60,
         priceHigh: 90,
         pricePeak: 120,
@@ -330,8 +347,13 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/apt6/6.jpg",
           "/images/apartments/apt6/7.jpg"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartmani%20Ivan%C4%8Devi%C4%87!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
-        bookingUrl: "https://www.booking.com/hotel/hr/apartment-deluxe.html",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.55254234976!2d17.132241975471526!3d42.95820129710443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e1!3m2!1sen!2sit!4v1746808352324!5m2!1sen!2sit",
+        bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
+        airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
+        icalUrls: [
+          "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e212eed9fbea95b5d2dcc398220",
+          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7ddcd0dbd2911faab332fcfd90"
+        ],
         price: 100,
         priceHigh: 150,
         pricePeak: 180,
@@ -357,8 +379,13 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/apt7/4.jpg",
           "/images/apartments/apt7/5.jpg"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartmani%20Ivan%C4%8Devi%C4%87!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
-        airbnbUrl: "https://www.airbnb.com/rooms/67890123",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.55254234976!2d17.132241975471526!3d42.95820129710443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e1!3m2!1sen!2sit!4v1746808352324!5m2!1sen!2sit",
+        bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
+        airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
+        icalUrls: [
+          "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e212eed9fbea95b5d2dcc398220",
+          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7ddcd0dbd2911faab332fcfd90"
+        ],
         price: 85,
         priceHigh: 125,
         pricePeak: 155,

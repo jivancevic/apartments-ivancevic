@@ -9,7 +9,7 @@ export const apartments = pgTable("apartments", {
   nameHr: text("name_hr").notNull(),
   descriptionEn: text("description_en").notNull(),
   descriptionHr: text("description_hr").notNull(),
-  imagesPath: text("images_path").notNull(),
+  images: text("images").array().notNull(),
   location: text("location").notNull(),
   price: integer("price").notNull(),
   priceHigh: integer("price_high").notNull(),

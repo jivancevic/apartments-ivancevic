@@ -39,7 +39,7 @@ const ApartmentGallery = ({ imagesPath, mainImage, images: propImages }: Apartme
       
       // Try to load up to 20 images
       for (let i = 1; i <= 20; i++) {
-        const imageUrl = `${normalizedPath}${i}.jpg`;
+        const imageUrl = `${normalizedPath}${i}.png`;
         const exists = await checkImageExists(imageUrl);
         
         if (exists) {

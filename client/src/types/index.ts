@@ -16,6 +16,8 @@ export interface Apartment {
   price?: number;
   priceHigh?: number;
   pricePeak?: number;
+  // Guest capacity
+  maxGuests?: number;
   // Amenities
   hasWifi: boolean;
   hasKitchen: boolean;

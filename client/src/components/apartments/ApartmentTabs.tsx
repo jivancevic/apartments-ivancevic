@@ -21,7 +21,7 @@ const ApartmentTabs = ({ apartments }: ApartmentTabsProps) => {
     <div>
       {/* Tabs Navigation */}
       <div className="overflow-x-auto mb-10">
-        <div className="inline-flex min-w-full md:justify-center space-x-2 mb-8 tabs-container">
+        <div className="inline-flex min-w-full md:justify-center space-x-2 tabs-container">
           {apartments.map((apartment) => (
             <button
               key={apartment.id}

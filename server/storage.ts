@@ -184,9 +184,9 @@ export class MemStorage implements IStorage {
           "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e21284eed9fbea95b5d2dcc398220",
           "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd24cd0dbd2911faab332fcfd90"
         ],
-        price: 80,
-        priceHigh: 120,
-        pricePeak: 150,
+        basePeakPrice: 110,
+        priceMultiplier: "1.90",
+        cleaningFee: 50,
         hasWifi: true,
         hasKitchen: true,
         hasAC: true,

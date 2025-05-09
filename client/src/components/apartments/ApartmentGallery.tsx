@@ -139,7 +139,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
   return (
     <div ref={galleryRef}>
       {/* Main Image with Navigation Arrows */}
-      <div className="relative aspect-video bg-neutral mb-4 rounded-lg overflow-hidden group">
+      <div className="relative aspect-video bg-neutral mb-4 rounded-lg overflow-hidden group lg:max-h-[70vh]">
         <img
           src={currentImage}
           alt="Apartment view"
@@ -175,7 +175,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         <div className="col-span-4 relative overflow-hidden">
           <div 
             ref={thumbnailsContainerRef}
-            className="flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 pb-3"
+            className="flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 pb-3 lg:max-h-[20vh]"
           >
             {images.map((image: string, index: number) => (
               <div

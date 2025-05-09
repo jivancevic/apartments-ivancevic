@@ -22,8 +22,6 @@ export function useIcalFeeds(apartmentId: number, icalUrls?: string[]) {
   // Process the data with useMemo to avoid unnecessary calculations
   const icalBookings = useMemo(() => {
     if (!bookingsData) return [];
-
-    console.log("📥 Raw iCal booking data:", bookingsData); // ✅ Log raw fetch result
     
     try {
       const parsed = bookingsData.map((booking: any) => ({
@@ -32,7 +30,6 @@ export function useIcalFeeds(apartmentId: number, icalUrls?: string[]) {
         endDate: new Date(booking.endDate),
       }));
 
-      console.log("✅ Parsed iCal bookings:", parsed); // ✅ Log parsed bookings
       return parsed;
     } catch (err) {
       console.error("❌ Error processing iCal bookings:", err);

@@ -218,8 +218,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/st-roko/6.jpg"
         ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartment%20St.%20Roko!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
-        bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
-        airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
+        bookingUrl: "https://www.booking.com/hotel/hr/old-town-st-roko.html",
         icalUrls: [
           "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e2124eed9fbea95b5d2dcc398220",
           "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd4cd0dbd2911faab332fcfd90"
@@ -250,8 +249,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/apt3/5.jpg"
         ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d414.28494504583205!2d17.13522756990842!3d42.96152961092943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a6c1cbb5f%3A0x2849d1dc0357a5b5!2sUl.%20Ismaelli%205%2C%2020260%2C%20Kor%C4%8Dula%2C%20Croatia!5e1!3m2!1sen!2sit!4v1746768250275!5m2!1sen!2sit",
-        bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
-        airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
+        airbnbUrl: "airbnb.com/h/korcula-old-town-palace-sunset-flat",
         icalUrls: [
           "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e212eed9fbea95b5d2dcc398220",
           "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7ddcd0dbd2911faab332fcfd90"
@@ -272,22 +270,38 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
       {
         nameEn: "Lavander",
         nameHr: "Lavanda",
-        descriptionEn: "A spacious family apartment with two bedrooms, ideal for families or groups looking for extra space and comfort during their vacation.",
-        descriptionHr: "Prostrani obiteljski apartman s dvije spavaće sobe, idealan za obitelji ili grupe koje traže dodatni prostor i udobnost tijekom odmora.",
+        descriptionEn: "Spacious, air-conditioned, 4 stars apartment for 5 people (+ sofa): 1 double, 1 twin/double room, 1 single, 2 bathrooms, living room, kitchen, balcony. Equipped with SAT/TV, DVD, washing machine, 2 air-conditioning units and other things.",
+        descriptionHr: "Prostrani, klimatizirani apartman s 4 zvjezdice za 5 osoba (+ kauč): 1 bračna soba, 1 soba s odvojenim ili bračnim krevetom, 1 jednokrevetna soba, 2 kupaonice, dnevni boravak, kuhinja, balkon. Opremljen satelitskom TV, DVD uređajem, perilicom rublja, dvjema klima jedinicama i ostalom opremom.",
         images: [
-          "/images/apartments/apt4/1.jpg",
-          "/images/apartments/apt4/2.jpg",
-          "/images/apartments/apt4/3.jpg",
-          "/images/apartments/apt4/4.jpg",
-          "/images/apartments/apt4/5.jpg",
-          "/images/apartments/apt4/6.jpg"
+          "/images/apartments/lavender/balcony.webp",
+          "/images/apartments/lavender/balcony2.webp",
+          "/images/apartments/lavender/balcony3.webp",
+          "/images/apartments/lavender/books.webp",
+          "/images/apartments/lavender/dining-room.webp",
+          "/images/apartments/lavender/entrance.webp",
+          "/images/apartments/lavender/exterior.webp",
+          "/images/apartments/lavender/kitchen.webp",
+          "/images/apartments/lavender/living-room.webp",
+          "/images/apartments/lavender/location.webp",
+          "/images/apartments/lavender/room1.webp",
+          "/images/apartments/lavender/room1-2.webp",
+          "/images/apartments/lavender/room2.webp",
+          "/images/apartments/lavender/room2-2.webp",
+          "/images/apartments/lavender/room3.webp",
+          "/images/apartments/lavender/stairs.webp",
+          "/images/apartments/lavender/table.webp",
+          "/images/apartments/lavender/view.webp",
+          "/images/apartments/lavender/view2.webp",
+          "/images/apartments/lavender/view3.webp",
+          "/images/apartments/lavender/wc1.webp",
+          "/images/apartments/lavender/wc2.webp",
+          "/images/apartments/lavender/wc3.webp"
         ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.55254234976!2d17.132241975471526!3d42.95820129710443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e1!3m2!1sen!2sit!4v1746808352324!5m2!1sen!2sit",
-        bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
-        airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
+        bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
+        airbnbUrl: "https://airbnb.com/h/apartments-viva-lavander",
         icalUrls: [
-          "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e212eed9fbea95b5d2dcc398220",
-          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7ddcd0dbd2911faab332fcfd90"
+          "https://www.airbnb.com/calendar/ical/7353092.ics?s=eae1da13782e4b81009bcd64f58bd357"
         ],
         price: 90,
         priceHigh: 130,
@@ -305,20 +319,27 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
       {
         nameEn: "Sun",
         nameHr: "Sunce",
-        descriptionEn: "A cozy studio apartment perfect for solo travelers or couples who want a comfortable base for exploring the island of Korčula.",
-        descriptionHr: "Udoban studio apartman savršen za samostalne putnike ili parove koji žele udobnu bazu za istraživanje otoka Korčule.",
+        descriptionEn: "Our nice and comfortable  two bedrooms apartment has a true city feeling! It comfortably fits four and is centrally located just 20 m from Town park, bus station and ACI marina. Area 57m2 + balcony 6,5m2, living room, kitchen, sat/TV, DVD, 2 AC units.",
+        descriptionHr: "Naš ugodan i lijepo uređen dvosobni apartman pruža pravi doživljaj grada! Udobno prima četiri osobe i nalazi se na savršenoj lokaciji – samo 20 m od gradskog parka, autobusnog kolodvora i ACI marine. Površina apartmana je 57 m² + balkon 6,5 m². Sadrži dnevni boravak, kuhinju, satelitsku TV, DVD uređaj i dvije klima jedinice.",
         images: [
-          "/images/apartments/apt5/1.jpg",
-          "/images/apartments/apt5/2.jpg",
-          "/images/apartments/apt5/3.jpg",
-          "/images/apartments/apt5/4.jpg"
+          "/images/apartments/sun/balcony-view.webp",
+          "/images/apartments/sun/balcony.webp",
+          "/images/apartments/sun/dining-room.webp",
+          "/images/apartments/sun/exterior.webp",
+          "/images/apartments/sun/kitchen.webp",
+          "/images/apartments/sun/location.webp",
+          "/images/apartments/sun/room2.webp",
+          "/images/apartments/sun/table.webp",
+          "/images/apartments/sun/view.webp",
+          "/images/apartments/sun/view2.webp",
+          "/images/apartments/sun/view3.webp",
+          "/images/apartments/sun/wc.webp"
         ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.55254234976!2d17.132241975471526!3d42.95820129710443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e1!3m2!1sen!2sit!4v1746808352324!5m2!1sen!2sit",
-        bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
-        airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
+        bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
+        airbnbUrl: "https://airbnb.com/h/apartments-viva-sun",
         icalUrls: [
-          "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e212eed9fbea95b5d2dcc398220",
-          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7ddcd0dbd2911faab332fcfd90"
+          "https://www.airbnb.com/calendar/ical/3289636.ics?s=3fc4d298685df0c27704199880b09d8c"
         ],
         price: 60,
         priceHigh: 90,
@@ -336,23 +357,21 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
       {
         nameEn: "Sea",
         nameHr: "More",
-        descriptionEn: "Our premium offering with luxury amenities, spacious living areas, and panoramic sea views for the most discerning travelers.",
-        descriptionHr: "Naša premium ponuda s luksuznim sadržajima, prostranim dnevnim boravkom i panoramskim pogledom na more za najzahtjevnije putnike.",
+        descriptionEn: "Air-conditioned, 3 stars studio apartment for 2 people in the centre of town. Living room - kitchen, balcony. Fitted with satellite/TV, DVD, washing machine and other necessary facilities. Living area 28m2 + balcony 6,5m2.",
+        descriptionHr: "Klimatizirani studio apartman s 3 zvjezdice za 2 osobe, u samom centru grada. Dnevni boravak s kuhinjom, balkon. Opremljen satelitskom TV, DVD uređajem, perilicom rublja i svim potrebnim sadržajima. Površina 28 m² + balkon 6,5 m².",
         images: [
-          "/images/apartments/apt6/1.jpg",
-          "/images/apartments/apt6/2.jpg",
-          "/images/apartments/apt6/3.jpg",
-          "/images/apartments/apt6/4.jpg",
-          "/images/apartments/apt6/5.jpg",
-          "/images/apartments/apt6/6.jpg",
-          "/images/apartments/apt6/7.jpg"
+          "/images/apartments/sea/balcony.webp",
+          "/images/apartments/sea/bedroom.webp",
+          "/images/apartments/sea/exterior.webp",
+          "/images/apartments/sea/location.webp",
+          "/images/apartments/sea/wc.webp",
+          "/images/apartments/sea/whole.webp"
         ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.55254234976!2d17.132241975471526!3d42.95820129710443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e1!3m2!1sen!2sit!4v1746808352324!5m2!1sen!2sit",
-        bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
-        airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
+        bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
+        airbnbUrl: "https://airbnb.com/h/apartments-viva-sea",
         icalUrls: [
-          "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e212eed9fbea95b5d2dcc398220",
-          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7ddcd0dbd2911faab332fcfd90"
+          "https://www.airbnb.com/calendar/ical/19014861.ics?s=f8c3b2e230826d572c35ea739efb6e2a"
         ],
         price: 100,
         priceHigh: 150,
@@ -370,21 +389,21 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
       {
         nameEn: "Beach",
         nameHr: "Plaža",
-        descriptionEn: "Specially designed for couples, this intimate apartment offers romance and privacy with a private terrace perfect for sunset dinners.",
-        descriptionHr: "Posebno dizajniran za parove, ovaj intimni apartman nudi romantiku i privatnost s privatnom terasom savršenom za večere uz zalazak sunca.",
+        descriptionEn: "Great location on the doorstep of the old town. The apartment is nicely decorated and very modern. It is well equipped in every regard. The patio area is lovely with lavendar flowers.",
+        descriptionHr: "Izvrsna lokacija – tik uz vrata starog grada. Apartman je moderno uređen, vrlo ugodan i opremljen svime što vam može zatrebati. Dvorište je posebno šarmantno, s lavandom koja unosi mirisnu toplinu.",
         images: [
-          "/images/apartments/apt7/1.jpg",
-          "/images/apartments/apt7/2.jpg",
-          "/images/apartments/apt7/3.jpg",
-          "/images/apartments/apt7/4.jpg",
-          "/images/apartments/apt7/5.jpg"
+          "/images/apartments/beach/terrace.webp",
+          "/images/apartments/beach/bedroom.webp",
+          "/images/apartments/beach/wc.webp",
+          "/images/apartments/beach/garden.webp",
+          "/images/apartments/beach/exterior.webp",
+          "/images/apartments/beach/location.webp"
         ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.55254234976!2d17.132241975471526!3d42.95820129710443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e1!3m2!1sen!2sit!4v1746808352324!5m2!1sen!2sit",
-        bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
-        airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
+        bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
+        airbnbUrl: "https://airbnb.com/h/apartments-viva-beach",
         icalUrls: [
-          "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e212eed9fbea95b5d2dcc398220",
-          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7ddcd0dbd2911faab332fcfd90"
+          "https://www.airbnb.com/calendar/ical/11847437.ics?s=6d2cbbdabf0b62bf08a047cf0712d317"
         ],
         price: 85,
         priceHigh: 125,
@@ -402,8 +421,8 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
       {
         nameEn: "Nika",
         nameHr: "Nika",
-        descriptionEn: "Charming attic apartment with unique architecture, skylights, and a cozy atmosphere perfect for those seeking something different.",
-        descriptionHr: "Šarmantni potkrovni apartman s jedinstvenom arhitekturom, krovnim prozorima i ugodnom atmosferom savršen za one koji traže nešto drugačije.",
+        descriptionEn: "Beautiful sea view and close proximity to the old town center.",
+        descriptionHr: "Pogled i blizina starge gradske jezgre, pogled na more.",
         images: [
           "/images/apartments/nika/view.webp",
           "/images/apartments/nika/living-room.webp",
@@ -438,13 +457,21 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
       {
         nameEn: "Lara",
         nameHr: "Lara",
-        descriptionEn: "Budget-friendly option with all essential amenities and comfortable furnishings, perfect for travelers watching their spending.",
-        descriptionHr: "Opcija prilagođena budžetu sa svim osnovnim sadržajima i udobnim namještajem, savršena za putnike koji paze na potrošnju.",
+        descriptionEn: "Newly renovated studio apartment with a kitchen, bed, bathroom, terrace, and a view of the sea and the Pelješac Channel.",
+        descriptionHr: "Novo adaptirani studio apartman sa kuhinjom, krevetom, kupaonom, terasom i pogledom na more i pelješki kanal.",
         images: [
-          "/images/apartments/apt9/1.jpg",
-          "/images/apartments/apt9/2.jpg",
-          "/images/apartments/apt9/3.jpg",
-          "/images/apartments/apt9/4.jpg"
+          "/images/apartments/lara/bed.webp",
+          "/images/apartments/lara/bed2.webp",
+          "/images/apartments/lara/bed3.webp",
+          "/images/apartments/lara/bed4.webp",
+          "/images/apartments/lara/kitchen.webp",
+          "/images/apartments/lara/kitchen2.webp",
+          "/images/apartments/lara/mirror.webp",
+          "/images/apartments/lara/table.webp",
+          "/images/apartments/lara/table2.webp",
+          "/images/apartments/lara/terrace.webp",
+          "/images/apartments/lara/view.webp",
+          "/images/apartments/lara/wc.webp"
         ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartmani%20Ivan%C4%8Devi%C4%87!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
         bookingUrl: "https://www.booking.com/hotel/hr/apartmani-lara-i-nika.html",

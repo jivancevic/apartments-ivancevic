@@ -391,7 +391,10 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.4167420755093!2d17.127484875471605!3d42.961486396894585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a516bb56b95d3%3A0x2758c0e472e4450c!2sApartments%20Giuliani!5e1!3m2!1sen!2sit!4v1746801360640!5m2!1sen!2sit",
         bookingUrl: "https://www.booking.com/hotel/hr/apartmani-lara-i-nika.html",
-        airbnbUrl: "https://www.booking.com/hotel/hr/apartment-attic.html",
+        airbnbUrl: "https://airbnb.com/h/apartmani-giuliani-nika",
+        icalUrls: [
+          "https://www.airbnb.com/calendar/ical/27617468.ics?s=e408c51a965bccbbaba29d58295304a6&locale=hr"
+        ],
         price: 70,
         priceHigh: 110,
         pricePeak: 140,
@@ -417,7 +420,11 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/apt9/4.jpg"
         ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartmani%20Ivan%C4%8Devi%C4%87!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
-        airbnbUrl: "https://www.airbnb.com/rooms/78901234",
+        bookingUrl: "https://www.booking.com/hotel/hr/apartmani-lara-i-nika.html",
+        airbnbUrl: "https://airbnb.com/h/apartmani-giuliani-lara",
+        icalUrls: [
+          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd24cd0dbd2911faab332fcfd90"
+        ],
         price: 55,
         priceHigh: 85,
         pricePeak: 115,

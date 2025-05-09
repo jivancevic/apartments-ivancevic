@@ -14,6 +14,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
   const currentImage = images[currentImageIndex] || "";
   const thumbnailsContainerRef = useRef<HTMLDivElement>(null);
   const thumbnailRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const galleryRef = useRef<HTMLDivElement>(null);
   
   // Initialize thumbnailRefs with the correct length
   useEffect(() => {
@@ -40,19 +41,46 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
     }
   }, [currentImageIndex]);
 
-  // Listen for escape key to close modal
+  // Listen for keyboard navigation in standard view
   useEffect(() => {
-    const handleEscKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && showModal) {
-        setShowModal(false);
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!showModal && galleryRef.current) {
+        // Only handle keyboard events when the gallery is in focus/viewport
+        if (event.key === 'ArrowLeft') {
+          handlePrevious();
+        } else if (event.key === 'ArrowRight') {
+          handleNext();
+        }
       }
     };
 
-    window.addEventListener('keydown', handleEscKey);
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleEscKey);
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [showModal]);
+  }, [showModal, currentImageIndex]);
+
+  // Listen for escape key to close modal and arrow keys for navigation in modal view
+  useEffect(() => {
+    const handleModalKeyDown = (event: KeyboardEvent) => {
+      if (showModal) {
+        if (event.key === 'Escape') {
+          setShowModal(false);
+        } else if (event.key === 'ArrowLeft') {
+          handlePrevious();
+        } else if (event.key === 'ArrowRight') {
+          handleNext();
+        }
+      }
+    };
+
+    if (showModal) {
+      window.addEventListener('keydown', handleModalKeyDown);
+      return () => {
+        window.removeEventListener('keydown', handleModalKeyDown);
+      };
+    }
+  }, [showModal, currentImageIndex]);
 
   const handleThumbnailClick = (index: number) => {
     setCurrentImageIndex(index);
@@ -72,6 +100,13 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
 
   const openModal = () => {
     setShowModal(true);
+    // Add focus to the modal container to ensure keyboard events work properly
+    window.setTimeout(() => {
+      const modalElement = document.querySelector('.gallery-modal');
+      if (modalElement) {
+        (modalElement as HTMLElement).focus();
+      }
+    }, 100);
   };
 
   const closeModal = () => {
@@ -102,7 +137,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
   }
 
   return (
-    <div>
+    <div ref={galleryRef}>
       {/* Main Image with Navigation Arrows */}
       <div className="relative aspect-video bg-neutral mb-4 rounded-lg overflow-hidden group">
         <img
@@ -151,7 +186,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
                 }`}
                 onClick={() => handleThumbnailClick(index)}
               >
-                <div className="aspect-video w-full">
+                <div className="aspect-square w-full">
                   <img
                     src={image}
                     alt={`Apartment thumbnail ${index + 1}`}
@@ -166,11 +201,39 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
 
       {/* Image Modal/Lightbox with Animations */}
       <div 
-        className={`fixed inset-0 bg-black/80 z-50 flex items-center justify-center transition-opacity duration-300 ease-in-out ${
+        className={`gallery-modal fixed inset-0 bg-black/80 z-50 flex items-center justify-center transition-opacity duration-300 ease-in-out ${
           showModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         onClick={handleModalBackdropClick}
+        tabIndex={0}
+        aria-modal="true"
+        role="dialog"
+        aria-label="Image gallery"
       >
+        {/* Left Arrow - Fixed at left edge */}
+        <button 
+          onClick={(e) => {
+            e.stopPropagation();
+            handlePrevious();
+          }}
+          className="fixed left-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-3 transition-all z-50 shadow-lg"
+          aria-label="Previous image"
+        >
+          <ChevronLeft className="h-8 w-8" />
+        </button>
+        
+        {/* Right Arrow - Fixed at right edge */}
+        <button 
+          onClick={(e) => {
+            e.stopPropagation();
+            handleNext();
+          }}
+          className="fixed right-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-3 transition-all z-50 shadow-lg"
+          aria-label="Next image"
+        >
+          <ChevronRight className="h-8 w-8" />
+        </button>
+        
         <div className={`relative max-w-[90vw] max-h-[90vh] transition-transform duration-300 ${
           showModal ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
         }`}>
@@ -188,29 +251,9 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
             className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-xl"
           />
           
-          {/* Modal Navigation */}
-          <div className="absolute inset-x-0 bottom-0 flex justify-between px-4 py-2">
-            <button 
-              onClick={(e) => {
-                e.stopPropagation();
-                handlePrevious();
-              }}
-              className="bg-black/60 hover:bg-black/80 text-white rounded-full p-2 transition-all"
-              aria-label="Previous image"
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </button>
-            
-            <button 
-              onClick={(e) => {
-                e.stopPropagation();
-                handleNext();
-              }}
-              className="bg-black/60 hover:bg-black/80 text-white rounded-full p-2 transition-all"
-              aria-label="Next image"
-            >
-              <ChevronRight className="h-6 w-6" />
-            </button>
+          {/* Image Counter */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/60 text-white text-sm px-3 py-1 rounded-full z-10">
+            {currentImageIndex + 1} / {images.length}
           </div>
         </div>
       </div>

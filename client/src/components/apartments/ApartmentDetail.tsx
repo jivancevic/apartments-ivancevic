@@ -21,7 +21,7 @@ interface ApartmentDetailProps {
   selectedDates?: SelectedDates;
 }
 
-const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
+const ApartmentDetail = ({ apartment, selectedDates }: ApartmentDetailProps) => {
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
   
@@ -192,7 +192,12 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
                 </div>
               )}
               
-              <BookingCalendar bookings={allBookings} apartment={apartment} />
+              <BookingCalendar 
+                bookings={allBookings} 
+                apartment={apartment} 
+                initialStartDate={selectedDates?.checkIn}
+                initialEndDate={selectedDates?.checkOut}
+              />
               
               {apartment.icalUrls && apartment.icalUrls.length > 0 && (
                 <div className="mt-2 text-xs text-gray-500">
@@ -203,7 +208,12 @@ const ApartmentDetail = ({ apartment }: ApartmentDetailProps) => {
           )}
         </div>
         
-        <Link href={`/contact?apartment=${apartment.id}`} 
+        <Link 
+          href={`/contact?apartmentId=${apartment.id}${
+            selectedDates?.checkIn ? `&checkIn=${selectedDates.checkIn.toISOString()}` : ''
+          }${
+            selectedDates?.checkOut ? `&checkOut=${selectedDates.checkOut.toISOString()}` : ''
+          }`}
           className="block w-full bg-primary hover:bg-blue-600 text-white text-center font-medium py-3 px-6 rounded-md transition-colors">
           {t("apartments.sendInquiry")}
         </Link>

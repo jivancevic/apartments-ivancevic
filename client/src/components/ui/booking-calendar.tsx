@@ -22,9 +22,11 @@ type ApartmentWithRequiredProps = Apartment & {
 interface BookingCalendarProps {
   bookings: Booking[];
   apartment: Apartment;
+  initialStartDate?: Date;
+  initialEndDate?: Date;
 }
 
-const BookingCalendar = ({ bookings, apartment }: BookingCalendarProps) => {
+const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate }: BookingCalendarProps) => {
   // Ensure required properties with defaults
   const apartmentWithDefaults: ApartmentWithRequiredProps = {
     ...apartment,
@@ -34,9 +36,15 @@ const BookingCalendar = ({ bookings, apartment }: BookingCalendarProps) => {
     cleaningFee: apartment.cleaningFee || 40
   };
   const { t } = useTranslation();
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
-  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
+  // If initial dates are provided, set the current month to the month of the initial start date
+  const [currentDate, setCurrentDate] = useState(() => {
+    if (initialStartDate) {
+      return initialStartDate;
+    }
+    return new Date();
+  });
+  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(initialStartDate || null);
+  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(initialEndDate || null);
   const [hoverDate, setHoverDate] = useState<Date | null>(null);
   const [priceSummary, setPriceSummary] = useState<{
     totalNights: number;
@@ -180,6 +188,21 @@ const BookingCalendar = ({ bookings, apartment }: BookingCalendarProps) => {
       setPriceSummary(null);
     }
   }, [selectedStartDate, selectedEndDate, apartment, apartmentWithDefaults]);
+
+  // Calculate initial price summary on component mount if dates are already provided
+  useEffect(() => {
+    if (initialStartDate && initialEndDate) {
+      const summary = calculateStayPrice(apartmentWithDefaults, initialStartDate, initialEndDate);
+      setPriceSummary({
+        totalNights: summary.totalNights,
+        subtotal: summary.subtotal,
+        cleaningFee: summary.cleaningFee,
+        total: summary.total,
+        averagePerNight: summary.averagePerNight
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialStartDate, initialEndDate, apartmentWithDefaults]);
 
   return (
     <div>

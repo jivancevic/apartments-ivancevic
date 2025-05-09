@@ -40,6 +40,15 @@ const AmenityIcon: React.FC<AmenityIconProps> = ({ icon, className = "" }) => {
       return <Volume2 {...defaultProps} />;
     case 'mountain':
       return <Mountain {...defaultProps} />;
+    // New feature icons
+    case 'handshake':
+      return <Handshake {...defaultProps} />;
+    case 'sparkles':
+      return <Sparkles {...defaultProps} />;
+    case 'map-pin':
+      return <MapPin {...defaultProps} />;
+    case 'compass':
+      return <Compass {...defaultProps} />;
     default:
       return null;
   }

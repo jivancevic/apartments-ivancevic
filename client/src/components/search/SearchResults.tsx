@@ -182,14 +182,17 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
 
   return (
     <div className="space-y-6">
-      {/* Search bar to modify search parameters */}
+      {/* Search parameters summary */}
       <div className="mb-8 bg-gray-50 rounded-lg p-4 border">
-        <h2 className="text-lg font-medium mb-3">{t("search.modifySearch")}</h2>
-        <SearchBar 
-          initialCheckIn={checkIn} 
-          initialCheckOut={checkOut} 
-          initialGuests={guests} 
-        />
+        <h2 className="text-lg font-medium mb-2">{t("search.currentSearch")}</h2>
+        <div className="flex flex-wrap gap-3">
+          <div className="bg-white px-3 py-1.5 rounded border text-sm">
+            {format(checkIn, "MMM d, yyyy")} — {format(checkOut, "MMM d, yyyy")}
+          </div>
+          <div className="bg-white px-3 py-1.5 rounded border text-sm">
+            {t("search.guestsCount", { count: guests })}
+          </div>
+        </div>
       </div>
       
       <h2 className="text-2xl font-bold">

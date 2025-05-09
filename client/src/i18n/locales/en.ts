@@ -140,6 +140,9 @@ const enTranslation = {
   "search.totalPrice": "total price",
   "search.perNight": "per night",
   "search.modifySearch": "Modify search",
+  "search.currentSearch": "Current search criteria",
+  "search.guestsCount": "{{count}} Guest",
+  "search.guestsCount_plural": "{{count}} Guests",
   "search.enterCriteria": "Please enter your travel dates and number of guests to search for available apartments",
   
   // Apartment Details

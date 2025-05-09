@@ -199,7 +199,7 @@ const SearchBar = ({
                 disabled={parseInt(guests) <= 1}
                 aria-label={t("search.decreaseGuests")}
               >
-                <span className="text-xl font-medium flex items-center justify-center h-6 w-6 rounded-full group-hover:bg-primary-100 group-disabled:opacity-50 transition-colors">-</span>
+                <span className="text-xl font-medium flex items-center justify-center h-6 w-6 rounded-full group-hover:bg-primary group-hover:text-white group-disabled:opacity-50 transition-colors">-</span>
               </button>
               
               <div className="flex items-center gap-1 min-w-[60px] justify-center">
@@ -219,7 +219,7 @@ const SearchBar = ({
                 disabled={parseInt(guests) >= 6}
                 aria-label={t("search.increaseGuests")}
               >
-                <span className="text-xl font-medium flex items-center justify-center h-6 w-6 rounded-full group-hover:bg-primary-100 group-disabled:opacity-50 transition-colors">+</span>
+                <span className="text-xl font-medium flex items-center justify-center h-6 w-6 rounded-full group-hover:bg-primary group-hover:text-white group-disabled:opacity-50 transition-colors">+</span>
               </button>
             </div>
           </div>

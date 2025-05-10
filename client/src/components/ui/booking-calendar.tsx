@@ -395,12 +395,12 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
               </div>
               <div className="h-px bg-gray-200 my-2"></div>
               <div className="flex justify-between font-medium">
-                <span>{t("apartments.total")}</span>
-                <span>€{priceSummary.total}</span>
-              </div>
-              <div className="flex justify-between text-xs text-gray-600">
                 <span>{t("apartments.averageNight")}</span>
                 <span>€{priceSummary.averagePerNight}</span>
+              </div>
+              <div className="flex justify-between text-xs text-gray-600">
+                <span>{t("apartments.total")}</span>
+                <span>€{priceSummary.total}</span>
               </div>
             </div>
           </CardContent>

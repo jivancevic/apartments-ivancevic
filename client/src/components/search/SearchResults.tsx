@@ -351,10 +351,10 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
                         {priceSummary.totalNights} {t("nights", { count: priceSummary.totalNights })}
                       </div>
                       <div className="font-bold text-lg">
-                        €{priceSummary.total} <span className="text-xs font-normal">{t("search.totalPrice")}</span>
+                        €{Math.round(averageNightlyPrice)} <span className="text-xs font-normal">{t("search.perNight")}</span>
                       </div>
                       <div className="text-xs text-gray-500">
-                        €{Math.round(averageNightlyPrice)} {t("search.perNight")}
+                        €{priceSummary.total} {t("search.totalPrice")}
                       </div>
                     </div>
                     

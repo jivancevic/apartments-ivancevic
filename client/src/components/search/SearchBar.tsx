@@ -162,44 +162,45 @@ const SearchBar = ({
   };
 
   return (
-    <div className={`bg-white border rounded-lg shadow-md p-3 ${className}`}>
-      <div className="flex flex-col md:flex-row gap-2 md:items-center">
-        {/* Date range selection (unified) */}
-        <div className="flex flex-col md:flex-row flex-1 gap-2">
-          {/* Check-in date button */}
+    <div className={`bg-white border rounded-lg shadow-md p-3 overflow-hidden ${className}`}>
+      {/* Responsive layout with reduced paddings and tighter spacing */}
+      <div className="flex flex-col lg:flex-row gap-2 lg:items-center w-full">
+        {/* Date range selection (unified) - modified for better space usage */}
+        <div className="flex flex-col lg:flex-row flex-1 gap-2 min-w-0">
+          {/* Check-in date button - reduced padding */}
           <Button 
             variant="outline" 
-            className="flex-1 justify-start text-left font-normal h-11 overflow-hidden whitespace-nowrap"
+            className="flex-1 justify-start text-left font-normal h-11 overflow-hidden whitespace-nowrap px-2 min-w-0"
             onClick={openCheckInCalendar}
           >
-            <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
-            <div className="flex flex-col items-start overflow-hidden">
+            <CalendarIcon className="mr-1 h-4 w-4 flex-shrink-0" />
+            <div className="flex flex-col items-start overflow-hidden min-w-0">
               <span className="text-xs text-muted-foreground w-full truncate">{t("search.checkIn")}</span>
               <span className="w-full truncate">{checkIn ? format(checkIn, "MMM d, yyyy") : t("search.selectDate")}</span>
             </div>
           </Button>
           
-          {/* Check-out date button */}
+          {/* Check-out date button - reduced padding */}
           <Button 
             variant="outline" 
-            className="flex-1 justify-start text-left font-normal h-11 overflow-hidden whitespace-nowrap"
+            className="flex-1 justify-start text-left font-normal h-11 overflow-hidden whitespace-nowrap px-2 min-w-0"
             onClick={openCheckOutCalendar}
           >
-            <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
-            <div className="flex flex-col items-start overflow-hidden">
+            <CalendarIcon className="mr-1 h-4 w-4 flex-shrink-0" />
+            <div className="flex flex-col items-start overflow-hidden min-w-0">
               <span className="text-xs text-muted-foreground w-full truncate">{t("search.checkOut")}</span>
               <span className="w-full truncate">{checkOut ? format(checkOut, "MMM d, yyyy") : t("search.selectDate")}</span>
             </div>
           </Button>
         </div>
         
-        {/* Guests selection with +/- buttons */}
-        <div className="md:w-28 flex-shrink-0">
+        {/* Guests selection - more compact */}
+        <div className="lg:w-24 flex-shrink-0">
           <div className="border rounded-md h-11 flex flex-col justify-center">
-            <div className="px-3 py-0.5">
+            <div className="px-2 py-0.5">
               <span className="text-xs text-muted-foreground">{t("search.guests")}</span>
             </div>
-            <div className="flex items-center justify-between px-3 pb-1">
+            <div className="flex items-center justify-between px-2 pb-1">
               <button 
                 type="button"
                 className="group"
@@ -212,12 +213,12 @@ const SearchBar = ({
                 disabled={parseInt(guests) <= 1}
                 aria-label={t("search.decreaseGuests")}
               >
-                <span className="text-xl font-medium flex items-center justify-center h-6 w-6 rounded-full group-hover:bg-primary group-hover:text-white group-disabled:opacity-50 transition-colors">-</span>
+                <span className="text-lg font-medium flex items-center justify-center h-5 w-5 rounded-full group-hover:bg-primary group-hover:text-white group-disabled:opacity-50 transition-colors">-</span>
               </button>
               
               <div className="flex items-center gap-1 justify-center">
-                <Users className="h-4 w-4 text-gray-500" />
-                <span>{guests}</span>
+                <Users className="h-3 w-3 text-gray-500" />
+                <span className="text-sm">{guests}</span>
               </div>
               
               <button 
@@ -232,18 +233,18 @@ const SearchBar = ({
                 disabled={parseInt(guests) >= 6}
                 aria-label={t("search.increaseGuests")}
               >
-                <span className="text-xl font-medium flex items-center justify-center h-6 w-6 rounded-full group-hover:bg-primary group-hover:text-white group-disabled:opacity-50 transition-colors">+</span>
+                <span className="text-lg font-medium flex items-center justify-center h-5 w-5 rounded-full group-hover:bg-primary group-hover:text-white group-disabled:opacity-50 transition-colors">+</span>
               </button>
             </div>
           </div>
         </div>
         
-        {/* Search button */}
+        {/* Search button - more compact */}
         <div className="flex-shrink-0">
           <Button 
             type="button" 
             onClick={handleSearch}
-            className="bg-primary hover:bg-primary/90 text-white h-11 w-full"
+            className="bg-primary hover:bg-primary/90 text-white h-11 w-full text-sm px-3"
           >
             {t("search.searchButton")}
           </Button>

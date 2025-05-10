@@ -34,6 +34,7 @@ const Search = () => {
       setGuests(parseInt(guestsParam, 10));
     }
   }, [location]);
+
   
   // Handle search button click from SearchBar
   const handleSearch = useCallback((newCheckIn: Date, newCheckOut: Date, newGuests: number) => {

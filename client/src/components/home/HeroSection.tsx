@@ -44,16 +44,18 @@ const HeroSection = () => {
           <div className="hidden lg:block lg:max-w-[45%]">
             <div className="bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg">
               <h3 className="text-primary font-medium text-xl mb-4">{t("search.findYourStay")}</h3>
-              <SearchBar />
+              <SearchBar className="max-w-full" />
             </div>
           </div>
         </div>
         
-        {/* Search bar for mobile and tablets - below buttons */}
-        <div className="lg:hidden mt-8">
-          <div className="bg-white/95 backdrop-blur-sm p-4 rounded-lg shadow-lg">
-            <h3 className="text-primary font-medium text-lg mb-3">{t("search.findYourStay")}</h3>
-            <SearchBar />
+        {/* Search bar for mobile and tablets - moved below buttons for better visibility */}
+        <div className="mt-12 lg:hidden">
+          <div className="flex flex-col items-center">
+            <h3 className="text-white text-shadow font-medium text-xl mb-4">{t("search.findYourStay")}</h3>
+            <div className="w-full max-w-md bg-white/95 backdrop-blur-sm p-4 rounded-lg shadow-lg">
+              <SearchBar className="max-w-full" />
+            </div>
           </div>
         </div>
       </div>

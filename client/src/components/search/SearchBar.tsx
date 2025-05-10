@@ -129,6 +129,10 @@ const SearchBar = ({
         // If selected date is before check-in, make it the new check-in
         setCheckIn(date);
         // Don't close calendar, continue selecting check-out
+      } else if (isSameDay(date, checkIn)) {
+        // Prevent selecting the same day for check-in and check-out
+        // Just keep selecting check-out
+        return;
       } else {
         // Set check-out but keep calendar open
         setCheckOut(date);
@@ -280,8 +284,8 @@ const SearchBar = ({
             }}
             modifiersClassNames={{
               range: "bg-primary/20",
-              start: "bg-primary text-white rounded-l-md",
-              end: "bg-primary text-white rounded-r-md"
+              start: "bg-primary text-white font-bold border-2 border-primary rounded-l-md",
+              end: "bg-primary text-white font-bold border-2 border-primary rounded-r-md"
             }}
             initialFocus
           />

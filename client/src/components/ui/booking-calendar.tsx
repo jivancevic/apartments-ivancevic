@@ -131,6 +131,9 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
         // If clicked date is before start date, swap them
         setSelectedEndDate(selectedStartDate);
         setSelectedStartDate(date);
+      } else if (isSameDay(date, selectedStartDate)) {
+        // Prevent selecting the same day for check-in and check-out
+        return;
       } else {
         setSelectedEndDate(date);
       }
@@ -283,8 +286,9 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
             bgColorClass = 'bg-gray-100';
             priceColorClass = 'text-gray-400';
           } else if (isStart || isEnd) {
-            bgColorClass = 'bg-primary';
-            priceColorClass = 'text-white';
+            // Make selected dates more visually prominent with larger text and stronger styling
+            bgColorClass = 'bg-primary border-2 border-primary';
+            priceColorClass = 'text-white font-bold';
           } else if (inRange) {
             bgColorClass = 'bg-primary-lighter';
             priceColorClass = 'text-primary-darker';
@@ -319,7 +323,19 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
               onClick={() => selectable && handleDateClick(day)}
               onMouseEnter={() => selectable && handleDateHover(day)}
             >
-              <div className="text-center font-medium">
+              {/* Add check-in/out label for selected dates */}
+              {isStart && (
+                <div className="absolute top-0 left-0 right-0 text-[8px] bg-blue-700 text-white px-1 text-center font-bold">
+                  {t("search.checkIn")}
+                </div>
+              )}
+              {isEnd && (
+                <div className="absolute top-0 left-0 right-0 text-[8px] bg-blue-900 text-white px-1 text-center font-bold">
+                  {t("search.checkOut")}
+                </div>
+              )}
+              
+              <div className={`text-center font-medium ${isStart || isEnd ? 'mt-3' : ''}`}>
                 {format(day, 'd')}
               </div>
               <div className={`text-center ${priceColorClass} ${isBooked || isPast ? 'line-through' : ''}`}>

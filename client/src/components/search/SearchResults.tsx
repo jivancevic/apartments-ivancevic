@@ -224,7 +224,9 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold">
-        {t("search.resultsFound", { count: filteredApartments.length })}
+        {filteredApartments.length === 1
+          ? t("search.resultsFound", { count: 1 })
+          : t("search.resultsFound_plural", { count: filteredApartments.length })}
       </h2>
       
       <div className="space-y-4">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
@@ -44,6 +44,11 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
   const [, setLocation] = useLocation();
   
   const [filteredApartments, setFilteredApartments] = useState<Apartment[]>([]);
+  
+  // Control minimum loading time with these states
+  const [controlledLoading, setControlledLoading] = useState(true);
+  const loadingTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const searchStartTimeRef = useRef<number>(Date.now());
 
   // Fetch all apartments
   const { data: apartments, isLoading: isLoadingApartments } = useQuery({
@@ -54,6 +59,9 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
   // Fetch all bookings (across all apartments for simplicity)
   const fetchAllBookings = async () => {
     if (!apartments || !Array.isArray(apartments)) return [];
+    
+    // Record search start time when we begin fetching bookings
+    searchStartTimeRef.current = Date.now();
     
     const bookingsPromises = apartments.map((apartment: Apartment) => 
       fetch(`/api/apartments/${apartment.id}/bookings`).then(res => res.json())
@@ -80,6 +88,46 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
     queryFn: fetchAllBookings,
     enabled: !!apartments
   });
+
+  // Effect to clean up timer when component unmounts
+  useEffect(() => {
+    return () => {
+      if (loadingTimerRef.current) {
+        clearTimeout(loadingTimerRef.current);
+      }
+    };
+  }, []);
+  
+  // Reset controlled loading state when search parameters change
+  useEffect(() => {
+    // Always show loading when parameters change
+    setControlledLoading(true);
+    // Restart the search timer
+    searchStartTimeRef.current = Date.now();
+  }, [checkIn, checkOut, guests]);
+  
+  // Handle the controlled loading state based on query status
+  useEffect(() => {
+    // If we're not loading data anymore, check the minimum time requirement
+    if (!isLoadingApartments && !isLoadingBookings && controlledLoading) {
+      const elapsedTime = Date.now() - searchStartTimeRef.current;
+      const remainingTime = Math.max(0, 500 - elapsedTime);
+      
+      if (remainingTime > 0) {
+        // If we need to show loading state longer, set a timer
+        if (loadingTimerRef.current) {
+          clearTimeout(loadingTimerRef.current);
+        }
+        
+        loadingTimerRef.current = setTimeout(() => {
+          setControlledLoading(false);
+        }, remainingTime);
+      } else {
+        // If enough time has elapsed, stop loading immediately
+        setControlledLoading(false);
+      }
+    }
+  }, [isLoadingApartments, isLoadingBookings, controlledLoading]);
 
   useEffect(() => {
     if (!apartments || !Array.isArray(apartments) || !allBookings || !Array.isArray(allBookings)) {
@@ -139,7 +187,7 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
     setFilteredApartments(filtered);
   }, [apartments, allBookings, checkIn, checkOut, guests]);
 
-  if (isLoadingApartments || isLoadingBookings) {
+  if (isLoadingApartments || isLoadingBookings || controlledLoading) {
     return (
       <div className="space-y-4">
         <h2 className="text-2xl font-bold mb-4">{t("search.loading")}</h2>
@@ -206,18 +254,22 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
           // Get first image as main image or use the mainImage if specified
           const mainImage = apartment.mainImage || (apartment.images && apartment.images.length > 0 ? apartment.images[0] : undefined);
           
-          // Create URL for contact page with prefilled data
+          // Format dates for clean URL parameters (YYYY-MM-DD)
+          const formattedCheckIn = format(checkIn, 'yyyy-MM-dd');
+          const formattedCheckOut = format(checkOut, 'yyyy-MM-dd');
+          
+          // Create URL for contact page with prefilled data - using clean date format
           const contactSearchParams = new URLSearchParams({
             apartmentId: apartment.id.toString(),
-            checkIn: checkIn.toISOString(),
-            checkOut: checkOut.toISOString(),
+            checkIn: formattedCheckIn,
+            checkOut: formattedCheckOut,
           });
           const contactUrl = `/contact?${contactSearchParams.toString()}`;
           
-          // Create URL for apartment page with dates
+          // Create URL for apartment page with dates - using clean date format
           const apartmentSearchParams = new URLSearchParams({
-            checkIn: checkIn.toISOString(),
-            checkOut: checkOut.toISOString(),
+            checkIn: formattedCheckIn,
+            checkOut: formattedCheckOut,
           });
           const apartmentUrl = `/apartments?${apartmentSearchParams.toString()}#${getApartmentSlug(apartment.id)}`;
           

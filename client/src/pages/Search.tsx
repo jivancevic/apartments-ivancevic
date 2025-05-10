@@ -23,11 +23,29 @@ const Search = () => {
     const guestsParam = params.get("guests");
     
     if (checkInParam) {
-      setCheckIn(new Date(checkInParam));
+      try {
+        // Try to parse date, handling both ISO format and YYYY-MM-DD format
+        const date = new Date(checkInParam);
+        // Check if valid date
+        if (!isNaN(date.getTime())) {
+          setCheckIn(date);
+        }
+      } catch (e) {
+        console.error("Error parsing checkIn date", e);
+      }
     }
     
     if (checkOutParam) {
-      setCheckOut(new Date(checkOutParam));
+      try {
+        // Try to parse date, handling both ISO format and YYYY-MM-DD format
+        const date = new Date(checkOutParam);
+        // Check if valid date
+        if (!isNaN(date.getTime())) {
+          setCheckOut(date);
+        }
+      } catch (e) {
+        console.error("Error parsing checkOut date", e);
+      }
     }
     
     if (guestsParam) {

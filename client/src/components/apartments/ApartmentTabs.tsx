@@ -37,7 +37,11 @@ const ApartmentTabs = ({ apartments, selectedDates }: ApartmentTabsProps) => {
   // Handle hash change and initial load
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '');
+      // Get full URL to handle both hash and query parameters
+      const currentUrl = window.location.href;
+      // Extract hash from URL (ignoring any query parameters)
+      const hashMatch = currentUrl.match(/#([^?&]+)/);
+      const hash = hashMatch ? hashMatch[1] : '';
       
       // Check if hash matches an apartment slug
       if (hash && APARTMENT_SLUGS[hash]) {
@@ -68,11 +72,18 @@ const ApartmentTabs = ({ apartments, selectedDates }: ApartmentTabsProps) => {
     
     // Update URL hash - find slug by apartment ID
     const slug = Object.keys(APARTMENT_SLUGS).find(key => APARTMENT_SLUGS[key] === apartmentId);
-    if (slug) {
-      window.location.hash = slug;
-    } else {
-      window.location.hash = `apartment-${apartmentId}`;
-    }
+    
+    // Preserve query parameters when changing the hash
+    const urlWithoutHash = window.location.href.split('#')[0];
+    const newHash = slug ? slug : `apartment-${apartmentId}`;
+    
+    // We need to use history.replaceState to avoid triggering a page reload
+    // and to ensure the query parameters are preserved
+    window.history.replaceState(
+      null, 
+      '', 
+      `${urlWithoutHash}#${newHash}`
+    );
   };
 
   return (

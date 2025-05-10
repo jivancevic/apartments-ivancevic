@@ -18,23 +18,51 @@ const Apartments = () => {
   
   // Parse dates from URL parameters, supporting both full ISO format and cleaner YYYY-MM-DD format
   const checkIn = checkInParam ? (() => {
-    // Check if the format is already YYYY-MM-DD (no time component)
-    if (checkInParam.length === 10) {
-      // Make sure the date is set to midnight in local timezone for consistency
-      const date = new Date(checkInParam + 'T00:00:00');
+    try {
+      // Check if the format is already YYYY-MM-DD (no time component)
+      if (checkInParam.length === 10) {
+        // Make sure the date is set to midnight in local timezone for consistency
+        const date = new Date(checkInParam + 'T00:00:00');
+        if (isNaN(date.getTime())) {
+          console.error('Invalid check-in date format in URL:', checkInParam);
+          return undefined;
+        }
+        return date;
+      }
+      const date = new Date(checkInParam);
+      if (isNaN(date.getTime())) {
+        console.error('Invalid check-in date format in URL:', checkInParam);
+        return undefined;
+      }
       return date;
+    } catch (e) {
+      console.error('Error parsing check-in date:', e);
+      return undefined;
     }
-    return new Date(checkInParam);
   })() : undefined;
   
   const checkOut = checkOutParam ? (() => {
-    // Check if the format is already YYYY-MM-DD (no time component)
-    if (checkOutParam.length === 10) {
-      // Make sure the date is set to midnight in local timezone for consistency
-      const date = new Date(checkOutParam + 'T00:00:00');
+    try {
+      // Check if the format is already YYYY-MM-DD (no time component)
+      if (checkOutParam.length === 10) {
+        // Make sure the date is set to midnight in local timezone for consistency
+        const date = new Date(checkOutParam + 'T00:00:00');
+        if (isNaN(date.getTime())) {
+          console.error('Invalid check-out date format in URL:', checkOutParam);
+          return undefined;
+        }
+        return date;
+      }
+      const date = new Date(checkOutParam);
+      if (isNaN(date.getTime())) {
+        console.error('Invalid check-out date format in URL:', checkOutParam);
+        return undefined;
+      }
       return date;
+    } catch (e) {
+      console.error('Error parsing check-out date:', e);
+      return undefined;
     }
-    return new Date(checkOutParam);
   })() : undefined;
   
   // Fetch apartments data

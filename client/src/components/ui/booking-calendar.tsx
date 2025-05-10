@@ -193,8 +193,14 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
   }, [selectedStartDate, selectedEndDate, apartment, apartmentWithDefaults]);
 
   // Calculate initial price summary on component mount if dates are already provided
+  // and select the dates in the calendar
   useEffect(() => {
     if (initialStartDate && initialEndDate) {
+      // Set the selected dates in the calendar
+      setSelectedStartDate(initialStartDate);
+      setSelectedEndDate(initialEndDate);
+      
+      // Calculate price summary
       const summary = calculateStayPrice(apartmentWithDefaults, initialStartDate, initialEndDate);
       setPriceSummary({
         totalNights: summary.totalNights,

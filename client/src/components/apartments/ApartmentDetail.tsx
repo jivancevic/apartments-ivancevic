@@ -22,9 +22,12 @@ interface ApartmentDetailProps {
   selectedDates?: SelectedDates;
 }
 
-const ApartmentDetail = ({ apartment, selectedDates }: ApartmentDetailProps) => {
+const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: ApartmentDetailProps) => {
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
+  
+  // Track selected dates internally to handle calendar selection
+  const [currentSelectedDates, setCurrentSelectedDates] = useState<SelectedDates>(initialSelectedDates || {});
   
   // Fetch bookings for this apartment from API
   const { data: apiBookings, isLoading: isLoadingApi } = useQuery<Booking[]>({
@@ -201,8 +204,14 @@ const ApartmentDetail = ({ apartment, selectedDates }: ApartmentDetailProps) => 
               <BookingCalendar 
                 bookings={allBookings} 
                 apartment={apartment} 
-                initialStartDate={selectedDates?.checkIn}
-                initialEndDate={selectedDates?.checkOut}
+                initialStartDate={initialSelectedDates?.checkIn}
+                initialEndDate={initialSelectedDates?.checkOut}
+                onDatesChange={(startDate, endDate) => {
+                  setCurrentSelectedDates({
+                    checkIn: startDate || undefined,
+                    checkOut: endDate || undefined
+                  });
+                }}
               />
             </div>
           )}
@@ -210,9 +219,9 @@ const ApartmentDetail = ({ apartment, selectedDates }: ApartmentDetailProps) => 
         
         <Link 
           href={`/contact?apartmentId=${apartment.id}${
-            selectedDates?.checkIn ? `&checkIn=${selectedDates.checkIn.toISOString().split('T')[0]}` : ''
+            currentSelectedDates?.checkIn ? `&checkIn=${currentSelectedDates.checkIn.toISOString().split('T')[0]}` : ''
           }${
-            selectedDates?.checkOut ? `&checkOut=${selectedDates.checkOut.toISOString().split('T')[0]}` : ''
+            currentSelectedDates?.checkOut ? `&checkOut=${currentSelectedDates.checkOut.toISOString().split('T')[0]}` : ''
           }`}
           className="block w-full bg-primary hover:bg-blue-600 text-white text-center font-medium py-3 px-6 rounded-md transition-colors">
           {t("apartments.sendInquiry")}

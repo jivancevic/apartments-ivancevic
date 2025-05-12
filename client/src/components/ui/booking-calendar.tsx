@@ -108,7 +108,7 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
     return !isDateBooked(date) && !isDatePast(date);
   };
 
-  // Check if a date is in the selected range
+  // Check if a date is in the selected range (days between selected start and end)
   const isInSelectedRange = (date: Date) => {
     if (!selectedStartDate) return false;
     
@@ -291,6 +291,8 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
           
           let bgColorClass = 'bg-white';
           let priceColorClass = 'text-gray-700';
+          // Position-based styling for range effect
+          let positionClass = '';
           
           if (isBooked) {
             bgColorClass = 'bg-red-100';
@@ -298,21 +300,29 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
           } else if (isPast) {
             bgColorClass = 'bg-gray-100';
             priceColorClass = 'text-gray-400';
-          } else if (isStart || isEnd) {
-            // Make selected dates more visually prominent with larger text and stronger styling
+          } else if (isStart) {
+            // Start date styling with rounded left
             bgColorClass = 'bg-primary border-2 border-primary';
             priceColorClass = 'text-white font-bold';
+            positionClass = selectedEndDate ? 'rounded-l-lg rounded-r-none border-r-0' : '';
+          } else if (isEnd) {
+            // End date styling with rounded right
+            bgColorClass = 'bg-primary border-2 border-primary';
+            priceColorClass = 'text-white font-bold';
+            positionClass = 'rounded-r-lg rounded-l-none border-l-0';
           } else if (inRange) {
-            bgColorClass = 'bg-primary-lighter';
-            priceColorClass = 'text-primary-darker';
+            // Make the in-between days clearly visible with a connected appearance
+            bgColorClass = 'bg-blue-100 border-t-2 border-b-2 border-blue-300';
+            priceColorClass = 'text-blue-800';
+            positionClass = 'border-l-0 border-r-0'; // No side borders for connected effect
           }
           
           return (
             <div 
               key={format(day, 'd')}
-              className={`calendar-day relative text-xs p-1 ${bgColorClass} ${
+              className={`calendar-day relative text-xs p-1 ${bgColorClass} ${positionClass} ${
                 selectable ? 'cursor-pointer hover:border hover:border-primary' : 'cursor-not-allowed'
-              } ${isCurrentDay ? 'border border-blue-500' : ''} transition-colors rounded overflow-hidden`}
+              } ${isCurrentDay ? 'border border-blue-500' : ''} transition-colors overflow-hidden`}
               onClick={() => selectable && handleDateClick(day)}
               onMouseEnter={() => selectable && handleDateHover(day)}
             >
@@ -333,6 +343,14 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
                 {(isStart || isEnd) ? (
                   <div className="w-full text-center font-medium mt-3">
                     {format(day, 'd')}
+                  </div>
+                ) : inRange ? (
+                  <div className="text-xs font-medium relative">
+                    <span className="relative z-10">{format(day, 'd')}</span>
+                    {/* Add a subtle highlight effect for days in the selected range */}
+                    <span className="absolute inset-0 flex items-center justify-center">
+                      <span className="w-5 h-5 rounded-full bg-blue-200 opacity-50"></span>
+                    </span>
                   </div>
                 ) : (
                   <div className="text-xs font-medium">

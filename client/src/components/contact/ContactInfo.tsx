@@ -31,15 +31,15 @@ const ContactInfo = () => {
             <div>
               <div className="font-medium">{t("contact.info.phone")}</div>
               <div className="mb-1">
-                {t("contact.info.vicko")}: 
-                <a href="tel:+38598660645" className="text-primary hover:underline ml-1">
-                  +385 98 6606 45
-                </a>
-              </div>
-              <div className="mb-1">
                 {t("contact.info.mirica")}: 
                 <a href="tel:+385976830150" className="text-primary hover:underline ml-1">
                   +385 97 6830 150
+                </a>
+              </div>
+              <div className="mb-1">
+                {t("contact.info.vicko")}: 
+                <a href="tel:+38598660645" className="text-primary hover:underline ml-1">
+                  +385 98 6606 45
                 </a>
               </div>
               <div>

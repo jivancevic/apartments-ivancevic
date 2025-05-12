@@ -60,9 +60,9 @@ const ApartmentDetail = ({ apartment, selectedDates }: ApartmentDetailProps) => 
       
       {/* Details */}
       <div>
-        <div className="flex items-center mb-2 text-amber-500">
+        <div className="flex items-center mb-1 text-amber-500">
           {Array.from({ length: getApartmentStars(apartment.id) }).map((_, index) => (
-            <Star key={index} size={16} fill="currentColor" className="mr-0.5" />
+            <Star key={index} size={12} fill="currentColor" className="mr-0.5" />
           ))}
         </div>
         <h3 className="font-heading font-bold text-2xl mb-4">

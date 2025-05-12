@@ -149,62 +149,67 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Submit an inquiry
   app.post('/api/inquiries', async (req: Request, res: Response) => {
     try {
-      // Clone the request body to avoid modifying the original
-      const data = { ...req.body };
+      console.log('Raw inquiry data:', JSON.stringify(req.body, null, 2));
       
-      // Parse dates from strings to Date objects if they're strings
-      if (typeof data.checkIn === 'string') {
-        data.checkIn = new Date(data.checkIn);
-      }
+      // Create a new object with parsed dates for database storage
+      const dbData = { 
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone || null,
+        apartmentId: req.body.apartmentId ? parseInt(req.body.apartmentId) : null,
+        message: req.body.message || null,
+        checkIn: new Date(req.body.checkIn),
+        checkOut: new Date(req.body.checkOut),
+      };
       
-      if (typeof data.checkOut === 'string') {
-        data.checkOut = new Date(data.checkOut);
-      }
+      console.log('Processed inquiry data for DB:', JSON.stringify(dbData, null, 2));
       
-      console.log('Parsed inquiry data:', JSON.stringify(data, null, 2));
-      
-      // Validate request body
-      const result = insertInquirySchema.safeParse(data);
-      
-      if (!result.success) {
-        console.error('Validation errors:', JSON.stringify(result.error.errors, null, 2));
+      // Check if dates are valid
+      if (isNaN(dbData.checkIn.getTime()) || isNaN(dbData.checkOut.getTime())) {
         return res.status(400).json({ 
-          message: 'Invalid inquiry data',
-          errors: result.error.errors 
+          message: 'Invalid dates provided' 
         });
       }
       
       // Check if check-out date is after check-in date
-      if (result.data.checkOut <= result.data.checkIn) {
+      if (dbData.checkOut <= dbData.checkIn) {
         return res.status(400).json({ 
           message: 'Check-out date must be after check-in date' 
         });
       }
       
       // Save inquiry to storage
-      const inquiry = await storage.createInquiry(result.data);
+      const inquiry = await storage.createInquiry(dbData);
       
       // If apartment ID is provided, get apartment details
       let apartment = undefined;
-      if (result.data.apartmentId) {
-        apartment = await storage.getApartment(result.data.apartmentId);
+      if (dbData.apartmentId) {
+        apartment = await storage.getApartment(dbData.apartmentId);
       }
       
       // Send emails asynchronously (don't await)
       try {
+        // Email data can use the raw data directly
+        const emailData = {
+          ...req.body,
+          apartmentId: req.body.apartmentId ? parseInt(req.body.apartmentId) : null
+        };
+        
         // Send notification to the property owner
-        sendOwnerNotification(result.data, apartment)
+        sendOwnerNotification(emailData, apartment)
           .then(success => {
             if (!success) console.error('Failed to send owner notification email');
+            else console.log('Owner notification email sent successfully');
           })
           .catch(error => {
             console.error('Error in owner notification email:', error);
           });
           
         // Send confirmation to the customer
-        sendCustomerConfirmation(result.data, apartment)
+        sendCustomerConfirmation(emailData, apartment)
           .then(success => {
             if (!success) console.error('Failed to send customer confirmation email');
+            else console.log('Customer confirmation email sent successfully');
           })
           .catch(error => {
             console.error('Error in customer confirmation email:', error);

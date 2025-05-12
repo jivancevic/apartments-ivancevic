@@ -9,6 +9,7 @@ import { z } from "zod";
 import { Apartment, InquiryFormData } from "@/types";
 import useLanguage from "@/hooks/useLanguage";
 import { useToast } from "@/hooks/use-toast";
+import { format } from "date-fns";
 
 import {
   Form,
@@ -56,12 +57,21 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
     const checkInStr = searchParams.get("checkIn");
     const checkOutStr = searchParams.get("checkOut");
     
+    // Create dates with correct timezone handling
+    const createLocalDate = (dateStr: string | null): Date => {
+      if (!dateStr) return new Date();
+      
+      // This ensures we create a date in the local timezone
+      const [year, month, day] = dateStr.split('-').map(Number);
+      return new Date(year, month - 1, day); // month is 0-indexed in JS Date
+    };
+    
     // Update state with parsed parameters
     setUrlParams({
       apartmentId,
-      checkIn: checkInStr ? new Date(checkInStr) : new Date(),
+      checkIn: createLocalDate(checkInStr),
       checkOut: checkOutStr 
-        ? new Date(checkOutStr) 
+        ? createLocalDate(checkOutStr)
         : new Date(new Date().setDate(new Date().getDate() + 7))
     });
   }, []);

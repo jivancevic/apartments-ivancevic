@@ -11,6 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { AlertCircle, Star } from "lucide-react";
 import { useMemo, useState } from "react";
 import { getApartmentStars } from "./ApartmentTabs";
+import { format } from 'date-fns';
 
 interface SelectedDates {
   checkIn?: Date;
@@ -219,9 +220,9 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
         
         <Link 
           href={`/contact?apartmentId=${apartment.id}${
-            currentSelectedDates?.checkIn ? `&checkIn=${currentSelectedDates.checkIn.toISOString().split('T')[0]}` : ''
+            currentSelectedDates?.checkIn ? `&checkIn=${format(currentSelectedDates.checkIn, 'yyyy-MM-dd')}` : ''
           }${
-            currentSelectedDates?.checkOut ? `&checkOut=${currentSelectedDates.checkOut.toISOString().split('T')[0]}` : ''
+            currentSelectedDates?.checkOut ? `&checkOut=${format(currentSelectedDates.checkOut, 'yyyy-MM-dd')}` : ''
           }`}
           className="block w-full bg-primary hover:bg-blue-600 text-white text-center font-medium py-3 px-6 rounded-md transition-colors">
           {t("apartments.sendInquiry")}

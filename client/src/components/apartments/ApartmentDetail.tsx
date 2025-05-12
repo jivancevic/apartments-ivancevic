@@ -9,7 +9,7 @@ import { useIcalFeeds } from "@/hooks/useIcalFeeds";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AlertCircle, Star } from "lucide-react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { getApartmentStars } from "./ApartmentTabs";
 
 interface SelectedDates {

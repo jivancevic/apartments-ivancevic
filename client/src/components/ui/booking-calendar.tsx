@@ -24,9 +24,10 @@ interface BookingCalendarProps {
   apartment: Apartment;
   initialStartDate?: Date;
   initialEndDate?: Date;
+  onDatesChange?: (startDate: Date | null, endDate: Date | null) => void;
 }
 
-const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate }: BookingCalendarProps) => {
+const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate, onDatesChange }: BookingCalendarProps) => {
   // Initialize dates from props only once on mount
   useEffect(() => {
     if (initialStartDate) {
@@ -137,10 +138,20 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
       // No dates selected yet, or both already selected (start fresh)
       setSelectedStartDate(date);
       setSelectedEndDate(null);
+      
+      // Notify parent component of date change
+      if (onDatesChange) {
+        onDatesChange(date, null);
+      }
     } else {
       // Start date already selected, set the end date
+      let newStartDate = selectedStartDate;
+      let newEndDate = date;
+      
       if (isBefore(date, selectedStartDate)) {
         // If clicked date is before start date, swap them
+        newEndDate = selectedStartDate;
+        newStartDate = date;
         setSelectedEndDate(selectedStartDate);
         setSelectedStartDate(date);
       } else if (isSameDay(date, selectedStartDate)) {
@@ -148,6 +159,11 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
         return;
       } else {
         setSelectedEndDate(date);
+      }
+      
+      // Notify parent component of date changes
+      if (onDatesChange) {
+        onDatesChange(newStartDate, newEndDate);
       }
     }
   };
@@ -165,6 +181,11 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
     setSelectedEndDate(null);
     setHoverDate(null);
     setPriceSummary(null);
+    
+    // Notify parent component that dates were cleared
+    if (onDatesChange) {
+      onDatesChange(null, null);
+    }
   };
   
   // Navigate to previous month

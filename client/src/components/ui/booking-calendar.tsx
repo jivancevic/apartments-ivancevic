@@ -354,10 +354,6 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
           <span className="inline-block bg-primary w-3 h-3 rounded-sm mr-1"></span> 
           {t("apartments.selected")}
         </div>
-        <div className="flex items-center">
-          <span className="inline-block bg-primary-lighter w-3 h-3 rounded-sm mr-1"></span> 
-          {t("apartments.dateRange")}
-        </div>
       </div>
       
       {/* Instructions */}

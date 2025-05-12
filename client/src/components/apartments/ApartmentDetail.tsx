@@ -204,12 +204,6 @@ const ApartmentDetail = ({ apartment, selectedDates }: ApartmentDetailProps) => 
                 initialStartDate={selectedDates?.checkIn}
                 initialEndDate={selectedDates?.checkOut}
               />
-              
-              {apartment.icalUrls && apartment.icalUrls.length > 0 && (
-                <div className="mt-2 text-xs text-gray-500">
-                  <span>External calendars synchronized: {apartment.icalUrls.length}</span>
-                </div>
-              )}
             </div>
           )}
         </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
 import { apiRequest } from "@/lib/queryClient";
@@ -31,21 +31,40 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
   const { toast } = useToast();
-  const [location, setLocation] = useLocation();
+  const [location] = useLocation();
   
-  // Get parameters from query string
-  const params = new URLSearchParams(location.split("?")[1] || "");
-  const preselectedApartmentId = params.get("apartmentId") || params.get("apartment");
-  
-  // Get prefilled dates if available
-  const checkInParam = params.get("checkIn");
-  const checkOutParam = params.get("checkOut");
-  
-  // Parse dates from URL parameters
-  const initialCheckIn = checkInParam ? new Date(checkInParam) : new Date();
-  const initialCheckOut = checkOutParam 
-    ? new Date(checkOutParam) 
-    : new Date(new Date().setDate(new Date().getDate() + 7));
+  // Use state to store URL parameters
+  const [urlParams, setUrlParams] = useState<{
+    apartmentId?: string;
+    checkIn?: Date;
+    checkOut?: Date;
+  }>({
+    checkIn: new Date(),
+    checkOut: new Date(new Date().setDate(new Date().getDate() + 7))
+  });
+
+  // Parse URL parameters when component mounts
+  useEffect(() => {
+    // Get full URL including query parameters and hash
+    const fullUrl = window.location.href;
+    
+    // Parse query parameters
+    const searchParams = new URLSearchParams(window.location.search);
+    const apartmentId = searchParams.get("apartmentId") || searchParams.get("apartment") || undefined;
+    
+    // Parse dates
+    const checkInStr = searchParams.get("checkIn");
+    const checkOutStr = searchParams.get("checkOut");
+    
+    // Update state with parsed parameters
+    setUrlParams({
+      apartmentId,
+      checkIn: checkInStr ? new Date(checkInStr) : new Date(),
+      checkOut: checkOutStr 
+        ? new Date(checkOutStr) 
+        : new Date(new Date().setDate(new Date().getDate() + 7))
+    });
+  }, []);
 
   // Create a schema for form validation
   const formSchema = z.object({
@@ -74,12 +93,25 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
       name: "",
       email: "",
       phone: "",
-      apartmentId: preselectedApartmentId || "",
+      apartmentId: "",
       message: "",
-      checkIn: initialCheckIn,
-      checkOut: initialCheckOut,
+      checkIn: new Date(),
+      checkOut: new Date(new Date().setDate(new Date().getDate() + 7)),
     },
   });
+  
+  // Update form values when URL parameters change
+  useEffect(() => {
+    if (urlParams.apartmentId) {
+      form.setValue('apartmentId', urlParams.apartmentId);
+    }
+    if (urlParams.checkIn) {
+      form.setValue('checkIn', urlParams.checkIn);
+    }
+    if (urlParams.checkOut) {
+      form.setValue('checkOut', urlParams.checkOut);
+    }
+  }, [urlParams, form]);
 
   // Mutation for submitting the form
   const mutation = useMutation({

@@ -1,0 +1,24 @@
+Warning: Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.
+    at BookingCalendar (https://3e64b24a-cd95-4d34-9afe-4aeae8651748-00-1cn4isihglxr0.spock.replit.dev/src/components/ui/booking-calendar.tsx:36:28)
+    at div
+    at div
+    at div
+    at div
+    at ApartmentDetail (https://3e64b24a-cd95-4d34-9afe-4aeae8651748-00-1cn4isihglxr0.spock.replit.dev/src/components/apartments/ApartmentDetail.tsx:29:28)
+    at div
+    at div
+    at div
+    at ApartmentTabs (https://3e64b24a-cd95-4d34-9afe-4aeae8651748-00-1cn4isihglxr0.spock.replit.dev/src/components/apartments/ApartmentTabs.tsx:33:26)
+    at div
+    at section
+    at Apartments (https://3e64b24a-cd95-4d34-9afe-4aeae8651748-00-1cn4isihglxr0.spock.replit.dev/src/pages/Apartments.tsx:26:17)
+    at Route (https://3e64b24a-cd95-4d34-9afe-4aeae8651748-00-1cn4isihglxr0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=08e1b2c8:323:16)
+    at Switch (https://3e64b24a-cd95-4d34-9afe-4aeae8651748-00-1cn4isihglxr0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=08e1b2c8:379:17)
+    at main
+    at div
+    at Router
+    at Provider (https://3e64b24a-cd95-4d34-9afe-4aeae8651748-00-1cn4isihglxr0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EIA3JL2W.js?v=08e1b2c8:42:15)
+    at TooltipProvider (https://3e64b24a-cd95-4d34-9afe-4aeae8651748-00-1cn4isihglxr0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=08e1b2c8:54:5)
+    at I18nextProvider (https://3e64b24a-cd95-4d34-9afe-4aeae8651748-00-1cn4isihglxr0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-i18next.js?v=08e1b2c8:781:3)
+    at QueryClientProvider (https://3e64b24a-cd95-4d34-9afe-4aeae8651748-00-1cn4isihglxr0.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=08e1b2c8:2805:3)
+    at App

@@ -27,9 +27,15 @@ interface BookingCalendarProps {
 }
 
 const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate }: BookingCalendarProps) => {
+  // Initialize dates from props only once on mount
   useEffect(() => {
-    console.log("initialStartDate", initialStartDate);
-    console.log("initialEndDate", initialEndDate);
+    if (initialStartDate) {
+      setSelectedStartDate(initialStartDate);
+    }
+    if (initialEndDate) {
+      setSelectedEndDate(initialEndDate);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Ensure required properties with defaults
@@ -48,8 +54,9 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
     }
     return new Date();
   });
-  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(initialStartDate || null);
-  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(initialEndDate || null);
+  // Use null as initial state for selected dates, we'll update them in useEffect
+  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
+  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
   const [hoverDate, setHoverDate] = useState<Date | null>(null);
   const [priceSummary, setPriceSummary] = useState<{
     totalNights: number;
@@ -184,39 +191,34 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
   // Calculate price summary when selection changes
   useEffect(() => {
     if (selectedStartDate && selectedEndDate) {
+      // Calculate the price summary
       const summary = calculateStayPrice(apartmentWithDefaults, selectedStartDate, selectedEndDate);
-      setPriceSummary({
+      
+      // Only update price summary if it's different from the current one
+      // to avoid unnecessary re-renders
+      const newPriceSummary = {
         totalNights: summary.totalNights,
         subtotal: summary.subtotal,
         cleaningFee: summary.cleaningFee,
         total: summary.total,
         averagePerNight: summary.averagePerNight
-      });
-    } else {
+      };
+      
+      // Deep comparison to avoid unnecessary updates
+      const shouldUpdate = !priceSummary || 
+        priceSummary.totalNights !== newPriceSummary.totalNights ||
+        priceSummary.subtotal !== newPriceSummary.subtotal ||
+        priceSummary.total !== newPriceSummary.total;
+      
+      if (shouldUpdate) {
+        setPriceSummary(newPriceSummary);
+      }
+    } else if (priceSummary !== null) {
       setPriceSummary(null);
     }
-  }, [selectedStartDate, selectedEndDate, apartment, apartmentWithDefaults]);
+  }, [selectedStartDate, selectedEndDate, apartment, apartmentWithDefaults, priceSummary]);
 
-  // Calculate initial price summary on component mount if dates are already provided
-  // and select the dates in the calendar
-  useEffect(() => {
-    if (initialStartDate && initialEndDate) {
-      // Set the selected dates in the calendar
-      setSelectedStartDate(initialStartDate);
-      setSelectedEndDate(initialEndDate);
-      
-      // Calculate price summary
-      const summary = calculateStayPrice(apartmentWithDefaults, initialStartDate, initialEndDate);
-      setPriceSummary({
-        totalNights: summary.totalNights,
-        subtotal: summary.subtotal,
-        cleaningFee: summary.cleaningFee,
-        total: summary.total,
-        averagePerNight: summary.averagePerNight
-      });
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialStartDate, initialEndDate, apartmentWithDefaults]);
+
 
   return (
     <div>

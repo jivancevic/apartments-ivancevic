@@ -34,6 +34,17 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
   const { toast } = useToast();
   const [location] = useLocation();
   
+  // Helper function to format dates consistently and avoid timezone issues
+  const formatDateForInput = (date: Date): string => {
+    return format(date, 'yyyy-MM-dd');
+  };
+  
+  // Helper function to parse dates from inputs without timezone issues
+  const parseDateFromInput = (dateStr: string): Date => {
+    const [year, month, day] = dateStr.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  };
+  
   // Use state to store URL parameters
   const [urlParams, setUrlParams] = useState<{
     apartmentId?: string;
@@ -61,9 +72,8 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
     const createLocalDate = (dateStr: string | null): Date => {
       if (!dateStr) return new Date();
       
-      // This ensures we create a date in the local timezone
-      const [year, month, day] = dateStr.split('-').map(Number);
-      return new Date(year, month - 1, day); // month is 0-indexed in JS Date
+      // Parse using our helper function to avoid timezone issues
+      return parseDateFromInput(dateStr);
     };
     
     // Update state with parsed parameters
@@ -95,17 +105,6 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
     message: t("validation.checkOut"),
     path: ["checkOut"]
   });
-
-  // Helper function to format dates consistently and avoid timezone issues
-  const formatDateForInput = (date: Date): string => {
-    return format(date, 'yyyy-MM-dd');
-  };
-  
-  // Helper function to parse dates from inputs without timezone issues
-  const parseDateFromInput = (dateStr: string): Date => {
-    const [year, month, day] = dateStr.split('-').map(Number);
-    return new Date(year, month - 1, day);
-  };
   
   // Initialize form with react-hook-form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -261,8 +260,8 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
                     <FormControl>
                       <Input 
                         type="date" 
-                        onChange={(e) => field.onChange(new Date(e.target.value))}
-                        value={field.value ? field.value.toISOString().split("T")[0] : ""}
+                        onChange={(e) => field.onChange(parseDateFromInput(e.target.value))}
+                        value={field.value ? formatDateForInput(field.value) : ""}
                       />
                     </FormControl>
                     <FormMessage />
@@ -279,8 +278,8 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
                     <FormControl>
                       <Input 
                         type="date" 
-                        onChange={(e) => field.onChange(new Date(e.target.value))}
-                        value={field.value ? field.value.toISOString().split("T")[0] : ""}
+                        onChange={(e) => field.onChange(parseDateFromInput(e.target.value))}
+                        value={field.value ? formatDateForInput(field.value) : ""}
                       />
                     </FormControl>
                     <FormMessage />

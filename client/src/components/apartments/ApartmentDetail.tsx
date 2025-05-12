@@ -11,7 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { AlertCircle, Star } from "lucide-react";
 import { useMemo, useState } from "react";
 import { getApartmentStars } from "./ApartmentTabs";
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 
 interface SelectedDates {
   checkIn?: Date;
@@ -26,6 +26,12 @@ interface ApartmentDetailProps {
 const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: ApartmentDetailProps) => {
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
+  
+  // Helper function to format dates consistently for URL parameters
+  const formatDateForUrl = (date: Date | undefined): string | null => {
+    if (!date) return null;
+    return format(date, 'yyyy-MM-dd');
+  };
   
   // Track selected dates internally to handle calendar selection
   const [currentSelectedDates, setCurrentSelectedDates] = useState<SelectedDates>(initialSelectedDates || {});
@@ -220,9 +226,9 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
         
         <Link 
           href={`/contact?apartmentId=${apartment.id}${
-            currentSelectedDates?.checkIn ? `&checkIn=${format(currentSelectedDates.checkIn, 'yyyy-MM-dd')}` : ''
+            currentSelectedDates?.checkIn ? `&checkIn=${formatDateForUrl(currentSelectedDates.checkIn)}` : ''
           }${
-            currentSelectedDates?.checkOut ? `&checkOut=${format(currentSelectedDates.checkOut, 'yyyy-MM-dd')}` : ''
+            currentSelectedDates?.checkOut ? `&checkOut=${formatDateForUrl(currentSelectedDates.checkOut)}` : ''
           }`}
           className="block w-full bg-primary hover:bg-blue-600 text-white text-center font-medium py-3 px-6 rounded-md transition-colors">
           {t("apartments.sendInquiry")}

@@ -149,7 +149,7 @@ const ApartmentDetail = ({ apartment, selectedDates }: ApartmentDetailProps) => 
         
         {/* Calendar with booking links */}
         <div className="mb-6">
-          <div className="flex justify-between items-center mb-3">
+          <div className="flex justify-between items-center mt-3 mb-3">
             <h4 className="font-heading font-semibold text-lg">
               {t("apartments.availability")}
             </h4>

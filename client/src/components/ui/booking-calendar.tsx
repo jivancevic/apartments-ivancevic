@@ -289,8 +289,8 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
           const inRange = isInSelectedRange(day);
           const isCurrentDay = isToday(day);
           
-          let bgColorClass = '';
-          let priceColorClass = '';
+          let bgColorClass = 'bg-white';
+          let priceColorClass = 'text-gray-700';
           
           if (isBooked) {
             bgColorClass = 'bg-red-100';
@@ -305,26 +305,6 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
           } else if (inRange) {
             bgColorClass = 'bg-primary-lighter';
             priceColorClass = 'text-primary-darker';
-          } else {
-            // Color based on season
-            switch(seasonType) {
-              case SeasonType.OUT_OF_SEASON:
-                bgColorClass = 'bg-blue-50';
-                priceColorClass = 'text-blue-700';
-                break;
-              case SeasonType.LOW_SEASON:
-                bgColorClass = 'bg-green-50';
-                priceColorClass = 'text-green-700';
-                break;
-              case SeasonType.HIGH_SEASON:
-                bgColorClass = 'bg-yellow-50';
-                priceColorClass = 'text-amber-700';
-                break;
-              case SeasonType.PEAK_SEASON:
-                bgColorClass = 'bg-orange-50';
-                priceColorClass = 'text-orange-700';
-                break;
-            }
           }
           
           return (
@@ -348,11 +328,25 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
                 </div>
               )}
               
-              <div className={`text-center font-medium ${isStart || isEnd ? 'mt-3' : ''}`}>
-                {format(day, 'd')}
-              </div>
-              <div className={`text-center ${priceColorClass} ${isBooked || isPast ? 'line-through' : ''}`}>
-                {!isBooked && !isPast && `€${price}`}
+              <div className="min-h-[36px] sm:min-h-[42px] relative flex flex-col justify-between">
+                {/* If we have check-in/out labels, they take the top space */}
+                {(!isStart && !isEnd) && (
+                  <div className="absolute top-0 left-0 text-xs font-medium">
+                    {format(day, 'd')}
+                  </div>
+                )}
+                
+                {/* For check-in/check-out days, we'll center the day number */}
+                {(isStart || isEnd) && (
+                  <div className="w-full text-center font-medium mt-3">
+                    {format(day, 'd')}
+                  </div>
+                )}
+                
+                {/* On wider screens we can show price in bottom left */}
+                <div className={`absolute bottom-0 left-0 text-[10px] ${priceColorClass} ${isBooked || isPast ? 'line-through' : ''}`}>
+                  {!isBooked && !isPast && !isStart && !isEnd && `€${price}`}
+                </div>
               </div>
             </div>
           );
@@ -369,20 +363,8 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
           {t("apartments.selected")}
         </div>
         <div className="flex items-center">
-          <span className="inline-block bg-blue-50 w-3 h-3 rounded-sm mr-1"></span> 
-          {getSeasonName(SeasonType.OUT_OF_SEASON)}
-        </div>
-        <div className="flex items-center">
-          <span className="inline-block bg-green-50 w-3 h-3 rounded-sm mr-1"></span> 
-          {getSeasonName(SeasonType.LOW_SEASON)}
-        </div>
-        <div className="flex items-center">
-          <span className="inline-block bg-yellow-50 w-3 h-3 rounded-sm mr-1"></span> 
-          {getSeasonName(SeasonType.HIGH_SEASON)}
-        </div>
-        <div className="flex items-center">
-          <span className="inline-block bg-orange-50 w-3 h-3 rounded-sm mr-1"></span> 
-          {getSeasonName(SeasonType.PEAK_SEASON)}
+          <span className="inline-block bg-primary-lighter w-3 h-3 rounded-sm mr-1"></span> 
+          {t("apartments.dateRange")}
         </div>
       </div>
       

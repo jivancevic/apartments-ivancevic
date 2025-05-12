@@ -36,6 +36,7 @@ const enTranslation = {
   "apartments.booked": "Booked",
   "apartments.available": "Available",
   "apartments.selected": "Selected",
+  "apartments.dateRange": "Date Range",
   "apartments.sendInquiry": "Send Inquiry",
   "apartments.calendarInstructions": "Click to select your check-in and check-out dates. See instant price calculation below.",
   "apartments.nights": "{{count}} night",

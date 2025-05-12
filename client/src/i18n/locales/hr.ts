@@ -41,6 +41,7 @@ const hrTranslation = {
   "apartments.booked": "Rezervirano",
   "apartments.available": "Dostupno",
   "apartments.selected": "Odabrano",
+  "apartments.dateRange": "Raspon datuma",
   "apartments.sendInquiry": "Pošaljite upit",
   "apartments.calendarInstructions": "Kliknite da odaberete datum dolaska i odlaska. Pogledajte trenutni izračun cijene ispod.",
   "apartments.nights": "{{count}} noćenje",

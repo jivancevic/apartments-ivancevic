@@ -28,7 +28,7 @@ interface ApartmentTabsProps {
 }
 
 // Helper function to get star rating for each apartment
-const getApartmentStars = (apartmentId: number): number => {
+export const getApartmentStars = (apartmentId: number): number => {
   // Magical Oasis (ID: 1), Nika (ID: 8), and Lara (ID: 9) have 3 stars, all others have 4
   return [1, 8, 9].includes(apartmentId) ? 3 : 4;
 };
@@ -183,11 +183,6 @@ const ApartmentTabs = ({ apartments }: ApartmentTabsProps) => {
               onClick={() => handleTabClick(apartment.id)}
             >
               <div className="flex flex-col items-center">
-                <div className="flex items-center mb-1 text-amber-500">
-                  {Array.from({ length: getApartmentStars(apartment.id) }).map((_, index) => (
-                    <Star key={index} size={12} fill="currentColor" className="mr-0.5" />
-                  ))}
-                </div>
                 {currentLanguage === "en" ? apartment.nameEn : apartment.nameHr}
               </div>
             </button>

@@ -8,8 +8,9 @@ import useLanguage from "@/hooks/useLanguage";
 import { useIcalFeeds } from "@/hooks/useIcalFeeds";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Star } from "lucide-react";
 import { useMemo } from "react";
+import { getApartmentStars } from "./ApartmentTabs";
 
 interface SelectedDates {
   checkIn?: Date;
@@ -59,6 +60,11 @@ const ApartmentDetail = ({ apartment, selectedDates }: ApartmentDetailProps) => 
       
       {/* Details */}
       <div>
+        <div className="flex items-center mb-2 text-amber-500">
+          {Array.from({ length: getApartmentStars(apartment.id) }).map((_, index) => (
+            <Star key={index} size={16} fill="currentColor" className="mr-0.5" />
+          ))}
+        </div>
         <h3 className="font-heading font-bold text-2xl mb-4">
           {currentLanguage === "en" ? apartment.nameEn : apartment.nameHr}
         </h3>

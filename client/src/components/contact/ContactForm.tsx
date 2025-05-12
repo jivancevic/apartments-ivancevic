@@ -206,7 +206,7 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
                     <FormLabel>{t("contact.form.apartment")}</FormLabel>
                     <Select 
                       onValueChange={field.onChange}
-                      defaultValue={field.value}
+                      value={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>

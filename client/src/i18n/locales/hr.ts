@@ -71,7 +71,7 @@ const hrTranslation = {
   "contact.title": "Kontaktirajte nas",
   "contact.inquiry.title": "Pošaljite upit",
   "contact.info.title": "Kontakt informacije",
-  "contact.form.name": "Puno ime*",
+  "contact.form.name": "Ime i prezime*",
   "contact.form.email": "Email*",
   "contact.form.phone": "Telefon",
   "contact.form.apartment": "Apartman*",

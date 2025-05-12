@@ -96,6 +96,17 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
     path: ["checkOut"]
   });
 
+  // Helper function to format dates consistently and avoid timezone issues
+  const formatDateForInput = (date: Date): string => {
+    return format(date, 'yyyy-MM-dd');
+  };
+  
+  // Helper function to parse dates from inputs without timezone issues
+  const parseDateFromInput = (dateStr: string): Date => {
+    const [year, month, day] = dateStr.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  };
+  
   // Initialize form with react-hook-form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

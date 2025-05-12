@@ -175,7 +175,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
       
+      // Save inquiry to storage
       const inquiry = await storage.createInquiry(result.data);
+      
+      // If apartment ID is provided, get apartment details
+      let apartment = undefined;
+      if (result.data.apartmentId) {
+        apartment = await storage.getApartment(result.data.apartmentId);
+      }
+      
+      // Send emails asynchronously (don't await)
+      try {
+        // Send notification to the property owner
+        sendOwnerNotification(result.data, apartment)
+          .then(success => {
+            if (!success) console.error('Failed to send owner notification email');
+          })
+          .catch(error => {
+            console.error('Error in owner notification email:', error);
+          });
+          
+        // Send confirmation to the customer
+        sendCustomerConfirmation(result.data, apartment)
+          .then(success => {
+            if (!success) console.error('Failed to send customer confirmation email');
+          })
+          .catch(error => {
+            console.error('Error in customer confirmation email:', error);
+          });
+      } catch (emailError) {
+        console.error('Error sending emails:', emailError);
+        // Continue processing - don't fail the API call if emails fail
+      }
+      
       res.status(201).json(inquiry);
     } catch (error) {
       res.status(500).json({ message: 'Error submitting inquiry' });

@@ -57,7 +57,7 @@ export async function sendOwnerNotification(
       to: OWNER_EMAIL,
       subject,
       html: content,
-      reply_to: inquiry.email,
+      replyTo: inquiry.email,
     });
     
     if (error) {
@@ -77,7 +77,7 @@ export async function sendOwnerNotification(
  * Send confirmation email to the customer
  */
 export async function sendCustomerConfirmation(
-  inquiry: InquiryFormData,
+  inquiry: InquiryData,
   apartment?: Apartment,
 ): Promise<boolean> {
   try {
@@ -118,7 +118,7 @@ export async function sendCustomerConfirmation(
       to: inquiry.email,
       subject,
       html: content,
-      reply_to: OWNER_EMAIL,
+      replyTo: OWNER_EMAIL,
     });
     
     if (error) {

@@ -331,7 +331,7 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
               <div className="min-h-[36px] sm:min-h-[42px] relative flex flex-col justify-between">
                 {/* If we have check-in/out labels, they take the top space */}
                 {(!isStart && !isEnd) && (
-                  <div className="absolute top-0 left-0 text-xs font-medium">
+                  <div className="absolute top-0 left-1 text-xs font-medium">
                     {format(day, 'd')}
                   </div>
                 )}
@@ -344,7 +344,7 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
                 )}
                 
                 {/* On wider screens we can show price in bottom left */}
-                <div className={`absolute bottom-0 left-0 text-[10px] ${priceColorClass} ${isBooked || isPast ? 'line-through' : ''}`}>
+                <div className={`absolute bottom-0 left-1 text-[10px] ${priceColorClass} ${isBooked || isPast ? 'line-through' : ''}`}>
                   {!isBooked && !isPast && !isStart && !isEnd && `€${price}`}
                 </div>
               </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "wouter";
 import { Apartment } from "@/types";
 import ApartmentDetail from "./ApartmentDetail";
 import useLanguage from "@/hooks/useLanguage";
@@ -24,12 +25,76 @@ interface SelectedDates {
 
 interface ApartmentTabsProps {
   apartments: Apartment[];
-  selectedDates?: SelectedDates;
 }
 
-const ApartmentTabs = ({ apartments, selectedDates }: ApartmentTabsProps) => {
+const ApartmentTabs = ({ apartments }: ApartmentTabsProps) => {
   const { t } = useTranslation();
   const { currentLanguage } = useLanguage();
+  const [location] = useLocation();
+  
+  // Extract and parse date parameters from the URL
+  const [selectedDates, setSelectedDates] = useState<SelectedDates>({});
+  
+  // Parse date parameters from URL when location changes
+  useEffect(() => {
+    // Extract query parameters
+    const params = new URLSearchParams(location.split("?")[1] || "");
+    const checkInParam = params.get("checkIn");
+    const checkOutParam = params.get("checkOut");
+    
+    // Parse check-in date if available
+    const checkIn = checkInParam ? (() => {
+      try {
+        // Check if the format is already YYYY-MM-DD (no time component)
+        if (checkInParam.length === 10) {
+          // Make sure the date is set to midnight in local timezone for consistency
+          const date = new Date(checkInParam + 'T00:00:00');
+          if (isNaN(date.getTime())) {
+            console.error('Invalid check-in date format in URL:', checkInParam);
+            return undefined;
+          }
+          return date;
+        }
+        const date = new Date(checkInParam);
+        if (isNaN(date.getTime())) {
+          console.error('Invalid check-in date format in URL:', checkInParam);
+          return undefined;
+        }
+        return date;
+      } catch (e) {
+        console.error('Error parsing check-in date:', e);
+        return undefined;
+      }
+    })() : undefined;
+    
+    // Parse check-out date if available
+    const checkOut = checkOutParam ? (() => {
+      try {
+        // Check if the format is already YYYY-MM-DD (no time component)
+        if (checkOutParam.length === 10) {
+          // Make sure the date is set to midnight in local timezone for consistency
+          const date = new Date(checkOutParam + 'T00:00:00');
+          if (isNaN(date.getTime())) {
+            console.error('Invalid check-out date format in URL:', checkOutParam);
+            return undefined;
+          }
+          return date;
+        }
+        const date = new Date(checkOutParam);
+        if (isNaN(date.getTime())) {
+          console.error('Invalid check-out date format in URL:', checkOutParam);
+          return undefined;
+        }
+        return date;
+      } catch (e) {
+        console.error('Error parsing check-out date:', e);
+        return undefined;
+      }
+    })() : undefined;
+    
+    // Update selected dates
+    setSelectedDates({ checkIn, checkOut });
+  }, [location]);
   
   // Default to first apartment if none is specified in the URL
   const [activeTab, setActiveTab] = useState<number>(apartments[0]?.id || 0);

@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { insertInquirySchema } from "@shared/schema";
 import fetch from "node-fetch";
 import ical from 'ical';
+import { sendOwnerNotification, sendCustomerConfirmation } from './email';
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API routes with /api prefix

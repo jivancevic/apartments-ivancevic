@@ -149,19 +149,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Submit an inquiry
   app.post('/api/inquiries', async (req: Request, res: Response) => {
     try {
-      // Parse dates from strings to Date objects
-      if (typeof req.body.checkIn === 'string') {
-        req.body.checkIn = new Date(req.body.checkIn);
+      // Clone the request body to avoid modifying the original
+      const data = { ...req.body };
+      
+      // Parse dates from strings to Date objects if they're strings
+      if (typeof data.checkIn === 'string') {
+        data.checkIn = new Date(data.checkIn);
       }
       
-      if (typeof req.body.checkOut === 'string') {
-        req.body.checkOut = new Date(req.body.checkOut);
+      if (typeof data.checkOut === 'string') {
+        data.checkOut = new Date(data.checkOut);
       }
+      
+      console.log('Parsed inquiry data:', JSON.stringify(data, null, 2));
       
       // Validate request body
-      const result = insertInquirySchema.safeParse(req.body);
+      const result = insertInquirySchema.safeParse(data);
       
       if (!result.success) {
+        console.error('Validation errors:', JSON.stringify(result.error.errors, null, 2));
         return res.status(400).json({ 
           message: 'Invalid inquiry data',
           errors: result.error.errors 

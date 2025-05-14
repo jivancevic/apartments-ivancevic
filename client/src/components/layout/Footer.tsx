@@ -104,12 +104,9 @@ const Footer = () => {
         <div className="mt-10 pt-6 border-t border-blue-400 text-center text-sm">
           <p>{t("footer.copyright")}</p>
           <div className="mt-2 flex justify-center space-x-4">
-            <a href="#" className="hover:underline">
-              {t("footer.privacy")}
-            </a>
-            <a href="#" className="hover:underline">
-              {t("footer.terms")}
-            </a>
+            <Link href="/privacy-policy" className="hover:underline">
+              {t("footer.privacy", "Privacy Policy")}
+            </Link>
           </div>
         </div>
       </div>

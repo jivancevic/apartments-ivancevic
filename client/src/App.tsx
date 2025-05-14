@@ -13,6 +13,7 @@ import About from "@/pages/About";
 import Visit from "@/pages/Visit";
 import Contact from "@/pages/Contact";
 import Search from "@/pages/Search";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import NotFound from "@/pages/not-found";
 
 // Layout
@@ -31,6 +32,7 @@ function Router() {
           <Route path="/visit" component={Visit} />
           <Route path="/contact" component={Contact} />
           <Route path="/search" component={Search} />
+          <Route path="/privacy-policy" component={PrivacyPolicy} />
           <Route component={NotFound} />
         </Switch>
       </main>

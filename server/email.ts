@@ -18,8 +18,8 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Constants for email configuration
 const OWNER_EMAIL = 'josip.ivancevic00@gmail.com';
-const FROM_EMAIL = 'no-reply@apartmani-ivancevic.com';
-const BRAND_NAME = 'Apartmani Ivančević';
+const FROM_EMAIL = 'no-reply@apartments.josip-ivancevic.from.hr';
+const BRAND_NAME = 'Apartments Ivančević';
 
 /**
  * Format a date for email display
@@ -37,7 +37,7 @@ export async function sendOwnerNotification(
 ): Promise<boolean> {
   try {
     // Create email content
-    const subject = `New Inquiry: ${inquiry.name} (${formatDate(inquiry.checkIn)} - ${formatDate(inquiry.checkOut)})`;
+    const subject = `New Inquiry: ${inquiry.name} (${apartment ? `${apartment.nameEn}, ` : ''}${formatDate(inquiry.checkIn)} - ${formatDate(inquiry.checkOut)})`;
     
     const content = `
       <h1>New Apartment Inquiry</h1>
@@ -104,8 +104,7 @@ export async function sendCustomerConfirmation(
          <p><em>"${inquiry.message}"</em></p>` 
         : ''}
       
-      <p>If you have any further questions, please feel free to reply 
-         to this email or contact us directly at ${OWNER_EMAIL}.
+      <p>If you have any further questions, please feel free to contact us directly at ${OWNER_EMAIL}.
       </p>
       
       <p>Best regards,<br>

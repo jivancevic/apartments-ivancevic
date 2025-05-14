@@ -306,6 +306,18 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
               )}
             />
             
+            <div className="text-sm text-gray-500 mb-4 text-center">
+              {t("contact.form.privacyNotice", "By submitting, you agree to our ")}
+              <a 
+                href="/privacy-policy" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-primary hover:underline"
+              >
+                {t("contact.form.privacyLink", "Privacy Policy")}
+              </a>.
+            </div>
+            
             <div className="text-center">
               <Button 
                 type="submit" 

@@ -1,0 +1,90 @@
+**Privacy Policy**
+
+*Last updated: May 2025*
+
+Welcome to the website of Apartmani Ivančević ("we", "us", or "our"). We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website or contact us.
+
+---
+
+### 1. **Information We Collect**
+
+We collect the following information when you use our website:
+
+#### a) **Information You Provide Directly**
+
+* **Contact form data**: Name, email, phone number (optional), number of guests, check-in and check-out dates, message content.
+
+#### b) **Automatically Collected Information**
+
+* **Cookies** for session management and user preferences.
+* **Website analytics** (e.g., Google Analytics) for anonymous visitor behavior tracking.
+* **iCal calendar data** to show booking availability by syncing with Airbnb and Booking.com.
+
+---
+
+### 2. **How We Use Your Information**
+
+We use your information for the following purposes:
+
+* To respond to your inquiries and booking requests.
+* To show up-to-date availability via integrated calendars.
+* To improve user experience and optimize website performance.
+* To send confirmation emails regarding your inquiry.
+
+---
+
+### 3. **Who We Share Data With**
+
+We do **not** sell or share your personal data with third parties, except:
+
+* **Email services** (e.g., SMTP provider) used to deliver messages.
+* **Analytics providers** to understand how visitors use our site.
+
+---
+
+### 4. **Cookies**
+
+Our site uses cookies to:
+
+* Save your preferences (e.g., language selection).
+* Improve performance and analytics.
+* Enable interactive features like the calendar.
+
+You can disable cookies in your browser settings.
+
+---
+
+### 5. **Your Rights**
+
+If you are an EU/EEA resident, you have rights under GDPR including:
+
+* Access, correction, or deletion of your personal data.
+* Objection to processing.
+* Data portability.
+
+To exercise these rights, please contact us via the form on the Contact page.
+
+---
+
+### 6. **Data Security**
+
+We implement standard security measures (HTTPS, data access controls) to protect your information. However, no method of transmission is 100% secure.
+
+---
+
+### 7. **Third-Party Links**
+
+Our website links to external booking platforms (e.g., Airbnb, Booking.com). We are not responsible for their privacy practices.
+
+---
+
+### 8. **Contact Us**
+
+If you have any questions about this Privacy Policy, please contact us at:
+
+**Email:** [josip.ivancevic00@gmail.com](mailto:josip.ivancevic00@gmail.com)
+**Phone:** \[Your listed phone number if applicable]
+
+---
+
+We may update this policy occasionally. The latest version will always be available on this page.

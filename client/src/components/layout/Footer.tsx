@@ -58,8 +58,8 @@ const Footer = () => {
               </h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="mailto:info@korcula.bz" className="hover:underline">
-                    info@korcula.bz
+                  <a href="mailto:info@apartmentsivancevic.com" className="hover:underline">
+                    info@apartmentsivancevic.com
                   </a>
                 </li>
                 <li>
@@ -69,35 +69,6 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-
-            <div>
-              <h4 className="font-heading font-semibold text-lg mb-4">
-                {t("footer.followUs")}
-              </h4>
-              <div className="flex space-x-4">
-                <a
-                  href="#"
-                  className="hover:text-white hover:opacity-75 transition-opacity"
-                  aria-label="Facebook"
-                >
-                  <Facebook className="h-6 w-6" />
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-white hover:opacity-75 transition-opacity"
-                  aria-label="Instagram"
-                >
-                  <Instagram className="h-6 w-6" />
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-white hover:opacity-75 transition-opacity"
-                  aria-label="Location on map"
-                >
-                  <MapPin className="h-6 w-6" />
-                </a>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -106,6 +77,9 @@ const Footer = () => {
           <div className="mt-2 flex justify-center space-x-4">
             <Link href="/privacy-policy" className="hover:underline">
               {t("footer.privacy", "Privacy Policy")}
+            </Link>
+            <Link href="/terms-of-service" className="hover:underline">
+              {t("footer.terms", "Terms of Service")}
             </Link>
           </div>
         </div>

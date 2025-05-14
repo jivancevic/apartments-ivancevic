@@ -1,10 +1,17 @@
 import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet";
 
 const PrivacyPolicy = () => {
   const { t } = useTranslation();
 
   return (
     <section className="py-12 md:py-16">
+      <Helmet>
+        <title>Privacy Policy | Apartments Ivančević</title>
+        <meta name="description" content="Privacy Policy for Apartments Ivančević - Family vacation apartments in Korčula, Croatia" />
+        <meta name="robots" content="index, follow" />
+      </Helmet>
+      
       <div className="container mx-auto px-4 max-w-4xl">
         <h1 className="font-heading font-bold text-3xl md:text-4xl text-center mb-8">
           {t("privacy.title", "Privacy Policy")}

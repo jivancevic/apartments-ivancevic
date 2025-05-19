@@ -130,10 +130,47 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
             </div>
           )}
           
-          {apartment.hasParking && (
+          {/* Parking section with different types and tooltip */}
+          {apartment.parkingType !== "none" && (
             <div className="flex items-center">
-              <AmenityIcon icon="parking" className="text-primary mr-2" />
-              <span>{t("amenities.parking")}</span>
+              {apartment.parkingType === "free" ? (
+                <>
+                  <AmenityIcon icon="parking" className="text-primary mr-2" />
+                  <span>{t("amenities.freeParking", "Free parking")}</span>
+                </>
+              ) : apartment.parkingType === "private" && apartment.parkingDetails ? (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger className="flex items-center hover:text-primary transition-colors">
+                      <AmenityIcon icon="parking" className="text-primary mr-2" />
+                      <span>{t("amenities.privateParking", "Private parking")}</span>
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-xs">
+                      <p>
+                        {t("amenities.parkingTooltip", 
+                          `Private parking is possible on site (${
+                            apartment.parkingDetails.reservationRequired 
+                              ? "reservation is required" 
+                              : "reservation is not needed"
+                          }) and costs €${apartment.parkingDetails.pricePerDay} per day.`
+                        )}
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              ) : (
+                <>
+                  <AmenityIcon icon="parking" className="text-primary mr-2" />
+                  <span>{t("amenities.privateParking", "Private parking")}</span>
+                </>
+              )}
+            </div>
+          )}
+          
+          {apartment.parkingType === "none" && (
+            <div className="flex items-center">
+              <Ban size={18} className="text-red-500 mr-2" />
+              <span>{t("amenities.noParking", "No parking")}</span>
             </div>
           )}
           

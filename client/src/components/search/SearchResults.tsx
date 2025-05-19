@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { Bed, Wifi, Wind, Tv, Mountain, Car, Palmtree, Users, Mail } from "lucide-react";
+import { Bed, Wifi, Wind, Tv, Mountain, Car, Palmtree, Users, Mail, Ban, ParkingSquare } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -331,10 +331,22 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
                         {t("amenities.seaView")}
                       </Badge>
                     )}
-                    {apartment.hasParking && (
+                    {apartment.parkingType === "free" && (
                       <Badge variant="outline" className="flex items-center gap-1">
                         <Car className="h-3 w-3" />
-                        {t("amenities.parking")}
+                        {t("amenities.freeParking", "Free parking")}
+                      </Badge>
+                    )}
+                    {apartment.parkingType === "private" && (
+                      <Badge variant="outline" className="flex items-center gap-1">
+                        <ParkingSquare className="h-3 w-3" />
+                        {t("amenities.privateParking", "Private parking")}
+                      </Badge>
+                    )}
+                    {apartment.parkingType === "none" && (
+                      <Badge variant="outline" className="flex items-center gap-1 text-red-500 border-red-200">
+                        <Ban className="h-3 w-3" />
+                        {t("amenities.noParking", "No parking")}
                       </Badge>
                     )}
                     {apartment.hasGarden && (

@@ -195,7 +195,11 @@ export class MemStorage implements IStorage {
         hasTV: true,
         hasBalcony: true,
         hasSeaView: true,
-        hasParking: true,
+        parkingType: "private",
+        parkingDetails: {
+          pricePerDay: 11,
+          reservationRequired: false
+        },
         hasGarden: false,
         otherAmenities: []
       },
@@ -236,7 +240,8 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         hasTV: true,
         hasBalcony: false,
         hasSeaView: false,
-        hasParking: true,
+        parkingType: "free",
+        parkingDetails: null,
         hasGarden: true,
         otherAmenities: ["Patio Furniture"]
       },
@@ -277,7 +282,8 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         hasTV: true,
         hasBalcony: true,
         hasSeaView: false,
-        hasParking: true,
+        parkingType: "free",
+        parkingDetails: null,
         hasGarden: false,
         otherAmenities: []
       },

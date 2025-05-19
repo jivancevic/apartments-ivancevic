@@ -63,25 +63,6 @@ const ContactInfo = () => {
           </div>
         </div>
       </div>
-      
-      {/* Map - Using a static image instead of iframe to avoid MutationObserver error */}
-      <div className="relative h-80 bg-neutral rounded-lg overflow-hidden">
-        <div className="w-full h-full flex items-center justify-center">
-          <div className="text-center p-4">
-            <MapPin className="h-10 w-10 mx-auto mb-2 text-primary" />
-            <h3 className="font-semibold text-lg">Ul. Ante Starčevića 1, 20260 Korčula</h3>
-            <p className="text-gray-600">Located in the center of Korčula, Croatia</p>
-            <a 
-              href="https://goo.gl/maps/ykn1MNnhgQVGTVjb7" 
-              target="_blank"
-              rel="noopener noreferrer" 
-              className="inline-block mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-blue-600 transition-colors"
-            >
-              {t("contact.info.viewMap")}
-            </a>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

@@ -17,8 +17,8 @@ interface InquiryData {
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Constants for email configuration
-const OWNER_EMAIL = 'josip.ivancevic00@gmail.com';
-const FROM_EMAIL = 'no-reply@apartments.josip-ivancevic.from.hr';
+const OWNER_EMAIL = 'info@apartmentsivancevic.com';
+const FROM_EMAIL = 'no-reply@email.apartmentsivancevic.com';
 const BRAND_NAME = 'Apartments Ivančević';
 
 /**

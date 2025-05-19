@@ -8,10 +8,11 @@ import useLanguage from "@/hooks/useLanguage";
 import { useIcalFeeds } from "@/hooks/useIcalFeeds";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
-import { AlertCircle, Star } from "lucide-react";
+import { AlertCircle, Ban, Car, Star } from "lucide-react";
 import { useMemo, useState } from "react";
 import { getApartmentStars } from "./ApartmentTabs";
 import { format, parse } from 'date-fns';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface SelectedDates {
   checkIn?: Date;

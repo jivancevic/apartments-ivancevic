@@ -182,7 +182,8 @@ export class MemStorage implements IStorage {
         airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
         icalUrls: [
           "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e21284eed9fbea95b5d2dcc398220",
-          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd24cd0dbd2911faab332fcfd90"
+          "https://ical.booking.com/v1/export?t=2b421589-cfe4-42ba-9800-94a8a7ffd436"
+          
         ],
         basePeakPrice: 110,
         priceMultiplier: "1.90",
@@ -264,8 +265,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d414.28494504583205!2d17.13522756990842!3d42.96152961092943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a6c1cbb5f%3A0x2849d1dc0357a5b5!2sUl.%20Ismaelli%205%2C%2020260%2C%20Kor%C4%8Dula%2C%20Croatia!5e1!3m2!1sen!2sit!4v1746768250275!5m2!1sen!2sit",
         airbnbUrl: "airbnb.com/h/korcula-old-town-palace-sunset-flat",
         icalUrls: [
-          "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e212eed9fbea95b5d2dcc398220",
-          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7ddcd0dbd2911faab332fcfd90"
+          "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd24cd0dbd2911faab332fcfd90"
         ],
         basePeakPrice: 110,
         priceMultiplier: "4.00",
@@ -311,7 +311,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/lavander/wc2.webp",
           "/images/apartments/lavander/wc3.webp"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.55254234976!2d17.132241975471526!3d42.95820129710443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e1!3m2!1sen!2sit!4v1746808352324!5m2!1sen!2sit",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d188.2796402065861!2d17.13455596084784!3d42.95820684655463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2sit!4v1747665668512!5m2!1sen!2sit",
         bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
         airbnbUrl: "https://airbnb.com/h/apartments-viva-lavander",
         icalUrls: [
@@ -350,7 +350,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/sun/view3.webp",
           "/images/apartments/sun/wc.webp"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.55254234976!2d17.132241975471526!3d42.95820129710443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e1!3m2!1sen!2sit!4v1746808352324!5m2!1sen!2sit",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d188.2796402065861!2d17.13455596084784!3d42.95820684655463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2sit!4v1747665668512!5m2!1sen!2sit",
         bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
         airbnbUrl: "https://airbnb.com/h/apartments-viva-sun",
         icalUrls: [
@@ -382,7 +382,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/sea/wc.webp",
           "/images/apartments/sea/whole.webp"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.55254234976!2d17.132241975471526!3d42.95820129710443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e1!3m2!1sen!2sit!4v1746808352324!5m2!1sen!2sit",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d188.2796402065861!2d17.13455596084784!3d42.95820684655463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2sit!4v1747665668512!5m2!1sen!2sit",
         bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
         airbnbUrl: "https://airbnb.com/h/apartments-viva-sea",
         icalUrls: [
@@ -415,7 +415,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/beach/exterior.webp",
           "/images/apartments/beach/location.webp"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.55254234976!2d17.132241975471526!3d42.95820129710443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e1!3m2!1sen!2sit!4v1746808352324!5m2!1sen!2sit",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5500.1!2d17.13455596084784!3d42.95520684655463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2shr!4v1747665668512!5m2!1sen!2shr",
         bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
         airbnbUrl: "https://airbnb.com/h/apartments-viva-beach",
         icalUrls: [
@@ -452,7 +452,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/nika/room1.webp",
           "/images/apartments/nika/balcony.webp"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2543.4167420755093!2d17.127484875471605!3d42.961486396894585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a516bb56b95d3%3A0x2758c0e472e4450c!2sApartments%20Giuliani!5e1!3m2!1sen!2sit!4v1746801360640!5m2!1sen!2sit",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2919.7969843822066!2d17.12748487563004!3d42.96148247114323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a516bb56b95d3%3A0x2758c0e472e4450c!2sApartments%20Giuliani!5e0!3m2!1sen!2sit!4v1747665846634!5m2!1sen!2sit",
         bookingUrl: "https://www.booking.com/hotel/hr/apartmani-lara-i-nika.html",
         airbnbUrl: "https://airbnb.com/h/apartmani-giuliani-nika",
         icalUrls: [
@@ -491,7 +491,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/lara/view.webp",
           "/images/apartments/lara/wc.webp"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d431.82557484831614!2d17.136164208098933!3d42.96223239916531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartmani%20Ivan%C4%8Devi%C4%87!5e0!3m2!1sen!2sit!4v1746459813494!5m2!1sen!2sit",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2919.7969843822066!2d17.12748487563004!3d42.96148247114323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a516bb56b95d3%3A0x2758c0e472e4450c!2sApartments%20Giuliani!5e0!3m2!1sen!2sit!4v1747665846634!5m2!1sen!2sit",
         bookingUrl: "https://www.booking.com/hotel/hr/apartmani-lara-i-nika.html",
         airbnbUrl: "https://airbnb.com/h/apartmani-giuliani-lara",
         icalUrls: [

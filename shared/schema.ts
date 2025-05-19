@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, date, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, date, timestamp, jsonb } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -23,7 +23,8 @@ export const apartments = pgTable("apartments", {
   hasTV: boolean("has_tv").notNull().default(true),
   hasBalcony: boolean("has_balcony").notNull().default(false),
   hasSeaView: boolean("has_sea_view").notNull().default(false),
-  hasParking: boolean("has_parking").notNull().default(true),
+  parkingType: text("parking_type").notNull().default("free"),
+  parkingDetails: jsonb("parking_details"),
   hasGarden: boolean("has_garden").notNull().default(false),
   otherAmenities: text("other_amenities").array(),
   icalUrls: text("ical_urls").array(),

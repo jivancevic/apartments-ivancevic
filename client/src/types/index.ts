@@ -21,7 +21,11 @@ export interface Apartment {
   hasTV: boolean;
   hasBalcony: boolean;
   hasSeaView: boolean;
-  hasParking: boolean;
+  parkingType: "none" | "free" | "private";
+  parkingDetails?: {
+    pricePerDay: number;
+    reservationRequired: boolean;
+  };
   hasGarden: boolean;
   otherAmenities: string[] | null;
   // Booking links

@@ -254,12 +254,12 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         </div>
       </div>
 
-      {/* Image Modal/Lightbox with Animations */}
-      <div 
-        className={`gallery-modal fixed inset-0 z-[9999] bg-black/90 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300 ease-in-out ${
+      {/* Full screen modal overlay - covers everything including header */}
+      <div
+        className={`fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300 ease-in-out ${
           showModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
-        style={{ isolation: 'isolate', padding: '2rem' }}
+        style={{ isolation: 'isolate' }}
         onClick={handleModalBackdropClick}
         tabIndex={0}
         aria-modal="true"
@@ -272,7 +272,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
             e.stopPropagation(); e.preventDefault(); handlePrevious();
           }}
           onMouseDown={(e) => e.preventDefault()}
-          className="fixed left-0 top-[var(--header-height)] h-[calc(100vh-var(--header-height))] w-24 flex items-center justify-start pl-6 bg-gradient-to-r from-black/30 to-transparent hover:from-black/50 text-white z-[10000]"
+          className="fixed left-0 top-0 bottom-0 w-24 flex items-center justify-start pl-6 bg-gradient-to-r from-black/30 to-transparent hover:from-black/50 text-white z-[10000]"
           aria-label="Previous image"
         >
           <ChevronLeft className="h-12 w-12" />
@@ -284,7 +284,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
             e.stopPropagation(); e.preventDefault(); handleNext();
           }}
           onMouseDown={(e) => e.preventDefault()}
-          className="fixed right-0 top-[var(--header-height)] h-[calc(100vh-var(--header-height))] w-24 flex items-center justify-end pr-6 bg-gradient-to-l from-black/30 to-transparent hover:from-black/50 text-white z-[10000]"
+          className="fixed right-0 top-0 bottom-0 w-24 flex items-center justify-end pr-6 bg-gradient-to-l from-black/30 to-transparent hover:from-black/50 text-white z-[10000]"
           aria-label="Next image"
         >
           <ChevronRight className="h-12 w-12" />

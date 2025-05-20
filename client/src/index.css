@@ -95,7 +95,6 @@
 .gallery-modal img,
 .gallery-modal div {
   z-index: 10000 !important;
-  position: relative;
 }
 
 /* When modal is open, hide all iframes to avoid z-index issues */

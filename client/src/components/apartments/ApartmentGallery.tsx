@@ -60,23 +60,42 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
     };
   }, [showModal, currentImageIndex]);
 
-  // Listen for escape key to close modal and arrow keys for navigation in modal view
+  // Lock body scroll when modal is open
   useEffect(() => {
-    const handleModalKeyDown = (event: KeyboardEvent) => {
-      if (showModal) {
+    if (showModal) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      
+      // Add styles to prevent scrolling
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      
+      // Listen for escape key to close modal and arrow keys for navigation
+      const handleModalKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'Escape') {
           setShowModal(false);
         } else if (event.key === 'ArrowLeft') {
+          event.preventDefault(); // Prevent scrolling
           handlePrevious();
         } else if (event.key === 'ArrowRight') {
+          event.preventDefault(); // Prevent scrolling
           handleNext();
         }
-      }
-    };
-
-    if (showModal) {
+      };
+      
       window.addEventListener('keydown', handleModalKeyDown);
+      
       return () => {
+        // Restore scrolling when modal closes
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, scrollY);
+        
+        // Remove listener
         window.removeEventListener('keydown', handleModalKeyDown);
       };
     }
@@ -86,13 +105,21 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
     setCurrentImageIndex(index);
   };
 
-  const handlePrevious = () => {
+  const handlePrevious = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setCurrentImageIndex((prevIndex) => 
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   };
 
-  const handleNext = () => {
+  const handleNext = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setCurrentImageIndex((prevIndex) => 
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
@@ -149,7 +176,8 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         
         {/* Navigation Arrows */}
         <button 
-          onClick={handlePrevious}
+          onClick={(e) => handlePrevious(e)}
+          onMouseDown={(e) => e.preventDefault()}
           className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white/90 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity"
           aria-label="Previous image"
         >
@@ -157,7 +185,8 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         </button>
         
         <button 
-          onClick={handleNext}
+          onClick={(e) => handleNext(e)}
+          onMouseDown={(e) => e.preventDefault()}
           className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white/90 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity"
           aria-label="Next image"
         >
@@ -201,7 +230,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
 
       {/* Image Modal/Lightbox with Animations */}
       <div 
-        className={`gallery-modal fixed inset-0 bg-black/80 z-50 flex items-center justify-center transition-opacity duration-300 ease-in-out ${
+        className={`gallery-modal fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center transition-opacity duration-300 ease-in-out ${
           showModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         onClick={handleModalBackdropClick}
@@ -214,9 +243,11 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         <button 
           onClick={(e) => {
             e.stopPropagation();
+            e.preventDefault();
             handlePrevious();
           }}
-          className="fixed left-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-3 transition-all z-50 shadow-lg"
+          onMouseDown={(e) => e.preventDefault()}
+          className="fixed left-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-3 transition-all z-[9999] shadow-lg"
           aria-label="Previous image"
         >
           <ChevronLeft className="h-8 w-8" />
@@ -226,19 +257,28 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         <button 
           onClick={(e) => {
             e.stopPropagation();
+            e.preventDefault();
             handleNext();
           }}
-          className="fixed right-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-3 transition-all z-50 shadow-lg"
+          onMouseDown={(e) => e.preventDefault()}
+          className="fixed right-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-3 transition-all z-[9999] shadow-lg"
           aria-label="Next image"
         >
           <ChevronRight className="h-8 w-8" />
         </button>
         
-        <div className={`relative max-w-[90vw] max-h-[90vh] transition-transform duration-300 ${
-          showModal ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
-        }`}>
+        <div 
+          className={`relative max-w-[90vw] max-h-[90vh] transition-transform duration-300 ${
+            showModal ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+          }`}
+          onClick={(e) => e.stopPropagation()}
+        >
           <button
-            onClick={closeModal}
+            onClick={(e) => {
+              e.preventDefault();
+              closeModal();
+            }}
+            onMouseDown={(e) => e.preventDefault()}
             className="absolute top-2 right-2 bg-black/60 hover:bg-black/80 text-white rounded-full p-2 transition-all z-10"
             aria-label="Close modal"
           >
@@ -248,7 +288,8 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
           <img
             src={currentImage}
             alt="Large view"
-            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-xl"
+            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-xl select-none"
+            onDragStart={(e) => e.preventDefault()}
           />
           
           {/* Image Counter */}

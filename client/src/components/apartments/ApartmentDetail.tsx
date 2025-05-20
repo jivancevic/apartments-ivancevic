@@ -167,13 +167,6 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
             </div>
           )}
           
-          {apartment.parkingType === "none" && (
-            <div className="flex items-center">
-              <Ban size={18} className="text-red-500 mr-2" />
-              <span>{t("amenities.noParking", "No parking")}</span>
-            </div>
-          )}
-          
           {apartment.hasGarden && (
             <div className="flex items-center">
               <AmenityIcon icon="tree" className="text-primary mr-2" />

@@ -60,46 +60,63 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
     };
   }, [showModal, currentImageIndex]);
 
-  // Lock body scroll when modal is open
+  // Handle modal open/close
   useEffect(() => {
     if (showModal) {
-      // Save current scroll position
-      const scrollY = window.scrollY;
-      
-      // Add styles to prevent scrolling
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
-      
-      // Listen for escape key to close modal and arrow keys for navigation
+      // Function to prevent default for arrow keys only
       const handleModalKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'Escape') {
           setShowModal(false);
         } else if (event.key === 'ArrowLeft') {
-          event.preventDefault(); // Prevent scrolling
+          // Only prevent default for arrow keys
+          event.preventDefault();
           handlePrevious();
         } else if (event.key === 'ArrowRight') {
-          event.preventDefault(); // Prevent scrolling
+          // Only prevent default for arrow keys
+          event.preventDefault();
           handleNext();
         }
       };
       
+      // Add the keydown event listener 
       window.addEventListener('keydown', handleModalKeyDown);
       
       return () => {
-        // Restore scrolling when modal closes
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflow = '';
-        window.scrollTo(0, scrollY);
-        
         // Remove listener
         window.removeEventListener('keydown', handleModalKeyDown);
       };
     }
   }, [showModal, currentImageIndex]);
+  
+  // Create a modal overlay when the modal is shown
+  useEffect(() => {
+    if (showModal) {
+      // Create a modal overlay using regular DOM
+      // This ensures it appears over maps and calendars
+      const modalRoot = document.createElement('div');
+      modalRoot.id = 'gallery-modal-root';
+      modalRoot.style.position = 'fixed';
+      modalRoot.style.top = '0';
+      modalRoot.style.left = '0';
+      modalRoot.style.right = '0';
+      modalRoot.style.bottom = '0';
+      modalRoot.style.zIndex = '9998';
+      
+      // Use transparent background so we don't add another dark layer
+      modalRoot.style.background = 'transparent'; 
+      modalRoot.style.pointerEvents = 'none'; // Don't block clicks
+      
+      document.body.appendChild(modalRoot);
+      
+      return () => {
+        // Clean up when component unmounts
+        const root = document.getElementById('gallery-modal-root');
+        if (root && root.parentNode) {
+          root.parentNode.removeChild(root);
+        }
+      };
+    }
+  }, [showModal]);
 
   const handleThumbnailClick = (index: number) => {
     setCurrentImageIndex(index);
@@ -230,7 +247,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
 
       {/* Image Modal/Lightbox with Animations */}
       <div 
-        className={`gallery-modal fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center transition-opacity duration-300 ease-in-out ${
+        className={`gallery-modal fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-300 ease-in-out ${
           showModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         onClick={handleModalBackdropClick}

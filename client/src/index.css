@@ -81,3 +81,26 @@
   background: #a0a0a0;
 }
 
+/* Gallery modal overrides */
+.gallery-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  z-index: 9999 !important;
+}
+
+/* Make gallery elements appear on top of everything */
+.gallery-modal button,
+.gallery-modal img,
+.gallery-modal div {
+  z-index: 10000 !important;
+}
+
+/* Force map and calendar components to stay behind the modal */
+.leaflet-container, 
+.react-datepicker-wrapper,
+.react-datepicker-popper,
+.react-datepicker {
+  z-index: 50 !important;
+}
+

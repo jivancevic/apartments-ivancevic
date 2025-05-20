@@ -256,22 +256,17 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
 
       {/* Image Modal/Lightbox with Animations */}
       <div 
-        className={`gallery-modal fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center transition-opacity duration-300 ease-in-out ${
+        className={`gallery-modal fixed inset-0 top-[var(--header-height)] z-[9999] bg-black/90 flex items-center justify-center transition-opacity duration-300 ease-in-out ${
           showModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
-        style={{ 
-          isolation: 'isolate', 
-          paddingTop: 'calc(var(--header-height) + 2rem)',
-          paddingBottom: '2rem',
-          height: '100vh'
-        }}
+        style={{ height: 'calc(100vh - var(--header-height))' }}
         onClick={handleModalBackdropClick}
         tabIndex={0}
         aria-modal="true"
         role="dialog"
         aria-label="Image gallery"
       >
-        {/* Left Arrow - Fixed at left edge */}
+        {/* Left Arrow */}
         <button 
           onClick={(e) => {
             e.stopPropagation();
@@ -279,13 +274,13 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
             handlePrevious();
           }}
           onMouseDown={(e) => e.preventDefault()}
-          className="fixed left-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-3 transition-all z-[9999] shadow-lg"
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-3 transition-all z-[9999] shadow-lg"
           aria-label="Previous image"
         >
           <ChevronLeft className="h-8 w-8" />
         </button>
         
-        {/* Right Arrow - Fixed at right edge */}
+        {/* Right Arrow */}
         <button 
           onClick={(e) => {
             e.stopPropagation();
@@ -293,18 +288,20 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
             handleNext();
           }}
           onMouseDown={(e) => e.preventDefault()}
-          className="fixed right-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-3 transition-all z-[9999] shadow-lg"
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-3 transition-all z-[9999] shadow-lg"
           aria-label="Next image"
         >
           <ChevronRight className="h-8 w-8" />
         </button>
         
+        {/* Main Image Container */}
         <div 
-          className={`relative max-w-[90vw] max-h-[calc(100vh-var(--header-height)-2rem)] transition-transform duration-300 ${
+          className={`relative w-auto h-auto max-w-[90vw] max-h-[calc(100vh-var(--header-height)-2rem)] transition-transform duration-300 ${
             showModal ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
           }`}
           onClick={(e) => e.stopPropagation()}
         >
+          {/* Close button */}
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -317,42 +314,17 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
             <X className="h-6 w-6" />
           </button>
           
+          {/* Main image */}
           <img
             src={currentImage}
             alt="Large view"
-            className="max-w-full max-h-[calc(100vh-var(--header-height)-4rem)] object-contain rounded-lg shadow-xl select-none"
+            className="max-w-full max-h-[calc(100vh-var(--header-height)-2rem)] object-contain rounded-lg shadow-xl select-none"
             onDragStart={(e) => e.preventDefault()}
           />
           
           {/* Image Counter */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/60 text-white text-sm px-3 py-1 rounded-full z-10">
             {currentImageIndex + 1} / {images.length}
-          </div>
-        </div>
-
-        {/* Modal Thumbnails */}
-        <div className="mt-4 max-w-[90vw] w-full overflow-x-auto hide-scrollbar px-2">
-          <div className="flex items-center justify-center gap-2 pb-2">
-            {images.map((img, idx) => (
-              <div 
-                key={`modal-thumb-${idx}`}
-                className={`flex-none h-16 w-16 sm:h-20 sm:w-20 bg-black cursor-pointer rounded overflow-hidden transition-all duration-200 ${
-                  idx === currentImageIndex 
-                    ? 'border-2 border-primary scale-105 shadow-lg' 
-                    : 'opacity-70 hover:opacity-100'
-                }`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentImageIndex(idx);
-                }}
-              >
-                <img 
-                  src={img} 
-                  alt={`Thumbnail ${idx + 1}`} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
           </div>
         </div>
       </div>

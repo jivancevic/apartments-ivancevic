@@ -81,12 +81,13 @@
   background: #a0a0a0;
 }
 
-/* Gallery modal overrides */
+/* Ensure modal is always on top */
 .gallery-modal {
   position: fixed !important;
   inset: 0 !important;
   background-color: rgba(0, 0, 0, 0.9) !important;
   z-index: 9999 !important;
+  isolation: isolate !important;
 }
 
 /* Make gallery elements appear on top of everything */
@@ -94,6 +95,7 @@
 .gallery-modal img,
 .gallery-modal div {
   z-index: 10000 !important;
+  position: relative;
 }
 
 /* When modal is open, hide all iframes to avoid z-index issues */
@@ -107,7 +109,10 @@ body.modal-open .booking-calendar-wrapper {
   z-index: 0 !important;
 }
 
-/* Optional: hide react-datepicker components too if needed */
+/* When modal is open, force map and calendar behind modal */
+body.modal-open iframe,
+body.modal-open .leaflet-container,
+body.modal-open .booking-calendar-wrapper,
 body.modal-open .react-datepicker,
 body.modal-open .react-datepicker-popper,
 body.modal-open .react-datepicker-wrapper {
@@ -115,11 +120,10 @@ body.modal-open .react-datepicker-wrapper {
   z-index: 0 !important;
 }
 
-/* Force map and calendar components to stay behind the modal */
-.leaflet-container, 
-.react-datepicker-wrapper,
+/* When modal is closed, allow normal stacking */
+.leaflet-container,
+.react-datepicker,
 .react-datepicker-popper,
-.react-datepicker {
+.react-datepicker-wrapper {
   z-index: 50 !important;
 }
-

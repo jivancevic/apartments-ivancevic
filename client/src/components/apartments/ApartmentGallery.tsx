@@ -256,7 +256,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
 
       {/* Image Modal/Lightbox with Animations */}
       <div 
-        className={`gallery-modal fixed inset-0 top-[var(--header-height)] z-[9999] bg-black/90 flex items-center justify-center transition-opacity duration-300 ease-in-out ${
+        className={`gallery-modal fixed inset-0 top-[var(--header-height)] z-[9999] bg-black/90 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300 ease-in-out ${
           showModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         style={{ height: 'calc(100vh - var(--header-height))' }}
@@ -274,10 +274,10 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
             handlePrevious();
           }}
           onMouseDown={(e) => e.preventDefault()}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-3 transition-all z-[9999] shadow-lg"
+          className="absolute left-0 top-0 bottom-0 w-20 flex items-center justify-center text-white opacity-60 hover:opacity-100 hover:bg-black/20 transition-all z-[9999]"
           aria-label="Previous image"
         >
-          <ChevronLeft className="h-8 w-8" />
+          <ChevronLeft className="h-12 w-12" />
         </button>
         
         {/* Right Arrow */}
@@ -288,10 +288,10 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
             handleNext();
           }}
           onMouseDown={(e) => e.preventDefault()}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-3 transition-all z-[9999] shadow-lg"
+          className="absolute right-0 top-0 bottom-0 w-20 flex items-center justify-center text-white opacity-60 hover:opacity-100 hover:bg-black/20 transition-all z-[9999]"
           aria-label="Next image"
         >
-          <ChevronRight className="h-8 w-8" />
+          <ChevronRight className="h-12 w-12" />
         </button>
         
         {/* Main Image Container */}

@@ -96,6 +96,25 @@
   z-index: 10000 !important;
 }
 
+/* When modal is open, hide all iframes to avoid z-index issues */
+body.modal-open iframe {
+  visibility: hidden !important;
+}
+
+/* Push calendar behind the modal when modal is open */
+body.modal-open .booking-calendar-wrapper {
+  visibility: hidden !important;
+  z-index: 0 !important;
+}
+
+/* Optional: hide react-datepicker components too if needed */
+body.modal-open .react-datepicker,
+body.modal-open .react-datepicker-popper,
+body.modal-open .react-datepicker-wrapper {
+  visibility: hidden !important;
+  z-index: 0 !important;
+}
+
 /* Force map and calendar components to stay behind the modal */
 .leaflet-container, 
 .react-datepicker-wrapper,

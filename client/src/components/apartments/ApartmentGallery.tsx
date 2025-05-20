@@ -118,6 +118,15 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
     }
   }, [showModal]);
 
+  useEffect(() => {
+    const body = document.body;
+    if (showModal) {
+      body.classList.add("modal-open");
+    } else {
+      body.classList.remove("modal-open");
+    }
+  }, [showModal]);
+
   const handleThumbnailClick = (index: number) => {
     setCurrentImageIndex(index);
   };
@@ -247,9 +256,10 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
 
       {/* Image Modal/Lightbox with Animations */}
       <div 
-        className={`gallery-modal fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-300 ease-in-out ${
+        className={`gallery-modal fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-start justify-center transition-opacity duration-300 ease-in-out ${
           showModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
+        style={{ isolation: 'isolate', paddingTop: 'var(--header-height)' }}
         onClick={handleModalBackdropClick}
         tabIndex={0}
         aria-modal="true"
@@ -285,7 +295,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         </button>
         
         <div 
-          className={`relative max-w-[90vw] max-h-[90vh] transition-transform duration-300 ${
+          className={`relative max-w-[90vw] max-h-[calc(100vh-var(--header-height)-2rem)] transition-transform duration-300 ${
             showModal ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
           }`}
           onClick={(e) => e.stopPropagation()}
@@ -305,7 +315,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
           <img
             src={currentImage}
             alt="Large view"
-            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-xl select-none"
+            className="max-w-full max-h-[calc(100vh-var(--header-height)-4rem)] object-contain rounded-lg shadow-xl select-none"
             onDragStart={(e) => e.preventDefault()}
           />
           

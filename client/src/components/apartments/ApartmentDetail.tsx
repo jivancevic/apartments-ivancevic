@@ -179,13 +179,14 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
         <h4 className="font-heading font-semibold text-lg mb-3">
           {t("apartments.location")}
         </h4>
-        <div className="relative h-80 bg-neutral rounded-lg overflow-hidden">
+        <div className="relative h-80 bg-neutral rounded-lg overflow-hidden z-0">
           <iframe
             title="Apartmani Ivančević Location"
+            className="w-full h-full pointer-events-none z-0"
+            style={{ zIndex: 0, position: 'relative', border: 0 }}
             src={`${apartment.location}`}
             width="100%"
             height="100%"
-            style={{ border: 0 }}
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -238,19 +239,20 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
                   <span>Error loading external calendars: {icalError}</span>
                 </div>
               )}
-              
-              <BookingCalendar 
-                bookings={allBookings} 
-                apartment={apartment} 
-                initialStartDate={initialSelectedDates?.checkIn}
-                initialEndDate={initialSelectedDates?.checkOut}
-                onDatesChange={(startDate, endDate) => {
-                  setCurrentSelectedDates({
-                    checkIn: startDate || undefined,
-                    checkOut: endDate || undefined
-                  });
-                }}
-              />
+              <div className="booking-calendar-wrapper">
+                <BookingCalendar 
+                  bookings={allBookings} 
+                  apartment={apartment} 
+                  initialStartDate={initialSelectedDates?.checkIn}
+                  initialEndDate={initialSelectedDates?.checkOut}
+                  onDatesChange={(startDate, endDate) => {
+                    setCurrentSelectedDates({
+                      checkIn: startDate || undefined,
+                      checkOut: endDate || undefined
+                    });
+                  }}
+                />
+              </div>
             </div>
           )}
         </div>

@@ -85,8 +85,8 @@
 .gallery-modal {
   position: fixed !important;
   inset: 0 !important;
-  background-color: rgba(0, 0, 0, 0.9) !important;
-  z-index: 9999 !important;
+  background-color: rgba(0, 0, 0, 0.95) !important;
+  z-index: 99999 !important;
   isolation: isolate !important;
 }
 
@@ -94,7 +94,12 @@
 .gallery-modal button,
 .gallery-modal img,
 .gallery-modal div {
-  z-index: 10000 !important;
+  z-index: 100000 !important;
+}
+
+/* Force header to stay behind modal */
+header, .header, nav, .nav {
+  z-index: 999 !important;
 }
 
 /* When modal is open, hide all iframes to avoid z-index issues */

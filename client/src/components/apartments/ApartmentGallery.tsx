@@ -256,39 +256,35 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
 
       {/* Image Modal/Lightbox with Animations */}
       <div 
-        className={`gallery-modal fixed inset-0 top-[var(--header-height)] z-[9999] bg-black/90 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300 ease-in-out ${
+        className={`gallery-modal fixed inset-0 z-[9999] bg-black/90 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300 ease-in-out ${
           showModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
-        style={{ height: 'calc(100vh - var(--header-height))' }}
+        style={{ isolation: 'isolate', padding: '2rem' }}
         onClick={handleModalBackdropClick}
         tabIndex={0}
         aria-modal="true"
         role="dialog"
         aria-label="Image gallery"
       >
-        {/* Left Arrow */}
+        {/* Left Arrow - at the left edge of the screen */}
         <button 
           onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            handlePrevious();
+            e.stopPropagation(); e.preventDefault(); handlePrevious();
           }}
           onMouseDown={(e) => e.preventDefault()}
-          className="absolute left-0 top-0 bottom-0 w-20 flex items-center justify-center text-white opacity-60 hover:opacity-100 hover:bg-black/20 transition-all z-[9999]"
+          className="fixed left-0 top-[var(--header-height)] h-[calc(100vh-var(--header-height))] w-24 flex items-center justify-start pl-6 bg-gradient-to-r from-black/30 to-transparent hover:from-black/50 text-white z-[10000]"
           aria-label="Previous image"
         >
           <ChevronLeft className="h-12 w-12" />
         </button>
         
-        {/* Right Arrow */}
+        {/* Right Arrow - at the right edge of the screen */}
         <button 
           onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            handleNext();
+            e.stopPropagation(); e.preventDefault(); handleNext();
           }}
           onMouseDown={(e) => e.preventDefault()}
-          className="absolute right-0 top-0 bottom-0 w-20 flex items-center justify-center text-white opacity-60 hover:opacity-100 hover:bg-black/20 transition-all z-[9999]"
+          className="fixed right-0 top-[var(--header-height)] h-[calc(100vh-var(--header-height))] w-24 flex items-center justify-end pr-6 bg-gradient-to-l from-black/30 to-transparent hover:from-black/50 text-white z-[10000]"
           aria-label="Next image"
         >
           <ChevronRight className="h-12 w-12" />
@@ -296,7 +292,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         
         {/* Main Image Container */}
         <div 
-          className={`relative w-auto h-auto max-w-[90vw] max-h-[calc(100vh-var(--header-height)-2rem)] transition-transform duration-300 ${
+          className={`relative w-auto h-auto max-w-[90vw] max-h-[90vh] transition-transform duration-300 ${
             showModal ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
           }`}
           onClick={(e) => e.stopPropagation()}

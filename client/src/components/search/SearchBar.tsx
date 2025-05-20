@@ -20,107 +20,112 @@ interface SearchBarProps {
   onSearch?: (checkIn: Date, checkOut: Date, guests: number) => void;
 }
 
-const SearchBar = ({ 
-  className = "", 
+const SearchBar = ({
+  className = "",
   initialCheckIn,
   initialCheckOut,
   initialGuests,
-  onSearch
+  onSearch,
 }: SearchBarProps) => {
   const { t } = useTranslation();
   const [location, setLocation] = useLocation();
-  
+
   // Default to current date and a week later
   const today = new Date();
   const nextWeek = addDays(today, 7);
-  
+
   const [checkIn, setCheckIn] = useState<Date>(initialCheckIn || today);
   const [checkOut, setCheckOut] = useState<Date>(initialCheckOut || nextWeek);
-  const [guests, setGuests] = useState<string>(initialGuests?.toString() || "2");
-  
+  const [guests, setGuests] = useState<string>(
+    initialGuests?.toString() || "2",
+  );
+
   // Update the form when URL parameters change
   useEffect(() => {
     // Only update if initialValues are provided (from URL parameters)
     if (initialCheckIn) {
       setCheckIn(initialCheckIn);
     }
-    
+
     if (initialCheckOut) {
       setCheckOut(initialCheckOut);
     }
-    
+
     if (initialGuests) {
       setGuests(initialGuests.toString());
     }
   }, [initialCheckIn, initialCheckOut, initialGuests]);
-  
+
   const handleSearch = () => {
     if (!checkIn || !checkOut) return;
-    
+
     // Use custom handler if provided (for direct search page use)
     if (onSearch) {
       onSearch(checkIn, checkOut, parseInt(guests));
       return;
     }
-    
+
     // Otherwise use default navigation behavior
     // Format dates for cleaner URLs (YYYY-MM-DD)
-    const formattedCheckIn = checkIn.toISOString().split('T')[0];
-    const formattedCheckOut = checkOut.toISOString().split('T')[0];
-    
+    const formattedCheckIn = checkIn.toISOString().split("T")[0];
+    const formattedCheckOut = checkOut.toISOString().split("T")[0];
+
     // Navigate to search results with query parameters
     const searchParams = new URLSearchParams({
       checkIn: formattedCheckIn,
       checkOut: formattedCheckOut,
-      guests: guests
+      guests: guests,
     });
-    
+
     setLocation(`/search?${searchParams.toString()}`);
   };
-  
+
   // State for date range selector
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [selectingCheckIn, setSelectingCheckIn] = useState(true);
   const popoverRef = useRef<HTMLDivElement>(null);
-  
+
   // Close the popover when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (popoverRef.current && !popoverRef.current.contains(event.target as Node)) {
+      if (
+        popoverRef.current &&
+        !popoverRef.current.contains(event.target as Node)
+      ) {
         setIsCalendarOpen(false);
       }
     };
-    
+
     const handleEscKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         setIsCalendarOpen(false);
       }
     };
 
     if (isCalendarOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('keydown', handleEscKey);
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleEscKey);
     }
-    
+
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleEscKey);
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscKey);
     };
   }, [isCalendarOpen]);
-  
+
   // Handler for date selection
   const handleDateSelect = (date: Date | undefined) => {
     if (!date) return;
-    
+
     if (selectingCheckIn) {
       // If selecting check-in date
       setCheckIn(date);
-      
+
       // If selected date is after current check-out, reset check-out
       if (checkOut && isAfter(date, checkOut)) {
         setCheckOut(addDays(date, 1));
       }
-      
+
       // Switch to selecting check-out
       setSelectingCheckIn(false);
     } else {
@@ -141,71 +146,87 @@ const SearchBar = ({
       }
     }
   };
-  
+
   // Date modifiers for highlighting the range
   const isDayInRange = (day: Date) => {
     if (!checkIn || !checkOut) return false;
     return (
-      (isAfter(day, checkIn) || isSameDay(day, checkIn)) && 
+      (isAfter(day, checkIn) || isSameDay(day, checkIn)) &&
       (isBefore(day, checkOut) || isSameDay(day, checkOut))
     );
   };
 
   const isStartDate = (day: Date) => checkIn && isSameDay(day, checkIn);
   const isEndDate = (day: Date) => checkOut && isSameDay(day, checkOut);
-  
+
   // Open calendar and set mode
   const openCheckInCalendar = () => {
     setSelectingCheckIn(true);
     setIsCalendarOpen(true);
   };
-  
+
   const openCheckOutCalendar = () => {
     setSelectingCheckIn(false);
     setIsCalendarOpen(true);
   };
 
   return (
-    <div className={`bg-white border rounded-lg shadow-md p-3 overflow-hidden ${className}`}>
+    <div
+      className={`bg-white border rounded-lg shadow-md p-3 overflow-hidden ${className}`}
+    >
       {/* Responsive layout with reduced paddings and tighter spacing */}
       <div className="flex flex-col lg:flex-row gap-2 lg:items-center w-full">
         {/* Date range selection (unified) - modified for better space usage */}
         <div className="flex flex-col lg:flex-row flex-1 gap-2 min-w-0">
           {/* Check-in date button - reduced padding */}
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             className="flex-1 justify-start text-left font-normal h-11 overflow-hidden whitespace-nowrap px-2 min-w-0"
             onClick={openCheckInCalendar}
           >
             <CalendarIcon className="mr-1 h-4 w-4 flex-shrink-0" />
             <div className="flex flex-col items-start overflow-hidden min-w-0">
-              <span className="text-xs text-muted-foreground w-full truncate">{t("search.checkIn")}</span>
-              <span className="w-full truncate">{checkIn ? format(checkIn, "MMM d, yyyy") : t("search.selectDate")}</span>
+              <span className="text-xs text-muted-foreground w-full truncate">
+                {t("search.checkIn")}
+              </span>
+              <span className="w-full truncate">
+                {checkIn
+                  ? format(checkIn, "MMM d, yyyy")
+                  : t("search.selectDate")}
+              </span>
             </div>
           </Button>
-          
+
           {/* Check-out date button - reduced padding */}
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             className="flex-1 justify-start text-left font-normal h-11 overflow-hidden whitespace-nowrap px-2 min-w-0"
             onClick={openCheckOutCalendar}
           >
             <CalendarIcon className="mr-1 h-4 w-4 flex-shrink-0" />
             <div className="flex flex-col items-start overflow-hidden min-w-0">
-              <span className="text-xs text-muted-foreground w-full truncate">{t("search.checkOut")}</span>
-              <span className="w-full truncate">{checkOut ? format(checkOut, "MMM d, yyyy") : t("search.selectDate")}</span>
+              <span className="text-xs text-muted-foreground w-full truncate">
+                {t("search.checkOut")}
+              </span>
+              <span className="w-full truncate">
+                {checkOut
+                  ? format(checkOut, "MMM d, yyyy")
+                  : t("search.selectDate")}
+              </span>
             </div>
           </Button>
         </div>
-        
+
         {/* Guests selection - more compact */}
         <div className="lg:w-24 flex-shrink-0">
           <div className="border rounded-md h-11 flex flex-col justify-center">
-            <div className="px-2 py-0.5">
-              <span className="text-xs text-muted-foreground">{t("search.guests")}</span>
+            <div className="px-2 pt-0.5">
+              <span className="text-xs text-muted-foreground">
+                {t("search.guests")}
+              </span>
             </div>
-            <div className="flex items-center justify-between px-2 pb-1">
-              <button 
+            <div className="flex items-center justify-between px-2 pb-1.5">
+              <button
                 type="button"
                 className="group"
                 onClick={() => {
@@ -217,15 +238,17 @@ const SearchBar = ({
                 disabled={parseInt(guests) <= 1}
                 aria-label={t("search.decreaseGuests")}
               >
-                <span className="text-lg font-medium flex items-center justify-center h-5 w-5 rounded-full group-hover:bg-primary group-hover:text-white group-disabled:opacity-50 transition-colors">-</span>
+                <span className="text-lg font-medium flex items-center justify-center h-5 w-5 rounded-full group-hover:bg-primary group-hover:text-white group-disabled:opacity-50 transition-colors">
+                  -
+                </span>
               </button>
-              
+
               <div className="flex items-center gap-1 justify-center">
                 <Users className="h-3 w-3 text-gray-500" />
                 <span className="text-sm">{guests}</span>
               </div>
-              
-              <button 
+
+              <button
                 type="button"
                 className="group"
                 onClick={() => {
@@ -237,16 +260,18 @@ const SearchBar = ({
                 disabled={parseInt(guests) >= 6}
                 aria-label={t("search.increaseGuests")}
               >
-                <span className="text-lg font-medium flex items-center justify-center h-5 w-5 rounded-full group-hover:bg-primary group-hover:text-white group-disabled:opacity-50 transition-colors">+</span>
+                <span className="text-lg font-medium flex items-center justify-center h-5 w-5 rounded-full group-hover:bg-primary group-hover:text-white group-disabled:opacity-50 transition-colors">
+                  +
+                </span>
               </button>
             </div>
           </div>
         </div>
-        
+
         {/* Search button - more compact */}
         <div className="flex-shrink-0">
-          <Button 
-            type="button" 
+          <Button
+            type="button"
             onClick={handleSearch}
             className="bg-primary hover:bg-primary/90 text-white h-11 w-full text-sm px-3"
           >
@@ -254,18 +279,20 @@ const SearchBar = ({
           </Button>
         </div>
       </div>
-      
+
       {/* Unified Calendar Popover */}
       {isCalendarOpen && (
-        <div 
+        <div
           className="absolute z-50 mt-2 bg-white rounded-lg shadow-lg p-3 border"
           ref={popoverRef}
         >
           <div className="mb-2 flex justify-between items-center">
             <h3 className="font-medium">
-              {selectingCheckIn ? t("search.selectCheckIn") : t("search.selectCheckOut")}
+              {selectingCheckIn
+                ? t("search.selectCheckIn")
+                : t("search.selectCheckOut")}
             </h3>
-            <button 
+            <button
               onClick={() => setIsCalendarOpen(false)}
               className="text-gray-400 hover:text-gray-600"
             >
@@ -280,12 +307,13 @@ const SearchBar = ({
             modifiers={{
               range: isDayInRange,
               start: isStartDate,
-              end: isEndDate
+              end: isEndDate,
             }}
             modifiersClassNames={{
               range: "bg-primary/20",
-              start: "bg-primary text-white font-bold border-2 border-primary rounded-l-md",
-              end: "bg-primary text-white font-bold border-2 border-primary rounded-r-md"
+              start:
+                "bg-primary text-white font-bold border-2 border-primary rounded-l-md",
+              end: "bg-primary text-white font-bold border-2 border-primary rounded-r-md",
             }}
             initialFocus
           />

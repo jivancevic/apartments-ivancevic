@@ -256,10 +256,15 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
 
       {/* Image Modal/Lightbox with Animations */}
       <div 
-        className={`gallery-modal fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-start justify-center transition-opacity duration-300 ease-in-out ${
+        className={`gallery-modal fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center transition-opacity duration-300 ease-in-out ${
           showModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
-        style={{ isolation: 'isolate', paddingTop: 'var(--header-height)' }}
+        style={{ 
+          isolation: 'isolate', 
+          paddingTop: 'calc(var(--header-height) + 2rem)',
+          paddingBottom: '2rem',
+          height: '100vh'
+        }}
         onClick={handleModalBackdropClick}
         tabIndex={0}
         aria-modal="true"
@@ -322,6 +327,32 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
           {/* Image Counter */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/60 text-white text-sm px-3 py-1 rounded-full z-10">
             {currentImageIndex + 1} / {images.length}
+          </div>
+        </div>
+
+        {/* Modal Thumbnails */}
+        <div className="mt-4 max-w-[90vw] w-full overflow-x-auto hide-scrollbar px-2">
+          <div className="flex items-center justify-center gap-2 pb-2">
+            {images.map((img, idx) => (
+              <div 
+                key={`modal-thumb-${idx}`}
+                className={`flex-none h-16 w-16 sm:h-20 sm:w-20 bg-black cursor-pointer rounded overflow-hidden transition-all duration-200 ${
+                  idx === currentImageIndex 
+                    ? 'border-2 border-primary scale-105 shadow-lg' 
+                    : 'opacity-70 hover:opacity-100'
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentImageIndex(idx);
+                }}
+              >
+                <img 
+                  src={img} 
+                  alt={`Thumbnail ${idx + 1}`} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>

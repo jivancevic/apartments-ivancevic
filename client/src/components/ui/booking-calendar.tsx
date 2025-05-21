@@ -36,6 +36,7 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
     if (initialEndDate) {
       setSelectedEndDate(initialEndDate);
     }
+    console.log("Current date on client:", new Date());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -314,13 +315,14 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
           let priceColorClass = 'text-gray-700';
           // Position-based styling for range effect
           let positionClass = '';
-          
-          if (isBooked) {
-            bgColorClass = 'bg-red-100';
-            priceColorClass = 'text-red-500';
-          } else if (isPast) {
+
+          if (isPast) {
             bgColorClass = 'bg-gray-100';
             priceColorClass = 'text-gray-400';
+          }
+          else if (isBooked) {
+            bgColorClass = 'bg-red-100';
+            priceColorClass = 'text-red-500';
           } else if (isStart) {
             // Start date styling with rounded left
             bgColorClass = 'bg-primary border-2 border-primary';

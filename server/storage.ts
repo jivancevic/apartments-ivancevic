@@ -174,8 +174,8 @@ export class MemStorage implements IStorage {
         hasKitchen: true,
         hasAC: true,
         hasTV: true,
-        hasBalcony: true,
-        hasSeaView: true,
+        hasBalcony: false,
+        hasSeaView: false,
         parkingType: "none",
         parkingDetails: null,
         hasGarden: false,
@@ -221,7 +221,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         hasSeaView: false,
         parkingType: "none",
         parkingDetails: null,
-        hasGarden: true,
+        hasGarden: false,
         otherAmenities: ["Patio Furniture"]
       },
       {
@@ -260,7 +260,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         hasAC: true,
         hasTV: true,
         hasBalcony: true,
-        hasSeaView: false,
+        hasSeaView: true,
         parkingType: "none",
         parkingDetails: null,
         hasGarden: false,
@@ -303,14 +303,14 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         hasAC: true,
         hasTV: true,
         hasBalcony: true,
-        hasSeaView: true,
+        hasSeaView: false,
         parkingType: "private",
         parkingDetails: {
           pricePerDay: 8,
           reservationRequired: true
         },
         hasGarden: false,
-        otherAmenities: ["Beach Towels", "Board Games"]
+        otherAmenities: []
       },
       {
         nameEn: "Sun",
@@ -342,7 +342,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         hasKitchen: true,
         hasAC: true,
         hasTV: true,
-        hasBalcony: false,
+        hasBalcony: true,
         hasSeaView: false,
         parkingType: "private",
         parkingDetails: {
@@ -378,14 +378,14 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         hasAC: true,
         hasTV: true,
         hasBalcony: true,
-        hasSeaView: true,
+        hasSeaView: false,
         parkingType: "private",
         parkingDetails: {
           pricePerDay: 8,
           reservationRequired: true
         },
-        hasGarden: true,
-        otherAmenities: ["Premium Furniture", "Coffee Machine", "Smart Home System"]
+        hasGarden: false,
+        otherAmenities: []
       },
       {
         nameEn: "Beach",
@@ -412,14 +412,14 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         hasKitchen: true,
         hasAC: true,
         hasTV: true,
-        hasBalcony: true,
-        hasSeaView: true,
+        hasBalcony: false,
+        hasSeaView: false,
         parkingType: "private",
         parkingDetails: {
           pricePerDay: 8,
           reservationRequired: true
         },
-        hasGarden: false,
+        hasGarden: true,
         otherAmenities: []
       },
       {
@@ -491,7 +491,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         parkingType: "free",
         parkingDetails: null,
         hasGarden: false,
-        otherAmenities: ["Outdoor Dining Area"]
+        otherAmenities: []
       }
     ];
     

@@ -182,7 +182,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
         <div className="relative h-80 bg-neutral rounded-lg overflow-hidden z-0">
           <iframe
             title="Apartmani Ivančević Location"
-            className="w-full h-full pointer-events-none z-0"
+            className="w-full h-full z-0"
             style={{ zIndex: 0, position: 'relative', border: 0 }}
             src={`${apartment.location}`}
             width="100%"

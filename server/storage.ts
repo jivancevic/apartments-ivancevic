@@ -158,7 +158,7 @@ export class MemStorage implements IStorage {
           "/images/apartments/magical-oasis/window-view.webp",
           "/images/apartments/magical-oasis/view.webp"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.35815949195765!2d17.13583210884043!3d42.96238425612054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a517549e08c53%3A0x20f6b511dabd88db!2sMagical%20Oasis%20for%20two%20in%20Korcula%20Old%20Town!5e0!3m2!1sen!2shr!4v1745508164244!5m2!1sen!2shr",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1400!2d17.13583210884043!3d42.96238425612054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a517549e08c53%3A0x20f6b511dabd88db!2sMagical%20Oasis%20for%20two%20in%20Korcula%20Old%20Town!5e0!3m2!1sen!2shr!4v1745508164244!5m2!1sen!2shr",
         bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
         airbnbUrl: "https://airbnb.com/h/magical-oasis-for-two-in-old-town-korcula",
         icalUrls: [
@@ -202,7 +202,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/saint-roko/street.webp",
           "/images/apartments/saint-roko/location.webp"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d403.7613683333374!2d17.135865071753455!3d42.96278344428222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5091a8dfba33%3A0x5f8d82eebee50fa0!2sApartment%20st%20Roko!5e0!3m2!1sen!2shr!4v1745508323704!5m2!1sen!2shr",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1200!2d17.130864458988793!3d42.9616473522362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartment%20St.%20Roko!5e0!3m2!1sen!2shr!4v1747837157249!5m2!1sen!2shr",
         bookingUrl: "https://www.booking.com/hotel/hr/old-town-st-roko.html",
         airbnbUrl: "https://airbnb.com/h/old-town-st-roko-apartment",
         icalUrls: [
@@ -246,7 +246,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/ismaelli/street.webp",
           "/images/apartments/ismaelli/yard.webp"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d414.28494504583205!2d17.13522756990842!3d42.96152961092943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a6c1cbb5f%3A0x2849d1dc0357a5b5!2sUl.%20Ismaelli%205%2C%2020260%2C%20Kor%C4%8Dula%2C%20Croatia!5e1!3m2!1sen!2sit!4v1746768250275!5m2!1sen!2sit",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1200!2d17.13522756990842!3d42.96152961092943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a6c1cbb5f%3A0x2849d1dc0357a5b5!2sUl.%20Ismaelli%205%2C%2020260%2C%20Kor%C4%8Dula%2C%20Croatia!5e1!3m2!1sen!2shr!4v1746768250275!5m2!1sen!2shr",
         airbnbUrl: "airbnb.com/h/korcula-old-town-palace-sunset-flat",
         icalUrls: [
           "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd24cd0dbd2911faab332fcfd90"
@@ -267,35 +267,35 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         otherAmenities: []
       },
       {
-        nameEn: "Lavander",
+        nameEn: "Lavender",
         nameHr: "Lavanda",
-        descriptionEn: "Spacious, air-conditioned, 4 stars apartment for 5 people (+ sofa): 1 double, 1 twin/double room, 1 single, 2 bathrooms, living room, kitchen, balcony. Equipped with SAT/TV, DVD, washing machine, 2 air-conditioning units and other things.",
-        descriptionHr: "Prostrani, klimatizirani apartman s 4 zvjezdice za 5 osoba (+ kauč): 1 bračna soba, 1 soba s odvojenim ili bračnim krevetom, 1 jednokrevetna soba, 2 kupaonice, dnevni boravak, kuhinja, balkon. Opremljen satelitskom TV, DVD uređajem, perilicom rublja, dvjema klima jedinicama i ostalom opremom.",
+        descriptionEn: "Apartment Lavender welcomes you with a blend of modern comfort and Mediterranean charm. This top-floor, three-bedroom retreat offers panoramic views of the Adriatic Sea, Korčula’s green hills, and even the silhouette of Korčula Old Town from its private balcony. The spacious interior is thoughtfully decorated, echoing the soothing hues of lavender for a truly relaxing ambiance. Guests appreciate the two full bathrooms and fully equipped kitchen – perfect for families or groups of up to five seeking convenience and privacy. The airy living room opens to a sunny balcony where you can savor breakfast with a sea breeze or dine under the stars. Just steps below, a quiet pebbly beach with crystal-clear water awaits for morning swims or lazy afternoons. Korčula’s Old Town is a scenic 3-minute walk away, making it easy to explore local shops and restaurants. Previous guests rave about the spotless cleanliness, the stunning views, and the warm hospitality of the hosts. Apartment Lavender invites you to experience Korčula’s beauty in comfort and style.",
+        descriptionHr: "Apartman Lavanda pruža suvremenu udobnost u kombinaciji s mediteranskim šarmom. Ova oaza na najvišem katu s tri spavaće sobe nudi panoramski pogled na Jadransko more, zelene brežuljke Korčule, pa čak i siluetu korčulanskog Starog grada s privatnog balkona. Prostrana unutrašnjost promišljeno je uređena u umirujućim tonovima lavande, stvarajući opuštajući ugođaj. Gostima se posebno sviđaju dvije kupaonice te potpuno opremljena kuhinja – savršeno za obitelji ili grupe do pet osoba koje traže praktičnost i privatnost. Svijetli dnevni boravak izlazi na osunčani balkon gdje možete uživati u doručku uz povjetarac ili večerati pod zvijezdama. Odmah ispod apartmana nalazi se mirna šljunčana plaža s kristalno čistim morem, idealna za jutarnje kupanje ili ljenčarenje popodne. Do starog grada vodi slikovita šetnja od oko 3 minute, što olakšava obilazak lokalnih dućana i restorana. Prethodni gosti oduševljeno hvale besprijekornu čistoću, zadivljujuće poglede i srdačno gostoprimstvo domaćina. Apartman Lavanda poziva vas da u udobnosti i stilu doživite sve ljepote Korčule.",
         images: [
-          "/images/apartments/lavander/balcony.webp",
-          "/images/apartments/lavander/balcony2.webp",
-          "/images/apartments/lavander/balcony3.webp",
-          "/images/apartments/lavander/books.webp",
-          "/images/apartments/lavander/dining-room.webp",
-          "/images/apartments/lavander/entrance.webp",
-          "/images/apartments/lavander/exterior.webp",
-          "/images/apartments/lavander/kitchen.webp",
-          "/images/apartments/lavander/living-room.webp",
-          "/images/apartments/lavander/location.webp",
-          "/images/apartments/lavander/room1.webp",
-          "/images/apartments/lavander/room1-2.webp",
-          "/images/apartments/lavander/room2.webp",
-          "/images/apartments/lavander/room2-2.webp",
-          "/images/apartments/lavander/room3.webp"
+          "/images/apartments/lavender/balcony.webp",
+          "/images/apartments/lavender/balcony2.webp",
+          "/images/apartments/lavender/balcony3.webp",
+          "/images/apartments/lavender/books.webp",
+          "/images/apartments/lavender/dining-room.webp",
+          "/images/apartments/lavender/entrance.webp",
+          "/images/apartments/lavender/exterior.webp",
+          "/images/apartments/lavender/kitchen.webp",
+          "/images/apartments/lavender/living-room.webp",
+          "/images/apartments/lavender/location.webp",
+          "/images/apartments/lavender/room1.webp",
+          "/images/apartments/lavender/room1-2.webp",
+          "/images/apartments/lavender/room2.webp",
+          "/images/apartments/lavender/room2-2.webp",
+          "/images/apartments/lavender/room3.webp"
         ],
-        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d188.27957913747578!2d17.134640899881172!3d42.95822117073364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2sit!4v1747665668512!5m2!1sen!2sit",
+        location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2000!2d17.129945983275697!3d42.83819729673939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2shr!4v1747837786693!5m2!1sen!2shr",
         bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
-        airbnbUrl: "https://airbnb.com/h/lavanda-apartment-korcula",
+        airbnbUrl: "https://airbnb.com/h/apartments-viva-lavender",
         icalUrls: [
           "https://www.airbnb.com/calendar/ical/7353092.ics?s=eae1da13782e4b81009bcd64f58bd357"
         ],
         basePeakPrice: 110,
-        priceMultiplier: "2.75",
+        priceMultiplier: "2.20",
         cleaningFee: 80,
         maxGuests: 6,
         hasWifi: true,
@@ -400,7 +400,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2919.812968723878!2d17.130686977090376!3d42.96122627114335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a8c2af613%3A0x2c0e4b2c1db1bff9!2sApartments%20Giuliani!5e0!3m2!1sen!2sit!4v1747665748121!5m2!1sen!2sit",
         bookingUrl: "https://www.booking.com/hotel/hr/apartmani-lara-i-nika.html",
-        airbnbUrl: "https://airbnb.com/h/apartmani-giuliani-beach",
+        airbnbUrl: "https://airbnb.com/h/apartments-viva-beach",
         icalUrls: [
           "https://www.airbnb.com/calendar/ical/11847437.ics?s=6d2cbbdabf0b62bf08a047cf0712d317"
         ],

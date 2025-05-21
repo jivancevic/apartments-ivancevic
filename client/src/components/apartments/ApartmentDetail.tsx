@@ -249,7 +249,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Hair Dryer */}
           {apartment.hasHairDryer && (
             <div className="flex items-center">
-              <Scissors className="text-primary w-5 h-5 mr-2" />
+              <AmenityIcon icon="hair-dryer" size={20} className="text-primary mr-2" />
               <span>{t("amenities.hairDryer", "Hair dryer")}</span>
             </div>
           )}
@@ -257,7 +257,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Coffee Machine */}
           {apartment.hasCoffeeMachine !== undefined && apartment.hasCoffeeMachine && (
             <div className="flex items-center">
-              <Coffee className="text-primary w-5 h-5 mr-2" />
+              <AmenityIcon icon="coffee-machine" size={20} className="text-primary mr-2" />
               <span>{t("amenities.coffeeMachine", "Coffee machine")}</span>
             </div>
           )}
@@ -265,7 +265,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Microwave */}
           {apartment.hasMicrowave && (
             <div className="flex items-center">
-              <Microwave className="text-primary w-5 h-5 mr-2" />
+              <AmenityIcon icon="microwave" size={20} className="text-primary mr-2" />
               <span>{t("amenities.microwave", "Microwave")}</span>
             </div>
           )}
@@ -273,7 +273,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Smoothie Maker */}
           {apartment.hasSmoothieMaker && (
             <div className="flex items-center">
-              <Blend className="text-primary w-5 h-5 mr-2" />
+              <AmenityIcon icon="smoothie-maker" size={20} className="text-primary mr-2" />
               <span>{t("amenities.smoothieMaker", "Smoothie maker")}</span>
             </div>
           )}
@@ -283,14 +283,14 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
             <div className="flex items-center">
               {apartment.parkingType === "free" ? (
                 <>
-                  <Car className="text-primary w-5 h-5 mr-2" />
+                  <AmenityIcon icon="parking" size={20} className="text-primary mr-2" />
                   <span>{t("amenities.freeParking", "Free parking")}</span>
                 </>
               ) : apartment.parkingType === "private" && apartment.parkingDetails ? (
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger className="flex items-center hover:text-primary transition-colors">
-                      <Car className="text-primary w-5 h-5 mr-2" />
+                      <AmenityIcon icon="parking" size={20} className="text-primary mr-2" />
                       <span>{t("amenities.privateParking", "Private parking")}</span>
                     </TooltipTrigger>
                     <TooltipContent className="max-w-xs">
@@ -309,7 +309,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
                 </TooltipProvider>
               ) : (
                 <>
-                  <Car className="text-primary w-5 h-5 mr-2" />
+                  <AmenityIcon icon="parking" size={20} className="text-primary mr-2" />
                   <span>{t("amenities.privateParking", "Private parking")}</span>
                 </>
               )}

@@ -10,7 +10,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { 
   AlertCircle, Ban, BedDouble, BedSingle, Building, Coffee, 
-  Droplet, Ruler, Sofa, Star, Trees, Users, Home, Bath
+  Car, Droplet, Ruler, Sofa, Star, Trees, Users, Home, Bath,
+  Wifi, Snowflake, Tv
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { getApartmentStars } from "./ApartmentTabs";
@@ -201,7 +202,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Garden */}
           {apartment.hasGarden && (
             <div className="flex items-center">
-              <AmenityIcon icon="tree" className="text-primary mr-2" />
+              <Trees className="text-primary w-5 h-5 mr-2" />
               <span>{t("amenities.garden")}</span>
             </div>
           )}
@@ -217,7 +218,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* City View */}
           {apartment.hasCityView !== undefined && apartment.hasCityView && (
             <div className="flex items-center">
-              <AmenityIcon icon="building" className="text-primary mr-2" />
+              <Building className="text-primary w-5 h-5 mr-2" />
               <span>{t("amenities.cityView", "City view")}</span>
             </div>
           )}
@@ -225,7 +226,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Free WiFi */}
           {apartment.hasWifi && (
             <div className="flex items-center">
-              <AmenityIcon icon="wifi" className="text-primary mr-2" />
+              <Wifi className="text-primary w-5 h-5 mr-2" />
               <span>{t("amenities.freeWifi", "Free WiFi")}</span>
             </div>
           )}
@@ -233,7 +234,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* AC */}
           {apartment.hasAC && (
             <div className="flex items-center">
-              <AmenityIcon icon="snowflake" className="text-primary mr-2" />
+              <Snowflake className="text-primary w-5 h-5 mr-2" />
               <span>{t("amenities.ac")}</span>
             </div>
           )}
@@ -241,7 +242,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* TV */}
           {apartment.hasTV && (
             <div className="flex items-center">
-              <AmenityIcon icon="tv" className="text-primary mr-2" />
+              <Tv className="text-primary w-5 h-5 mr-2" />
               <span>{t("amenities.tv")}</span>
             </div>
           )}
@@ -249,7 +250,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Dishwasher */}
           {apartment.hasDishwasher !== undefined && apartment.hasDishwasher && (
             <div className="flex items-center">
-              <AmenityIcon icon="droplet" className="text-primary mr-2" />
+              <Droplet className="text-primary w-5 h-5 mr-2" />
               <span>{t("amenities.dishwasher", "Dishwasher")}</span>
             </div>
           )}
@@ -257,7 +258,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Coffee Machine */}
           {apartment.hasCoffeeMachine !== undefined && apartment.hasCoffeeMachine && (
             <div className="flex items-center">
-              <AmenityIcon icon="coffee" className="text-primary mr-2" />
+              <Coffee className="text-primary w-5 h-5 mr-2" />
               <span>{t("amenities.coffeeMachine", "Coffee machine")}</span>
             </div>
           )}
@@ -267,14 +268,14 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
             <div className="flex items-center">
               {apartment.parkingType === "free" ? (
                 <>
-                  <AmenityIcon icon="parking" className="text-primary mr-2" />
+                  <Car className="text-primary w-5 h-5 mr-2" />
                   <span>{t("amenities.freeParking", "Free parking")}</span>
                 </>
               ) : apartment.parkingType === "private" && apartment.parkingDetails ? (
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger className="flex items-center hover:text-primary transition-colors">
-                      <AmenityIcon icon="parking" className="text-primary mr-2" />
+                      <Car className="text-primary w-5 h-5 mr-2" />
                       <span>{t("amenities.privateParking", "Private parking")}</span>
                     </TooltipTrigger>
                     <TooltipContent className="max-w-xs">
@@ -292,7 +293,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
                 </TooltipProvider>
               ) : (
                 <>
-                  <AmenityIcon icon="parking" className="text-primary mr-2" />
+                  <Car className="text-primary w-5 h-5 mr-2" />
                   <span>{t("amenities.privateParking", "Private parking")}</span>
                 </>
               )}

@@ -15,7 +15,7 @@ export interface Apartment {
   // Guest capacity
   maxGuests: number;
   // Apartment details
-  isEntireApartment: boolean;
+  type: "apartment" | "studio" | "room";
   roomSizeM2: number;
   bedrooms: {
     name: string;
@@ -36,6 +36,10 @@ export interface Apartment {
   hasCityView: boolean;
   hasDishwasher: boolean;
   hasCoffeeMachine: boolean;
+  hasHairDryer: boolean;
+  hasMicrowave: boolean;
+  hasSmoothieMaker: boolean;
+  washingMachineType: "both" | "washing" | "none";
   parkingType: "none" | "free" | "private";
   parkingDetails?: {
     pricePerDay: number;

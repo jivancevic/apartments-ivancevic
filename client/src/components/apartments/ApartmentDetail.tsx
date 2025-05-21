@@ -11,7 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { 
   AlertCircle, Ban, BedDouble, BedSingle, Building, Coffee, 
   Car, Droplet, Ruler, Sofa, Star, Trees, Users, Home, Bath,
-  Wifi, Snowflake, Tv
+  Wifi, Snowflake, Tv, Scissors, Microwave, Blend, WashingMachine
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { getApartmentStars } from "./ApartmentTabs";
@@ -99,17 +99,15 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
               <span>{t("amenities.maxGuests", "{{count}} guests", { count: apartment.maxGuests })}</span>
             </div>
             
-            {/* Entire apartment or just a room */}
+            {/* Apartment type */}
             <div className="flex items-center">
               <Home className="text-primary w-5 h-5 mr-2" />
               <span>
-                {apartment.isEntireApartment !== undefined ? (
-                  apartment.isEntireApartment 
-                    ? t("amenities.entireApartment", "Entire apartment") 
-                    : t("amenities.privateRoom", "Private room")
-                ) : (
-                  t("amenities.entireApartment", "Entire apartment")
-                )}
+                {apartment.type === "studio" 
+                  ? t("amenities.studio", "Studio apartment")
+                  : apartment.type === "room"
+                  ? t("amenities.privateRoom", "Private room")
+                  : t("amenities.entireApartment", "Entire apartment")}
               </span>
             </div>
             
@@ -260,6 +258,42 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
             <div className="flex items-center">
               <Coffee className="text-primary w-5 h-5 mr-2" />
               <span>{t("amenities.coffeeMachine", "Coffee machine")}</span>
+            </div>
+          )}
+          
+          {/* Hair Dryer */}
+          {apartment.hasHairDryer && (
+            <div className="flex items-center">
+              <Scissors className="text-primary w-5 h-5 mr-2" />
+              <span>{t("amenities.hairDryer", "Hair dryer")}</span>
+            </div>
+          )}
+          
+          {/* Microwave */}
+          {apartment.hasMicrowave && (
+            <div className="flex items-center">
+              <Microwave className="text-primary w-5 h-5 mr-2" />
+              <span>{t("amenities.microwave", "Microwave")}</span>
+            </div>
+          )}
+          
+          {/* Smoothie Maker */}
+          {apartment.hasSmoothieMaker && (
+            <div className="flex items-center">
+              <Blend className="text-primary w-5 h-5 mr-2" />
+              <span>{t("amenities.smoothieMaker", "Smoothie maker")}</span>
+            </div>
+          )}
+          
+          {/* Washing Machine */}
+          {apartment.washingMachineType !== "none" && (
+            <div className="flex items-center">
+              <WashingMachine className="text-primary w-5 h-5 mr-2" />
+              <span>
+                {apartment.washingMachineType === "both"
+                  ? t("amenities.washerDryer", "Washer & dryer")
+                  : t("amenities.washingMachine", "Washing machine")}
+              </span>
             </div>
           )}
           

@@ -14,6 +14,18 @@ export interface Apartment {
   cleaningFee: number;
   // Guest capacity
   maxGuests: number;
+  // Apartment details
+  isEntireApartment: boolean;
+  roomSizeM2: number;
+  bedrooms: {
+    name: string;
+    beds: {
+      type: string;
+      count: number;
+      emoji: string;
+    }[];
+  }[];
+  bathrooms: number;
   // Amenities
   hasWifi: boolean;
   hasKitchen: boolean;
@@ -21,6 +33,9 @@ export interface Apartment {
   hasTV: boolean;
   hasBalcony: boolean;
   hasSeaView: boolean;
+  hasCityView: boolean;
+  hasDishwasher: boolean;
+  hasCoffeeMachine: boolean;
   parkingType: "none" | "free" | "private";
   parkingDetails?: {
     pricePerDay: number;

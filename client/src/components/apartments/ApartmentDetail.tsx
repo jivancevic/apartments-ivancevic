@@ -83,18 +83,93 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {currentLanguage === "en" ? apartment.descriptionEn : apartment.descriptionHr}
         </p>
         
-        {/* Amenities */}
+        {/* Guest Capacity and Layout */}
+        <h4 className="font-heading font-semibold text-lg mb-3">
+          {t("apartments.details", "Details")}
+        </h4>
+        <div className="bg-neutral p-4 rounded-lg mb-6">
+          <div className="space-y-3">
+            {/* Number of guests */}
+            <div className="flex items-center">
+              <AmenityIcon icon="users" className="text-primary mr-2" />
+              <span>{t("amenities.maxGuests", "{{count}} guests", { count: apartment.maxGuests })}</span>
+            </div>
+            
+            {/* Entire apartment or just a room */}
+            <div className="flex items-center">
+              <AmenityIcon icon="home" className="text-primary mr-2" />
+              <span>
+                {apartment.isEntireApartment !== undefined ? (
+                  apartment.isEntireApartment 
+                    ? t("amenities.entireApartment", "Entire apartment") 
+                    : t("amenities.privateRoom", "Private room")
+                ) : (
+                  t("amenities.entireApartment", "Entire apartment")
+                )}
+              </span>
+            </div>
+            
+            {/* Room size */}
+            <div className="flex items-center">
+              <AmenityIcon icon="ruler" className="text-primary mr-2" />
+              <span>
+                {apartment.roomSizeM2 
+                  ? t("amenities.roomSize", "{{size}} m²", { size: apartment.roomSizeM2 })
+                  : t("amenities.roomSize", "59 m²")}
+              </span>
+            </div>
+            
+            {/* Bedrooms */}
+            {apartment.bedrooms ? (
+              apartment.bedrooms.map((bedroom, index) => (
+                <div key={index} className="bg-white p-3 rounded-md">
+                  <p className="font-medium mb-1">{bedroom.name}</p>
+                  <div className="space-y-1 pl-2">
+                    {bedroom.beds.map((bed, bedIndex) => (
+                      <div key={bedIndex} className="flex items-center">
+                        <span className="mr-2">{bed.emoji}</span>
+                        <span>
+                          {t("amenities.bed", "{{count}} {{type}} bed", { 
+                            count: bed.count, 
+                            type: bed.type 
+                          })}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))
+            ) : (
+              // Default bedroom layout if not specified
+              <div className="bg-white p-3 rounded-md">
+                <p className="font-medium mb-1">{t("amenities.bedroom", "Bedroom")} 1</p>
+                <div className="space-y-1 pl-2">
+                  <div className="flex items-center">
+                    <span className="mr-2">🛏️</span>
+                    <span>{t("amenities.doubleBed", "1 double bed")}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Bathrooms */}
+            <div className="flex items-center">
+              <AmenityIcon icon="bath" className="text-primary mr-2" />
+              <span>
+                {apartment.bathrooms
+                  ? t("amenities.bathrooms", "{{count}} bathroom", { count: apartment.bathrooms })
+                  : t("amenities.bathrooms", "1 bathroom")}
+              </span>
+            </div>
+          </div>
+        </div>
+        
+        {/* Amenities Section */}
         <h4 className="font-heading font-semibold text-lg mb-3">
           {t("apartments.amenities")}
         </h4>
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          {apartment.hasWifi && (
-            <div className="flex items-center">
-              <AmenityIcon icon="wifi" className="text-primary mr-2" />
-              <span>{t("amenities.wifi")}</span>
-            </div>
-          )}
-          
+        <div className="grid grid-cols-2 gap-y-3 gap-x-4 mb-6">
+          {/* Kitchen */}
           {apartment.hasKitchen && (
             <div className="flex items-center">
               <AmenityIcon icon="utensils" className="text-primary mr-2" />
@@ -102,20 +177,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
             </div>
           )}
           
-          {apartment.hasAC && (
-            <div className="flex items-center">
-              <AmenityIcon icon="snowflake" className="text-primary mr-2" />
-              <span>{t("amenities.ac")}</span>
-            </div>
-          )}
-          
-          {apartment.hasTV && (
-            <div className="flex items-center">
-              <AmenityIcon icon="tv" className="text-primary mr-2" />
-              <span>{t("amenities.tv")}</span>
-            </div>
-          )}
-          
+          {/* Balcony */}
           {apartment.hasBalcony && (
             <div className="flex items-center">
               <AmenityIcon icon="wind" className="text-primary mr-2" />
@@ -123,10 +185,67 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
             </div>
           )}
           
+          {/* Garden */}
+          {apartment.hasGarden && (
+            <div className="flex items-center">
+              <AmenityIcon icon="tree" className="text-primary mr-2" />
+              <span>{t("amenities.garden")}</span>
+            </div>
+          )}
+          
+          {/* Sea View */}
           {apartment.hasSeaView && (
             <div className="flex items-center">
               <AmenityIcon icon="water" className="text-primary mr-2" />
               <span>{t("amenities.seaView")}</span>
+            </div>
+          )}
+          
+          {/* City View */}
+          {apartment.hasCityView !== undefined && apartment.hasCityView && (
+            <div className="flex items-center">
+              <AmenityIcon icon="building" className="text-primary mr-2" />
+              <span>{t("amenities.cityView", "City view")}</span>
+            </div>
+          )}
+          
+          {/* Free WiFi */}
+          {apartment.hasWifi && (
+            <div className="flex items-center">
+              <AmenityIcon icon="wifi" className="text-primary mr-2" />
+              <span>{t("amenities.freeWifi", "Free WiFi")}</span>
+            </div>
+          )}
+          
+          {/* AC */}
+          {apartment.hasAC && (
+            <div className="flex items-center">
+              <AmenityIcon icon="snowflake" className="text-primary mr-2" />
+              <span>{t("amenities.ac")}</span>
+            </div>
+          )}
+          
+          {/* TV */}
+          {apartment.hasTV && (
+            <div className="flex items-center">
+              <AmenityIcon icon="tv" className="text-primary mr-2" />
+              <span>{t("amenities.tv")}</span>
+            </div>
+          )}
+          
+          {/* Dishwasher */}
+          {apartment.hasDishwasher !== undefined && apartment.hasDishwasher && (
+            <div className="flex items-center">
+              <AmenityIcon icon="droplet" className="text-primary mr-2" />
+              <span>{t("amenities.dishwasher", "Dishwasher")}</span>
+            </div>
+          )}
+          
+          {/* Coffee Machine */}
+          {apartment.hasCoffeeMachine !== undefined && apartment.hasCoffeeMachine && (
+            <div className="flex items-center">
+              <AmenityIcon icon="coffee" className="text-primary mr-2" />
+              <span>{t("amenities.coffeeMachine", "Coffee machine")}</span>
             </div>
           )}
           
@@ -166,13 +285,6 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
               )}
             </div>
           )}
-          
-          {apartment.hasGarden && (
-            <div className="flex items-center">
-              <AmenityIcon icon="tree" className="text-primary mr-2" />
-              <span>{t("amenities.garden")}</span>
-            </div>
-          )}
         </div>
 
         {/* Location */}
@@ -196,7 +308,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
         {/* Prices are now dynamically shown in calendar */}
         
         {/* Calendar with booking links */}
-        <div className="mb-6">
+        <div className="mt-6 mb-6">
           <div className="flex justify-between items-center mt-3 mb-3">
             <h4 className="font-heading font-semibold text-lg">
               {t("apartments.availability")}

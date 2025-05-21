@@ -23,7 +23,7 @@ const hrTranslation = {
     "Sami čistimo i pripremamo svaki apartman kako bismo osigurali da je sve besprijekorno, svježe i spremno za vaš boravak.",
   "features.location.title": "Jedinstvena lokacija",
   "features.location.description":
-    "Svi naši apartmani su samo nekoliko trenutaka od korčulanskog povijesnog Starog grada — dovoljno blizu za istraživanje, dovoljno daleko za odmor.",
+    "Svi naši apartmani su dio ili u neposrednoj blizini od korčulanskog povijesnog Starog grada — dovoljno blizu za istraživanje, dovoljno daleko za odmor.",
   "features.experience.title": "Pravo lokalno iskustvo",
   "features.experience.description":
     "Od lokalnih savjeta do skrivenih plaža, pomoći ćemo vam da doživite Korčulu kao pravi lokalac.",

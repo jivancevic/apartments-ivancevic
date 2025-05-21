@@ -247,7 +247,7 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
           "/images/apartments/ismaelli/yard.webp"
         ],
         location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1200!2d17.13522756990842!3d42.96152961092943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a6c1cbb5f%3A0x2849d1dc0357a5b5!2sUl.%20Ismaelli%205%2C%2020260%2C%20Kor%C4%8Dula%2C%20Croatia!5e1!3m2!1sen!2shr!4v1746768250275!5m2!1sen!2shr",
-        airbnbUrl: "airbnb.com/h/korcula-old-town-palace-sunset-flat",
+        airbnbUrl: "https://airbnb.com/h/korcula-old-town-palace-sunset-flat",
         icalUrls: [
           "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd24cd0dbd2911faab332fcfd90"
         ],

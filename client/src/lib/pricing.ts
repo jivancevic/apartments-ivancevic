@@ -30,12 +30,37 @@ export const CLEANING_FEES: Record<string, number> = {
   'Ismaelli Palace': 80,
 };
 
-// Season rate multipliers (% of peak price)
-export const SEASON_RATE_MULTIPLIERS: Record<SeasonType, number> = {
+// Default season rate multipliers (% of peak price)
+export const DEFAULT_SEASON_RATE_MULTIPLIERS: Record<SeasonType, number> = {
   [SeasonType.OUT_OF_SEASON]: 0.45, // 45% of peak price
   [SeasonType.LOW_SEASON]: 0.60,    // 60% of peak price
   [SeasonType.HIGH_SEASON]: 0.80,   // 80% of peak price
   [SeasonType.PEAK_SEASON]: 1.00,   // 100% of peak price
+};
+
+// Custom apartment pricing configurations
+export interface ApartmentPricingConfig {
+  basePeakPrice?: number;
+  seasonRateMultipliers?: Partial<Record<SeasonType, number>>;
+  cleaningFee?: number;
+}
+
+// Apartment-specific pricing overrides
+export const APARTMENT_PRICE_OVERRIDES: Record<string, ApartmentPricingConfig> = {
+  // Lara has €100 base price and 75% ratio for HIGH_SEASON
+  'Lara': {
+    basePeakPrice: 100,
+    seasonRateMultipliers: {
+      [SeasonType.HIGH_SEASON]: 0.75
+    }
+  },
+  // Nika has €200 base price and 75% ratio for HIGH_SEASON
+  'Nika': {
+    basePeakPrice: 200,
+    seasonRateMultipliers: {
+      [SeasonType.HIGH_SEASON]: 0.75
+    }
+  }
 };
 
 // Season date ranges for 2025
@@ -137,25 +162,68 @@ export function getSeasonName(seasonType: SeasonType): string {
 }
 
 /**
+ * Get apartment-specific pricing configuration including any custom overrides
+ */
+export function getApartmentPricingConfig(apartment: Apartment): {
+  basePeakPrice: number;
+  seasonRateMultipliers: Record<SeasonType, number>;
+  cleaningFee: number;
+} {
+  // Start with default price multipliers
+  const seasonRateMultipliers = { ...DEFAULT_SEASON_RATE_MULTIPLIERS };
+  
+  // Check for apartment-specific overrides
+  const overrides = APARTMENT_PRICE_OVERRIDES[apartment.nameEn];
+  
+  // Base values (from schema or defaults)
+  let basePeakPrice = apartment.basePeakPrice || 110;
+  let cleaningFee = apartment.cleaningFee || CLEANING_FEES[apartment.nameEn] || 40;
+  
+  // Apply overrides if they exist
+  if (overrides) {
+    // Override base peak price if specified
+    if (overrides.basePeakPrice !== undefined) {
+      basePeakPrice = overrides.basePeakPrice;
+    }
+    
+    // Override season multipliers if specified
+    if (overrides.seasonRateMultipliers) {
+      Object.assign(seasonRateMultipliers, overrides.seasonRateMultipliers);
+    }
+    
+    // Override cleaning fee if specified
+    if (overrides.cleaningFee !== undefined) {
+      cleaningFee = overrides.cleaningFee;
+    }
+  }
+  
+  return {
+    basePeakPrice,
+    seasonRateMultipliers,
+    cleaningFee
+  };
+}
+
+/**
  * Calculates the price for an apartment on a given date
  */
 export function calculateNightlyPrice(apartment: Apartment, date: Date): number {
   // Get the season type for this date
   const seasonType = getSeasonType(date);
   
-  // Get the season rate multiplier
-  const seasonRateMultiplier = SEASON_RATE_MULTIPLIERS[seasonType];
+  // Get apartment-specific pricing configuration with any overrides
+  const config = getApartmentPricingConfig(apartment);
+  
+  // Get the season rate multiplier for this apartment (with any overrides applied)
+  const seasonRateMultiplier = config.seasonRateMultipliers[seasonType];
   
   // Get the apartment's multiplier (from schema if available, or from constants)
   // Use a direct conversion to number to avoid CSP issues
   const apartmentMultiplier = apartment.priceMultiplier ? Number(apartment.priceMultiplier) : 
     (APARTMENT_MULTIPLIERS[apartment.nameEn] || 1.0);
   
-  // Get the base peak price (from schema if available, or the Sea apartment's base price)
-  const basePeakPrice = apartment.basePeakPrice || 110;
-  
   // Calculate price: basePeakPrice * seasonRateMultiplier * apartmentMultiplier
-  const price = basePeakPrice * seasonRateMultiplier * apartmentMultiplier;
+  const price = config.basePeakPrice * seasonRateMultiplier * apartmentMultiplier;
   
   // Round to nearest integer
   return Math.round(price);

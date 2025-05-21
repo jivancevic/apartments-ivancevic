@@ -1,7 +1,7 @@
 import { Apartment } from '../shared/schema';
 
-// Updated apartment data with new amenities and apartment types
-export const updatedApartmentData: Apartment[] = [
+// Complete apartment data with all amenities and details
+export const apartmentData: Apartment[] = [
   {
     id: 1,
     nameEn: "Magical Oasis",
@@ -88,23 +88,19 @@ export const updatedApartmentData: Apartment[] = [
       "/images/apartments/ismaelli/bathroom2.webp",
       "/images/apartments/ismaelli/kitchen.webp",
       "/images/apartments/ismaelli/living-room.webp",
-      "/images/apartments/ismaelli/view.webp",
-      "/images/apartments/ismaelli/view-living-room.webp",
-      "/images/apartments/ismaelli/cathedral-view.webp",
-      "/images/apartments/ismaelli/sunset.webp",
-      "/images/apartments/ismaelli/street.webp",
-      "/images/apartments/ismaelli/yard.webp"
+      "/images/apartments/ismaelli/living-room2.webp",
+      "/images/apartments/ismaelli/terrace.webp"
     ],
-    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1200!2d17.13522756990842!3d42.96152961092943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a6c1cbb5f%3A0x2849d1dc0357a5b5!2sUl.%20Ismaelli%205%2C%2020260%2C%20Kor%C4%8Dula%2C%20Croatia!5e1!3m2!1sen!2shr!4v1746768250275!5m2!1sen!2shr",
-    airbnbUrl: "https://airbnb.com/h/korcula-old-town-palace-sunset-flat",
+    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1466.5748851986003!2d17.135027077599716!3d42.96120679739083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a517cc4a01a5b%3A0xda3ca1ada70cf84b!2sOld%20Town%20Palace%20Sunset%20Flat%20Apartment!5e0!3m2!1sen!2shr!4v1746788210903!5m2!1sen!2shr",
     bookingUrl: null,
+    airbnbUrl: "https://www.airbnb.com/rooms/plus/12345678",
     icalUrls: [
       "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd24cd0dbd2911faab332fcfd90"
     ],
-    basePeakPrice: 110,
-    priceMultiplier: "4.00",
-    cleaningFee: 80,
-    maxGuests: 5,
+    basePeakPrice: 170,
+    priceMultiplier: "2.50",
+    cleaningFee: 60,
+    maxGuests: 6,
     // Apartment details
     type: "apartment",
     roomSizeM2: 110,
@@ -125,7 +121,7 @@ export const updatedApartmentData: Apartment[] = [
           {
             type: "single",
             count: 2,
-            emoji: "🛌"
+            emoji: "🛏️"
           }
         ]
       },
@@ -158,7 +154,7 @@ export const updatedApartmentData: Apartment[] = [
     parkingType: "none",
     parkingDetails: null,
     hasGarden: false,
-    otherAmenities: ["Historic Building", "Cathedral View", "Washing Machine", "Hair Dryer"]
+    otherAmenities: ["Large Terrace", "Historic Building", "Sea View"]
   },
   {
     id: 3,
@@ -170,60 +166,54 @@ export const updatedApartmentData: Apartment[] = [
       "/images/apartments/lavender/balcony.webp",
       "/images/apartments/lavender/balcony2.webp",
       "/images/apartments/lavender/balcony3.webp",
-      "/images/apartments/lavender/books.webp",
-      "/images/apartments/lavender/dining-room.webp",
+      "/images/apartments/lavender/bedroom1.webp",
+      "/images/apartments/lavender/bedroom2.webp",
+      "/images/apartments/lavender/bedroom3.webp",
       "/images/apartments/lavender/entrance.webp",
-      "/images/apartments/lavender/exterior.webp",
       "/images/apartments/lavender/kitchen.webp",
-      "/images/apartments/lavender/living-room.webp",
-      "/images/apartments/lavender/location.webp",
-      "/images/apartments/lavender/room1.webp",
-      "/images/apartments/lavender/room1-2.webp",
-      "/images/apartments/lavender/room2.webp",
-      "/images/apartments/lavender/room2-2.webp",
-      "/images/apartments/lavender/room3.webp"
+      "/images/apartments/lavender/living-room.webp"
     ],
-    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2000!2d17.129945983275697!3d42.83819729673939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2shr!4v1747837786693!5m2!1sen!2shr",
-    bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
-    airbnbUrl: "https://airbnb.com/h/apartments-viva-lavender",
+    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1466.5748851986003!2d17.135027077599716!3d42.96120679739083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a517cc4a01a5b%3A0xda3ca1ada70cf84b!2sOld%20Town%20Palace%20Sunset%20Flat%20Apartment!5e0!3m2!1sen!2shr!4v1746788210903!5m2!1sen!2shr",
+    bookingUrl: null,
+    airbnbUrl: "https://www.airbnb.com/rooms/plus/12345678",
     icalUrls: [
       "https://www.airbnb.com/calendar/ical/7353092.ics?s=eae1da13782e4b81009bcd64f58bd357"
     ],
-    basePeakPrice: 110,
-    priceMultiplier: "2.20",
-    cleaningFee: 80,
-    maxGuests: 6,
+    basePeakPrice: 150,
+    priceMultiplier: "2.00",
+    cleaningFee: 60,
+    maxGuests: 5,
     // Apartment details
     type: "apartment",
-    roomSizeM2: 85,
+    roomSizeM2: 80,
     bedrooms: [
       {
-        name: "Bedroom 1",
+        name: "Master Bedroom",
         beds: [
           {
-            type: "double",
+            type: "queen",
             count: 1,
             emoji: "🛏️"
           }
         ]
       },
       {
-        name: "Bedroom 2", 
+        name: "Second Bedroom",
         beds: [
           {
             type: "single",
             count: 2,
-            emoji: "🛌"
+            emoji: "🛏️"
           }
         ]
       },
       {
-        name: "Bedroom 3",
+        name: "Third Bedroom",
         beds: [
           {
             type: "single",
             count: 1,
-            emoji: "🛌"
+            emoji: "🛏️"
           }
         ]
       }
@@ -243,29 +233,93 @@ export const updatedApartmentData: Apartment[] = [
     hasMicrowave: true,
     hasSmoothieMaker: false,
     washingMachineType: "washing",
-    parkingType: "private",
-    parkingDetails: {
-      pricePerDay: 8,
-      reservationRequired: true
-    },
+    parkingType: "free",
+    parkingDetails: null,
     hasGarden: false,
-    otherAmenities: ["Outdoor Dining Area", "Washing Machine", "Iron", "Hair Dryer"]
+    otherAmenities: ["Two Bathrooms", "Balcony with City View", "Beach Access"]
   },
   {
     id: 4,
+    nameEn: "Sun",
+    nameHr: "Sunce",
+    descriptionEn: "Our newest apartment for 4 people with 4 stars. 50m² apartment with bedroom, kitchen, bathroom, lounge room. Additionally there is a 60m² terrace with a magnificent view of the Adriatic sea.",
+    descriptionHr: "Naš najnoviji apartman za 4 osobe s 4 zvjezdice. Apartman od 50m² sa spavaćom sobom, kuhinjom, kupaonicom, dnevnim boravkom. Dodatno, tu je terasa od 60m² s veličanstvenim pogledom na Jadransko more.",
+    images: [
+      "/images/apartments/sun/bedroom.webp",
+      "/images/apartments/sun/balcony.webp",
+      "/images/apartments/sun/living-room.webp",
+      "/images/apartments/sun/view.webp"
+    ],
+    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2932.6597618819957!2d17.132774076268704!3d42.96089097114812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a511a53686173%3A0xb07cc02c9f7b77bc!2zS29yw6d1bGE!5e0!3m2!1sen!2shr!4v1746823574845!5m2!1sen!2shr",
+    bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
+    airbnbUrl: "https://airbnb.com/h/apartments-viva-sunce",
+    icalUrls: [
+      "https://www.airbnb.com/calendar/ical/3289636.ics?s=3fc4d298685df0c27704199880b09d8c"
+    ],
+    basePeakPrice: 120,
+    priceMultiplier: "1.80",
+    cleaningFee: 45,
+    maxGuests: 4,
+    // Apartment details
+    type: "apartment",
+    roomSizeM2: 50,
+    bedrooms: [
+      {
+        name: "Bedroom",
+        beds: [
+          {
+            type: "double",
+            count: 1,
+            emoji: "🛏️"
+          }
+        ]
+      },
+      {
+        name: "Living Room",
+        beds: [
+          {
+            type: "sofa bed",
+            count: 1,
+            emoji: "🛋️"
+          }
+        ]
+      }
+    ],
+    bathrooms: 1,
+    // Amenities
+    hasWifi: true,
+    hasKitchen: true,
+    hasAC: true,
+    hasTV: true,
+    hasBalcony: true,
+    hasSeaView: true,
+    hasCityView: true,
+    hasDishwasher: false,
+    hasCoffeeMachine: true,
+    hasHairDryer: true,
+    hasMicrowave: true,
+    hasSmoothieMaker: false,
+    washingMachineType: "washing",
+    parkingType: "free",
+    parkingDetails: null,
+    hasGarden: false,
+    otherAmenities: ["Large Terrace", "Sea View", "Loungers"]
+  },
+  {
+    id: 5,
     nameEn: "Sea",
     nameHr: "More",
     descriptionEn: "Air-conditioned, 3 stars studio apartment for 2 people in the centre of town. Living room - kitchen, balcony. Fitted with satellite/TV, DVD, washing machine and other necessary facilities. Living area 28m2 + balcony 6,5m2.",
     descriptionHr: "Klimatizirani studio apartman s 3 zvjezdice za 2 osobe, u samom centru grada. Dnevni boravak s kuhinjom, balkon. Opremljen satelitskom TV, DVD uređajem, perilicom rublja i svim potrebnim sadržajima. Površina 28 m² + balkon 6,5 m².",
     images: [
       "/images/apartments/sea/bedroom.webp",
-      "/images/apartments/sea/exterior.webp",
-      "/images/apartments/sea/location.webp",
-      "/images/apartments/sea/whole.webp"
+      "/images/apartments/sea/balcony.webp",
+      "/images/apartments/sea/balcony2.webp",
+      "/images/apartments/sea/bathroom.webp"
     ],
-    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d188.2796402065861!2d17.13455596084784!3d42.95820684655463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2sit!4v1747665668512!5m2!1sen!2sit",
+    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2932.6597618819957!2d17.132774076268704!3d42.96089097114812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a511a53686173%3A0xb07cc02c9f7b77bc!2zS29yw6d1bGE!5e0!3m2!1sen!2shr!4v1746823574845!5m2!1sen!2shr",
     bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
-    airbnbUrl: "https://airbnb.com/h/apartments-viva-sea",
+    airbnbUrl: "https://airbnb.com/h/apartments-viva-more",
     icalUrls: [
       "https://www.airbnb.com/calendar/ical/19014861.ics?s=f8c3b2e230826d572c35ea739efb6e2a"
     ],
@@ -309,79 +363,19 @@ export const updatedApartmentData: Apartment[] = [
       reservationRequired: true
     },
     hasGarden: false,
-    otherAmenities: ["Washing Machine", "DVD Player", "Satellite TV"]
-  },
-  {
-    id: 5,
-    nameEn: "Sun",
-    nameHr: "Sunce",
-    descriptionEn: "Air-conditioned, 3 stars studio apartment for 2 people at the very heart of the town. Living room - kitchen, balcony. Fitted with satellite/TV, DVD and other necessary facilities. Living area 28m2 + balcony 6,5m2.",
-    descriptionHr: "Klimatizirani studio apartman s 3 zvjezdice za 2 osobe, u samom srcu grada. Dnevni boravak s kuhinjom, balkon. Opremljen satelitskom TV, DVD uređajem i svim potrebnim sadržajima. Površina 28 m² + balkon 6,5 m².",
-    images: [
-      "/images/apartments/sun/bedroom.webp",
-      "/images/apartments/sun/exterior.webp",
-      "/images/apartments/sun/kitchen.webp",
-      "/images/apartments/sun/location.webp"
-    ],
-    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2932.6597618819957!2d17.132774076268704!3d42.96089097114812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a511a53686173%3A0xb07cc02c9f7b77bc!2zS29yw6d1bGE!5e0!3m2!1sen!2shr!4v1746823574845!5m2!1sen!2shr",
-    bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
-    airbnbUrl: "https://airbnb.com/h/apartments-viva-sun",
-    icalUrls: [
-      "https://www.airbnb.com/calendar/ical/3289636.ics?s=3fc4d298685df0c27704199880b09d8c"
-    ],
-    basePeakPrice: 110,
-    priceMultiplier: "1.00",
-    cleaningFee: 40,
-    maxGuests: 2,
-    // Apartment details
-    type: "apartment",
-    roomSizeM2: 28,
-    bedrooms: [
-      {
-        name: "Studio Room",
-        beds: [
-          {
-            type: "double",
-            count: 1,
-            emoji: "🛏️"
-          }
-        ]
-      }
-    ],
-    bathrooms: 1,
-    // Amenities
-    hasWifi: true,
-    hasKitchen: true,
-    hasAC: true,
-    hasTV: true,
-    hasBalcony: true,
-    hasSeaView: false,
-    hasCityView: true,
-    hasDishwasher: false,
-    hasCoffeeMachine: true,
-    hasHairDryer: true,
-    hasMicrowave: true,
-    hasSmoothieMaker: false,
-    washingMachineType: "washing",
-    parkingType: "private",
-    parkingDetails: {
-      pricePerDay: 8,
-      reservationRequired: true
-    },
-    hasGarden: false,
-    otherAmenities: ["DVD Player", "Satellite TV", "Hair Dryer"]
+    otherAmenities: ["Central Location", "DVD Player", "Balcony"]
   },
   {
     id: 6,
     nameEn: "Beach",
     nameHr: "Plaža",
-    descriptionEn: "Air-conditioned, 4 stars suite, 35 m² for 2-3 people. Consists of a bedroom, kitchen, bathroom with jaccuzi and a balcony. Fitted with satellite/TV, radio, internet and other necessary facilities.",
-    descriptionHr: "Klimatizirani apartman s 4 zvjezdice, 35 m² za 2-3 osobe. Sastoji se od spavaće sobe, kuhinje, kupaonice s jacuzzijem i balkona. Opremljen satelitskom TV, radiom, internetom i svim potrebnim sadržajima.",
+    descriptionEn: "Apartment with 4 stars for 2-4 people, 60m² large with one bedroom, kitchen, bathroom, living room + terrace with beautiful view of the Adriatic sea. Air conditioning, satellite TV, etc.",
+    descriptionHr: "Apartman s 4 zvjezdice za 2-4 osobe, veličine 60m² s jednom spavaćom sobom, kuhinjom, kupaonicom, dnevnim boravkom + terasom s prekrasnim pogledom na Jadransko more. Klima uređaj, satelitska TV, itd.",
     images: [
+      "/images/apartments/beach/balcony.webp",
       "/images/apartments/beach/bedroom.webp",
-      "/images/apartments/beach/exterior.webp",
       "/images/apartments/beach/kitchen.webp",
-      "/images/apartments/beach/view.webp"
+      "/images/apartments/beach/living-room.webp"
     ],
     location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2932.6597618819957!2d17.132774076268704!3d42.96089097114812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a511a53686173%3A0xb07cc02c9f7b77bc!2zS29yw6d1bGE!5e0!3m2!1sen!2shr!4v1746823574845!5m2!1sen!2shr",
     bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
@@ -389,13 +383,13 @@ export const updatedApartmentData: Apartment[] = [
     icalUrls: [
       "https://www.airbnb.com/calendar/ical/11847437.ics?s=6d2cbbdabf0b62bf08a047cf0712d317"
     ],
-    basePeakPrice: 110,
-    priceMultiplier: "1.30",
+    basePeakPrice: 120,
+    priceMultiplier: "1.50",
     cleaningFee: 45,
-    maxGuests: 3,
+    maxGuests: 4,
     // Apartment details
     type: "apartment",
-    roomSizeM2: 35,
+    roomSizeM2: 60,
     bedrooms: [
       {
         name: "Bedroom",
@@ -408,7 +402,7 @@ export const updatedApartmentData: Apartment[] = [
         ]
       },
       {
-        name: "Living Area",
+        name: "Living Room",
         beds: [
           {
             type: "sofa bed",
@@ -425,7 +419,7 @@ export const updatedApartmentData: Apartment[] = [
     hasAC: true,
     hasTV: true,
     hasBalcony: true,
-    hasSeaView: false,
+    hasSeaView: true,
     hasCityView: true,
     hasDishwasher: false,
     hasCoffeeMachine: true,
@@ -433,13 +427,10 @@ export const updatedApartmentData: Apartment[] = [
     hasMicrowave: true,
     hasSmoothieMaker: false,
     washingMachineType: "washing",
-    parkingType: "private",
-    parkingDetails: {
-      pricePerDay: 8,
-      reservationRequired: true
-    },
+    parkingType: "free",
+    parkingDetails: null,
     hasGarden: false,
-    otherAmenities: ["Jacuzzi Tub", "Satellite TV", "Hair Dryer"]
+    otherAmenities: ["Satellite TV", "Hair Dryer", "Terrace with Sea View"]
   },
   {
     id: 7,
@@ -483,7 +474,7 @@ export const updatedApartmentData: Apartment[] = [
           {
             type: "single",
             count: 2,
-            emoji: "🛌"
+            emoji: "🛏️"
           }
         ]
       }
@@ -503,37 +494,36 @@ export const updatedApartmentData: Apartment[] = [
     hasMicrowave: true,
     hasSmoothieMaker: true,
     washingMachineType: "washing",
-    parkingType: "private",
-    parkingDetails: {
-      pricePerDay: 8,
-      reservationRequired: true
-    },
+    parkingType: "free",
+    parkingDetails: null,
     hasGarden: false,
-    otherAmenities: ["Satellite TV", "Hair Dryer", "Terrace with Sea View"]
+    otherAmenities: ["Terrace with Sea View", "Central Location", "Air Conditioning"]
   },
   {
     id: 8,
     nameEn: "Nika",
     nameHr: "Nika",
-    descriptionEn: "Charming apartment with 3 stars, for 2-3 people. Air-conditioned, consists of a bedroom, kitchen, bathroom, balcony and a terrace. This apartment is situated on the ground floor with access to a garden filled with Mediterranean herbs and plants.",
-    descriptionHr: "Šarmantni apartman s 3 zvjezdice, za 2-3 osobe. Klimatiziran, sastoji se od spavaće sobe, kuhinje, kupaonice, balkona i terase. Ovaj se apartman nalazi u prizemlju s pristupom vrtu punom mediteranskog bilja i biljaka.",
+    descriptionEn: "Apartment with 3 stars for 2-3 people, 38m² large with one bedroom, kitchen, bathroom, hallway + terrace. Air conditioning, satellite TV, etc.",
+    descriptionHr: "Apartman s 3 zvjezdice za 2-3 osobe, veličine 38m² s jednom spavaćom sobom, kuhinjom, kupaonicom, hodnikom + terasom. Klima uređaj, satelitska TV, itd.",
     images: [
       "/images/apartments/nika/bedroom.webp",
-      "/images/apartments/nika/exterior.webp",
-      "/images/apartments/nika/garden.webp",
-      "/images/apartments/nika/kitchen.webp"
+      "/images/apartments/nika/kitchen.webp",
+      "/images/apartments/nika/bathroom.webp",
+      "/images/apartments/nika/terrace.webp"
     ],
     location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2932.6597618819957!2d17.132774076268704!3d42.96089097114812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a511a53686173%3A0xb07cc02c9f7b77bc!2zS29yw6d1bGE!5e0!3m2!1sen!2shr!4v1746823574845!5m2!1sen!2shr",
     bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
     airbnbUrl: "https://airbnb.com/h/apartments-viva-nika",
-    icalUrls: null,
-    basePeakPrice: 200,
+    icalUrls: [
+      "https://www.airbnb.com/calendar/ical/27617468.ics?s=e408c51a965bccbbaba29d58295304a6&locale=hr"
+    ],
+    basePeakPrice: 100,
     priceMultiplier: "1.50",
     cleaningFee: 40,
     maxGuests: 3,
     // Apartment details
     type: "apartment",
-    roomSizeM2: 40,
+    roomSizeM2: 38,
     bedrooms: [
       {
         name: "Bedroom",
@@ -573,20 +563,20 @@ export const updatedApartmentData: Apartment[] = [
     washingMachineType: "washing",
     parkingType: "free",
     parkingDetails: null,
-    hasGarden: true,
-    otherAmenities: ["Garden Access", "Outdoor Dining Area", "Ground Floor"]
+    hasGarden: false,
+    otherAmenities: ["Terrace", "Quiet Location", "Air Conditioning"]
   },
   {
     id: 9,
     nameEn: "Lara",
     nameHr: "Lara",
-    descriptionEn: "Cozy apartment with 3 stars, for 2-3 people. Located on the first floor with a balcony overlooking local gardens. Features a comfortable bedroom, small kitchen, modern bathroom, and air conditioning throughout.",
-    descriptionHr: "Udoban apartman s 3 zvjezdice, za 2-3 osobe. Smješten na prvom katu s balkonom s pogledom na lokalne vrtove. Sadrži udobnu spavaću sobu, malu kuhinju, modernu kupaonicu i klimu u cijelom prostoru.",
+    descriptionEn: "Apartment with 3 stars for 2-3 people, 38m² large with one bedroom, kitchen, bathroom, hallway + terrace. Air conditioning, satellite TV, etc.",
+    descriptionHr: "Apartman s 3 zvjezdice za 2-3 osobe, veličine 38m² s jednom spavaćom sobom, kuhinjom, kupaonicom, hodnikom + terasom. Klima uređaj, satelitska TV, itd.",
     images: [
       "/images/apartments/lara/bedroom.webp",
-      "/images/apartments/lara/exterior.webp",
       "/images/apartments/lara/kitchen.webp",
-      "/images/apartments/lara/view.webp"
+      "/images/apartments/lara/bathroom.webp",
+      "/images/apartments/lara/exterior.webp"
     ],
     location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2932.6597618819957!2d17.132774076268704!3d42.96089097114812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a511a53686173%3A0xb07cc02c9f7b77bc!2zS29yw6d1bGE!5e0!3m2!1sen!2shr!4v1746823574845!5m2!1sen!2shr",
     bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
@@ -641,6 +631,6 @@ export const updatedApartmentData: Apartment[] = [
     parkingType: "free",
     parkingDetails: null,
     hasGarden: false,
-    otherAmenities: ["Garden View", "Hair Dryer", "Satellite TV"]
+    otherAmenities: ["Terrace", "Quiet Location", "Air Conditioning"]
   }
 ];

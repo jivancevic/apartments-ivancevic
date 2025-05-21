@@ -4,7 +4,7 @@ import {
   inquiries, type Inquiry, type InsertInquiry,
   locations, type Location, type InsertLocation
 } from "@shared/schema";
-import { updatedApartmentData } from './updatedData';
+import { apartmentData } from './apartments';
 
 // Storage interface with all needed CRUD operations
 export interface IStorage {
@@ -142,9 +142,13 @@ export class MemStorage implements IStorage {
   
   // SEED DATA
   private seedApartments() {
-    // Use the updated apartment data with all new amenities
-    this.apartments = new Map(updatedApartmentData.map(apt => [apt.id, apt]));
-    const apartmentData: InsertApartment[] = [
+    // Load data from the apartments.ts file
+    this.apartments = new Map(apartmentData.map(apt => [apt.id, apt]));
+    // We've migrated all apartment data to the apartments.ts file
+    return;
+    
+    // Legacy code kept for reference - not actually used
+    const unusedData: InsertApartment[] = [
       {
         nameEn: "Magical Oasis",
         nameHr: "Magical Oasis",

@@ -123,13 +123,13 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
                         {Array.from({ length: bed.count }).map((_, iconIndex) => (
                           <span key={iconIndex} className="mr-0.5">
                             {bed.type === "double" ? (
-                              <BedDouble size={18} className="text-primary" />
+                              <AmenityIcon icon="bed-double" size={18} className="text-primary" />
                             ) : bed.type === "single" ? (
-                              <BedSingle size={18} className="text-primary" />
+                              <AmenityIcon icon="bed-single" size={18} className="text-primary" />
                             ) : bed.type === "sofa" ? (
-                              <Sofa size={18} className="text-primary" />
+                              <AmenityIcon icon="sofa" size={18} className="text-primary" />
                             ) : (
-                              <BedSingle size={18} className="text-primary" />
+                              <AmenityIcon icon="bed-single" size={18} className="text-primary" />
                             )}
                           </span>
                         ))}
@@ -377,7 +377,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
             <div className="bg-neutral p-4 rounded-lg">
               {icalError && (
                 <div className="flex items-center gap-2 text-red-500 text-sm mb-3 p-2 bg-red-50 rounded">
-                  <AlertCircle className="h-4 w-4" />
+                  <AmenityIcon icon="alert" size={16} />
                   <span>Error loading external calendars: {icalError}</span>
                 </div>
               )}

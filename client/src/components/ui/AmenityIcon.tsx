@@ -111,7 +111,7 @@ const AmenityIcon: React.FC<AmenityIconProps> = ({ icon, className = "", size = 
       return <BedDouble {...defaultProps} />;
     case 'bed-single':
       return <BedSingle {...defaultProps} />;
-    case 'sofa-bed':
+    case 'sofa':
       return <Sofa {...defaultProps} />;
     
     default:

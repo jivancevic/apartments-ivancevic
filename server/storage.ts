@@ -177,8 +177,8 @@ export class MemStorage implements IStorage {
         priceMultiplier: "1.90",
         cleaningFee: 50,
         maxGuests: 2,
-        // New apartment details
-        isEntireApartment: true,
+        // Apartment details
+        type: "apartment",
         roomSizeM2: 35,
         bedrooms: [
           {
@@ -236,7 +236,7 @@ export class MemStorage implements IStorage {
         cleaningFee: 40,
         maxGuests: 2,
         // New apartment details
-        isEntireApartment: true,
+        type: "apartment",
         roomSizeM2: 26,
         bedrooms: [
           {
@@ -297,7 +297,7 @@ export class MemStorage implements IStorage {
         cleaningFee: 80,
         maxGuests: 4,
         // New apartment details
-        isEntireApartment: true,
+        type: "apartment",
         roomSizeM2: 110,
         bedrooms: [
           {
@@ -368,7 +368,7 @@ export class MemStorage implements IStorage {
         cleaningFee: 80,
         maxGuests: 5,
         // New apartment details
-        isEntireApartment: true,
+        type: "apartment",
         roomSizeM2: 76,
         bedrooms: [
           {
@@ -454,7 +454,7 @@ export class MemStorage implements IStorage {
         cleaningFee: 70,
         maxGuests: 4,
         // New apartment details
-        isEntireApartment: true,
+        type: "apartment",
         roomSizeM2: 57,
         bedrooms: [
           {
@@ -526,7 +526,7 @@ export class MemStorage implements IStorage {
         cleaningFee: 40,
         maxGuests: 2,
         // New apartment details
-        isEntireApartment: true,
+        type: "apartment",
         roomSizeM2: 29,
         bedrooms: [
           {
@@ -580,7 +580,7 @@ export class MemStorage implements IStorage {
         cleaningFee: 60,
         maxGuests: 2,
         // New apartment details
-        isEntireApartment: true,
+        type: "apartment",
         roomSizeM2: 33,
         bedrooms: [
           {
@@ -640,7 +640,7 @@ export class MemStorage implements IStorage {
         cleaningFee: 80,
         maxGuests: 2,
         // New apartment details
-        isEntireApartment: true,
+        type: "apartment",
         roomSizeM2: 65,
         bedrooms: [
           {
@@ -710,7 +710,7 @@ export class MemStorage implements IStorage {
         cleaningFee: 30,
         maxGuests: 2,
         // New apartment details
-        isEntireApartment: true,
+        type: "apartment",
         roomSizeM2: 25,
         bedrooms: [
           {

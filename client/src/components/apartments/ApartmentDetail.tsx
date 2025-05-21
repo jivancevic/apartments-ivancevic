@@ -148,7 +148,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
             
             {/* Bathrooms */}
             <div className="flex items-center">
-              <Bath className="text-primary w-5 h-5 mr-2" />
+              <AmenityIcon icon="bathroom" size={20} className="text-primary mr-2" />
               <span>
                 {t("amenities.bathrooms", { count: apartment.bathrooms ?? 1 })}
               </span>
@@ -181,7 +181,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Garden */}
           {apartment.hasGarden && (
             <div className="flex items-center">
-              <Trees className="text-primary w-5 h-5 mr-2" />
+              <AmenityIcon icon="garden" size={20} className="text-primary mr-2" />
               <span>{t("amenities.garden")}</span>
             </div>
           )}
@@ -189,7 +189,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Sea View */}
           {apartment.hasSeaView && (
             <div className="flex items-center">
-              <AmenityIcon icon="water" className="text-primary mr-2" />
+              <AmenityIcon icon="sea-view" size={20} className="text-primary mr-2" />
               <span>{t("amenities.seaView")}</span>
             </div>
           )}
@@ -197,7 +197,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* City View */}
           {apartment.hasCityView !== undefined && apartment.hasCityView && (
             <div className="flex items-center">
-              <Building className="text-primary w-5 h-5 mr-2" />
+              <AmenityIcon icon="city-view" size={20} className="text-primary mr-2" />
               <span>{t("amenities.cityView", "City view")}</span>
             </div>
           )}
@@ -205,7 +205,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Free WiFi */}
           {apartment.hasWifi && (
             <div className="flex items-center">
-              <Wifi className="text-primary w-5 h-5 mr-2" />
+              <AmenityIcon icon="wifi" size={20} className="text-primary mr-2" />
               <span>{t("amenities.freeWifi", "Free WiFi")}</span>
             </div>
           )}
@@ -213,7 +213,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* AC */}
           {apartment.hasAC && (
             <div className="flex items-center">
-              <Snowflake className="text-primary w-5 h-5 mr-2" />
+              <AmenityIcon icon="ac" size={20} className="text-primary mr-2" />
               <span>{t("amenities.ac")}</span>
             </div>
           )}
@@ -221,7 +221,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* TV */}
           {apartment.hasTV && (
             <div className="flex items-center">
-              <Tv className="text-primary w-5 h-5 mr-2" />
+              <AmenityIcon icon="tv" size={20} className="text-primary mr-2" />
               <span>{t("amenities.tv")}</span>
             </div>
           )}
@@ -229,7 +229,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Dishwasher */}
           {apartment.hasDishwasher !== undefined && apartment.hasDishwasher && (
             <div className="flex items-center">
-              <Droplet className="text-primary w-5 h-5 mr-2" />
+              <AmenityIcon icon="dishwasher" size={20} className="text-primary mr-2" />
               <span>{t("amenities.dishwasher", "Dishwasher")}</span>
             </div>
           )}
@@ -237,7 +237,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Washing Machine */}
           {apartment.washingMachineType !== "none" && (
             <div className="flex items-center">
-              <WashingMachine className="text-primary w-5 h-5 mr-2" />
+              <AmenityIcon icon="washing-machine" size={20} className="text-primary mr-2" />
               <span>
                 {apartment.washingMachineType === "both"
                   ? t("amenities.washerDryer", "Washer & dryer")

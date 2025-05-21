@@ -8,11 +8,6 @@ import useLanguage from "@/hooks/useLanguage";
 import { useIcalFeeds } from "@/hooks/useIcalFeeds";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
-import { 
-  AlertCircle, Ban, BedDouble, BedSingle, Building, Coffee, 
-  Car, Droplet, Ruler, Sofa, Star, Trees, Users, Home, Bath,
-  Wifi, Snowflake, Tv, Scissors, Microwave, Blend, WashingMachine
-} from "lucide-react";
 import { useMemo, useState } from "react";
 import { getApartmentStars } from "./ApartmentTabs";
 import { format, parse } from 'date-fns';
@@ -77,7 +72,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
       <div>
         <div className="flex items-center mb-1 text-amber-500">
           {Array.from({ length: getApartmentStars(apartment.id) }).map((_, index) => (
-            <Star key={index} size={12} fill="currentColor" className="mr-0.5" />
+            <AmenityIcon key={index} icon="star" size={12} className="mr-0.5 text-current fill-current" />
           ))}
         </div>
         <h3 className="font-heading font-bold text-2xl mb-4">
@@ -95,88 +90,67 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           <div className="space-y-3">
             {/* Number of guests */}
             <div className="flex items-center">
-              <Users className="text-primary w-5 h-5 mr-2" />
-              <span>{t("amenities.maxGuests", "{{count}} guests", { count: apartment.maxGuests })}</span>
+              <AmenityIcon icon="guests" size={20} className="text-primary mr-2" />
+              <span>{t("amenities.maxGuests", { count: apartment.maxGuests })}</span>
             </div>
             
             {/* Apartment type */}
             <div className="flex items-center">
-              <Home className="text-primary w-5 h-5 mr-2" />
+              <AmenityIcon icon="apartment-type" size={20} className="text-primary mr-2" />
               <span>
-                {apartment.type === "studio" 
-                  ? t("amenities.studio", "Studio apartment")
-                  : apartment.type === "room"
-                  ? t("amenities.privateRoom", "Private room")
-                  : t("amenities.entireApartment", "Entire apartment")}
+                {t(`amenities.${apartment.type}`)}
               </span>
             </div>
-            
+
             {/* Room size */}
             <div className="flex items-center">
-              <Ruler className="text-primary w-5 h-5 mr-2" />
+              <AmenityIcon icon="room-size" size={20} className="text-primary mr-2" />
               <span>
-                {apartment.roomSizeM2 
-                  ? t("amenities.roomSize", "{{size}} m²", { size: apartment.roomSizeM2 })
-                  : t("amenities.roomSize", "59 m²")}
+                {t("amenities.roomSize", { size: apartment.roomSizeM2 })}
               </span>
             </div>
             
             {/* Bedrooms */}
-            {apartment.bedrooms ? (
-              apartment.bedrooms.map((bedroom, index) => (
-                <div key={index} className="bg-white p-3 rounded-md">
-                  <p className="font-medium mb-1">
-                    {currentLanguage === "en" ? bedroom.nameEn : bedroom.nameHr}
-                  </p>
-                  <div className="space-y-1 pl-2">
-                    {bedroom.beds.map((bed, bedIndex) => (
-                      <div key={bedIndex} className="flex items-center">
-                        <span className="flex mr-2">
-                          {Array.from({ length: bed.count }).map((_, iconIndex) => (
-                            <span key={iconIndex} className="mr-0.5">
-                              {bed.type === "double" ? (
-                                <BedDouble size={18} className="text-primary" />
-                              ) : bed.type === "single" ? (
-                                <BedSingle size={18} className="text-primary" />
-                              ) : bed.type === "sofa bed" ? (
-                                <Sofa size={18} className="text-primary" />
-                              ) : (
-                                <BedSingle size={18} className="text-primary" />
-                              )}
-                            </span>
-                          ))}
-                        </span>
-                        <span>
-                          {t("amenities.bed", "{{count}} {{type}} bed", { 
-                            count: bed.count, 
-                            type: bed.type 
-                          })}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))
-            ) : (
-              // Default bedroom layout if not specified
-              <div className="bg-white p-3 rounded-md">
-                <p className="font-medium mb-1">{t("amenities.bedroom", "Bedroom")} 1</p>
+            {apartment.bedrooms.map((bedroom, index) => (
+              <div key={index} className="bg-white p-3 rounded-md">
+                <p className="font-medium mb-1">
+                  {currentLanguage === "en" ? bedroom.nameEn : bedroom.nameHr}
+                </p>
                 <div className="space-y-1 pl-2">
-                  <div className="flex items-center">
-                    <span className="mr-2"><BedDouble size={18} className="text-primary" /></span>
-                    <span>{t("amenities.doubleBed", "1 double bed")}</span>
-                  </div>
+                  {bedroom.beds.map((bed, bedIndex) => (
+                    <div key={bedIndex} className="flex items-center">
+                      <span className="flex mr-2">
+                        {Array.from({ length: bed.count }).map((_, iconIndex) => (
+                          <span key={iconIndex} className="mr-0.5">
+                            {bed.type === "double" ? (
+                              <BedDouble size={18} className="text-primary" />
+                            ) : bed.type === "single" ? (
+                              <BedSingle size={18} className="text-primary" />
+                            ) : bed.type === "sofa" ? (
+                              <Sofa size={18} className="text-primary" />
+                            ) : (
+                              <BedSingle size={18} className="text-primary" />
+                            )}
+                          </span>
+                        ))}
+                      </span>
+                      <span>
+                        {t("amenities.bed", {
+                          count: bed.count,
+                          type: t(`amenities.bedTypes.${bed.type}`)
+                        })}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
-            )}
+            ))}
             
             {/* Bathrooms */}
             <div className="flex items-center">
               <Bath className="text-primary w-5 h-5 mr-2" />
               <span>
-                {apartment.bathrooms
-                  ? t("amenities.bathrooms", "{{count}} bathroom", { count: apartment.bathrooms })
-                  : t("amenities.bathrooms", "1 bathroom")}
+                {t("amenities.bathrooms", { count: apartment.bathrooms ?? 1 })}
               </span>
             </div>
           </div>
@@ -187,6 +161,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {t("apartments.amenities")}
         </h4>
         <div className="grid grid-cols-2 gap-y-3 gap-x-4 mb-6">
+          
           {/* Kitchen */}
           {apartment.hasKitchen && (
             <div className="flex items-center">
@@ -258,20 +233,32 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
               <span>{t("amenities.dishwasher", "Dishwasher")}</span>
             </div>
           )}
+
+          {/* Washing Machine */}
+          {apartment.washingMachineType !== "none" && (
+            <div className="flex items-center">
+              <WashingMachine className="text-primary w-5 h-5 mr-2" />
+              <span>
+                {apartment.washingMachineType === "both"
+                  ? t("amenities.washerDryer", "Washer & dryer")
+                  : t("amenities.washingMachine", "Washing machine")}
+              </span>
+            </div>
+          )}
+
+          {/* Hair Dryer */}
+          {apartment.hasHairDryer && (
+            <div className="flex items-center">
+              <Scissors className="text-primary w-5 h-5 mr-2" />
+              <span>{t("amenities.hairDryer", "Hair dryer")}</span>
+            </div>
+          )}
           
           {/* Coffee Machine */}
           {apartment.hasCoffeeMachine !== undefined && apartment.hasCoffeeMachine && (
             <div className="flex items-center">
               <Coffee className="text-primary w-5 h-5 mr-2" />
               <span>{t("amenities.coffeeMachine", "Coffee machine")}</span>
-            </div>
-          )}
-          
-          {/* Hair Dryer */}
-          {apartment.hasHairDryer && (
-            <div className="flex items-center">
-              <Scissors className="text-primary w-5 h-5 mr-2" />
-              <span>{t("amenities.hairDryer", "Hair dryer")}</span>
             </div>
           )}
           
@@ -288,18 +275,6 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
             <div className="flex items-center">
               <Blend className="text-primary w-5 h-5 mr-2" />
               <span>{t("amenities.smoothieMaker", "Smoothie maker")}</span>
-            </div>
-          )}
-          
-          {/* Washing Machine */}
-          {apartment.washingMachineType !== "none" && (
-            <div className="flex items-center">
-              <WashingMachine className="text-primary w-5 h-5 mr-2" />
-              <span>
-                {apartment.washingMachineType === "both"
-                  ? t("amenities.washerDryer", "Washer & dryer")
-                  : t("amenities.washingMachine", "Washing machine")}
-              </span>
             </div>
           )}
           
@@ -320,13 +295,14 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
                     </TooltipTrigger>
                     <TooltipContent className="max-w-xs">
                       <p>
-                        {t("amenities.parkingTooltip", 
-                          `Private parking is possible on site (${
-                            apartment.parkingDetails.reservationRequired 
-                              ? "reservation is required" 
-                              : "reservation is not needed"
-                          }) and costs €${apartment.parkingDetails.pricePerDay} per day.`
-                        )}
+                        {t("amenities.parkingTooltip", {
+                          reservation: t(
+                            apartment.parkingDetails.reservationRequired
+                              ? "amenities.reservationRequired"
+                              : "amenities.reservationNotRequired"
+                          ),
+                          price: apartment.parkingDetails.pricePerDay
+                        })}
                       </p>
                     </TooltipContent>
                   </Tooltip>

@@ -233,7 +233,9 @@ export function calculateNightlyPrice(apartment: Apartment, date: Date): number 
  * Gets cleaning fee for an apartment
  */
 export function getCleaningFee(apartment: Apartment): number {
-  return apartment.cleaningFee || CLEANING_FEES[apartment.nameEn] || 40;
+  // Use the apartment pricing config system to get the cleaning fee
+  const config = getApartmentPricingConfig(apartment);
+  return config.cleaningFee;
 }
 
 /**
@@ -314,6 +316,9 @@ export function calculateStayPrice(
  * Gets pricing table for all seasons
  */
 export function getSeasonalPrices(apartment: Apartment): Record<SeasonType, number> {
+  // Get the apartment-specific pricing configuration
+  const config = getApartmentPricingConfig(apartment);
+  
   // Sample dates for each season (we just need a date within the range)
   const seasonSampleDates: Record<SeasonType, Date> = {
     [SeasonType.OUT_OF_SEASON]: createDate(1, 11, 2024),

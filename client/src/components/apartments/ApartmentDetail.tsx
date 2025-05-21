@@ -8,7 +8,10 @@ import useLanguage from "@/hooks/useLanguage";
 import { useIcalFeeds } from "@/hooks/useIcalFeeds";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
-import { AlertCircle, Ban, Car, Star } from "lucide-react";
+import { 
+  AlertCircle, Ban, BedDouble, BedSingle, Building, Coffee, 
+  Droplet, Ruler, Sofa, Star, Trees, Users, Home, Bath
+} from "lucide-react";
 import { useMemo, useState } from "react";
 import { getApartmentStars } from "./ApartmentTabs";
 import { format, parse } from 'date-fns';
@@ -91,13 +94,13 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           <div className="space-y-3">
             {/* Number of guests */}
             <div className="flex items-center">
-              <AmenityIcon icon="users" className="text-primary mr-2" />
+              <Users className="text-primary w-5 h-5 mr-2" />
               <span>{t("amenities.maxGuests", "{{count}} guests", { count: apartment.maxGuests })}</span>
             </div>
             
             {/* Entire apartment or just a room */}
             <div className="flex items-center">
-              <AmenityIcon icon="home" className="text-primary mr-2" />
+              <Home className="text-primary w-5 h-5 mr-2" />
               <span>
                 {apartment.isEntireApartment !== undefined ? (
                   apartment.isEntireApartment 
@@ -111,7 +114,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
             
             {/* Room size */}
             <div className="flex items-center">
-              <AmenityIcon icon="ruler" className="text-primary mr-2" />
+              <Ruler className="text-primary w-5 h-5 mr-2" />
               <span>
                 {apartment.roomSizeM2 
                   ? t("amenities.roomSize", "{{size}} m²", { size: apartment.roomSizeM2 })
@@ -127,7 +130,17 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
                   <div className="space-y-1 pl-2">
                     {bedroom.beds.map((bed, bedIndex) => (
                       <div key={bedIndex} className="flex items-center">
-                        <span className="mr-2">{bed.emoji}</span>
+                        <span className="mr-2">
+                          {bed.type === "double" ? (
+                            <BedDouble size={18} className="text-primary" />
+                          ) : bed.type === "single" ? (
+                            <BedSingle size={18} className="text-primary" />
+                          ) : bed.type === "sofa bed" ? (
+                            <Sofa size={18} className="text-primary" />
+                          ) : (
+                            <BedSingle size={18} className="text-primary" />
+                          )}
+                        </span>
                         <span>
                           {t("amenities.bed", "{{count}} {{type}} bed", { 
                             count: bed.count, 
@@ -154,7 +167,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
             
             {/* Bathrooms */}
             <div className="flex items-center">
-              <AmenityIcon icon="bath" className="text-primary mr-2" />
+              <Bath className="text-primary w-5 h-5 mr-2" />
               <span>
                 {apartment.bathrooms
                   ? t("amenities.bathrooms", "{{count}} bathroom", { count: apartment.bathrooms })

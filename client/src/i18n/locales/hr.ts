@@ -53,7 +53,7 @@ const hrTranslation = {
   // Details
   "amenities.maxGuests": "{{count}} gost",
   "amenities.maxGuests_plural": "{{count}} gosta",
-  "amenities.apartment": "Apartman",
+  "amenities.apartment": "Cijeli Apartman",
   "amenities.studio": "Studio apartman",
   "amenities.room": "Soba",
   "amenities.roomSize": "{{size}} m²",

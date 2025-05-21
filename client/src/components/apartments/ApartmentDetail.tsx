@@ -165,7 +165,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Kitchen */}
           {apartment.hasKitchen && (
             <div className="flex items-center">
-              <AmenityIcon icon="utensils" className="text-primary mr-2" />
+              <AmenityIcon icon="kitchen" className="text-primary mr-2" />
               <span>{t("amenities.kitchen")}</span>
             </div>
           )}
@@ -173,7 +173,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
           {/* Balcony */}
           {apartment.hasBalcony && (
             <div className="flex items-center">
-              <AmenityIcon icon="wind" className="text-primary mr-2" />
+              <AmenityIcon icon="balcony" className="text-primary mr-2" />
               <span>{t("amenities.balcony")}</span>
             </div>
           )}

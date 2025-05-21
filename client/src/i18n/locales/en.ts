@@ -48,7 +48,7 @@ const enTranslation = {
   // Details
   "amenities.maxGuests": "{{count}} guest",
   "amenities.maxGuests_plural": "{{count}} guests",
-  "amenities.apartment": "Apartment",
+  "amenities.apartment": "Entire Apartment",
   "amenities.studio": "Studio apartment",
   "amenities.room": "Private room",
   "amenities.roomSize": "{{size}} m²",

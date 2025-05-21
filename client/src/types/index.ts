@@ -18,11 +18,11 @@ export interface Apartment {
   type: "apartment" | "studio" | "room";
   roomSizeM2: number;
   bedrooms: {
-    name: string;
+    nameEn: string;
+    nameHr: string;
     beds: {
       type: string;
       count: number;
-      emoji: string;
     }[];
   }[];
   bathrooms: number;

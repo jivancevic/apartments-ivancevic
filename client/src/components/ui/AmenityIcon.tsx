@@ -2,7 +2,8 @@ import React from 'react';
 import { 
   Wifi, Utensils, Snowflake, Tv, Wind, Droplets, 
   ParkingMeter, Network, Umbrella, Volume2, Mountain,
-  Handshake, Sparkles, MapPin, Compass
+  Handshake, Sparkles, MapPin, Compass, BedDouble,
+  BedSingle, Sofa
 } from 'lucide-react';
 
 interface AmenityIconProps {
@@ -49,6 +50,13 @@ const AmenityIcon: React.FC<AmenityIconProps> = ({ icon, className = "" }) => {
       return <MapPin {...defaultProps} />;
     case 'compass':
       return <Compass {...defaultProps} />;
+    // Bed type icons
+    case 'bed-double':
+      return <BedDouble {...defaultProps} />;
+    case 'bed-single':
+      return <BedSingle {...defaultProps} />;
+    case 'sofa-bed':
+      return <Sofa {...defaultProps} />;
     default:
       return null;
   }

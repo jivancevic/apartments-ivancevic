@@ -9,10 +9,11 @@ const VisitTabs = ({ activeTab, onTabChange }: VisitTabsProps) => {
   const { t } = useTranslation();
 
   const tabs = [
-    { id: "beach", label: t("visit.beaches") },
-    { id: "restaurant", label: t("visit.restaurants") },
-    { id: "attraction", label: t("visit.attractions") },
-    { id: "activity", label: t("visit.activities") }
+    { id: "attraction-old-town", label: t("visit.attractionsOldTown", "Attractions - Old Town") },
+    { id: "attraction-island", label: t("visit.attractionsIsland", "Attractions - Island") },
+    { id: "activity", label: t("visit.activities", "Activities") },
+    { id: "excursion", label: t("visit.excursions", "Excursions") },
+    { id: "restaurant", label: t("visit.restaurants", "Restaurants") }
   ];
 
   return (

@@ -51,8 +51,10 @@ const VisitCards = ({ locations }: VisitCardsProps) => {
 const getDistanceIcon = (distance: string): string => {
   if (distance.includes("walk")) {
     return "fas fa-walking text-primary mr-1";
-  } else if (distance.includes("drive")) {
+  } else if (distance.includes("car")) {
     return "fas fa-car text-primary mr-1";
+  } else if (distance.includes("ferry")) {
+    return "fas fa-ship text-primary mr-1";
   } else {
     return "fas fa-map-marker-alt text-primary mr-1";
   }
@@ -60,14 +62,16 @@ const getDistanceIcon = (distance: string): string => {
 
 const getFeatureIcon = (type: string): string => {
   switch (type) {
-    case "beach":
-      return "fas fa-umbrella-beach text-primary mr-1";
+    case "attraction-old-town":
+      return "fas fa-landmark text-primary mr-1";
+    case "attraction-island":
+      return "fas fa-tree text-primary mr-1";
     case "restaurant":
       return "fas fa-utensils text-primary mr-1";
-    case "attraction":
-      return "fas fa-landmark text-primary mr-1";
     case "activity":
       return "fas fa-hiking text-primary mr-1";
+    case "excursion":
+      return "fas fa-ship text-primary mr-1";
     default:
       return "fas fa-star text-primary mr-1";
   }

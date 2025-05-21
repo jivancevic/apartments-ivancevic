@@ -9,7 +9,7 @@ import { AlertCircle } from "lucide-react";
 
 const Visit = () => {
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState<string>("beach");
+  const [activeTab, setActiveTab] = useState<string>("attraction-old-town");
   
   // Fetch locations data
   const { data: locations, isLoading, error } = useQuery({

@@ -15,15 +15,12 @@ export const apartmentData: Apartment[] = [
     Ovaj udoban apartman od 35 m² spaja povijesni karakter i suvremeni komfor – kameni zidovi autentičnog ambijenta skladno su spojeni s elegantnim modernim uređenjem. Gosti oduševljeno ističu besprijekornu čistoću interijera i pažljivo osmišljene detalje u svakom kutku. Dnevni boravak nudi udobnu sofu, flat-screen TV (s pristupom Netflixu) i klima-uređaj, dok spavaća soba ima iznimno udoban krevet s kvalitetnom posteljinom za miran san. Potpuno opremljena kuhinja pruža sve potrebno za pripremu obroka, a blistava kupaonica s prostranim tušem, bideom i mekanim ručnicima donosi dašak luksuza. Iako se nalazi nadomak svih znamenitosti, šetnice “iza grada” i najboljih restorana, apartman ostaje tih i miran – prava “oaza” u srcu živahnog Starog Grada. 
     Domaćini Josip i njegova obitelj trude se gostima osigurati neponovljiv boravak: dočekuju goste s toplom dalmatinskom gostoljubivošću i korisnim lokalnim preporukama. Zahvaljujući nenadmašnoj lokaciji, romantičnom ugođaju i svim pogodnostima doma (od brzog Wi-Fi-ja do perilice rublja u apartmanu), Magical Oasis jamči divan boravak u kojem se možete opustiti i doživjeti svu čaroliju Korčule.`,
     images: [
-        "/images/apartments/magical-oasis/exterior.webp",
-        "/images/apartments/magical-oasis/exterior2.webp",
-        "/images/apartments/magical-oasis/entrance.webp",
-        "/images/apartments/magical-oasis/bedroom.webp",
-        "/images/apartments/magical-oasis/bathroom.webp",
-        "/images/apartments/magical-oasis/bathroom2.webp",
-        "/images/apartments/magical-oasis/kitchen.webp",
-        "/images/apartments/magical-oasis/window-view.webp",
-        "/images/apartments/magical-oasis/view.webp"
+        "/images/apartments/magical-oasis/1.png",
+        "/images/apartments/magical-oasis/2.png",
+        "/images/apartments/magical-oasis/3.png",
+        "/images/apartments/magical-oasis/4.png",
+        "/images/apartments/magical-oasis/5.png",
+        "/images/apartments/magical-oasis/6.png"
     ],
     location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1400!2d17.13583210884043!3d42.96238425612054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a517549e08c53%3A0x20f6b511dabd88db!2sMagical%20Oasis%20for%20two%20in%20Korcula%20Old%20Town!5e0!3m2!1sen!2shr!4v1745508164244!5m2!1sen!2shr",
     bookingUrl: "https://www.booking.com/hotel/hr/magical-old-town-escape-for-two.html",
@@ -165,16 +162,16 @@ export const apartmentData: Apartment[] = [
       Vlasnik Vicko često dočeka goste već u luci te podijeli insajderske savjete (ponekad čak i poziv na lokalne manifestacije poput tradicionalnog mačevalačkog plesa), čineći da se ovdje osjećate kao kod kuće. Spoj povijesnog šarma, udobnosti i vrhunske praktičnosti čini Apartman Sveti Roko savršenim izborom za parove ili solo putnike u potrazi za nezaboravnim boravkom u Korčuli.
 `,
     images: [
-      "/images/apartments/saint-roko/living-room1.webp",
-      "/images/apartments/saint-roko/living-room2.webp",
-      "/images/apartments/saint-roko/bedroom.webp",
-      "/images/apartments/saint-roko/bathroom.webp",
-      "/images/apartments/saint-roko/detail1.webp",
-      "/images/apartments/saint-roko/detail2.webp",
-      "/images/apartments/saint-roko/exterior.webp",
-      "/images/apartments/saint-roko/entrance.webp",
-      "/images/apartments/saint-roko/street.webp",
-      "/images/apartments/saint-roko/location.webp"
+      "/images/apartments/st-roko/ispred.jpg",
+      "/images/apartments/st-roko/krevet.jpg",
+      "/images/apartments/st-roko/kuhinja.jpg",
+      "/images/apartments/st-roko/kuhinja2.jpg",
+      "/images/apartments/st-roko/ostava.jpg",
+      "/images/apartments/st-roko/siroko.jpg",
+      "/images/apartments/st-roko/siroko2.jpg",
+      "/images/apartments/st-roko/ulaz.jpg",
+      "/images/apartments/st-roko/wc.jpg",
+      "/images/apartments/st-roko/wc2.jpg"
     ],
     location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1200!2d17.130864458988793!3d42.9616473522362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartment%20St.%20Roko!5e0!3m2!1sen!2shr!4v1747837157249!5m2!1sen!2shr",
     bookingUrl: "https://www.booking.com/hotel/hr/old-town-st-roko.html",
@@ -246,9 +243,16 @@ export const apartmentData: Apartment[] = [
       "/images/apartments/lavender/room1-2.webp",
       "/images/apartments/lavender/room2.webp",
       "/images/apartments/lavender/room2-2.webp",
-      "/images/apartments/lavender/room3.webp"
+      "/images/apartments/lavender/stairs.webp",
+      "/images/apartments/lavender/table.webp",
+      "/images/apartments/lavender/view.webp",
+      "/images/apartments/lavender/view2.webp",
+      "/images/apartments/lavender/view3.webp",
+      "/images/apartments/lavender/wc1.webp",
+      "/images/apartments/lavender/wc2.webp",
+      "/images/apartments/lavender/wc3.webp",
     ],
-    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2000!2d17.129945983275697!3d42.83819729673939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2shr!4v1747837786693!5m2!1sen!2shr",
+    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d17.129945983275697!3d42.83819729673939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2sen!4v1747837786693!5m2!1sen!2sen",
     bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
     airbnbUrl: "https://airbnb.com/h/apartments-viva-lavender",
     icalUrls: [
@@ -329,17 +333,20 @@ export const apartmentData: Apartment[] = [
     descriptionEn: `Apartment Viva Sun is a bright and welcoming getaway designed for comfort and relaxation. This spacious two-bedroom apartment (one with a queen bed and one flexible twin/double) features a prozračan open living area filled with natural light and a balcony that offers beautiful views of the Adriatic Sea. Start your morning with sunshine on the balcony, sipping coffee as you overlook the tranquil bay. Inside, a fully equipped kitchen and a cozy dining space make it easy to enjoy meals at home. An added convenience is the apartment’s extra half-bathroom alongside the modern full bathroom – a detail families and groups of up to four guests truly appreciate. The décor reflects the warm colors of the Dalmatian sun, creating a cheerful ambiance throughout. Guests have access to a barbecue grill on the property, perfect for grilling fresh local seafood in the evenings. The seaside is just a few minutes’ walk down a path, leading to a quiet pebble beach with crystal-clear water. Korčula’s historic center is within walking distance or a quick drive, so you can easily explore shops, restaurants, and cultural sites. Past guests consistently praise Apartment Viva Sun’s cleanliness, convenient layout, and the friendly, helpful hosts who make every stay special.`,
     descriptionHr: `Apartman Viva Sun svijetao je i ugodan prostor osmišljen za udoban odmor. Ovaj prostrani apartman s dvije spavaće sobe (jedna s bračnim krevetom, druga s dva odvojena kreveta koja se mogu spojiti) ima prozračan dnevni boravak ispunjen prirodnim svjetlom i balkon koji pruža prekrasan pogled na Jadransko more. Jutro možete započeti uz sunčeve zrake na balkonu, ispijajući kavu s pogledom na mirnu uvalu. Unutra se nalaze potpuno opremljena kuhinja i udoban blagovaonski kutak kako biste lako mogli uživati u obrocima. Dodatna pogodnost je odvojeni toalet uz modernu kupaonicu – detalj koji obitelji i grupe do četiri osobe itekako cijene. Uređenje interijera odražava tople boje dalmatinskog sunca, stvarajući vedar ugođaj u cijelom prostoru. Gostima je na raspolaganju i roštilj u dvorištu, idealan za pripremu svježe ribe i morskih plodova u toplim večerima. More je udaljeno svega nekoliko minuta hoda niz stazu, gdje vas čeka mirna šljunčana plaža s kristalno čistim morem. Povijesna jezgra Korčule nalazi se na pješačkoj udaljenosti ili par minuta vožnje, pa lako možete istražiti trgovine, restorane i kulturne znamenitosti. Prijašnji gosti redovito hvale besprijekornu čistoću, praktičan raspored apartmana te ljubazne i susretljive domaćine koji svaki boravak čine posebnim.`,
     images: [
-      "/images/apartments/sun/living-room.webp",
-      "/images/apartments/sun/living-room2.webp",
-      "/images/apartments/sun/kitchen.webp",
-      "/images/apartments/sun/bedroom1.webp",
-      "/images/apartments/sun/bedroom2.webp",
-      "/images/apartments/sun/bathroom.webp",
+      "/images/apartments/sun/balcony-view.webp",
       "/images/apartments/sun/balcony.webp",
+      "/images/apartments/sun/dining-room.webp",
+      "/images/apartments/sun/exterior.webp",
+      "/images/apartments/sun/kitchen.webp",
+      "/images/apartments/sun/location.webp",
+      "/images/apartments/sun/room2.webp",
+      "/images/apartments/sun/table.webp",
       "/images/apartments/sun/view.webp",
-      "/images/apartments/sun/garden.webp"
+      "/images/apartments/sun/view2.webp",
+      "/images/apartments/sun/view3.webp",
+      "/images/apartments/sun/wc.webp",
     ],
-    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d188.2796402065861!2d17.13455596084784!3d42.95820684655463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2sit!4v1747665668512!5m2!1sen!2sit",
+    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d17.129945983275697!3d42.83819729673939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2sen!4v1747837786693!5m2!1sen!2sen",
     bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
     airbnbUrl: "https://airbnb.com/h/apartments-viva-sun",
     icalUrls: [
@@ -411,12 +418,14 @@ export const apartmentData: Apartment[] = [
     descriptionEn: `Apartment Viva Sea is a stylish studio for two, offering breathtaking vistas and a serene atmosphere. Perched above the bay, this open-plan retreat maximizes space with a comfortable double bed, a compact kitchenette, and a modern bathroom. The décor is contemporary with touches of coastal charm, letting the sparkling sea view take center stage. Step out onto the private balcony and you’re greeted by an expansive panorama of the crystal-clear bay and the majestic Pelješac mountains across the channel. It’s the perfect spot to sip local wine at sunset or start your day with breakfast in the fresh sea air. Apartment Viva Sea comes equipped with all the essentials: air conditioning, free WiFi, satellite TV, and even a washing machine for your convenience. Adventure is close at hand – the calm bay below is great for swimming and snorkeling, and the area is known for windsurfing and scenic cycling routes. Korčula’s famous Old Town is around 1 km away (about a 15–20 minute walk), so you can enjoy both tranquility and cultural sights with ease. Guests consistently praise the panoramic views and peaceful location in their reviews, noting how rejuvenating their stay in Viva Sea was and applauding the attentive, friendly hosts. Whether you’re a couple seeking romance or a solo traveler longing for a quiet seaside escape, Viva Sea offers an unforgettable Korčula experience.`,
     descriptionHr: `Apartman Viva Sea moderan je studio za dvoje, s prekrasnim vidicima i spokojnim ugođajem. Smješten iznad uvale, ovaj otvoreni studio maksimalno koristi svoj prostor te nudi udoban bračni krevet, malu čajnu kuhinju i modernu kupaonicu – sve što vam treba za opušten boravak. Interijer je suvremen s daškom mediteranskog šarma, a blistav pogled na more uvijek je u prvom planu. S privatnog balkona pruža se široka panorama kristalno čiste uvale i impresivnih peljeških planina preko puta kanala. To je savršeno mjesto za uživanje u čaši domaćeg vina u suton ili za početak dana doručkom na svježem morskom zraku. Apartman Viva Sea opremljen je svim bitnim sadržajima: klima-uređajem, besplatnim Wi-Fi internetom, satelitskom TV i čak perilicom rublja za vašu udobnost. Avantura vam je također nadohvat ruke – mirna uvala ispod izvrsna je za plivanje i ronjenje, a okolica je poznata po jedrenju na dasci i slikovitim biciklističkim stazama. Čuveni stari grad Korčule udaljen je oko 1 km (15–20 minuta hoda), tako da možete lako uživati i u miru i u kulturnim znamenitostima. Gosti u recenzijama neprestano hvale panoramski pogled i miran položaj – mnogi ističu kako su se tijekom boravka u Vivi Sea zaista odmorili, a pohvaljuju i susretljive, prijazne domaćine. Bilo da ste par u potrazi za romantičnim bijegom ili solo putnik koji želi tiho utočište uz more, Viva Sea nudi nezaboravno korčulansko iskustvo.`,
     images: [
+      "/images/apartments/sea/balcony.webp",
       "/images/apartments/sea/bedroom.webp",
       "/images/apartments/sea/exterior.webp",
       "/images/apartments/sea/location.webp",
+      "/images/apartments/sea/wc.webp",
       "/images/apartments/sea/whole.webp"
     ],
-    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d188.2796402065861!2d17.13455596084784!3d42.95820684655463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2sit!4v1747665668512!5m2!1sen!2sit",
+    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d17.129945983275697!3d42.83819729673939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2sen!4v1747837786693!5m2!1sen!2sen",
     bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
     airbnbUrl: "https://airbnb.com/h/apartments-viva-sea",
     icalUrls: [
@@ -471,13 +480,15 @@ export const apartmentData: Apartment[] = [
     descriptionEn: `Apartment Viva Beach is a charming seaside hideaway perfect for a romantic escape or a peaceful retreat for two. Nestled on the ground floor, this one-bedroom apartment boasts its own private courtyard terrace (about 22 m²) surrounded by lush greenery – including fragrant orange and lemon trees that provide natural shade. The cozy interior is thoughtfully arranged, featuring a comfortable double bed, a compact but well-equipped kitchen (with a dishwasher for added convenience), and a modern bathroom with a walk-in shower. The indoor living space seamlessly connects to the outdoor terrace, where you can lounge, sunbathe in privacy, or enjoy al fresco dining with the sound of the sea in the background. A few stone steps lead directly from the property down to a secluded pebble beach known for its crystal-clear water and uncrowded atmosphere – it’s almost like having your own private beach. Despite the tucked-away feel, Korčula’s Old Town is only a short drive or a pleasant 20-minute walk along the coast. Guests often remark in reviews that Apartment Viva Beach’s shady terrace is a highlight of their stay, calling it an “oasis of calm,” and they love the spotless cleanliness and the hospitality of the hosts. If you’re seeking tranquility by the sea with all the comforts of home, Viva Beach delivers an unforgettable experience.`,
     descriptionHr: `Apartman Viva Beach šarmantno je utočište uz more, savršeno za romantičan bijeg ili opuštajući odmor udvoje. Smješten u prizemlju, ovaj jednosobni apartman ima vlastitu privatnu terasu (oko 22 m²) okruženu bujnim zelenilom – mirisna stabla naranče i limuna pružaju prirodan hlad. Ugodan interijer pametno je organiziran te sadrži udoban bračni krevet, kompaktnu ali potpuno opremljenu kuhinju (s perilicom posuđa za dodatnu praktičnost) i modernu kupaonicu s prostranom tuš-kabinom. Unutarnji dnevni prostor neprimjetno se spaja s vanjskom terasom, gdje se možete opustiti, sunčati u privatnosti ili blagovati na otvorenom uz zvuk mora u pozadini. Nekoliko kamenih stuba vodi iz dvorišta izravno do osamljene šljunčane plaže s kristalno čistim morem, koja nije napučena – gotovo kao da imate vlastitu plažu. Unatoč skrovitom ugođaju, stari grad Korčule udaljen je samo kratku vožnju ili ugodnu šetnju od dvadesetak minuta uz obalu. Gosti u recenzijama često ističu da je zasjenjena terasa apartmana Viva Beach vrhunac njihova boravka, opisujući je kao "oazu mira", a hvale i besprijekornu čistoću te gostoljubivost domaćina. Ako tražite spokoj na moru uz sve udobnosti doma, Viva Beach pružit će vam nezaboravno iskustvo.`,
     images: [
-      "/images/apartments/beach/living-room.webp",
-      "/images/apartments/beach/couch.webp",
-      "/images/apartments/beach/balcony.webp",
-      "/images/apartments/beach/kitchen.webp"
+      "/images/apartments/beach/bedroom.webp",
+      "/images/apartments/beach/exterior.webp",
+      "/images/apartments/beach/garden.webp",
+      "/images/apartments/beach/location.webp",
+      "/images/apartments/beach/terrace.webp",
+      "/images/apartments/beach/wc.webp"
     ],
-    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2919.812968723878!2d17.130686977090376!3d42.96122627114335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a8c2af613%3A0x2c0e4b2c1db1bff9!2sApartments%20Giuliani!5e0!3m2!1sen!2sit!4v1747665748121!5m2!1sen!2sit",
-    bookingUrl: "https://www.booking.com/hotel/hr/apartmani-lara-i-nika.html",
+    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d17.129945983275697!3d42.83819729673939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a5024e22e58e5%3A0x197355921c559cc4!2sApartments%20Viva!5e0!3m2!1sen!2sen!4v1747837786693!5m2!1sen!2sen",
+    bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
     airbnbUrl: "https://airbnb.com/h/apartments-viva-beach",
     icalUrls: [
       "https://www.airbnb.com/calendar/ical/11847437.ics?s=6d2cbbdabf0b62bf08a047cf0712d317"
@@ -489,18 +500,18 @@ export const apartmentData: Apartment[] = [
     maxGuests: 2,
     type: "apartment",
     roomSizeM2: 33,
-      bedrooms: [
-        {
-          name: "Bedroom 1",
-          beds: [
-            {
-              type: "double",
-              count: 1
-            }
-          ]
-        }
-      ],
-      bathrooms: 1,
+    bedrooms: [
+      {
+        name: "Bedroom 1",
+        beds: [
+          {
+            type: "double",
+            count: 1
+          }
+        ]
+      }
+    ],
+    bathrooms: 1,
     // Amenities
     hasKitchen: true,
     hasBalcony: false,
@@ -541,7 +552,7 @@ export const apartmentData: Apartment[] = [
       "/images/apartments/nika/room1.webp",
       "/images/apartments/nika/balcony.webp"
     ],
-    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2919.7969843822066!2d17.12748487563004!3d42.96148247114323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a516bb56b95d3%3A0x2758c0e472e4450c!2sApartments%20Giuliani!5e0!3m2!1sen!2sit!4v1747665846634!5m2!1sen!2sit",
+    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5000!2d17.12748487563004!3d42.96148247114323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a516bb56b95d3%3A0x2758c0e472e4450c!2sApartments%20Giuliani!5e0!3m2!1sen!2sen!4v1747665953963!5m2!1sen!2sen",
     bookingUrl: "https://www.booking.com/hotel/hr/apartmani-lara-i-nika.html",
     airbnbUrl: "https://airbnb.com/h/apartmani-giuliani-nika",
     icalUrls: [
@@ -610,13 +621,20 @@ export const apartmentData: Apartment[] = [
     descriptionEn: `Apartment Lara is a cozy Korčula getaway with a delightful local touch. Just a short 10-minute stroll from the Old Town gates (and a few minutes from a small pebble beach), Lara enjoys a peaceful setting and lovely partial sea views. Step outside to your own little patio – the perfect spot to sip morning coffee while gazing at the turquoise Adriatic. Inside, the apartment is clean, bright and outfitted with everything you need. The living area includes a comfortable sofa (ideal for relaxing after a day of exploring) and a flat-screen TV, and opens into a compact kitchen equipped with all the essentials for cooking – from a stovetop and fridge to cookware and a coffee maker. The tranquil bedroom offers a cozy double bed with quality linens to ensure restful nights, and the bathroom is modern, stocked with fresh towels and toiletries. Air-conditioning and free Wi-Fi are provided, and guests of Lara can also use a shared washing machine during longer stays. Tucked in a friendly residential neighborhood just outside the tourist bustle, Apartment Lara lets you experience Korčula like a local – quiet nights, easy walks to town and beach, and authentic charm. Hosts Marija and her family are praised for their warmth and attentiveness; they’ll gladly offer tips on where to eat, swim, and sightsee. Whether you’re enjoying a glass of wine on the patio or unwinding in the comfy living room, Apartment Lara offers charm, comfort, and convenience for your island stay.`,
     descriptionHr: `Apartman Lara pruža ugodno utočište u Korčuli s osebujnim lokalnim šarmom. Nalazi se u mirnom okruženju, oko 10 minuta lagane šetnje od gradskih zidina (i tek nekoliko minuta od male šljunčane plaže). Lara uživa povlašten položaj u tišini stambenog naselja, uz lijep djelomičan pogled na more. Na vlastitoj maloj terasi ispred apartmana možete ispijati jutarnju kavu dok promatrate tirkizno more na obzoru. Unutrašnjost je čista, svijetla i opremljena svime što vam treba. Dnevni boravak nudi udoban kauč za opuštanje nakon istraživanja otoka i TV ravnog ekrana, a spojen je s kompaktnom kuhinjom opremljenom svim potrepštinama za kuhanje – od ploče za kuhanje i hladnjaka do posuđa i aparata za kavu. U mirnoj spavaćoj sobi nalazi se udoban bračni krevet s kvalitetnom posteljinom koja jamči spokojne noći, a kupaonica je moderna, s čistim ručnicima i toaletnim potrepštinama. Na raspolaganju su i klima-uređaj te besplatan Wi-Fi, a gosti Lare mogu koristiti i zajedničku perilicu rublja tijekom duljih boravaka. Smještena izvan vreve turista, u susjedstvu gdje žive lokalni stanovnici, Lara vam omogućuje da doživite Korčulu kao mještanin – mirne noći, lagane šetnje do grada i plaže, te autentičan ugođaj. Domaćini (obitelj Giuliani) poznati su po svojoj srdačnosti i pažnji: rado će vam preporučiti gdje jesti, kupati se ili što posjetiti. Bilo da ispijate čašu vina na terasi u suton ili se odmarate u udobnom dnevnom boravku, Apartman Lara pruža šarm, udobnost i praktičnost za vaš boravak na otoku.`,
     images: [
+      "/images/apartments/lara/bed.webp",
+      "/images/apartments/lara/bed2.webp",
+      "/images/apartments/lara/bed3.webp",
+      "/images/apartments/lara/bed4.webp",
       "/images/apartments/lara/kitchen.webp",
-      "/images/apartments/lara/kitchen-view.webp",
-      "/images/apartments/lara/room1.webp",
-      "/images/apartments/lara/balcony.webp",
-      "/images/apartments/lara/bathroom.webp"
+      "/images/apartments/lara/kitchen2.webp",
+      "/images/apartments/lara/mirror.webp",
+      "/images/apartments/lara/table.webp",
+      "/images/apartments/lara/table2.webp",
+      "/images/apartments/lara/terrace.webp",
+      "/images/apartments/lara/view.webp",
+      "/images/apartments/lara/wc.webp"
     ],
-    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2919.7969843822066!2d17.12748487563004!3d42.96148247114323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a516bb56b95d3%3A0x2758c0e472e4450c!2sApartments%20Giuliani!5e0!3m2!1sen!2sit!4v1747665953963!5m2!1sen!2sit",
+    location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5000!2d17.12748487563004!3d42.96148247114323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a516bb56b95d3%3A0x2758c0e472e4450c!2sApartments%20Giuliani!5e0!3m2!1sen!2sen!4v1747665953963!5m2!1sen!2sen",
     bookingUrl: "https://www.booking.com/hotel/hr/apartmani-lara-i-nika.html",
     airbnbUrl: "https://airbnb.com/h/apartmani-giuliani-lara",
     icalUrls: [

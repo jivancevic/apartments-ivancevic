@@ -125,20 +125,26 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
             {apartment.bedrooms ? (
               apartment.bedrooms.map((bedroom, index) => (
                 <div key={index} className="bg-white p-3 rounded-md">
-                  <p className="font-medium mb-1">{bedroom.name}</p>
+                  <p className="font-medium mb-1">
+                    {currentLanguage === "en" ? bedroom.nameEn : bedroom.nameHr}
+                  </p>
                   <div className="space-y-1 pl-2">
                     {bedroom.beds.map((bed, bedIndex) => (
                       <div key={bedIndex} className="flex items-center">
-                        <span className="mr-2">
-                          {bed.type === "double" ? (
-                            <BedDouble size={18} className="text-primary" />
-                          ) : bed.type === "single" ? (
-                            <BedSingle size={18} className="text-primary" />
-                          ) : bed.type === "sofa bed" ? (
-                            <Sofa size={18} className="text-primary" />
-                          ) : (
-                            <BedSingle size={18} className="text-primary" />
-                          )}
+                        <span className="flex mr-2">
+                          {Array.from({ length: bed.count }).map((_, iconIndex) => (
+                            <span key={iconIndex} className="mr-0.5">
+                              {bed.type === "double" ? (
+                                <BedDouble size={18} className="text-primary" />
+                              ) : bed.type === "single" ? (
+                                <BedSingle size={18} className="text-primary" />
+                              ) : bed.type === "sofa bed" ? (
+                                <Sofa size={18} className="text-primary" />
+                              ) : (
+                                <BedSingle size={18} className="text-primary" />
+                              )}
+                            </span>
+                          ))}
                         </span>
                         <span>
                           {t("amenities.bed", "{{count}} {{type}} bed", { 
@@ -157,7 +163,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
                 <p className="font-medium mb-1">{t("amenities.bedroom", "Bedroom")} 1</p>
                 <div className="space-y-1 pl-2">
                   <div className="flex items-center">
-                    <span className="mr-2">🛏️</span>
+                    <span className="mr-2"><BedDouble size={18} className="text-primary" /></span>
                     <span>{t("amenities.doubleBed", "1 double bed")}</span>
                   </div>
                 </div>

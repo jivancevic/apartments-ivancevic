@@ -378,12 +378,52 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         priceMultiplier: "2.20",
         cleaningFee: 80,
         maxGuests: 6,
+        // New apartment details
+        isEntireApartment: true,
+        roomSizeM2: 85,
+        bedrooms: [
+          {
+            name: "Bedroom 1",
+            beds: [
+              {
+                type: "double",
+                count: 1,
+                emoji: "🛏️"
+              }
+            ]
+          },
+          {
+            name: "Bedroom 2", 
+            beds: [
+              {
+                type: "single",
+                count: 2,
+                emoji: "🛌"
+              }
+            ]
+          },
+          {
+            name: "Bedroom 3",
+            beds: [
+              {
+                type: "single",
+                count: 1,
+                emoji: "🛌"
+              }
+            ]
+          }
+        ],
+        bathrooms: 2,
+        // Amenities
         hasWifi: true,
         hasKitchen: true,
         hasAC: true,
         hasTV: true,
         hasBalcony: true,
         hasSeaView: false,
+        hasCityView: true,
+        hasDishwasher: true,
+        hasCoffeeMachine: true,
         parkingType: "private",
         parkingDetails: {
           pricePerDay: 8,
@@ -453,6 +493,23 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         priceMultiplier: "1.00",
         cleaningFee: 40,
         maxGuests: 2,
+        // New apartment details
+        isEntireApartment: true,
+        roomSizeM2: 28,
+        bedrooms: [
+          {
+            name: "Bedroom 1",
+            beds: [
+              {
+                type: "double",
+                count: 1,
+                emoji: "🛏️"
+              }
+            ]
+          }
+        ],
+        bathrooms: 1,
+        // Amenities
         hasWifi: true,
         hasKitchen: true,
         hasAC: true,

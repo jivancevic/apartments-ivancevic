@@ -23,31 +23,32 @@ export const apartmentData: Apartment[] = [
       "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e21284eed9fbea95b5d2dcc398220",
       "https://ical.booking.com/v1/export?t=2b421589-cfe4-42ba-9800-94a8a7ffd436"
     ],
-    basePeakPrice: 120,
-    priceMultiplier: "3.00",
+    // Consolidated price (120 * 3.00 = 360)
+    basePeakPrice: 360,
+    priceMultiplier: "1.00",
     cleaningFee: 40,
     maxGuests: 4,
-    // Apartment details - updated to use type instead of isEntireApartment
+    // Apartment details
     type: "apartment",
     roomSizeM2: 65,
     bedrooms: [
       {
-        name: "Bedroom 1",
+        nameEn: "Bedroom",
+        nameHr: "Spavaća soba",
         beds: [
           {
             type: "queen",
-            count: 1,
-            emoji: "🛏️"
+            count: 1
           }
         ]
       },
       {
-        name: "Living room",
+        nameEn: "Living room",
+        nameHr: "Dnevni boravak",
         beds: [
           {
             type: "sofa bed",
-            count: 1,
-            emoji: "🛋️"
+            count: 1
           }
         ]
       }
@@ -97,8 +98,9 @@ export const apartmentData: Apartment[] = [
     icalUrls: [
       "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd24cd0dbd2911faab332fcfd90"
     ],
-    basePeakPrice: 170,
-    priceMultiplier: "2.50",
+    // Consolidated price (170 * 2.50 = 425)
+    basePeakPrice: 425,
+    priceMultiplier: "1.00",
     cleaningFee: 60,
     maxGuests: 6,
     // Apartment details
@@ -106,32 +108,32 @@ export const apartmentData: Apartment[] = [
     roomSizeM2: 110,
     bedrooms: [
       {
-        name: "Bedroom 1",
+        nameEn: "Master Bedroom",
+        nameHr: "Glavna spavaća soba",
         beds: [
           {
             type: "double",
-            count: 1,
-            emoji: "🛏️"
+            count: 1
           }
         ]
       },
       {
-        name: "Bedroom 2",
+        nameEn: "Second Bedroom",
+        nameHr: "Druga spavaća soba",
         beds: [
           {
             type: "single",
-            count: 2,
-            emoji: "🛏️"
+            count: 2
           }
         ]
       },
       {
-        name: "Living room",
+        nameEn: "Living room",
+        nameHr: "Dnevni boravak",
         beds: [
           {
             type: "sofa bed",
-            count: 1,
-            emoji: "🛋️"
+            count: 1
           }
         ]
       }
@@ -179,8 +181,9 @@ export const apartmentData: Apartment[] = [
     icalUrls: [
       "https://www.airbnb.com/calendar/ical/7353092.ics?s=eae1da13782e4b81009bcd64f58bd357"
     ],
-    basePeakPrice: 150,
-    priceMultiplier: "2.00",
+    // Consolidated price (150 * 2.00 = 300)
+    basePeakPrice: 300,
+    priceMultiplier: "1.00",
     cleaningFee: 60,
     maxGuests: 5,
     // Apartment details
@@ -188,32 +191,32 @@ export const apartmentData: Apartment[] = [
     roomSizeM2: 80,
     bedrooms: [
       {
-        name: "Master Bedroom",
+        nameEn: "Master Bedroom",
+        nameHr: "Glavna spavaća soba",
         beds: [
           {
             type: "queen",
-            count: 1,
-            emoji: "🛏️"
+            count: 1
           }
         ]
       },
       {
-        name: "Second Bedroom",
+        nameEn: "Second Bedroom",
+        nameHr: "Druga spavaća soba",
         beds: [
           {
             type: "single",
-            count: 2,
-            emoji: "🛏️"
+            count: 2
           }
         ]
       },
       {
-        name: "Third Bedroom",
+        nameEn: "Third Bedroom",
+        nameHr: "Treća spavaća soba",
         beds: [
           {
             type: "single",
-            count: 1,
-            emoji: "🛏️"
+            count: 1
           }
         ]
       }
@@ -256,8 +259,9 @@ export const apartmentData: Apartment[] = [
     icalUrls: [
       "https://www.airbnb.com/calendar/ical/3289636.ics?s=3fc4d298685df0c27704199880b09d8c"
     ],
-    basePeakPrice: 120,
-    priceMultiplier: "1.80",
+    // Consolidated price (120 * 1.80 = 216)
+    basePeakPrice: 216,
+    priceMultiplier: "1.00",
     cleaningFee: 45,
     maxGuests: 4,
     // Apartment details
@@ -265,22 +269,22 @@ export const apartmentData: Apartment[] = [
     roomSizeM2: 50,
     bedrooms: [
       {
-        name: "Bedroom",
+        nameEn: "Bedroom",
+        nameHr: "Spavaća soba",
         beds: [
           {
             type: "double",
-            count: 1,
-            emoji: "🛏️"
+            count: 1
           }
         ]
       },
       {
-        name: "Living Room",
+        nameEn: "Living Room",
+        nameHr: "Dnevni boravak",
         beds: [
           {
             type: "sofa bed",
-            count: 1,
-            emoji: "🛋️"
+            count: 1
           }
         ]
       }
@@ -323,6 +327,7 @@ export const apartmentData: Apartment[] = [
     icalUrls: [
       "https://www.airbnb.com/calendar/ical/19014861.ics?s=f8c3b2e230826d572c35ea739efb6e2a"
     ],
+    // Consolidated price (110 * 1.00 = 110)
     basePeakPrice: 110,
     priceMultiplier: "1.00",
     cleaningFee: 40,
@@ -332,12 +337,12 @@ export const apartmentData: Apartment[] = [
     roomSizeM2: 28,
     bedrooms: [
       {
-        name: "Studio Room",
+        nameEn: "Studio Room",
+        nameHr: "Studio soba",
         beds: [
           {
             type: "double",
-            count: 1,
-            emoji: "🛏️"
+            count: 1
           }
         ]
       }
@@ -383,8 +388,9 @@ export const apartmentData: Apartment[] = [
     icalUrls: [
       "https://www.airbnb.com/calendar/ical/11847437.ics?s=6d2cbbdabf0b62bf08a047cf0712d317"
     ],
-    basePeakPrice: 120,
-    priceMultiplier: "1.50",
+    // Consolidated price (120 * 1.50 = 180)
+    basePeakPrice: 180,
+    priceMultiplier: "1.00",
     cleaningFee: 45,
     maxGuests: 4,
     // Apartment details
@@ -392,22 +398,22 @@ export const apartmentData: Apartment[] = [
     roomSizeM2: 60,
     bedrooms: [
       {
-        name: "Bedroom",
+        nameEn: "Bedroom",
+        nameHr: "Spavaća soba",
         beds: [
           {
             type: "double",
-            count: 1,
-            emoji: "🛏️"
+            count: 1
           }
         ]
       },
       {
-        name: "Living Room",
+        nameEn: "Living Room",
+        nameHr: "Dnevni boravak",
         beds: [
           {
             type: "sofa bed",
-            count: 1,
-            emoji: "🛋️"
+            count: 1
           }
         ]
       }
@@ -450,8 +456,9 @@ export const apartmentData: Apartment[] = [
     icalUrls: [
       "https://www.airbnb.com/calendar/ical/27617468.ics?s=e408c51a965bccbbaba29d58295304a6&locale=hr"
     ],
-    basePeakPrice: 110,
-    priceMultiplier: "2.00",
+    // Consolidated price (110 * 2.00 = 220)
+    basePeakPrice: 220,
+    priceMultiplier: "1.00",
     cleaningFee: 60,
     maxGuests: 4,
     // Apartment details
@@ -459,22 +466,22 @@ export const apartmentData: Apartment[] = [
     roomSizeM2: 50,
     bedrooms: [
       {
-        name: "Bedroom 1",
+        nameEn: "Bedroom 1",
+        nameHr: "Spavaća soba 1",
         beds: [
           {
             type: "double",
-            count: 1,
-            emoji: "🛏️"
+            count: 1
           }
         ]
       },
       {
-        name: "Bedroom 2",
+        nameEn: "Bedroom 2",
+        nameHr: "Spavaća soba 2",
         beds: [
           {
             type: "single",
-            count: 2,
-            emoji: "🛏️"
+            count: 2
           }
         ]
       }
@@ -517,8 +524,9 @@ export const apartmentData: Apartment[] = [
     icalUrls: [
       "https://www.airbnb.com/calendar/ical/27617468.ics?s=e408c51a965bccbbaba29d58295304a6&locale=hr"
     ],
-    basePeakPrice: 100,
-    priceMultiplier: "1.50",
+    // Consolidated price (100 * 1.50 = 150)
+    basePeakPrice: 150,
+    priceMultiplier: "1.00",
     cleaningFee: 40,
     maxGuests: 3,
     // Apartment details
@@ -526,22 +534,22 @@ export const apartmentData: Apartment[] = [
     roomSizeM2: 38,
     bedrooms: [
       {
-        name: "Bedroom",
+        nameEn: "Bedroom",
+        nameHr: "Spavaća soba",
         beds: [
           {
             type: "double",
-            count: 1,
-            emoji: "🛏️"
+            count: 1
           }
         ]
       },
       {
-        name: "Living Area",
+        nameEn: "Living Area",
+        nameHr: "Dnevni prostor",
         beds: [
           {
             type: "sofa bed",
-            count: 1,
-            emoji: "🛋️"
+            count: 1
           }
         ]
       }
@@ -584,8 +592,9 @@ export const apartmentData: Apartment[] = [
     icalUrls: [
       "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd24cd0dbd2911faab332fcfd90"
     ],
-    basePeakPrice: 100,
-    priceMultiplier: "1.50",
+    // Consolidated price (100 * 1.50 = 150)
+    basePeakPrice: 150,
+    priceMultiplier: "1.00",
     cleaningFee: 40,
     maxGuests: 3,
     // Apartment details
@@ -593,22 +602,22 @@ export const apartmentData: Apartment[] = [
     roomSizeM2: 38,
     bedrooms: [
       {
-        name: "Bedroom",
+        nameEn: "Bedroom",
+        nameHr: "Spavaća soba",
         beds: [
           {
             type: "double",
-            count: 1,
-            emoji: "🛏️"
+            count: 1
           }
         ]
       },
       {
-        name: "Living Area",
+        nameEn: "Living Area",
+        nameHr: "Dnevni prostor",
         beds: [
           {
             type: "sofa bed",
-            count: 1,
-            emoji: "🛋️"
+            count: 1
           }
         ]
       }

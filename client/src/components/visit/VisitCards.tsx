@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Compass, Car, Ship, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Compass, Car, Ship, Clock, MapPin, ExternalLink } from "lucide-react";
 import { Location } from '../../types';
 
 interface VisitCardsProps {
@@ -9,7 +10,7 @@ interface VisitCardsProps {
 }
 
 export function VisitCards({ locations }: VisitCardsProps) {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const isEnglish = i18n.language === 'en';
 
   // Helper function to get the transport icon
@@ -26,11 +27,23 @@ export function VisitCards({ locations }: VisitCardsProps) {
     }
   };
 
+  // Handle clicking on a location
+  const handleLocationClick = (location: Location) => {
+    // Navigate to link if available, otherwise to Google Maps location
+    const url = location.link || location.location;
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {locations.map((location) => (
         <Card key={location.id} className="overflow-hidden flex flex-col h-full">
-          <div className="h-48 overflow-hidden">
+          <div 
+            className="h-48 overflow-hidden cursor-pointer" 
+            onClick={() => handleLocationClick(location)}
+          >
             <img
               src={location.image}
               alt={isEnglish ? location.nameEn : location.nameHr}
@@ -38,10 +51,12 @@ export function VisitCards({ locations }: VisitCardsProps) {
             />
           </div>
           <CardHeader className="pb-2">
-            <CardTitle>{isEnglish ? location.nameEn : location.nameHr}</CardTitle>
-            {location.location && (
-              <p className="text-sm text-muted-foreground">{location.location}</p>
-            )}
+            <CardTitle 
+              className="cursor-pointer hover:text-primary"
+              onClick={() => handleLocationClick(location)}
+            >
+              {isEnglish ? location.nameEn : location.nameHr}
+            </CardTitle>
           </CardHeader>
           <CardContent className="flex-grow">
             <CardDescription className="text-sm mb-4">
@@ -54,19 +69,37 @@ export function VisitCards({ locations }: VisitCardsProps) {
               </Badge>
             )}
           </CardContent>
-          <CardFooter className="pt-0 flex items-center">
-            {location.distance ? (
+          <CardFooter className="pt-0 flex items-center justify-between">
+            {location.distance && (
               <div className="flex items-center text-sm text-muted-foreground">
                 {getTransportIcon(location.distance.mean)}
                 <span>{location.distance.minutes} {isEnglish ? 'minutes' : 'minuta'}</span>
               </div>
-            ) : (
-              location.distanceEn && (
-                <div className="text-sm text-muted-foreground">
-                  {isEnglish ? location.distanceEn : location.distanceHr}
-                </div>
-              )
             )}
+            <div className="flex gap-2">
+              {location.location && (
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="p-1 h-8 w-8"
+                  onClick={() => window.open(location.location, '_blank', 'noopener,noreferrer')}
+                  title={isEnglish ? "View on map" : "Pogledaj na karti"}
+                >
+                  <MapPin className="h-4 w-4" />
+                </Button>
+              )}
+              {location.link && (
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="p-1 h-8 w-8"
+                  onClick={() => window.open(location.link, '_blank', 'noopener,noreferrer')}
+                  title={isEnglish ? "Visit website" : "Posjeti web stranicu"}
+                >
+                  <ExternalLink className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
           </CardFooter>
         </Card>
       ))}

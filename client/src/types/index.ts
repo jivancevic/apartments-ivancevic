@@ -82,13 +82,12 @@ export interface Location {
   descriptionEn: string;
   descriptionHr: string;
   image: string;
-  location?: string;
+  location?: string; // Google Maps URL
   distance?: {
     minutes: number;
     mean: "walk" | "car" | "ferry";
   };
-  distanceEn?: string;
-  distanceHr?: string;
+  link?: string; // Optional website link
   featureEn?: string;
   featureHr?: string;
 }

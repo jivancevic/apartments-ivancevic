@@ -75,10 +75,9 @@ export const locations = pgTable("locations", {
   descriptionEn: text("description_en").notNull(),
   descriptionHr: text("description_hr").notNull(),
   image: text("image").notNull(),
-  location: text("location"),
+  location: text("location"), // Google Maps location URL
   distance: jsonb("distance").$type<{ minutes: number; mean: "walk" | "car" | "ferry" }>(),
-  distanceEn: text("distance_en"),
-  distanceHr: text("distance_hr"),
+  link: text("link"), // Optional website link
   featureEn: text("feature_en"),
   featureHr: text("feature_hr"),
 });

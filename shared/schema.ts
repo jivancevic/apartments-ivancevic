@@ -68,13 +68,15 @@ export const inquiries = pgTable("inquiries", {
 // Define Location schema
 export const locations = pgTable("locations", {
   id: serial("id").primaryKey(),
-  typeEn: text("type_en").notNull(), // 'beach', 'restaurant', 'attraction', 'activity'
+  typeEn: text("type_en").notNull(), // 'attraction-old-town', 'attraction-island', 'activity', 'excursion', 'restaurant'
   typeHr: text("type_hr").notNull(),
   nameEn: text("name_en").notNull(),
   nameHr: text("name_hr").notNull(),
   descriptionEn: text("description_en").notNull(),
   descriptionHr: text("description_hr").notNull(),
   image: text("image").notNull(),
+  location: text("location"),
+  distance: jsonb("distance").$type<{ minutes: number; mean: "walk" | "car" | "ferry" }>(),
   distanceEn: text("distance_en"),
   distanceHr: text("distance_hr"),
   featureEn: text("feature_en"),

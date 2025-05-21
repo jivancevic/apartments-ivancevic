@@ -1,82 +1,77 @@
-import { Location } from "@/types";
-import useLanguage from "@/hooks/useLanguage";
+import { useTranslation } from 'react-i18next';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Compass, Car, Ship, Clock } from "lucide-react";
+import { Location } from '../../types';
 
 interface VisitCardsProps {
   locations: Location[];
 }
 
-const VisitCards = ({ locations }: VisitCardsProps) => {
-  const { currentLanguage } = useLanguage();
+export function VisitCards({ locations }: VisitCardsProps) {
+  const { i18n } = useTranslation();
+  const isEnglish = i18n.language === 'en';
+
+  // Helper function to get the transport icon
+  const getTransportIcon = (mean: string) => {
+    switch (mean) {
+      case 'walk':
+        return <Compass className="h-4 w-4 mr-1" />;
+      case 'car':
+        return <Car className="h-4 w-4 mr-1" />;
+      case 'ferry':
+        return <Ship className="h-4 w-4 mr-1" />;
+      default:
+        return <Clock className="h-4 w-4 mr-1" />;
+    }
+  };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {locations.map((location) => (
-        <div key={location.id} className="bg-white rounded-lg overflow-hidden shadow-md">
-          <div className="h-48 bg-neutral">
+        <Card key={location.id} className="overflow-hidden flex flex-col h-full">
+          <div className="h-48 overflow-hidden">
             <img
               src={location.image}
-              alt={currentLanguage === "en" ? location.nameEn : location.nameHr}
-              className="w-full h-full object-cover"
+              alt={isEnglish ? location.nameEn : location.nameHr}
+              className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
             />
           </div>
-          <div className="p-6">
-            <h3 className="font-heading font-bold text-xl mb-2">
-              {currentLanguage === "en" ? location.nameEn : location.nameHr}
-            </h3>
-            <p className="text-gray-600 mb-4">
-              {currentLanguage === "en" ? location.descriptionEn : location.descriptionHr}
-            </p>
-            <div className="flex justify-between text-sm text-gray-500">
-              {(location.distanceEn || location.distance) && (
-                <span>
-                  <i className={getDistanceIcon(location.distance?.mean || location.distanceEn || "")} />
-                  {location.distance 
-                    ? `${location.distance.minutes} min by ${location.distance.mean}` 
-                    : (currentLanguage === "en" ? location.distanceEn : location.distanceHr)}
-                </span>
-              )}
-              {location.featureEn && (
-                <span>
-                  <i className={getFeatureIcon(location.typeEn)} />
-                  {currentLanguage === "en" ? location.featureEn : location.featureHr}
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
+          <CardHeader className="pb-2">
+            <CardTitle>{isEnglish ? location.nameEn : location.nameHr}</CardTitle>
+            {location.location && (
+              <p className="text-sm text-muted-foreground">{location.location}</p>
+            )}
+          </CardHeader>
+          <CardContent className="flex-grow">
+            <CardDescription className="text-sm mb-4">
+              {isEnglish ? location.descriptionEn : location.descriptionHr}
+            </CardDescription>
+            
+            {(location.featureEn || location.featureHr) && (
+              <Badge variant="outline" className="bg-primary/10 text-primary mb-2">
+                {isEnglish ? location.featureEn : location.featureHr}
+              </Badge>
+            )}
+          </CardContent>
+          <CardFooter className="pt-0 flex items-center">
+            {location.distance ? (
+              <div className="flex items-center text-sm text-muted-foreground">
+                {getTransportIcon(location.distance.mean)}
+                <span>{location.distance.minutes} {isEnglish ? 'minutes' : 'minuta'}</span>
+              </div>
+            ) : (
+              location.distanceEn && (
+                <div className="text-sm text-muted-foreground">
+                  {isEnglish ? location.distanceEn : location.distanceHr}
+                </div>
+              )
+            )}
+          </CardFooter>
+        </Card>
       ))}
     </div>
   );
-};
-
-// Helper functions to determine icons
-const getDistanceIcon = (transportType: string): string => {
-  if (transportType.includes("walk")) {
-    return "fas fa-walking text-primary mr-1";
-  } else if (transportType.includes("car")) {
-    return "fas fa-car text-primary mr-1";
-  } else if (transportType.includes("ferry")) {
-    return "fas fa-ship text-primary mr-1";
-  } else {
-    return "fas fa-map-marker-alt text-primary mr-1";
-  }
-};
-
-const getFeatureIcon = (type: string): string => {
-  switch (type) {
-    case "attraction-old-town":
-      return "fas fa-landmark text-primary mr-1";
-    case "attraction-island":
-      return "fas fa-tree text-primary mr-1";
-    case "restaurant":
-      return "fas fa-utensils text-primary mr-1";
-    case "activity":
-      return "fas fa-hiking text-primary mr-1";
-    case "excursion":
-      return "fas fa-ship text-primary mr-1";
-    default:
-      return "fas fa-star text-primary mr-1";
-  }
-};
+}
 
 export default VisitCards;

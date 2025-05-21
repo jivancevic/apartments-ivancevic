@@ -82,6 +82,11 @@ export interface Location {
   descriptionEn: string;
   descriptionHr: string;
   image: string;
+  location?: string;
+  distance?: {
+    minutes: number;
+    mean: "walk" | "car" | "ferry";
+  };
   distanceEn?: string;
   distanceHr?: string;
   featureEn?: string;

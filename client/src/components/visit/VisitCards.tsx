@@ -27,10 +27,12 @@ const VisitCards = ({ locations }: VisitCardsProps) => {
               {currentLanguage === "en" ? location.descriptionEn : location.descriptionHr}
             </p>
             <div className="flex justify-between text-sm text-gray-500">
-              {location.distanceEn && (
+              {(location.distanceEn || location.distance) && (
                 <span>
-                  <i className={getDistanceIcon(location.distanceEn)} />
-                  {currentLanguage === "en" ? location.distanceEn : location.distanceHr}
+                  <i className={getDistanceIcon(location.distance?.mean || location.distanceEn || "")} />
+                  {location.distance 
+                    ? `${location.distance.minutes} min by ${location.distance.mean}` 
+                    : (currentLanguage === "en" ? location.distanceEn : location.distanceHr)}
                 </span>
               )}
               {location.featureEn && (
@@ -48,12 +50,12 @@ const VisitCards = ({ locations }: VisitCardsProps) => {
 };
 
 // Helper functions to determine icons
-const getDistanceIcon = (distance: string): string => {
-  if (distance.includes("walk")) {
+const getDistanceIcon = (transportType: string): string => {
+  if (transportType.includes("walk")) {
     return "fas fa-walking text-primary mr-1";
-  } else if (distance.includes("car")) {
+  } else if (transportType.includes("car")) {
     return "fas fa-car text-primary mr-1";
-  } else if (distance.includes("ferry")) {
+  } else if (transportType.includes("ferry")) {
     return "fas fa-ship text-primary mr-1";
   } else {
     return "fas fa-map-marker-alt text-primary mr-1";

@@ -170,12 +170,32 @@ export class MemStorage implements IStorage {
         priceMultiplier: "1.90",
         cleaningFee: 50,
         maxGuests: 2,
+        // New apartment details
+        isEntireApartment: true,
+        roomSizeM2: 28,
+        bedrooms: [
+          {
+            name: "Bedroom 1",
+            beds: [
+              {
+                type: "double",
+                count: 1,
+                emoji: "🛏️"
+              }
+            ]
+          }
+        ],
+        bathrooms: 1,
+        // Amenities
         hasWifi: true,
         hasKitchen: true,
         hasAC: true,
         hasTV: true,
         hasBalcony: false,
         hasSeaView: false,
+        hasCityView: true,
+        hasDishwasher: false,
+        hasCoffeeMachine: true,
         parkingType: "none",
         parkingDetails: null,
         hasGarden: false,
@@ -213,12 +233,32 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         priceMultiplier: "1.50",
         cleaningFee: 40,
         maxGuests: 2,
+        // New apartment details
+        isEntireApartment: true,
+        roomSizeM2: 35,
+        bedrooms: [
+          {
+            name: "Bedroom 1",
+            beds: [
+              {
+                type: "double",
+                count: 1,
+                emoji: "🛏️"
+              }
+            ]
+          }
+        ],
+        bathrooms: 1,
+        // Amenities
         hasWifi: true,
         hasKitchen: true,
         hasAC: true,
         hasTV: true,
         hasBalcony: false,
         hasSeaView: false,
+        hasCityView: true, 
+        hasDishwasher: false,
+        hasCoffeeMachine: true,
         parkingType: "none",
         parkingDetails: null,
         hasGarden: false,
@@ -255,12 +295,52 @@ Apartman ima jednu spavaću sobu, potpuno opremljenu kuhinju s mikrovalnom pećn
         priceMultiplier: "4.00",
         cleaningFee: 80,
         maxGuests: 5,
+        // New apartment details
+        isEntireApartment: true,
+        roomSizeM2: 110,
+        bedrooms: [
+          {
+            name: "Bedroom 1",
+            beds: [
+              {
+                type: "double",
+                count: 1,
+                emoji: "🛏️"
+              }
+            ]
+          },
+          {
+            name: "Bedroom 2",
+            beds: [
+              {
+                type: "single",
+                count: 2,
+                emoji: "🛌"
+              }
+            ]
+          },
+          {
+            name: "Living room",
+            beds: [
+              {
+                type: "sofa bed",
+                count: 1,
+                emoji: "🛋️"
+              }
+            ]
+          }
+        ],
+        bathrooms: 1,
+        // Amenities
         hasWifi: true,
         hasKitchen: true,
         hasAC: true,
         hasTV: true,
         hasBalcony: true,
         hasSeaView: true,
+        hasCityView: true,
+        hasDishwasher: true,
+        hasCoffeeMachine: true,
         parkingType: "none",
         parkingDetails: null,
         hasGarden: false,

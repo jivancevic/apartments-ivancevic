@@ -52,7 +52,7 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="break-words">
+            <div className="overflow-wrap">
               <h4 className="font-heading font-semibold text-lg mb-4">
                 {t("footer.contact")}
               </h4>

@@ -12,11 +12,15 @@ import { calculateNightlyPrice, calculateStayPrice, getSeasonType, getSeasonalPr
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 // Create a type that ensures all required properties are present
-type ApartmentWithRequiredProps = Apartment & {
+type ApartmentWithRequiredProps = Omit<Apartment, 'parkingDetails'> & {
   location: string;
   basePeakPrice: number;
   priceMultiplier: string;
   cleaningFee: number;
+  parkingDetails?: {
+    pricePerDay: number;
+    reservationRequired: boolean;
+  };
 };
 
 interface BookingCalendarProps {
@@ -110,6 +114,15 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
     return !isDateBooked(date) && !isDatePast(date);
   };
 
+  // Check if a date range contains any booked dates
+  const hasBookedDatesInRange = (startDate: Date, endDate: Date) => {
+    // Create an array of all dates in the range
+    const daysInRange = eachDayOfInterval({ start: startDate, end: endDate });
+    
+    // Check if any day in the range is booked
+    return daysInRange.some(day => isDateBooked(day));
+  };
+
   // Check if a date is in the selected range (days between selected start and end)
   const isInSelectedRange = (date: Date) => {
     if (!selectedStartDate) return false;
@@ -153,11 +166,21 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
         // If clicked date is before start date, swap them
         newEndDate = selectedStartDate;
         newStartDate = date;
-        setSelectedEndDate(selectedStartDate);
-        setSelectedStartDate(date);
       } else if (isSameDay(date, selectedStartDate)) {
         // Prevent selecting the same day for check-in and check-out
         return;
+      }
+      
+      // Check if the selected range contains any booked dates
+      if (hasBookedDatesInRange(newStartDate, newEndDate)) {
+        // Don't allow selection of ranges that include booked dates
+        return;
+      }
+      
+      // Update the state with validated dates
+      if (isBefore(date, selectedStartDate)) {
+        setSelectedEndDate(selectedStartDate);
+        setSelectedStartDate(date);
       } else {
         setSelectedEndDate(date);
       }

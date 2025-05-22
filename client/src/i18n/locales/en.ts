@@ -208,13 +208,17 @@ const enTranslation = {
   "search.enterCriteria": "Please enter your travel dates and number of guests to search for available apartments",
   
   // Apartment Details
-  "apartment.maxGuests": "{{count}} Guest",
-  "apartment.maxGuests_plural": "{{count}} Guests",
+  "apartment.maxGuests": {
+    "one": "{{count}} Guest",
+    "other": "{{count}} Guests"
+  },
   
   // Common
   "common.noImage": "No image available",
-  "nights": "night",
-  "nights_plural": "nights"
+  "nights": {
+    "one": "night",
+    "other": "nights"
+  }
 };
 
 export default enTranslation;

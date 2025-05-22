@@ -93,7 +93,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
               {/* Number of guests */}
               <div className="flex items-center">
                 <AmenityIcon icon="guests" size={20} className="text-primary mr-2" />
-                <span>{t("amenities.maxGuests", { count: apartment.maxGuests })}</span>
+                <span>{t("apartment.maxGuests", { count: apartment.maxGuests })}</span>
               </div>
 
               {/* Apartment type */}

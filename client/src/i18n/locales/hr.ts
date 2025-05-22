@@ -211,26 +211,38 @@ const hrTranslation = {
   "search.loading": "Tražimo dostupne apartmane...",
   "search.noResults": "Nema dostupnih apartmana za odabrane datume",
   "search.tryDifferent": "Pokušajte s drugim datumima ili brojem gostiju",
-  "search.resultsFound": "{{count}} apartman pronađen",
-  "search.resultsFound_plural": "{{count}} apartmana pronađeno",
+  "search.resultsFound": {
+    "one": "{{count}} apartman pronađen",
+    "few": "{{count}} apartmana pronađena", 
+    "other": "{{count}} apartmana pronađeno"
+  },
   "search.viewDetails": "Pogledaj detalje",
   "search.sendInquiry": "Pošalji upit",
   "search.totalPrice": "ukupna cijena",
   "search.perNight": "po noći",
   "search.modifySearch": "Promijeni pretragu",
   "search.currentSearch": "Trenutni kriteriji pretrage",
-  "search.guestsCount": "{{count}} gost",
-  "search.guestsCount_plural": "{{count}} gostiju",
+  "search.guestsCount": {
+    "one": "{{count}} gost",
+    "few": "{{count}} gosta",
+    "other": "{{count}} gostiju"
+  },
   "search.enterCriteria": "Unesite datume putovanja i broj gostiju za pretragu dostupnih apartmana",
   
   // Apartment Details
-  "apartment.maxGuests": "{{count}} Gost",
-  "apartment.maxGuests_plural": "{{count}} Gostiju",
+  "apartment.maxGuests": {
+    "one": "{{count}} gost",
+    "few": "{{count}} gosta",
+    "other": "{{count}} gostiju"
+  },
   
   // Common
   "common.noImage": "Slika nije dostupna",
-  "nights": "noćenje",
-  "nights_plural": "noćenja",
+  "nights": {
+    "one": "noćenje",
+    "few": "noćenja",
+    "other": "noćenja"
+  },
 };
 
 export default hrTranslation;

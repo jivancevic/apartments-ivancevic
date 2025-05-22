@@ -191,16 +191,20 @@ const enTranslation = {
   "search.loading": "Finding available apartments...",
   "search.noResults": "No apartments available for these dates",
   "search.tryDifferent": "Please try different dates or guest count",
-  "search.resultsFound": "{{count}} apartment found",
-  "search.resultsFound_plural": "{{count}} apartments found",
+  "search.resultsFound": {
+    "one": "{{count}} apartment found",
+    "other": "{{count}} apartments found"
+  },
   "search.viewDetails": "View Details",
   "search.sendInquiry": "Send Inquiry",
   "search.totalPrice": "total price",
   "search.perNight": "per night",
   "search.modifySearch": "Modify search",
   "search.currentSearch": "Current search criteria",
-  "search.guestsCount": "{{count}} Guest",
-  "search.guestsCount_plural": "{{count}} Guests",
+  "search.guestsCount": {
+    "one": "{{count}} Guest",
+    "other": "{{count}} Guests"
+  },
   "search.enterCriteria": "Please enter your travel dates and number of guests to search for available apartments",
   
   // Apartment Details

@@ -195,7 +195,18 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
   // Handle date hover for range preview
   const handleDateHover = (date: Date) => {
     if (selectedStartDate && !selectedEndDate) {
-      setHoverDate(date);
+      // Check if the potential range contains any booked dates
+      if (selectedStartDate && date) {
+        const rangeStart = selectedStartDate < date ? selectedStartDate : date;
+        const rangeEnd = selectedStartDate < date ? date : selectedStartDate;
+        
+        // Only update hover state if the range doesn't contain booked dates
+        if (!hasBookedDatesInRange(rangeStart, rangeEnd)) {
+          setHoverDate(date);
+        }
+      } else {
+        setHoverDate(date);
+      }
     }
   };
   

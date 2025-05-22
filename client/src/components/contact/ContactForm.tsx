@@ -101,7 +101,13 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
       invalid_type_error: t("validation.required"),
     }),
     message: z.string().optional(),
-  }).refine(data => data.checkOut > data.checkIn, {
+  })
+  .refine(data => {
+    // Ensure checkout date is at least one day after check-in date
+    const minCheckout = new Date(data.checkIn);
+    minCheckout.setDate(minCheckout.getDate() + 1);
+    return data.checkOut >= minCheckout;
+  }, {
     message: t("validation.checkOut"),
     path: ["checkOut"]
   });
@@ -154,9 +160,64 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
     },
   });
 
+  // Fetch all bookings at once for improved performance
+  const { data: allBookings } = useQuery<Booking[]>({
+    queryKey: ['/api/apartments/bookings'],
+    queryFn: async () => {
+      // Fetch bookings for all apartments
+      const response = await apiRequest('GET', '/api/apartments/bookings');
+      return response || [];
+    },
+  });
+
+  // Check if a date range conflicts with existing bookings for an apartment
+  const hasDateConflict = (apartmentId: number, checkIn: Date, checkOut: Date): boolean => {
+    if (!allBookings) return false;
+    
+    // Create array of dates in the requested period
+    const dates: Date[] = [];
+    let currentDate = new Date(checkIn);
+    
+    while (currentDate < checkOut) {
+      dates.push(new Date(currentDate));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    
+    // Filter bookings for this apartment
+    const apartmentBookings = allBookings.filter(booking => booking.apartmentId === apartmentId);
+    
+    // Check for date conflicts
+    return apartmentBookings.some(booking => {
+      const bookingStart = new Date(booking.startDate);
+      const bookingEnd = new Date(booking.endDate);
+      
+      // Check if any date in our range conflicts with this booking
+      return dates.some(date => date >= bookingStart && date <= bookingEnd);
+    });
+  };
+
   // Handle form submission
   const onSubmit = (data: z.infer<typeof formSchema>) => {
-    // Convert string to number for apartmentId
+    // Check if an apartment was selected and if so, verify availability
+    if (data.apartmentId && data.apartmentId !== "none") {
+      const apartmentId = parseInt(data.apartmentId);
+      // Check for booking conflicts
+      if (hasDateConflict(apartmentId, data.checkIn, data.checkOut)) {
+        // Show toast notification in the current language
+        toast({
+          title: currentLanguage === "en" 
+            ? "Selected dates are not available" 
+            : "Odabrani datumi nisu dostupni",
+          description: currentLanguage === "en"
+            ? "Please select alternative dates or a different apartment."
+            : "Molimo odaberite alternativne datume ili drugi apartman.",
+          variant: "destructive",
+        });
+        return;
+      }
+    }
+    
+    // If we reach here, dates are available or no specific apartment was selected
     const formData: InquiryFormData = {
       ...data,
       apartmentId: data.apartmentId && data.apartmentId !== "none" ? parseInt(data.apartmentId) : undefined,

@@ -39,6 +39,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // Get all bookings (must be placed BEFORE the route with :id parameter)
+  app.get('/api/apartments/all-bookings', async (req: Request, res: Response) => {
+    try {
+      const bookings = await storage.getBookings();
+      res.json(bookings);
+    } catch (error) {
+      console.error('Error fetching all bookings:', error);
+      res.status(500).json({ message: 'Error fetching all bookings' });
+    }
+  });
+  
   // Get bookings for a specific apartment
   app.get('/api/apartments/:id/bookings', async (req: Request, res: Response) => {
     try {

@@ -129,19 +129,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Get all locations (optionally filtered by type)
+  // Get all locations (optionally filtered by type or category)
   app.get('/api/locations', async (req: Request, res: Response) => {
     try {
       const type = req.query.type as string | undefined;
+      const category = req.query.category as string | undefined;
       
       if (type) {
+        // When filtering by type (legacy approach)
         const locations = await storage.getLocationsByType(type);
         return res.json(locations);
       }
       
+      if (category) {
+        // When filtering by the new category approach
+        const locations = await storage.getLocationsByCategory(category);
+        return res.json(locations);
+      }
+      
+      // Get all locations
       const locations = await storage.getLocations();
       res.json(locations);
     } catch (error) {
+      console.error('Error fetching locations:', error);
       res.status(500).json({ message: 'Error fetching locations' });
     }
   });

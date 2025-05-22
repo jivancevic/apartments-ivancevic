@@ -23,6 +23,9 @@ export function VisitTabs({ locations }: VisitTabsProps) {
     acc[type].push(location);
     return acc;
   }, {} as Record<string, Location[]>);
+  
+  // For debugging - log the grouped locations
+  console.log('Locations grouped by type:', Object.keys(locationsByType));
 
   return (
     <div className="container py-8">

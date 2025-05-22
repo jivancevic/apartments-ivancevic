@@ -5,7 +5,7 @@ import {
   locations, type Location, type InsertLocation
 } from "@shared/schema";
 import { apartmentData } from './apartments';
-import { visitData } from './visit';
+import { visitData, visitDataByCategory } from './visit';
 
 // Storage interface with all needed CRUD operations
 export interface IStorage {
@@ -26,6 +26,7 @@ export interface IStorage {
   // Location operations
   getLocations(): Promise<Location[]>;
   getLocationsByType(type: string): Promise<Location[]>;
+  getLocationsByCategory(category: string): Promise<Location[]>;
   createLocation(location: InsertLocation): Promise<Location>;
 }
 
@@ -133,6 +134,33 @@ export class MemStorage implements IStorage {
     return Array.from(this.locations.values()).filter(
       location => location.typeEn === type || location.typeHr === type
     );
+  }
+  
+  async getLocationsByCategory(category: string): Promise<Location[]> {
+    // Map the category to type if needed
+    let typeToLookFor = category;
+    
+    // Handle mapping from category to type
+    switch(category) {
+      case 'attractionsOldTown':
+        typeToLookFor = 'attraction-old-town';
+        break;
+      case 'attractionsIsland':
+        typeToLookFor = 'attraction-island';
+        break;
+      case 'activities':
+        typeToLookFor = 'activity';
+        break;
+      case 'excursions':
+        typeToLookFor = 'excursion';
+        break;
+      case 'restaurants':
+        typeToLookFor = 'restaurant';
+        break;
+    }
+    
+    // Now filter by the appropriate type
+    return this.getLocationsByType(typeToLookFor);
   }
   
   async createLocation(location: InsertLocation): Promise<Location> {

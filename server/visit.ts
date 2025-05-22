@@ -97,6 +97,61 @@ export const visitDataByCategory: Record<string, LocationItem[]> = {
       distance: { minutes: 6, mean: "walk" },
       featureEn: "Historic landmark",
       featureHr: "Povijesni spomenik"
+    },
+    {
+      nameEn: "Ismaelli Courtyard",
+      nameHr: "Dvorište Ismaelli",
+      descriptionEn: "Historic Renaissance palace with an atrium, now housing apartments.",
+      descriptionHr: "Povijesna renesansna palača s atrijem, sada u njoj stanovi.",
+      image: "/images/locations/cathedral.webp",
+      location: "https://maps.google.com/?q=42.961553,17.136012",
+      distance: { minutes: 5, mean: "walk" },
+      featureEn: "Historic architecture",
+      featureHr: "Povijesna arhitektura"
+    },
+    {
+      nameEn: "Španić Garden",
+      nameHr: "Vrt Španić",
+      descriptionEn: "Hidden Renaissance garden, a peaceful oasis in the city center.",
+      descriptionHr: "Skriveni renesansni vrt, mirna oaza u centru grada.",
+      image: "/images/locations/cathedral.webp",
+      location: "https://maps.google.com/?q=42.961357,17.135983",
+      distance: { minutes: 4, mean: "walk" },
+      featureEn: "Garden",
+      featureHr: "Vrt"
+    },
+    {
+      nameEn: "Church Nuncijata",
+      nameHr: "Crkva Nuncijata",
+      descriptionEn: "Small romantic chapel on a hill just outside the city walls, located near the Wine Bar. Offers panoramic sea views.",
+      descriptionHr: "Mala romantična kapela na brdu odmah izvan gradskih zidina, smještena blizu Wine Bara. Nudi panoramske poglede na more.",
+      image: "/images/locations/cathedral.webp",
+      location: "https://maps.google.com/?q=42.962758,17.134941",
+      distance: { minutes: 10, mean: "walk" },
+      featureEn: "Panoramic views",
+      featureHr: "Panoramski pogledi"
+    },
+    {
+      nameEn: "Church of Our Lady",
+      nameHr: "Crkva Gospe",
+      descriptionEn: "Baroque chapel known for its simple interior and peaceful ambiance.",
+      descriptionHr: "Barokna kapela poznata po jednostavnom interijeru i mirnoj atmosferi.",
+      image: "/images/locations/cathedral.webp",
+      location: "https://maps.google.com/?q=42.961322,17.135871",
+      distance: { minutes: 5, mean: "walk" },
+      featureEn: "Peaceful spot",
+      featureHr: "Mirno mjesto"
+    },
+    {
+      nameEn: "Church of St. Michael",
+      nameHr: "Crkva Sv. Mihovila",
+      descriptionEn: "Small Old Town church tied to the history of local brotherhoods.",
+      descriptionHr: "Mala crkva u Starom gradu vezana uz povijest lokalnih bratovština.",
+      image: "/images/locations/cathedral.webp",
+      location: "https://maps.google.com/?q=42.961496,17.136213",
+      distance: { minutes: 4, mean: "walk" },
+      featureEn: "Brotherhood history",
+      featureHr: "Povijest bratovština"
     }
   ],
   
@@ -124,6 +179,17 @@ export const visitDataByCategory: Record<string, LocationItem[]> = {
       featureHr: "Kamenolomi"
     },
     {
+      nameEn: "Lumbarda",
+      nameHr: "Lumbarda",
+      descriptionEn: "Village famous for its Grk wine, sandy beaches, and relaxed, local charm.",
+      descriptionHr: "Selo poznato po vinu Grk, pješčanim plažama i opuštenom, lokalnom šarmu.",
+      image: "/images/locations/banje-beach.webp",
+      location: "https://maps.google.com/?q=42.927127,17.173126",
+      distance: { minutes: 15, mean: "car" },
+      featureEn: "Wine and beaches",
+      featureHr: "Vino i plaže"
+    },
+    {
       nameEn: "Pupnatska Luka",
       nameHr: "Pupnatska Luka",
       descriptionEn: "One of the island's most beautiful beaches, with turquoise water and a natural pebble bay.",
@@ -133,6 +199,39 @@ export const visitDataByCategory: Record<string, LocationItem[]> = {
       distance: { minutes: 20, mean: "car" },
       featureEn: "Beach",
       featureHr: "Plaža"
+    },
+    {
+      nameEn: "Vaja & Samograd",
+      nameHr: "Vaja i Samograd",
+      descriptionEn: "Untouched pebble beaches near Račišće, surrounded by raw nature. Reachable by foot or boat.",
+      descriptionHr: "Netaknute šljunčane plaže blizu Račišća, okružene netaknutom prirodom. Dostupne pješke ili brodom.",
+      image: "/images/locations/banje-beach.webp",
+      location: "https://maps.google.com/?q=42.972783,17.050848",
+      distance: { minutes: 25, mean: "car" },
+      featureEn: "Untouched nature",
+      featureHr: "Netaknuta priroda"
+    },
+    {
+      nameEn: "Stupe",
+      nameHr: "Stupe",
+      descriptionEn: "A group of small islets home to the trendy Moro Beach bar and restaurant — ideal for full-day lounging and swimming.",
+      descriptionHr: "Skupina malih otočića na kojima se nalazi popularni bar i restoran Moro Beach — idealno za cjelodnevno opuštanje i kupanje.",
+      image: "/images/locations/banje-beach.webp",
+      location: "https://maps.google.com/?q=42.941000,17.140000",
+      distance: { minutes: 20, mean: "ferry" },
+      featureEn: "Beach bar",
+      featureHr: "Plažni bar"
+    },
+    {
+      nameEn: "Kočje",
+      nameHr: "Kočje",
+      descriptionEn: "Protected natural site near Žrnovo with cool, shaded stone corridors and a mystical forest feel.",
+      descriptionHr: "Zaštićeni prirodni lokalitet blizu Žrnova s hladnim, sjenovitim kamenim hodnicima i mističnim šumskim osjećajem.",
+      image: "/images/locations/banje-beach.webp",
+      location: "https://maps.google.com/?q=42.943780,17.104510",
+      distance: { minutes: 15, mean: "car" },
+      featureEn: "Protected nature",
+      featureHr: "Zaštićena priroda"
     }
   ],
   

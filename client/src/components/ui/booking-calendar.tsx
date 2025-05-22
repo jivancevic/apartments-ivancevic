@@ -488,9 +488,7 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
             
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span>{priceSummary.totalNights === 1
-                    ? t("apartments.nights", { count: 1 })
-                    : t("apartments.nights_plural", { count: priceSummary.totalNights })}</span>
+                <span>{t("apartments.nights", { count: priceSummary.totalNights })}</span>
                 <span>€{priceSummary.subtotal}</span>
               </div>
               <div className="flex justify-between text-sm">

@@ -72,12 +72,16 @@ const enTranslation = {
   },
   
   "amenities.bed": "{{count}} {{type}}",
-  "amenities.bedTypes.double": "double bed",
-  "amenities.bedTypes.single": "single bed",
-  "amenities.bedTypes.sofa": "sofa bed",
-  "amenities.bedTypes_plural.double": "double beds",
-  "amenities.bedTypes_plural.single": "single beds",
-  "amenities.bedTypes_plural.sofa": "sofa beds",
+  "amenities.bedTypes": {
+    "double": "double bed",
+    "single": "single bed",
+    "sofa": "sofa bed"
+  },
+  "amenities.bedTypes_plural": {
+    "double": "double beds",
+    "single": "single beds",
+    "sofa": "sofa beds"
+  },
   
   // Amenities
   "amenities.kitchen": "Equiped kitchen",

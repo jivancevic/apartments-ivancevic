@@ -76,9 +76,28 @@ const hrTranslation = {
     "other": "{{count}} kupaonica"
   },
   "amenities.bed": "{{count}} {{type}}",
-  "amenities.bedTypes.double": "bračni krevet",
-  "amenities.bedTypes.single": "krevet za 1 osobu",
-  "amenities.bedTypes.sofa": "kauč na rasklapanje",
+  "amenities.bedTypes": {
+    "double": "bračni krevet",
+    "single": "krevet za 1 osobu",
+    "sofa": "kauč na rasklapanje"
+  },
+  "amenities.bedTypes_plural": {
+    "double": {
+      "one": "bračni krevet",
+      "few": "bračna kreveta", 
+      "other": "bračnih kreveta"
+    },
+    "single": {
+      "one": "krevet za 1 osobu",
+      "few": "kreveta za 1 osobu",
+      "other": "kreveta za 1 osobu"
+    },
+    "sofa": {
+      "one": "kauč na rasklapanje",
+      "few": "kauča na rasklapanje",
+      "other": "kauča na rasklapanje"
+    }
+  },
 
   // Amenities
   "amenities.kitchen": "Opremljena kuhinja",

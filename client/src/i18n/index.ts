@@ -19,9 +19,7 @@ i18n
     fallbackLng: "en",
     interpolation: {
       escapeValue: false // React already safes from XSS
-    },
-    // The following settings are crucial for proper pluralization
-    debug: false
+    }
   });
 
 export default i18n;

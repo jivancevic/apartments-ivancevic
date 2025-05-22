@@ -44,22 +44,37 @@ const hrTranslation = {
   "apartments.dateRange": "Raspon datuma",
   "apartments.sendInquiry": "Pošaljite upit",
   "apartments.calendarInstructions": "Kliknite da odaberete datum dolaska i odlaska. Pogledajte trenutni izračun cijene ispod.",
-  "apartments.nights": "{{count}} noćenje",
-  "apartments.nights_plural": "{{count}} noćenja",
+  "apartments.nights": {
+    "one": "{{count}} noć",
+    "few": "{{count}} noći",
+    "other": "{{count}} noći"
+  },
   "apartments.cleaningFee": "Naknada za čišćenje",
   "apartments.total": "Ukupno",
   "apartments.averageNight": "Prosječno po noći",
 
-  // Details
-  "amenities.maxGuests": "{{count}} gost",
-  "amenities.maxGuests_plural": "{{count}} gosta",
+  // Details with proper Croatian pluralization
+  // Croatian has three forms - one, few, many
+  "amenities.maxGuests": {
+    "one": "{{count}} gost",
+    "few": "{{count}} gosta",
+    "other": "{{count}} gostiju"
+  },
   "amenities.apartment": "Cijeli Apartman",
   "amenities.studio": "Studio apartman",
   "amenities.room": "Soba",
   "amenities.roomSize": "{{size}} m²",
   "amenities.bedroom": "Soba",
-  "amenities.bathrooms": "{{count}} kupaonica",
-  "amenities.bathrooms_plural": "{{count}} kupaonica",
+  "amenities.bedrooms": {
+    "one": "{{count}} spavaća soba",
+    "few": "{{count}} spavaće sobe",
+    "other": "{{count}} spavaćih soba"
+  },
+  "amenities.bathrooms": {
+    "one": "{{count}} kupaonica",
+    "few": "{{count}} kupaonice",
+    "other": "{{count}} kupaonica"
+  },
   "amenities.bed": "{{count}} {{type}}",
   "amenities.bedTypes.double": "bračni krevet",
   "amenities.bedTypes.single": "krevet za 1 osobu",

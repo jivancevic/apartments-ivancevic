@@ -39,22 +39,38 @@ const enTranslation = {
   "apartments.dateRange": "Date Range",
   "apartments.sendInquiry": "Send Inquiry",
   "apartments.calendarInstructions": "Click to select your check-in and check-out dates. See instant price calculation below.",
-  "apartments.nights": "{{count}} night",
-  "apartments.nights_plural": "{{count}} nights",
+  "apartments.nights": {
+    "one": "{{count}} night",
+    "other": "{{count}} nights"
+  },
   "apartments.cleaningFee": "Cleaning fee",
   "apartments.total": "Total",
   "apartments.averageNight": "Average per night",
 
-  // Details
-  "amenities.maxGuests": "{{count}} guest",
-  "amenities.maxGuests_plural": "{{count}} guests",
+  // Details with proper pluralization
+  // English has simple singular (1) and plural (0, 2+) forms
+  "amenities.maxGuests": {
+    "one": "{{count}} guest",
+    "other": "{{count}} guests"
+  },
+  
   "amenities.apartment": "Entire Apartment",
   "amenities.studio": "Studio apartment",
   "amenities.room": "Private room",
   "amenities.roomSize": "{{size}} m²",
+  
   "amenities.bedroom": "Bedroom",
-  "amenities.bathrooms": "{{count}} bathroom",
-  "amenities.bathrooms_plural": "{{count}} bathrooms",
+  "amenities.bedrooms": {
+    "one": "{{count}} bedroom",
+    "other": "{{count}} bedrooms"
+  },
+  
+  "amenities.bathroom": "Bathroom",
+  "amenities.bathrooms": {
+    "one": "{{count}} bathroom",
+    "other": "{{count}} bathrooms"
+  },
+  
   "amenities.bed": "{{count}} {{type}}",
   "amenities.bedTypes.double": "double bed",
   "amenities.bedTypes.single": "single bed",

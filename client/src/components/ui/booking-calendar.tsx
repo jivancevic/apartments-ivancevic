@@ -11,7 +11,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { calculateNightlyPrice, calculateStayPrice, getSeasonType, getSeasonalPrices, SeasonType, getSeasonName } from "@/lib/pricing";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-// We're using the full Apartment type directly
+/**
+ * The booking calendar component shows availability and allows date selection
+ */
 
 interface BookingCalendarProps {
   bookings: Booking[];
@@ -34,20 +36,50 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Make sure all required properties are present with defaults
+  // Create a complete apartment object with all required properties to pass to pricing functions
   const apartmentWithDefaults = {
     ...apartment,
-    // Ensure parkingDetails exists with default values if not provided
+    // Required fields with default values if not provided
+    id: apartment.id,
+    type: apartment.type,
+    nameEn: apartment.nameEn,
+    nameHr: apartment.nameHr,
+    descriptionEn: apartment.descriptionEn,
+    descriptionHr: apartment.descriptionHr,
+    images: apartment.images,
+    location: apartment.location || "",
+    basePeakPrice: apartment.basePeakPrice || 110,
+    priceMultiplier: apartment.priceMultiplier || "1.0",
+    cleaningFee: apartment.cleaningFee || 40,
+    maxGuests: apartment.maxGuests,
+    roomSizeM2: apartment.roomSizeM2,
+    bedrooms: apartment.bedrooms,
+    bathrooms: apartment.bathrooms,
+    hasWifi: apartment.hasWifi,
+    hasKitchen: apartment.hasKitchen,
+    hasAC: apartment.hasAC,
+    hasTV: apartment.hasTV,
+    hasBalcony: apartment.hasBalcony,
+    hasSeaView: apartment.hasSeaView,
+    hasCityView: apartment.hasCityView,
+    hasDishwasher: apartment.hasDishwasher,
+    hasCoffeeMachine: apartment.hasCoffeeMachine,
+    hasHairDryer: apartment.hasHairDryer,
+    hasMicrowave: apartment.hasMicrowave,
+    hasSmoothieMaker: apartment.hasSmoothieMaker,
+    washingMachineType: apartment.washingMachineType,
+    parkingType: apartment.parkingType,
+    // Create a default parkingDetails if not provided
     parkingDetails: apartment.parkingDetails || {
       pricePerDay: 0,
       reservationRequired: false
     },
-    // Other defaults for possibly missing fields
-    location: apartment.location || "",
-    basePeakPrice: apartment.basePeakPrice || 110,
-    priceMultiplier: apartment.priceMultiplier || "1.0",
-    cleaningFee: apartment.cleaningFee || 40
-  };
+    hasGarden: apartment.hasGarden,
+    otherAmenities: apartment.otherAmenities,
+    bookingUrl: apartment.bookingUrl,
+    airbnbUrl: apartment.airbnbUrl,
+    icalUrls: apartment.icalUrls
+  } as const;
   const { t } = useTranslation();
   // If initial dates are provided, set the current month to the month of the initial start date
   const [currentDate, setCurrentDate] = useState(() => {

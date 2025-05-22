@@ -161,25 +161,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       console.log('Raw inquiry data:', JSON.stringify(req.body, null, 2));
       
-      // Create a new object with parsed dates for database storage
+      // Parse dates and format them as ISO strings for storage
+      const checkIn = new Date(req.body.checkIn);
+      const checkOut = new Date(req.body.checkOut);
+      
+      // Check if dates are valid
+      if (isNaN(checkIn.getTime()) || isNaN(checkOut.getTime())) {
+        return res.status(400).json({ 
+          message: 'Invalid dates provided' 
+        });
+      }
+      
+      // Create a new object with dates formatted as strings for storage
       const dbData = { 
         name: req.body.name,
         email: req.body.email,
         phone: req.body.phone || null,
         apartmentId: req.body.apartmentId ? parseInt(req.body.apartmentId) : null,
         message: req.body.message || null,
-        checkIn: new Date(req.body.checkIn),
-        checkOut: new Date(req.body.checkOut),
+        checkIn: checkIn.toISOString(),
+        checkOut: checkOut.toISOString(),
       };
       
       console.log('Processed inquiry data for DB:', JSON.stringify(dbData, null, 2));
-      
-      // Check if dates are valid
-      if (isNaN(dbData.checkIn.getTime()) || isNaN(dbData.checkOut.getTime())) {
-        return res.status(400).json({ 
-          message: 'Invalid dates provided' 
-        });
-      }
       
       // Check if check-out date is after check-in date
       if (dbData.checkOut <= dbData.checkIn) {
@@ -199,10 +203,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Send emails asynchronously (don't await)
       try {
-        // Email data can use the raw data directly
+        // For email we'll use the original date objects instead of ISO strings
         const emailData = {
-          ...req.body,
-          apartmentId: req.body.apartmentId ? parseInt(req.body.apartmentId) : null
+          name: req.body.name,
+          email: req.body.email,
+          phone: req.body.phone || null,
+          apartmentId: req.body.apartmentId ? parseInt(req.body.apartmentId) : null,
+          message: req.body.message || null,
+          checkIn: checkIn,
+          checkOut: checkOut
         };
         
         // Send notification to the property owner

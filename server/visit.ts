@@ -237,6 +237,17 @@ export const visitDataByCategory: Record<string, LocationItem[]> = {
   
   activities: [
     {
+      nameEn: "Buggies",
+      nameHr: "Buggies",
+      descriptionEn: "Quad and buggy rides through scenic hills and vineyards, offering sweeping views of the sea and Pelješac.",
+      descriptionHr: "Vožnje quadovima i buggyima kroz slikovita brda i vinograde, s prekrasnim pogledima na more i Pelješac.",
+      image: "/images/locations/korcula-adventures.webp",
+      location: "https://maps.google.com/?q=42.957133,17.133196",
+      distance: { minutes: 10, mean: "walk" },
+      featureEn: "Adventure",
+      featureHr: "Avantura"
+    },
+    {
       nameEn: "Windsurfing",
       nameHr: "Windsurfing",
       descriptionEn: "Excellent wind conditions in the Korčula-Pelješac channel make this one of the island's top water sports.",
@@ -259,17 +270,6 @@ export const visitDataByCategory: Record<string, LocationItem[]> = {
       featureEn: "Underwater adventure",
       featureHr: "Podvodna avantura",
       link: "https://www.korculadiving.com/"
-    },
-    {
-      nameEn: "Buggies",
-      nameHr: "Buggies",
-      descriptionEn: "Quad and buggy rides through scenic hills and vineyards, offering sweeping views of the sea and Pelješac.",
-      descriptionHr: "Vožnje quadovima i buggyima kroz slikovita brda i vinograde, s prekrasnim pogledima na more i Pelješac.",
-      image: "/images/locations/korcula-adventures.webp",
-      location: "https://maps.google.com/?q=42.957133,17.133196",
-      distance: { minutes: 10, mean: "walk" },
-      featureEn: "Adventure",
-      featureHr: "Avantura"
     }
   ],
   
@@ -299,6 +299,18 @@ export const visitDataByCategory: Record<string, LocationItem[]> = {
       link: "https://np-mljet.hr/en/"
     },
     {
+      nameEn: "Hvar",
+      nameHr: "Hvar",
+      descriptionEn: "Full-day trip to the glamorous island of Hvar, with beaches, culture, and excellent food.",
+      descriptionHr: "Cjelodnevni izlet na glamurozni otok Hvar, s plažama, kulturom i odličnom hranom.",
+      image: "/images/locations/korcula-adventures.webp",
+      location: "https://maps.google.com/?q=43.172779,16.653451",
+      distance: { minutes: 60, mean: "ferry" },
+      featureEn: "Glamorous island",
+      featureHr: "Glamurozni otok",
+      link: "https://www.hvarinfo.com/"
+    },
+    {
       nameEn: "Dubrovnik",
       nameHr: "Dubrovnik",
       descriptionEn: "Organized day trip to the UNESCO-protected 'Pearl of the Adriatic' – best outside peak summer crowds.",
@@ -314,16 +326,92 @@ export const visitDataByCategory: Record<string, LocationItem[]> = {
   
   restaurants: [
     {
-      nameEn: "Filippi",
-      nameHr: "Filippi",
-      descriptionEn: "Elegant seaside restaurant with a Michelin recommendation, known for refined presentations and creative local cuisine.",
-      descriptionHr: "Elegantni restoran uz more s Michelinovom preporukom, poznat po profinjenim prezentacijama i kreativnoj lokalnoj kuhinji.",
+      nameEn: "Pagar (Pupnat)",
+      nameHr: "Pagar (Pupnat)",
+      descriptionEn: "Top choice for premium fish and lobster, located inland. Traditional ambiance with local ingredients, worth the scenic drive.",
+      descriptionHr: "Najbolji izbor za vrhunsku ribu i jastoga, smješten u unutrašnjosti. Tradicionalni ambijent s lokalnim sastojcima, vrijedi slikovite vožnje.",
       image: "/images/locations/filippi.webp",
-      location: "https://maps.google.com/?q=42.962041,17.137671",
-      distance: { minutes: 10, mean: "walk" },
-      featureEn: "Fine dining",
-      featureHr: "Vrhunska kuhinja",
-      link: "https://www.filippicorchula.com/"
+      location: "https://maps.google.com/?q=42.935142,17.066763",
+      distance: { minutes: 20, mean: "car" },
+      featureEn: "Premium seafood",
+      featureHr: "Vrhunski plodovi mora"
+    },
+    {
+      nameEn: "Marko Polo (Kneže)",
+      nameHr: "Marko Polo (Kneže)",
+      descriptionEn: "Not located directly on the sea, but offers affordable fresh seafood in a calm bay setting.",
+      descriptionHr: "Nije smješten direktno na moru, ali nudi pristupačne svježe plodove mora u mirnom zaljevu.",
+      image: "/images/locations/filippi.webp",
+      location: "https://maps.google.com/?q=42.949722,17.105556",
+      distance: { minutes: 15, mean: "car" },
+      featureEn: "Affordable seafood",
+      featureHr: "Pristupačni plodovi mora"
+    },
+    {
+      nameEn: "Smrč (Šimunovo)",
+      nameHr: "Smrč (Šimunovo)",
+      descriptionEn: "Family farm in the wilderness with stunning views of the island of Lastovo. Known for authenticity and slow dining.",
+      descriptionHr: "Obiteljsko gospodarstvo u divljini s prekrasnim pogledom na otok Lastovo. Poznato po autentičnosti i sporom objedovanju.",
+      image: "/images/locations/filippi.webp",
+      location: "https://maps.google.com/?q=42.918998,17.003697",
+      distance: { minutes: 25, mean: "car" },
+      featureEn: "Farm-to-table",
+      featureHr: "Od farme do stola"
+    },
+    {
+      nameEn: "Čakulona",
+      nameHr: "Čakulona",
+      descriptionEn: "Cozy restaurant in the Old Town, offering homemade Croatian meals and a welcoming atmosphere.",
+      descriptionHr: "Ugodan restoran u Starom gradu, nudi domaća hrvatska jela i gostoljubivu atmosferu.",
+      image: "/images/locations/adio-mare.webp",
+      location: "https://maps.google.com/?q=42.961476,17.135943",
+      distance: { minutes: 6, mean: "walk" },
+      featureEn: "Home cooking",
+      featureHr: "Domaća kuhinja"
+    },
+    {
+      nameEn: "Aterina",
+      nameHr: "Aterina",
+      descriptionEn: "Stylish bistro serving seasonal, local produce. Great for vegetarians, with beautiful views over the harbor.",
+      descriptionHr: "Stilski bistro koji poslužuje sezonske, lokalne proizvode. Odličan za vegetarijance, s prekrasnim pogledom na luku.",
+      image: "/images/locations/adio-mare.webp",
+      location: "https://maps.google.com/?q=42.961909,17.137456",
+      distance: { minutes: 8, mean: "walk" },
+      featureEn: "Vegetarian-friendly",
+      featureHr: "Pogodno za vegetarijance"
+    },
+    {
+      nameEn: "Biankura",
+      nameHr: "Biankura",
+      descriptionEn: "Relaxed spot known for hearty breakfasts, sweet pastries, and friendly staff.",
+      descriptionHr: "Opušteno mjesto poznato po obilnim doručcima, slatkim kolačima i ljubaznom osoblju.",
+      image: "/images/locations/adio-mare.webp",
+      location: "https://maps.google.com/?q=42.961751,17.137135",
+      distance: { minutes: 7, mean: "walk" },
+      featureEn: "Breakfast spot",
+      featureHr: "Mjesto za doručak"
+    },
+    {
+      nameEn: "Pepper and Choco",
+      nameHr: "Pepper and Choco",
+      descriptionEn: "Small, chic cafe ideal for desserts and quality coffee, located in the heart of town.",
+      descriptionHr: "Mali, šik kafić idealan za deserte i kvalitetnu kavu, smješten u srcu grada.",
+      image: "/images/locations/adio-mare.webp",
+      location: "https://maps.google.com/?q=42.961639,17.136388",
+      distance: { minutes: 5, mean: "walk" },
+      featureEn: "Coffee and desserts",
+      featureHr: "Kava i deserti"
+    },
+    {
+      nameEn: "Adio Mare",
+      nameHr: "Adio Mare",
+      descriptionEn: "Legendary Korčula konoba serving classic Dalmatian dishes with an impressive wine list.",
+      descriptionHr: "Legendarna korčulanska konoba koja poslužuje klasična dalmatinska jela s impresivnom vinskom kartom.",
+      image: "/images/locations/adio-mare.webp",
+      location: "https://maps.google.com/?q=42.961683,17.136066",
+      distance: { minutes: 7, mean: "walk" },
+      featureEn: "Traditional cuisine",
+      featureHr: "Tradicionalna kuhinja"
     },
     {
       nameEn: "LD Restaurant",
@@ -338,26 +426,27 @@ export const visitDataByCategory: Record<string, LocationItem[]> = {
       link: "https://ldrestaurant.com/"
     },
     {
-      nameEn: "Adio Mare",
-      nameHr: "Adio Mare",
-      descriptionEn: "Legendary Korčula konoba serving classic Dalmatian dishes with an impressive wine list.",
-      descriptionHr: "Legendarna korčulanska konoba koja poslužuje klasična dalmatinska jela s impresivnom vinskom kartom.",
-      image: "/images/locations/adio-mare.webp",
-      location: "https://maps.google.com/?q=42.961683,17.136066",
-      distance: { minutes: 7, mean: "walk" },
-      featureEn: "Traditional cuisine",
-      featureHr: "Tradicionalna kuhinja"
+      nameEn: "Filippi",
+      nameHr: "Filippi",
+      descriptionEn: "Elegant seaside restaurant with a Michelin recommendation, known for refined presentations and creative local cuisine.",
+      descriptionHr: "Elegantni restoran uz more s Michelinovom preporukom, poznat po profinjenim prezentacijama i kreativnoj lokalnoj kuhinji.",
+      image: "/images/locations/filippi.webp",
+      location: "https://maps.google.com/?q=42.962041,17.137671",
+      distance: { minutes: 10, mean: "walk" },
+      featureEn: "Fine dining",
+      featureHr: "Vrhunska kuhinja",
+      link: "https://www.filippicorchula.com/"
     },
     {
-      nameEn: "Čakulona",
-      nameHr: "Čakulona",
-      descriptionEn: "Cozy restaurant in the Old Town, offering homemade Croatian meals and a welcoming atmosphere.",
-      descriptionHr: "Ugodan restoran u Starom gradu, nudi domaća hrvatska jela i gostoljubivu atmosferu.",
+      nameEn: "Lole",
+      nameHr: "Lole",
+      descriptionEn: "Artistic tapas bar with a bohemian vibe, inventive cocktails, and live music nights.",
+      descriptionHr: "Umjetnički tapas bar s boemskim ugođajem, inovativnim koktelima i večerima žive glazbe.",
       image: "/images/locations/adio-mare.webp",
-      location: "https://maps.google.com/?q=42.961476,17.135943",
+      location: "https://maps.google.com/?q=42.961546,17.136185",
       distance: { minutes: 6, mean: "walk" },
-      featureEn: "Home cooking",
-      featureHr: "Domaća kuhinja"
+      featureEn: "Tapas and cocktails",
+      featureHr: "Tapasi i kokteli"
     }
   ]
 };

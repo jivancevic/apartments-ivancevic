@@ -11,17 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { calculateNightlyPrice, calculateStayPrice, getSeasonType, getSeasonalPrices, SeasonType, getSeasonName } from "@/lib/pricing";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-// Create a type that ensures all required properties are present
-type ApartmentWithRequiredProps = Omit<Apartment, 'parkingDetails'> & {
-  location: string;
-  basePeakPrice: number;
-  priceMultiplier: string;
-  cleaningFee: number;
-  parkingDetails?: {
-    pricePerDay: number;
-    reservationRequired: boolean;
-  };
-};
+// We're using the full Apartment type directly
 
 interface BookingCalendarProps {
   bookings: Booking[];
@@ -44,9 +34,15 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Ensure required properties with defaults
-  const apartmentWithDefaults: ApartmentWithRequiredProps = {
+  // Make sure all required properties are present with defaults
+  const apartmentWithDefaults = {
     ...apartment,
+    // Ensure parkingDetails exists with default values if not provided
+    parkingDetails: apartment.parkingDetails || {
+      pricePerDay: 0,
+      reservationRequired: false
+    },
+    // Other defaults for possibly missing fields
     location: apartment.location || "",
     basePeakPrice: apartment.basePeakPrice || 110,
     priceMultiplier: apartment.priceMultiplier || "1.0",

@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
 import { apiRequest } from "@/lib/queryClient";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Apartment, InquiryFormData } from "@/types";
+import { Apartment, InquiryFormData, Booking } from "@/types";
 import useLanguage from "@/hooks/useLanguage";
 import { useToast } from "@/hooks/use-toast";
-import { format, parse } from "date-fns";
+import { format, parse, differenceInDays } from "date-fns";
 
 import {
   Form,
@@ -160,19 +160,58 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
     },
   });
 
-  // Fetch all bookings at once for improved performance
-  const { data: allBookings } = useQuery<Booking[]>({
-    queryKey: ['/api/apartments/bookings'],
+  // Request bookings for each apartment as needed
+  // For simplicity, we'll just request bookings for the selected apartment
+  const [selectedApartmentId, setSelectedApartmentId] = useState<number | null>(null);
+  
+  // Watch for changes to the selected apartment ID
+  // The form might not be initialized immediately
+  const formApartmentId = form.watch('apartmentId');
+  
+  useEffect(() => {
+    if (formApartmentId && formApartmentId !== 'none') {
+      setSelectedApartmentId(parseInt(formApartmentId));
+    } else {
+      setSelectedApartmentId(null);
+    }
+  }, [formApartmentId]);
+  
+  // Fetch bookings only for the selected apartment
+  const { data: apartmentBookings = [] } = useQuery<Booking[]>({
+    queryKey: ['/api/apartments', selectedApartmentId, 'bookings'],
     queryFn: async () => {
-      // Fetch bookings for all apartments
-      const response = await apiRequest('GET', '/api/apartments/bookings');
-      return response || [];
+      if (!selectedApartmentId) return [];
+      try {
+        const response = await apiRequest('GET', `/api/apartments/${selectedApartmentId}/bookings`);
+        return Array.isArray(response) ? response : [];
+      } catch (error) {
+        console.error('Error fetching apartment bookings:', error);
+        return [];
+      }
     },
+    enabled: !!selectedApartmentId, // Only run query when an apartment is selected
+  });
+  
+  // Fetch iCal bookings for the selected apartment
+  const { data: apartmentIcalBookings = [] } = useQuery<Booking[]>({
+    queryKey: ['/api/apartments', selectedApartmentId, 'ical-bookings'],
+    queryFn: async () => {
+      if (!selectedApartmentId) return [];
+      try {
+        const response = await apiRequest('GET', `/api/apartments/${selectedApartmentId}/ical-bookings`);
+        return Array.isArray(response) ? response : [];
+      } catch (error) {
+        console.error('Error fetching apartment iCal bookings:', error);
+        return [];
+      }
+    },
+    enabled: !!selectedApartmentId, // Only run query when an apartment is selected
   });
 
   // Check if a date range conflicts with existing bookings for an apartment
   const hasDateConflict = (apartmentId: number, checkIn: Date, checkOut: Date): boolean => {
-    if (!allBookings) return false;
+    // If we don't have bookings data yet or no apartment ID, assume no conflict
+    if (!apartmentId || (!apartmentBookings && !apartmentIcalBookings)) return false;
     
     // Create array of dates in the requested period
     const dates: Date[] = [];
@@ -183,17 +222,40 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
       currentDate.setDate(currentDate.getDate() + 1);
     }
     
-    // Filter bookings for this apartment
-    const apartmentBookings = allBookings.filter(booking => booking.apartmentId === apartmentId);
+    // Filter bookings to only include those for this apartment
+    const regularBookingsForApartment = apartmentBookings.filter(
+      booking => booking.apartmentId === apartmentId
+    );
     
-    // Check for date conflicts
-    return apartmentBookings.some(booking => {
+    const icalBookingsForApartment = apartmentIcalBookings.filter(
+      booking => booking.apartmentId === apartmentId
+    );
+    
+    // Check regular bookings
+    const hasRegularBookingConflict = regularBookingsForApartment.some(booking => {
       const bookingStart = new Date(booking.startDate);
       const bookingEnd = new Date(booking.endDate);
       
       // Check if any date in our range conflicts with this booking
-      return dates.some(date => date >= bookingStart && date <= bookingEnd);
+      return dates.some(date => {
+        const dateTime = date.getTime();
+        return dateTime >= bookingStart.getTime() && dateTime < bookingEnd.getTime();
+      });
     });
+    
+    // Check iCal bookings
+    const hasIcalBookingConflict = icalBookingsForApartment.some(booking => {
+      const bookingStart = new Date(booking.startDate);
+      const bookingEnd = new Date(booking.endDate);
+      
+      // Check if any date in our range conflicts with this booking
+      return dates.some(date => {
+        const dateTime = date.getTime();
+        return dateTime >= bookingStart.getTime() && dateTime < bookingEnd.getTime();
+      });
+    });
+    
+    return hasRegularBookingConflict || hasIcalBookingConflict;
   };
 
   // Handle form submission
@@ -201,6 +263,19 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
     // Check if an apartment was selected and if so, verify availability
     if (data.apartmentId && data.apartmentId !== "none") {
       const apartmentId = parseInt(data.apartmentId);
+      
+      // Validate minimum stay (at least one night)
+      if (differenceInDays(data.checkOut, data.checkIn) < 1) {
+        toast({
+          title: currentLanguage === "en" ? "Invalid date selection" : "Nevažeći odabir datuma",
+          description: currentLanguage === "en" 
+            ? "Please select at least a one-night stay." 
+            : "Molimo odaberite boravak od najmanje jedne noći.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
       // Check for booking conflicts
       if (hasDateConflict(apartmentId, data.checkIn, data.checkOut)) {
         // Show toast notification in the current language

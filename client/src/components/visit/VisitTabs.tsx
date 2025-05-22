@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import VisitCards from './VisitCards';
 import { Location } from '../../types';
+import { categories, CATEGORY_TO_TYPE_MAP } from '../../lib/categories';
 
 interface VisitTabsProps {
   locations: Location[];
@@ -11,6 +12,7 @@ interface VisitTabsProps {
 export function VisitTabs({ locations }: VisitTabsProps) {
   const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState('attraction-old-town');
+  const isEnglish = i18n.language === 'en';
 
   // Group locations by type
   const locationsByType = locations.reduce((acc, location) => {
@@ -27,25 +29,25 @@ export function VisitTabs({ locations }: VisitTabsProps) {
       <Tabs defaultValue="attraction-old-town" className="w-full" onValueChange={setActiveTab}>
         <TabsList className="grid grid-cols-5 mb-8">
           <TabsTrigger value="attraction-old-town">
-            {i18n.language === 'en' ? 'Old Town' : 'Stari grad'}
+            {isEnglish ? categories.attractionsOldTown.en : categories.attractionsOldTown.hr}
           </TabsTrigger>
           <TabsTrigger value="attraction-island">
-            {i18n.language === 'en' ? 'Island' : 'Otok'}
+            {isEnglish ? categories.attractionsIsland.en : categories.attractionsIsland.hr}
           </TabsTrigger>
           <TabsTrigger value="activity">
-            {i18n.language === 'en' ? 'Activities' : 'Aktivnosti'}
+            {isEnglish ? categories.activities.en : categories.activities.hr}
           </TabsTrigger>
           <TabsTrigger value="excursion">
-            {i18n.language === 'en' ? 'Excursions' : 'Izleti'}
+            {isEnglish ? categories.excursions.en : categories.excursions.hr}
           </TabsTrigger>
           <TabsTrigger value="restaurant">
-            {i18n.language === 'en' ? 'Restaurants' : 'Restorani'}
+            {isEnglish ? categories.restaurants.en : categories.restaurants.hr}
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="attraction-old-town" className="mt-0">
           <h2 className="text-2xl font-semibold mb-6">
-            {i18n.language === 'en' ? 'Old Town Attractions' : 'Atrakcije u Starom gradu'}
+            {isEnglish ? categories.attractionsOldTown.en : categories.attractionsOldTown.hr}
           </h2>
           <VisitCards 
             locations={locationsByType['attraction-old-town'] || []} 
@@ -54,7 +56,7 @@ export function VisitTabs({ locations }: VisitTabsProps) {
 
         <TabsContent value="attraction-island" className="mt-0">
           <h2 className="text-2xl font-semibold mb-6">
-            {i18n.language === 'en' ? 'Island Attractions' : 'Atrakcije na otoku'}
+            {isEnglish ? categories.attractionsIsland.en : categories.attractionsIsland.hr}
           </h2>
           <VisitCards 
             locations={locationsByType['attraction-island'] || []} 
@@ -63,7 +65,7 @@ export function VisitTabs({ locations }: VisitTabsProps) {
 
         <TabsContent value="activity" className="mt-0">
           <h2 className="text-2xl font-semibold mb-6">
-            {i18n.language === 'en' ? 'Activities' : 'Aktivnosti'}
+            {isEnglish ? categories.activities.en : categories.activities.hr}
           </h2>
           <VisitCards 
             locations={locationsByType['activity'] || []} 
@@ -72,7 +74,7 @@ export function VisitTabs({ locations }: VisitTabsProps) {
 
         <TabsContent value="excursion" className="mt-0">
           <h2 className="text-2xl font-semibold mb-6">
-            {i18n.language === 'en' ? 'Excursions' : 'Izleti'}
+            {isEnglish ? categories.excursions.en : categories.excursions.hr}
           </h2>
           <VisitCards 
             locations={locationsByType['excursion'] || []} 
@@ -81,7 +83,7 @@ export function VisitTabs({ locations }: VisitTabsProps) {
 
         <TabsContent value="restaurant" className="mt-0">
           <h2 className="text-2xl font-semibold mb-6">
-            {i18n.language === 'en' ? 'Restaurants' : 'Restorani'}
+            {isEnglish ? categories.restaurants.en : categories.restaurants.hr}
           </h2>
           <VisitCards 
             locations={locationsByType['restaurant'] || []} 

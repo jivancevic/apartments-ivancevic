@@ -224,9 +224,7 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold">
-        {filteredApartments.length === 1
-          ? t("search.resultsFound", { count: 1 })
-          : t("search.resultsFound_plural", { count: filteredApartments.length })}
+        {t("search.resultsFound", { count: filteredApartments.length })}
       </h2>
       
       <div className="space-y-4">
@@ -362,7 +360,7 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
                       <div className="text-gray-600">
                         {format(checkIn, "MMM d")} – {format(checkOut, "MMM d, yyyy")}
                         <span className="mx-1">•</span>
-                        {priceSummary.totalNights} {t("nights", { count: priceSummary.totalNights })}
+                        {priceSummary.totalNights} {t("apartments.nights", { count: priceSummary.totalNights })}
                       </div>
                       <div className="font-bold text-lg">
                         €{Math.round(averageNightlyPrice)} <span className="text-xs font-normal">{t("search.perNight")}</span>

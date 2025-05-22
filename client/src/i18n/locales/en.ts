@@ -59,6 +59,9 @@ const enTranslation = {
   "amenities.bedTypes.double": "double bed",
   "amenities.bedTypes.single": "single bed",
   "amenities.bedTypes.sofa": "sofa bed",
+  "amenities.bedTypes_plural.double": "double beds",
+  "amenities.bedTypes_plural.single": "single beds",
+  "amenities.bedTypes_plural.sofa": "sofa beds",
   
   // Amenities
   "amenities.kitchen": "Equiped kitchen",

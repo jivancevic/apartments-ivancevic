@@ -7,10 +7,8 @@ export const apartmentData: Apartment[] = [
     nameEn: "Magical Oasis",
     nameHr: "Magical Oasis",
     descriptionEn: `Nestled in a hidden lane of Korčula’s medieval Old Town, Magical Oasis is a charming retreat perfect for two. 
-    
-    This cozy 35 m² apartment blends historic character with modern comfort – think exposed stone walls and elegant contemporary décor. Guests love the spotless interior and thoughtful touches throughout. The living area features a comfy sofa, flat-screen TV (with Netflix) and air-conditioning, while the bedroom offers a luxuriously comfortable bed with quality linens for a restful night. A fully equipped kitchen provides everything needed to cook, and the sparkling bathroom includes a spacious rain shower, bidet, and plush towels for a touch of luxury. Despite being steps away from Korčula’s iconic landmarks, waterfront promenade, and best restaurants, the apartment stays peaceful – truly an “oasis” amid the lively Old Town. 
-    
-    Hosts Josip and his family go above and beyond, greeting guests with warm Dalmatian hospitality and insider tips. With its unbeatable location, romantic ambiance, and all the amenities of home (from fast Wi-Fi to an in-unit washing machine), Magical Oasis promises a delightful stay where you can unwind and enjoy the magic of Korčula.`,
+  This cozy 35 m² apartment blends historic character with modern comfort – think exposed stone walls and elegant contemporary décor. Guests love the spotless interior and thoughtful touches throughout. The living area features a comfy sofa, flat-screen TV (with Netflix) and air-conditioning, while the bedroom offers a luxuriously comfortable bed with quality linens for a restful night. A fully equipped kitchen provides everything needed to cook, and the sparkling bathroom includes a spacious rain shower, bidet, and plush towels for a touch of luxury. Despite being steps away from Korčula’s iconic landmarks, waterfront promenade, and best restaurants, the apartment stays peaceful – truly an “oasis” amid the lively Old Town. 
+  Hosts Josip and his family go above and beyond, greeting guests with warm Dalmatian hospitality and insider tips. With its unbeatable location, romantic ambiance, and all the amenities of home (from fast Wi-Fi to an in-unit washing machine), Magical Oasis promises a delightful stay where you can unwind and enjoy the magic of Korčula.`,
     descriptionHr: `Smješten u mirnoj, skrivenoj uličici srednjovjekovne gradske jezgre Korčule, Magical Oasis pruža šarmantno utočište idealno za dvoje. 
     Ovaj udoban apartman od 35 m² spaja povijesni karakter i suvremeni komfor – kameni zidovi autentičnog ambijenta skladno su spojeni s elegantnim modernim uređenjem. Gosti oduševljeno ističu besprijekornu čistoću interijera i pažljivo osmišljene detalje u svakom kutku. Dnevni boravak nudi udobnu sofu, flat-screen TV (s pristupom Netflixu) i klima-uređaj, dok spavaća soba ima iznimno udoban krevet s kvalitetnom posteljinom za miran san. Potpuno opremljena kuhinja pruža sve potrebno za pripremu obroka, a blistava kupaonica s prostranim tušem, bideom i mekanim ručnicima donosi dašak luksuza. Iako se nalazi nadomak svih znamenitosti, šetnice “iza grada” i najboljih restorana, apartman ostaje tih i miran – prava “oaza” u srcu živahnog Starog Grada. 
     Domaćini Josip i njegova obitelj trude se gostima osigurati neponovljiv boravak: dočekuju goste s toplom dalmatinskom gostoljubivošću i korisnim lokalnim preporukama. Zahvaljujući nenadmašnoj lokaciji, romantičnom ugođaju i svim pogodnostima doma (od brzog Wi-Fi-ja do perilice rublja u apartmanu), Magical Oasis jamči divan boravak u kojem se možete opustiti i doživjeti svu čaroliju Korčule.`,
@@ -267,7 +265,8 @@ export const apartmentData: Apartment[] = [
     roomSizeM2: 76,
     bedrooms: [
       {
-        name: "Bedroom 1",
+        nameEn: "Bedroom 1",
+        nameHr: "Soba 1",
         beds: [
           {
             type: "double",
@@ -276,7 +275,8 @@ export const apartmentData: Apartment[] = [
         ]
       },
       {
-        name: "Bedroom 2", 
+        nameEn: "Bedroom 2",
+        nameHr: "Soba 2", 
         beds: [
           {
             type: "single",
@@ -285,7 +285,8 @@ export const apartmentData: Apartment[] = [
         ]
       },
       {
-        name: "Bedroom 3",
+        nameEn: "Bedroom 3",
+        nameHr: "Soba 3",
         beds: [
           {
             type: "single",
@@ -294,7 +295,8 @@ export const apartmentData: Apartment[] = [
         ]
       },
       {
-        name: "Living room",
+        nameEn: "Living room",
+        nameHr: "Dnevni boravak",
         beds: [
           {
             type: "sofa",
@@ -361,7 +363,8 @@ export const apartmentData: Apartment[] = [
     roomSizeM2: 57,
     bedrooms: [
       {
-        name: "Bedroom 1",
+        nameEn: "Bedroom 1",
+        nameHr: "Soba 1",
         beds: [
           {
             type: "double",
@@ -370,7 +373,8 @@ export const apartmentData: Apartment[] = [
         ]
       },
       {
-        name: "Bedroom 2",
+        nameEn: "Bedroom 2",
+        nameHr: "Soba 2",
         beds: [
           {
             type: "single",
@@ -379,7 +383,8 @@ export const apartmentData: Apartment[] = [
         ]
       },
       {
-        name: "Living room",
+        nameEn: "Living room",
+        nameHr: "Dnevni boravak",
         beds: [
           {
             type: "sofa",
@@ -502,7 +507,8 @@ export const apartmentData: Apartment[] = [
     roomSizeM2: 33,
     bedrooms: [
       {
-        name: "Bedroom 1",
+        nameEn: "Bedroom 1",
+        nameHr: "Soba 1",
         beds: [
           {
             type: "double",
@@ -562,12 +568,13 @@ export const apartmentData: Apartment[] = [
     priceMultiplier: "1.00",
     cleaningFee: 80,
     // Apartment details
-    maxGuests: 2,
+    maxGuests: 7,
     type: "apartment",
     roomSizeM2: 65,
     bedrooms: [
       {
-        name: "Bedroom 1",
+        nameEn: "Bedroom 1",
+        nameHr: "Soba 1",
         beds: [
           {
             type: "double",
@@ -576,7 +583,8 @@ export const apartmentData: Apartment[] = [
         ]
       },
       {
-        name: "Bedroom 1",
+        nameEn: "Bedroom 2",
+        nameHr: "Soba 2",
         beds: [
           {
             type: "single",
@@ -585,7 +593,8 @@ export const apartmentData: Apartment[] = [
         ]
       },
       {
-        name: "Living room",
+        nameEn: "Living room",
+        nameHr: "Dnevni boravak",
         beds: [
           {
             type: "sofa",
@@ -649,7 +658,8 @@ export const apartmentData: Apartment[] = [
     roomSizeM2: 25,
     bedrooms: [
       {
-        name: "Studio",
+        nameEn: "Studio",
+        nameHr: "Studio",
         beds: [
           {
             type: "double",

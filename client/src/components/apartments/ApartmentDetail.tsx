@@ -78,80 +78,79 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
         <h3 className="font-heading font-bold text-2xl mb-4">
           {currentLanguage === "en" ? apartment.nameEn : apartment.nameHr}
         </h3>
-        <p className="mb-6">
+        <div className="mb-6 whitespace-pre-wrap">
           {currentLanguage === "en" ? apartment.descriptionEn : apartment.descriptionHr}
-        </p>
+        </div>
         
         {/* Guest Capacity and Layout */}
         <h4 className="font-heading font-semibold text-lg mb-3">
           {t("apartments.details", "Details")}
         </h4>
         <div className="bg-neutral p-4 rounded-lg mb-6">
-          <div className="space-y-3">
-            {/* Number of guests */}
-            <div className="flex items-center">
-              <AmenityIcon icon="guests" size={20} className="text-primary mr-2" />
-              <span>{t("amenities.maxGuests", { count: apartment.maxGuests })}</span>
-            </div>
-            
-            {/* Apartment type */}
-            <div className="flex items-center">
-              <AmenityIcon icon="apartment-type" size={20} className="text-primary mr-2" />
-              <span>
-                {t(`amenities.${apartment.type}`)}
-              </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* LEFT COLUMN: General Info */}
+            <div className="space-y-3">
+              {/* Number of guests */}
+              <div className="flex items-center">
+                <AmenityIcon icon="guests" size={20} className="text-primary mr-2" />
+                <span>{t("amenities.maxGuests", { count: apartment.maxGuests })}</span>
+              </div>
+
+              {/* Apartment type */}
+              <div className="flex items-center">
+                <AmenityIcon icon="apartment-type" size={20} className="text-primary mr-2" />
+                <span>{t(`amenities.${apartment.type}`)}</span>
+              </div>
+
+              {/* Room size */}
+              <div className="flex items-center">
+                <AmenityIcon icon="room-size" size={20} className="text-primary mr-2" />
+                <span>{t("amenities.roomSize", { size: apartment.roomSizeM2 })}</span>
+              </div>
+
+              {/* Bathrooms */}
+              <div className="flex items-center">
+                <AmenityIcon icon="bathroom" size={20} className="text-primary mr-2" />
+                <span>{t("amenities.bathrooms", { count: apartment.bathrooms ?? 1 })}</span>
+              </div>
             </div>
 
-            {/* Room size */}
-            <div className="flex items-center">
-              <AmenityIcon icon="room-size" size={20} className="text-primary mr-2" />
-              <span>
-                {t("amenities.roomSize", { size: apartment.roomSizeM2 })}
-              </span>
-            </div>
-            
-            {/* Bedrooms */}
-            {apartment.bedrooms.map((bedroom, index) => (
-              <div key={index} className="bg-white p-3 rounded-md">
-                <p className="font-medium mb-1">
-                  {currentLanguage === "en" ? bedroom.nameEn : bedroom.nameHr}
-                </p>
-                <div className="space-y-1 pl-2">
-                  {bedroom.beds.map((bed, bedIndex) => (
-                    <div key={bedIndex} className="flex items-center">
-                      <span className="flex mr-2">
-                        {Array.from({ length: bed.count }).map((_, iconIndex) => (
-                          <span key={iconIndex} className="mr-0.5">
-                            {bed.type === "double" ? (
-                              <AmenityIcon icon="bed-double" size={18} className="text-primary" />
-                            ) : bed.type === "single" ? (
-                              <AmenityIcon icon="bed-single" size={18} className="text-primary" />
-                            ) : bed.type === "sofa" ? (
-                              <AmenityIcon icon="sofa" size={18} className="text-primary" />
-                            ) : (
-                              <AmenityIcon icon="bed-single" size={18} className="text-primary" />
-                            )}
-                          </span>
-                        ))}
-                      </span>
-                      <span>
-                        {t("amenities.bed", {
-                          count: bed.count,
-                          type: t(`amenities.bedTypes.${bed.type}`)
-                        })}
-                      </span>
-                    </div>
-                  ))}
+            {/* RIGHT COLUMN: Bedrooms */}
+            <div className="space-y-3">
+              {apartment.bedrooms.map((bedroom, index) => (
+                <div key={index} className="bg-white rounded-md">
+                  <p className="font-medium mb-1">
+                    {currentLanguage === "en" ? bedroom.nameEn : bedroom.nameHr}
+                  </p>
+                  <div className="space-y-1 pl-2">
+                    {bedroom.beds.map((bed, bedIndex) => (
+                      <div key={bedIndex} className="flex items-center">
+                        <span className="flex mr-2">
+                          {Array.from({ length: bed.count }).map((_, iconIndex) => (
+                            <span key={iconIndex} className="mr-0.5">
+                              {bed.type === "double" ? (
+                                <AmenityIcon icon="bed-double" size={18} className="text-primary" />
+                              ) : bed.type === "single" ? (
+                                <AmenityIcon icon="bed-single" size={18} className="text-primary" />
+                              ) : bed.type === "sofa" ? (
+                                <AmenityIcon icon="sofa" size={18} className="text-primary" />
+                              ) : (
+                                <AmenityIcon icon="bed-single" size={18} className="text-primary" />
+                              )}
+                            </span>
+                          ))}
+                        </span>
+                        <span>
+                          {t("amenities.bed", {
+                            count: bed.count,
+                            type: t(`amenities.bedTypes.${bed.type}`),
+                          })}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
-            
-            {/* Bathrooms */}
-            <div className="flex items-center">
-              <AmenityIcon icon="bathroom" size={20} className="text-primary mr-2" />
-              <span>
-                {t("amenities.bathrooms", { count: apartment.bathrooms ?? 1 })}
-              </span>
+              ))}
             </div>
           </div>
         </div>

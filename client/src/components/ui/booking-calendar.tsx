@@ -32,7 +32,6 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
     if (initialEndDate) {
       setSelectedEndDate(initialEndDate);
     }
-    console.log("Current date on client:", new Date());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -44,60 +44,38 @@ const hrTranslation = {
   "apartments.dateRange": "Raspon datuma",
   "apartments.sendInquiry": "Pošaljite upit",
   "apartments.calendarInstructions": "Kliknite da odaberete datum dolaska i odlaska. Pogledajte trenutni izračun cijene ispod.",
-  "apartments.nights": {
-    "one": "{{count}} noć",
-    "few": "{{count}} noći",
-    "other": "{{count}} noći"
-  },
+  "apartments.nights_one": "{{count}} noć",
+  "apartments.nights_few": "{{count}} noći",
+  "apartments.nights_other": "{{count}} noći",
   "apartments.cleaningFee": "Naknada za čišćenje",
   "apartments.total": "Ukupno",
   "apartments.averageNight": "Prosječno po noći",
 
-  // Details with proper Croatian pluralization
-  // Croatian has three forms - one, few, many
-  "amenities.maxGuests": {
-    "one": "{{count}} gost",
-    "few": "{{count}} gosta",
-    "other": "{{count}} gostiju"
-  },
+  // Details
+  "amenities.maxGuests_one": "{{count}} gost",
+  "amenities.maxGuests_few": "{{count}} gosta",
+  "amenities.maxGuests_other": "{{count}} gostiju",
   "amenities.apartment": "Cijeli Apartman",
   "amenities.studio": "Studio apartman",
   "amenities.room": "Soba",
   "amenities.roomSize": "{{size}} m²",
   "amenities.bedroom": "Soba",
-  "amenities.bedrooms": {
-    "one": "{{count}} spavaća soba",
-    "few": "{{count}} spavaće sobe",
-    "other": "{{count}} spavaćih soba"
-  },
-  "amenities.bathrooms": {
-    "one": "{{count}} kupaonica",
-    "few": "{{count}} kupaonice",
-    "other": "{{count}} kupaonica"
-  },
+  "amenities.bathrooms_one": "{{count}} kupaonica",
+  "amenities.bathrooms_few": "{{count}} kupaonice",
+  "amenities.bathrooms_other": "{{count}} kupaonica",
   "amenities.bed": "{{count}} {{type}}",
-  "amenities.bedTypes": {
-    "double": "bračni krevet",
-    "single": "krevet za 1 osobu",
-    "sofa": "kauč na rasklapanje"
-  },
-  "amenities.bedTypes_plural": {
-    "double": {
-      "one": "bračni krevet",
-      "few": "bračna kreveta", 
-      "other": "bračnih kreveta"
-    },
-    "single": {
-      "one": "krevet za 1 osobu",
-      "few": "kreveta za 1 osobu",
-      "other": "kreveta za 1 osobu"
-    },
-    "sofa": {
-      "one": "kauč na rasklapanje",
-      "few": "kauča na rasklapanje",
-      "other": "kauča na rasklapanje"
-    }
-  },
+  "amenities.bedTypes.double_one": "{{count}} bračni krevet",
+  "amenities.bedTypes.double_few": "{{count}} bračna kreveta",
+  "amenities.bedTypes.double_other": "{{count}} bračnih kreveta",
+  "amenities.bedTypes.single_one": "{{count}} krevet za 1 osobu",
+  "amenities.bedTypes.single_few": "{{count}} kreveta za 1 osobu",
+  "amenities.bedTypes.single_other": "{{count}} kreveta za 1 osobu",
+  "amenities.bedTypes.sofa_one": "{{count}} kauč na rasklapanje",
+  "amenities.bedTypes.sofa_few": "{{count}} kauča na rasklapanje",
+  "amenities.bedTypes.sofa_double": "{{count}} kauča na rasklapanje",
+  "amenities.bedTypes.double": "bračni krevet",
+  "amenities.bedTypes.single": "krevet za 1 osobu",
+  "amenities.bedTypes.sofa": "kauč na rasklapanje",
 
   // Amenities
   "amenities.kitchen": "Opremljena kuhinja",
@@ -112,7 +90,7 @@ const hrTranslation = {
   "amenities.washerDryer": "Perilica/sušilica",
   "amenities.washingMachine": "Perilica rublja",
   "amenities.hairDryer": "Sušilo za kosu",
-  "amenities.coffeeMachine": "Apart za kavu",
+  "amenities.coffeeMachine": "Aparat za kavu",
   "amenities.microwave": "Mikrovalna pećnica",
   "amenities.smoothieMaker": "Blender za smoothie",
   "amenities.freeParking": "Besplatni parking",
@@ -127,6 +105,8 @@ const hrTranslation = {
   "visit.restaurants": "Restorani",
   "visit.attractions": "Atrakcije",
   "visit.activities": "Aktivnosti",
+  "visit.viewOnMap": "Pogledaj na karti",
+  "visit.visitWebsite": "Posjeti web stranicu",
 
   // Contact Page
   "contact.title": "Kontaktirajte nas",
@@ -229,20 +209,11 @@ const hrTranslation = {
   },
   "search.enterCriteria": "Unesite datume putovanja i broj gostiju za pretragu dostupnih apartmana",
   
-  // Apartment Details
-  "apartment.maxGuests": {
-    "one": "{{count}} gost",
-    "few": "{{count}} gosta",
-    "other": "{{count}} gostiju"
-  },
-  
   // Common
   "common.noImage": "Slika nije dostupna",
-  "nights": {
-    "one": "noćenje",
-    "few": "noćenja",
-    "other": "noćenja"
-  },
+  "nights_one": "{{count}} noćenje",
+  "nights_few": "{{count}} noćenja",
+  "nights_other": "{{count}} noćenja"
 };
 
 export default hrTranslation;

@@ -5,14 +5,14 @@ const enTranslation = {
   "nav.about": "About Us",
   "nav.visit": "What to Visit",
   "nav.contact": "Contact",
-  
+
   // Home Page
   "home.hero.welcome": "Apartments Ivančević",
   "home.hero.subheading": "Your home on Korčula",
   "home.hero.description": "Experience the beauty of the Adriatic coast in our family-owned apartments, just steps away from crystal-clear waters and breathtaking views.",
   "home.hero.viewApartments": "View Apartments",
   "home.hero.sendInquiry": "Send Booking Inquiry",
-  
+
   // Features
   "features.welcome.title": "Personal Welcome",
   "features.welcome.description": "We personally greet every guest and are always available to help you enjoy Korčula like a local.",
@@ -22,7 +22,7 @@ const enTranslation = {
   "features.location.description": "All our apartments are either in, or just moments away from Korčula's historic Old Town — close enough to explore, far enough to rest.",
   "features.experience.title": "True Local Experience",
   "features.experience.description": "From local tips to hidden beaches, we'll help you experience Korčula like a true insider.",
-  
+
   // Apartments Page
   "apartments.title": "Our Apartments",
   "apartments.amenities": "Amenities",
@@ -39,51 +39,32 @@ const enTranslation = {
   "apartments.dateRange": "Date Range",
   "apartments.sendInquiry": "Send Inquiry",
   "apartments.calendarInstructions": "Click to select your check-in and check-out dates. See instant price calculation below.",
-  "apartments.nights": {
-    "one": "{{count}} night",
-    "other": "{{count}} nights"
-  },
+  "apartments.nights_one": "{{count}} night",
+  "apartments.nights_other": "{{count}} nights",
   "apartments.cleaningFee": "Cleaning fee",
   "apartments.total": "Total",
   "apartments.averageNight": "Average per night",
 
-  // Details with proper pluralization
-  // English has simple singular (1) and plural (0, 2+) forms
-  "amenities.maxGuests": {
-    "one": "{{count}} guest",
-    "other": "{{count}} guests"
-  },
-  
+  // Amenities
+  "amenities.maxGuests_one": "{{count}} Guest",
+  "amenities.maxGuests_other": "{{count}} Guests",
   "amenities.apartment": "Entire Apartment",
   "amenities.studio": "Studio apartment",
   "amenities.room": "Private room",
   "amenities.roomSize": "{{size}} m²",
-  
   "amenities.bedroom": "Bedroom",
-  "amenities.bedrooms": {
-    "one": "{{count}} bedroom",
-    "other": "{{count}} bedrooms"
-  },
-  
+  "amenities.bedrooms_one": "{{count}} bedroom",
+  "amenities.bedrooms_other": "{{count}} bedrooms",
   "amenities.bathroom": "Bathroom",
-  "amenities.bathrooms": {
-    "one": "{{count}} bathroom",
-    "other": "{{count}} bathrooms"
-  },
-  
+  "amenities.bathrooms_one": "{{count}} bathroom",
+  "amenities.bathrooms_other": "{{count}} bathrooms",
   "amenities.bed": "{{count}} {{type}}",
-  "amenities.bedTypes": {
-    "double": "double bed",
-    "single": "single bed",
-    "sofa": "sofa bed"
-  },
-  "amenities.bedTypes_plural": {
-    "double": "double beds",
-    "single": "single beds",
-    "sofa": "sofa beds"
-  },
-  
-  // Amenities
+  "amenities.bedTypes.double_one": "{{count}} double bed",
+  "amenities.bedTypes.double_other": "{{count}} double beds",
+  "amenities.bedTypes.single_one": "{{count}} single bed",
+  "amenities.bedTypes.single_other": "{{count}} single beds",
+  "amenities.bedTypes.sofa_one": "{{count}} sofa bed",
+  "amenities.bedTypes.sofa_double": "{{count}} sofa beds",
   "amenities.kitchen": "Equiped kitchen",
   "amenities.balcony": "Balcony",
   "amenities.garden": "Garden access",
@@ -104,14 +85,16 @@ const enTranslation = {
   "amenities.parkingTooltip": "Private parking is possible on site ({{reservation}}) and costs €{{price}} per day.",
   "amenities.reservationRequired": "prior reservation is required",
   "amenities.reservationNotRequired": "prior reservation is not required",
-  
+
   // Visit Page
   "visit.title": "What to Visit",
   "visit.beaches": "Beaches",
   "visit.restaurants": "Restaurants",
   "visit.attractions": "Attractions",
   "visit.activities": "Activities",
-  
+  "visit.viewOnMap": "View on map",
+  "visit.visitWebsite": "Visit website",
+
   // Contact Page
   "contact.title": "Contact Us",
   "contact.inquiry.title": "Send an Inquiry",
@@ -130,7 +113,7 @@ const enTranslation = {
   "contact.form.success": "Thank you for your inquiry! We will get back to you as soon as possible.",
   "contact.form.error": "There was an error submitting your inquiry. Please try again.",
   "contact.notice": "We currently do not offer online booking. Please send an inquiry and we will respond as soon as possible.",
-  
+
   // Contact Information
   "contact.info.email": "Email",
   "contact.info.phone": "Phone",
@@ -138,7 +121,7 @@ const enTranslation = {
   "contact.info.mirica": "Mirica",
   "contact.info.josip": "Josip",
   "contact.info.address": "Address",
-  
+
   // Footer
   "footer.description": "Experience the beauty of Korčula island in our family-owned apartments. Perfect location, stunning views, and Croatian hospitality.",
   "footer.navigation": "Navigation",
@@ -147,7 +130,7 @@ const enTranslation = {
   "footer.copyright": "© 2025 Apartments Ivančević. All rights reserved.",
   "footer.privacy": "Privacy Policy",
   "footer.terms": "Terms of Service",
-  
+
   // Calendar
   "calendar.days.mon": "Mo",
   "calendar.days.tue": "Tu",
@@ -156,7 +139,7 @@ const enTranslation = {
   "calendar.days.fri": "Fr",
   "calendar.days.sat": "Sa",
   "calendar.days.sun": "Su",
-  
+
   // About Page
   "about.title": "About us",
   "about.family.title": "Welcome to Apartments Ivančević!",
@@ -167,13 +150,13 @@ const enTranslation = {
   "about.family.story5": "Everything we do, we do with the goal of making our guests feel welcome, relaxed, and safe. We're not perfect, but we try to be the kind of hosts we’d love to meet ourselves.",
   "about.family.story6": "For us, this isn’t just a job – it’s a way to live honestly, meet wonderful people, and share with the world why we love our island so much.",
   "about.family.story7": "You're always welcome – and we hope to host you too! 🤍",
-  
+
   // Form Validation
   "validation.required": "This field is required",
   "validation.email": "Please enter a valid email address",
   "validation.checkOut": "Check-out date must be after check-in date",
   "validation.future": "Date must be in the future",
-  
+
   // Search Page
   "search.title": "Find Your Perfect Apartment",
   "search.findYourStay": "Find your perfect stay",
@@ -191,34 +174,22 @@ const enTranslation = {
   "search.loading": "Finding available apartments...",
   "search.noResults": "No apartments available for these dates",
   "search.tryDifferent": "Please try different dates or guest count",
-  "search.resultsFound": {
-    "one": "{{count}} apartment found",
-    "other": "{{count}} apartments found"
-  },
+  "search.resultsFound_one": "{{count}} apartment found",
+  "search.resultsFound_other": "{{count}} apartments found",
   "search.viewDetails": "View Details",
   "search.sendInquiry": "Send Inquiry",
   "search.totalPrice": "total price",
   "search.perNight": "per night",
   "search.modifySearch": "Modify search",
   "search.currentSearch": "Current search criteria",
-  "search.guestsCount": {
-    "one": "{{count}} Guest",
-    "other": "{{count}} Guests"
-  },
+  "search.guestsCount_one": "{{count}} Guest",
+  "search.guestsCount_other": "{{count}} Guests",
   "search.enterCriteria": "Please enter your travel dates and number of guests to search for available apartments",
-  
-  // Apartment Details
-  "apartment.maxGuests": {
-    "one": "{{count}} Guest",
-    "other": "{{count}} Guests"
-  },
-  
+
   // Common
   "common.noImage": "No image available",
-  "nights": {
-    "one": "night",
-    "other": "nights"
-  }
+  "nights_one": "{{count}} night",
+  "nights_other": "{{count}} nights"
 };
 
 export default enTranslation;

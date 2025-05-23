@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Compass, Car, Ship, Clock, MapPin, ExternalLink } from "lucide-react";
+import { Footprints, Car, Ship, Clock, MapPin, ExternalLink } from "lucide-react";
 import { Location } from '../../types';
 
 interface VisitCardsProps {
@@ -17,7 +17,7 @@ export function VisitCards({ locations }: VisitCardsProps) {
   const getTransportIcon = (mean: string) => {
     switch (mean) {
       case 'walk':
-        return <Compass className="h-4 w-4 mr-1" />;
+        return <Footprints className="h-4 w-4 mr-1" />;
       case 'car':
         return <Car className="h-4 w-4 mr-1" />;
       case 'ferry':
@@ -73,7 +73,9 @@ export function VisitCards({ locations }: VisitCardsProps) {
             {location.distance && (
               <div className="flex items-center text-sm text-muted-foreground">
                 {getTransportIcon(location.distance.mean)}
-                <span>{location.distance.minutes} {isEnglish ? 'minutes' : 'minuta'}</span>
+                <span>
+                  {location.distance.minutes < 10 ? '< 10 mins' : `${location.distance.minutes} mins`}
+                </span>
               </div>
             )}
             <div className="flex gap-2">
@@ -83,7 +85,7 @@ export function VisitCards({ locations }: VisitCardsProps) {
                   size="sm" 
                   className="p-1 h-8 w-8"
                   onClick={() => window.open(location.location, '_blank', 'noopener,noreferrer')}
-                  title={isEnglish ? "View on map" : "Pogledaj na karti"}
+                  title={t("visit.viewOnMap")}
                 >
                   <MapPin className="h-4 w-4" />
                 </Button>
@@ -94,7 +96,7 @@ export function VisitCards({ locations }: VisitCardsProps) {
                   size="sm" 
                   className="p-1 h-8 w-8"
                   onClick={() => window.open(location.link, '_blank', 'noopener,noreferrer')}
-                  title={isEnglish ? "Visit website" : "Posjeti web stranicu"}
+                  title={t("visit.visitWebsite")}
                 >
                   <ExternalLink className="h-4 w-4" />
                 </Button>

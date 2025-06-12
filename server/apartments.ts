@@ -254,7 +254,8 @@ export const apartmentData: Apartment[] = [
     bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
     airbnbUrl: "https://airbnb.com/h/apartments-viva-lavender",
     icalUrls: [
-      "https://www.airbnb.com/calendar/ical/7353092.ics?s=eae1da13782e4b81009bcd64f58bd357"
+      "https://www.airbnb.com/calendar/ical/7353092.ics?s=eae1da13782e4b81009bcd64f58bd357",
+      "https://ical.booking.com/v1/export?t=a0e8002c-1a82-4ca9-a900-50b1729a5c2d"
     ],
     basePeakPrice: 220,
     priceMultiplier: "1.00",
@@ -352,7 +353,8 @@ export const apartmentData: Apartment[] = [
     bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
     airbnbUrl: "https://airbnb.com/h/apartments-viva-sun",
     icalUrls: [
-      "https://www.airbnb.com/calendar/ical/3289636.ics?s=3fc4d298685df0c27704199880b09d8c"
+      "https://www.airbnb.com/calendar/ical/3289636.ics?s=3fc4d298685df0c27704199880b09d8c",
+      "https://ical.booking.com/v1/export?t=81e13606-d72b-4e45-91d2-c6e73b6a0aed"
     ],
     basePeakPrice: 192,
     priceMultiplier: "1.00",
@@ -434,7 +436,8 @@ export const apartmentData: Apartment[] = [
     bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
     airbnbUrl: "https://airbnb.com/h/apartments-viva-sea",
     icalUrls: [
-      "https://www.airbnb.com/calendar/ical/19014861.ics?s=f8c3b2e230826d572c35ea739efb6e2a"
+      "https://www.airbnb.com/calendar/ical/19014861.ics?s=f8c3b2e230826d572c35ea739efb6e2a",
+      "https://ical.booking.com/v1/export?t=b1213fe7-0aa3-47ec-9c78-6046a50fea91"
     ],
     basePeakPrice: 110,
     priceMultiplier: "1.00",
@@ -496,7 +499,8 @@ export const apartmentData: Apartment[] = [
     bookingUrl: "https://www.booking.com/hotel/hr/apartments-ivancevic.html",
     airbnbUrl: "https://airbnb.com/h/apartments-viva-beach",
     icalUrls: [
-      "https://www.airbnb.com/calendar/ical/11847437.ics?s=6d2cbbdabf0b62bf08a047cf0712d317"
+      "https://www.airbnb.com/calendar/ical/11847437.ics?s=6d2cbbdabf0b62bf08a047cf0712d317",
+      "https://ical.booking.com/v1/export?t=3de330a9-30a8-4287-b485-8c665645be23"
     ],
     basePeakPrice: 137.5,
     priceMultiplier: "1.00",
@@ -562,7 +566,8 @@ export const apartmentData: Apartment[] = [
     bookingUrl: "https://www.booking.com/hotel/hr/apartmani-lara-i-nika.html",
     airbnbUrl: "https://airbnb.com/h/apartmani-giuliani-nika",
     icalUrls: [
-      "https://www.airbnb.com/calendar/ical/27617468.ics?s=e408c51a965bccbbaba29d58295304a6&locale=hr"
+      "https://www.airbnb.com/calendar/ical/27617468.ics?s=e408c51a965bccbbaba29d58295304a6",
+      "https://ical.booking.com/v1/export?t=15e633d6-1969-4a84-96f6-7cfbd1b58c80"
     ],
     basePeakPrice: 200,
     priceMultiplier: "1.00",
@@ -647,7 +652,8 @@ export const apartmentData: Apartment[] = [
     bookingUrl: "https://www.booking.com/hotel/hr/apartmani-lara-i-nika.html",
     airbnbUrl: "https://airbnb.com/h/apartmani-giuliani-lara",
     icalUrls: [
-      "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd24cd0dbd2911faab332fcfd90"
+      "https://www.airbnb.com/calendar/ical/29197587.ics?s=8b113ddead9128d420c587e9dd7b1d31",
+      "https://ical.booking.com/v1/export?t=b697b0c9-fcbe-4ee1-b416-6d680fe8039e"
     ],
     basePeakPrice: 100,
     priceMultiplier: "1.00",

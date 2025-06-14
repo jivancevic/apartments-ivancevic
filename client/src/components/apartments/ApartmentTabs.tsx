@@ -8,8 +8,8 @@ import { Star } from "lucide-react";
 // Mapping of apartment slugs to IDs
 const APARTMENT_SLUGS: Record<string, number> = {
   'magical-oasis': 1, 
-  'saint-roko': 2, 
-  'ismaelli': 3, 
+  'ismaelli': 2,
+  'saint-roko': 3,  
   'lavander': 4, 
   'sun': 5, 
   'sea': 6, 

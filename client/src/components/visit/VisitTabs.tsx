@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import VisitCards from './VisitCards';
 import { Location } from '../../types';
 import { categories, CATEGORY_TO_TYPE_MAP } from '../../lib/categories';
+
+// Mapping of category slugs to their keys
+const CATEGORY_SLUGS: Record<string, string> = {
+  'attractions-old-town': 'attraction-old-town',
+  'attractions-island': 'attraction-island', 
+  'activities': 'activity',
+  'excursions': 'excursion',
+  'restaurants': 'restaurant'
+};
 
 interface VisitTabsProps {
   locations: Location[];
@@ -23,76 +31,97 @@ export function VisitTabs({ locations }: VisitTabsProps) {
     acc[type].push(location);
     return acc;
   }, {} as Record<string, Location[]>);
-  
-  // For debugging - log the grouped locations
-  console.log('Locations grouped by type:', Object.keys(locationsByType));
+
+  // Available categories in order
+  const categories_list = [
+    { key: 'attraction-old-town', slug: 'attractions-old-town', nameEn: categories.attractionsOldTown.en, nameHr: categories.attractionsOldTown.hr },
+    { key: 'attraction-island', slug: 'attractions-island', nameEn: categories.attractionsIsland.en, nameHr: categories.attractionsIsland.hr },
+    { key: 'activity', slug: 'activities', nameEn: categories.activities.en, nameHr: categories.activities.hr },
+    { key: 'excursion', slug: 'excursions', nameEn: categories.excursions.en, nameHr: categories.excursions.hr },
+    { key: 'restaurant', slug: 'restaurants', nameEn: categories.restaurants.en, nameHr: categories.restaurants.hr }
+  ];
+
+  // Handle URL hash changes for tab selection
+  useEffect(() => {
+    const handleHashChange = () => {
+      const currentUrl = window.location.href;
+      const hashMatch = currentUrl.match(/#([^?&]+)/);
+      const hash = hashMatch ? hashMatch[1] : '';
+      
+      // Check if hash matches a category slug
+      if (hash && CATEGORY_SLUGS[hash]) {
+        setActiveTab(CATEGORY_SLUGS[hash]);
+      }
+    };
+
+    // Handle hash on initial load
+    handleHashChange();
+    
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
+  const handleTabClick = (categoryKey: string) => {
+    setActiveTab(categoryKey);
+    
+    // Update URL hash - find slug by category key
+    const category = categories_list.find(cat => cat.key === categoryKey);
+    const slug = category ? category.slug : categoryKey;
+    
+    // Preserve query parameters when changing the hash
+    const urlWithoutHash = window.location.href.split('#')[0];
+    
+    // Update the hash using history.replaceState to avoid page reload
+    window.history.replaceState(
+      null, 
+      '', 
+      `${urlWithoutHash}#${slug}`
+    );
+  };
 
   return (
     <div className="container py-8">
-      <Tabs defaultValue="attraction-old-town" className="w-full" onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-5 mb-8">
-          <TabsTrigger value="attraction-old-town">
-            {isEnglish ? categories.attractionsOldTown.en : categories.attractionsOldTown.hr}
-          </TabsTrigger>
-          <TabsTrigger value="attraction-island">
-            {isEnglish ? categories.attractionsIsland.en : categories.attractionsIsland.hr}
-          </TabsTrigger>
-          <TabsTrigger value="activity">
-            {isEnglish ? categories.activities.en : categories.activities.hr}
-          </TabsTrigger>
-          <TabsTrigger value="excursion">
-            {isEnglish ? categories.excursions.en : categories.excursions.hr}
-          </TabsTrigger>
-          <TabsTrigger value="restaurant">
-            {isEnglish ? categories.restaurants.en : categories.restaurants.hr}
-          </TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="attraction-old-town" className="mt-0">
-          <h2 className="text-2xl font-semibold mb-6">
-            {isEnglish ? categories.attractionsOldTown.en : categories.attractionsOldTown.hr}
-          </h2>
-          <VisitCards 
-            locations={locationsByType['attraction-old-town'] || []} 
-          />
-        </TabsContent>
-
-        <TabsContent value="attraction-island" className="mt-0">
-          <h2 className="text-2xl font-semibold mb-6">
-            {isEnglish ? categories.attractionsIsland.en : categories.attractionsIsland.hr}
-          </h2>
-          <VisitCards 
-            locations={locationsByType['attraction-island'] || []} 
-          />
-        </TabsContent>
-
-        <TabsContent value="activity" className="mt-0">
-          <h2 className="text-2xl font-semibold mb-6">
-            {isEnglish ? categories.activities.en : categories.activities.hr}
-          </h2>
-          <VisitCards 
-            locations={locationsByType['activity'] || []} 
-          />
-        </TabsContent>
-
-        <TabsContent value="excursion" className="mt-0">
-          <h2 className="text-2xl font-semibold mb-6">
-            {isEnglish ? categories.excursions.en : categories.excursions.hr}
-          </h2>
-          <VisitCards 
-            locations={locationsByType['excursion'] || []} 
-          />
-        </TabsContent>
-
-        <TabsContent value="restaurant" className="mt-0">
-          <h2 className="text-2xl font-semibold mb-6">
-            {isEnglish ? categories.restaurants.en : categories.restaurants.hr}
-          </h2>
-          <VisitCards 
-            locations={locationsByType['restaurant'] || []} 
-          />
-        </TabsContent>
-      </Tabs>
+      {/* Tabs Navigation */}
+      <div className="overflow-x-auto mb-8">
+        <div className="inline-flex min-w-full md:justify-center space-x-2 tabs-container">
+          {categories_list.map((category) => (
+            <button
+              key={category.key}
+              className={`tab-button py-2 px-4 border-b-2 whitespace-nowrap font-medium ${
+                activeTab === category.key
+                  ? "border-primary text-primary"
+                  : "border-transparent hover:border-primary transition-colors"
+              }`}
+              onClick={() => handleTabClick(category.key)}
+            >
+              <div className="flex flex-col items-center">
+                {isEnglish ? category.nameEn : category.nameHr}
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+      
+      {/* Tab Content */}
+      <div className="tab-content-container">
+        {categories_list.map((category) => (
+          <div
+            key={category.key}
+            className={activeTab === category.key ? "block" : "hidden"}
+          >
+            <h2 className="text-2xl font-semibold mb-6">
+              {isEnglish ? category.nameEn : category.nameHr}
+            </h2>
+            <VisitCards 
+              locations={locationsByType[category.key] || []} 
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

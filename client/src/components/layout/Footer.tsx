@@ -52,13 +52,16 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="overflow-wrap">
+            <div className="break-words">
               <h4 className="font-heading font-semibold text-lg mb-4">
                 {t("footer.contact")}
               </h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="mailto:info@apartmentsivancevic.com" className="hover:underline">
+                  <a
+                    href="mailto:info@apartmentsivancevic.com"
+                    className="hover:underline break-words"
+                  >
                     info@apartmentsivancevic.com
                   </a>
                 </li>

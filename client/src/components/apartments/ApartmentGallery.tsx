@@ -267,24 +267,29 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         aria-label="Image gallery"
       >
         {/* Left Arrow - at the left edge of the screen */}
-        <button 
+        <button
           onClick={(e) => {
-            e.stopPropagation(); e.preventDefault(); handlePrevious();
+            e.stopPropagation();
+            e.preventDefault();
+            handlePrevious();
           }}
           onMouseDown={(e) => e.preventDefault()}
-          className="fixed left-0 top-0 bottom-0 w-24 flex items-center justify-start pl-6 bg-gradient-to-r from-black/30 to-transparent hover:from-black/50 text-white z-[10000]"
+          className="fixed top-1/2 left-4 transform -translate-y-1/2 z-[10000] hover:bg-black/50 rounded-full p-2 text-white"
           aria-label="Previous image"
         >
           <ChevronLeft className="h-12 w-12" />
         </button>
+
         
         {/* Right Arrow - at the right edge of the screen */}
-        <button 
+        <button
           onClick={(e) => {
-            e.stopPropagation(); e.preventDefault(); handleNext();
+            e.stopPropagation();
+            e.preventDefault();
+            handleNext();
           }}
           onMouseDown={(e) => e.preventDefault()}
-          className="fixed right-0 top-0 bottom-0 w-24 flex items-center justify-end pr-6 bg-gradient-to-l from-black/30 to-transparent hover:from-black/50 text-white z-[10000]"
+          className="fixed top-1/2 right-4 transform -translate-y-1/2 z-[10000] hover:bg-black/50 rounded-full p-2 text-white"
           aria-label="Next image"
         >
           <ChevronRight className="h-12 w-12" />

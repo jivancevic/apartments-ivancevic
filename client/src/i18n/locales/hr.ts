@@ -44,6 +44,9 @@ const hrTranslation = {
   "apartments.dateRange": "Raspon datuma",
   "apartments.sendInquiry": "Pošaljite upit",
   "apartments.calendarInstructions": "Kliknite da odaberete datum dolaska i odlaska. Pogledajte trenutni izračun cijene ispod.",
+  "apartment.maxGuests_one": "{{count}} gost",
+  "apartment.maxGuests_few": "{{count}} gosta",
+  "apartment.maxGuests_other": "{{count}} gostiju",
   "apartments.nights_one": "{{count}} noć",
   "apartments.nights_few": "{{count}} noći",
   "apartments.nights_other": "{{count}} noći",
@@ -191,22 +194,18 @@ const hrTranslation = {
   "search.loading": "Tražimo dostupne apartmane...",
   "search.noResults": "Nema dostupnih apartmana za odabrane datume",
   "search.tryDifferent": "Pokušajte s drugim datumima ili brojem gostiju",
-  "search.resultsFound": {
-    "one": "{{count}} apartman pronađen",
-    "few": "{{count}} apartmana pronađena", 
-    "other": "{{count}} apartmana pronađeno"
-  },
+  "search.resultsFound_one": "{{count}} apartman pronađen",
+  "search.resultsFound_few": "{{count}} apartmana pronađena",
+  "search.resultsFound_other": "{{count}} apartmana pronađeno",
   "search.viewDetails": "Pogledaj detalje",
   "search.sendInquiry": "Pošalji upit",
   "search.totalPrice": "ukupna cijena",
   "search.perNight": "po noći",
   "search.modifySearch": "Promijeni pretragu",
   "search.currentSearch": "Trenutni kriteriji pretrage",
-  "search.guestsCount": {
-    "one": "{{count}} gost",
-    "few": "{{count}} gosta",
-    "other": "{{count}} gostiju"
-  },
+  "search.guestsCount_one": "{{count}} gost",
+  "search.guestsCount_few": "{{count}} gosta",
+  "search.guestsCount_other": "{{count}} gostiju",
   "search.enterCriteria": "Unesite datume putovanja i broj gostiju za pretragu dostupnih apartmana",
   
   // Common

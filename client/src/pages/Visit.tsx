@@ -15,9 +15,9 @@ const Visit = () => {
   });
 
   return (
-    <section id="visit" className="py-16 bg-neutral">
+    <section id="visit" className="py-8 bg-neutral">
       <div className="container mx-auto px-4">
-        <h2 className="font-heading font-bold text-3xl md:text-4xl text-center mb-12">
+        <h2 className="font-heading font-bold text-3xl md:text-4xl text-center mb-8">
           {t("visit.title")}
         </h2>
         

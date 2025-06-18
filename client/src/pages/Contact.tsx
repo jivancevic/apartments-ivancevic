@@ -12,9 +12,9 @@ const Contact = () => {
   });
 
   return (
-    <section id="contact" className="py-16">
+    <section id="contact" className="py-12">
       <div className="container mx-auto px-4">
-        <h2 className="font-heading font-bold text-3xl md:text-4xl text-center mb-12">
+        <h2 className="font-heading font-bold text-3xl md:text-4xl text-center mb-8">
           {t("contact.title")}
         </h2>
         

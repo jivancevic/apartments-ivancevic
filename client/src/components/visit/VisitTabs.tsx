@@ -84,7 +84,7 @@ export function VisitTabs({ locations }: VisitTabsProps) {
   };
 
   return (
-    <div className="container py-8">
+    <div className="container">
       {/* Tabs Navigation */}
       <div className="overflow-x-auto mb-8">
         <div className="inline-flex min-w-full md:justify-center space-x-2 tabs-container">

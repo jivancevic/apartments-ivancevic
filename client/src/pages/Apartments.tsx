@@ -15,9 +15,9 @@ const Apartments = () => {
   });
 
   return (
-    <section id="apartments" className="py-16">
+    <section id="apartments" className="py-8">
       <div className="container mx-auto px-4">
-        <h2 className="font-heading font-bold text-3xl md:text-4xl text-center mb-12">
+        <h2 className="font-heading font-bold text-3xl md:text-4xl text-center mb-8">
           {t("apartments.title")}
         </h2>
         

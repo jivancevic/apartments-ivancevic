@@ -341,12 +341,6 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
                         {t("amenities.privateParking", "Private parking")}
                       </Badge>
                     )}
-                    {apartment.parkingType === "none" && (
-                      <Badge variant="outline" className="flex items-center gap-1 text-red-500 border-red-200">
-                        <Ban className="h-3 w-3" />
-                        {t("amenities.noParking", "No parking")}
-                      </Badge>
-                    )}
                     {apartment.hasGarden && (
                       <Badge variant="outline" className="flex items-center gap-1">
                         <Palmtree className="h-3 w-3" />
@@ -360,7 +354,7 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
                       <div className="text-gray-600">
                         {format(checkIn, "MMM d")} – {format(checkOut, "MMM d, yyyy")}
                         <span className="mx-1">•</span>
-                        {priceSummary.totalNights} {t("apartments.nights", { count: priceSummary.totalNights })}
+                        {t("apartments.nights", { count: priceSummary.totalNights })}
                       </div>
                       <div className="font-bold text-lg">
                         €{Math.round(averageNightlyPrice)} <span className="text-xs font-normal">{t("search.perNight")}</span>

@@ -302,7 +302,7 @@ const ContactForm = ({ apartments }: ContactFormProps) => {
 
   return (
     <div>
-      <div className="bg-neutral p-8 rounded-lg">
+      <div className="bg-neutral rounded-lg">
         <h3 className="font-heading font-semibold text-2xl mb-6">
           {t("contact.inquiry.title")}
         </h3>

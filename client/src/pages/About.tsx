@@ -4,14 +4,14 @@ const About = () => {
   const { t } = useTranslation();
   
   return (
-    <div className="container mx-auto px-4 py-16">
+    <div className="container mx-auto px-4">
       <section className="mt-8">
-        <h1 className="font-heading font-bold text-4xl md:text-5xl text-center mb-12">
+        <h2 className="font-heading font-bold text-3xl md:text-4xl text-center mb-8">
           {t("about.title")}
-        </h1>
+        </h2>
         
         <div className="grid grid-cols-1 gap-4 items-center max-w-3xl mx-auto">
-          <h2 className="font-heading font-semibold text-2xl mb-6">
+          <h2 className="font-heading font-semibold text-2xl">
             {t("about.family.title")}
           </h2>
           

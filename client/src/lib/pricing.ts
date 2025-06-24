@@ -22,18 +22,19 @@ export const GLOBAL_RULE_SETS: Record<string, RuleSet> = {
     name: "Off season",
     priceModifier: 0.0, // No modifier, base price already calculated
     stayLengthDiscounts: [
-      { length: 7, discount: -0.1 },
+      { length: 7, name: "weekly", discount: -0.17 },
       { length: 30, name: "monthly", discount: -0.4 }
     ],
     minNights: 2,
-    maxNights: 60
+    maxNights: 90
   },
   "ivancevic-low": {
     name: "Low season",
     priceModifier: 0.2, // 20% increase
     stayLengthDiscounts: [
-      { length: 7, discount: -0.1 },
-      { length: 30, name: "monthly", discount: -0.3 }
+      { length: 3, discount: -0.17 },
+      { length: 7, name: "weekly", discount: -0.22 },
+      { length: 30, name: "monthly", discount: -0.50 }
     ],
     minNights: 2,
     maxNights: 60
@@ -42,18 +43,20 @@ export const GLOBAL_RULE_SETS: Record<string, RuleSet> = {
     name: "Mid season",
     priceModifier: 0.2, // 20% increase
     stayLengthDiscounts: [
-      { length: 7, discount: -0.05 },
-      { length: 30, name: "monthly", discount: -0.25 }
+      { length: 3, discount: -0.17 },
+      { length: 7, name: "weekly", discount: -0.22 },
+      { length: 30, name: "monthly", discount: -0.50 }
     ],
-    minNights: 3,
+    minNights: 2,
     maxNights: 30
   },
   "ivancevic-high": {
     name: "High season",
     priceModifier: 0.2, // 20% increase
     stayLengthDiscounts: [
-      { length: 7, discount: -0.05 },
-      { length: 30, name: "monthly", discount: -0.2 }
+      { length: 4, discount: -0.17 },
+      { length: 7, name: "weekly", discount: -0.22 },
+      { length: 30, name: "monthly", discount: -0.50 }
     ],
     minNights: 3,
     maxNights: 30
@@ -62,29 +65,26 @@ export const GLOBAL_RULE_SETS: Record<string, RuleSet> = {
     name: "Peak season",
     priceModifier: 0.2, // 20% increase
     stayLengthDiscounts: [
-      { length: 7, discount: -0.03 },
-      { length: 30, name: "monthly", discount: -0.15 }
+      { length: 5, discount: -0.17 },
+      { length: 7, name: "weekly", discount: -0.22 },
+      { length: 30, name: "monthly", discount: -0.50 }
     ],
-    minNights: 5,
+    minNights: 3,
     maxNights: 21
   },
   // Giuliani apartments rules
   "giuliani-off": {
     name: "Off season",
     priceModifier: 0.0, // No modifier, base price already calculated
-    stayLengthDiscounts: [
-      { length: 7, discount: -0.1 },
-      { length: 30, name: "monthly", discount: -0.4 }
-    ],
+    stayLengthDiscounts: [],
     minNights: 2,
-    maxNights: 60
+    maxNights: 90
   },
   "giuliani-low": {
     name: "Low season",
     priceModifier: 0.2, // 20% increase
     stayLengthDiscounts: [
-      { length: 7, discount: -0.1 },
-      { length: 30, name: "monthly", discount: -0.3 }
+      { length: 3, discount: -0.17 }
     ],
     minNights: 2,
     maxNights: 60
@@ -93,20 +93,18 @@ export const GLOBAL_RULE_SETS: Record<string, RuleSet> = {
     name: "Top season",
     priceModifier: 0.2, // 20% increase
     stayLengthDiscounts: [
-      { length: 7, discount: -0.05 },
-      { length: 30, name: "monthly", discount: -0.2 }
+      { length: 4, discount: -0.17 }
     ],
-    minNights: 3,
+    minNights: 2,
     maxNights: 30
   },
   "giuliani-full": {
     name: "Full season",
     priceModifier: 0.2, // 20% increase
     stayLengthDiscounts: [
-      { length: 7, discount: -0.03 },
-      { length: 30, name: "monthly", discount: -0.15 }
+      { length: 5, discount: -0.17 }
     ],
-    minNights: 5,
+    minNights: 3,
     maxNights: 21
   }
 };
@@ -161,7 +159,7 @@ export const APARTMENT_RULE_SET_PERIODS: Record<string, RuleSetPeriod[]> = {
     { start: "2025-10-04", end: "2025-10-31", ruleSet: "ivancevic-low" },
     { start: "2025-11-01", end: "2026-04-24", ruleSet: "ivancevic-off" }
   ],
-  "Lavander": [
+  "Lavender": [
     { start: "2024-10-01", end: "2025-04-25", ruleSet: "ivancevic-off" },
     { start: "2025-04-26", end: "2025-05-29", ruleSet: "ivancevic-low" },
     { start: "2025-05-30", end: "2025-06-20", ruleSet: "ivancevic-mid" },
@@ -262,7 +260,7 @@ export const APARTMENT_PRICE_PERIODS: Record<string, PricePeriod[]> = {
     { start: "2025-10-04", end: "2025-10-31", price: 242 }, // 55% of 440
     { start: "2025-11-01", end: "2026-04-24", price: 176 } // 40% of 440
   ],
-  "Lavander": [ // Peak: 231
+  "Lavender": [ // Peak: 231
     { start: "2024-10-01", end: "2025-04-25", price: 92 }, // 40% of 231
     { start: "2025-04-26", end: "2025-05-29", price: 127 }, // 55% of 231
     { start: "2025-05-30", end: "2025-06-20", price: 162 }, // 70% of 231
@@ -349,7 +347,7 @@ export const APARTMENT_PRICING_CONFIGS: Record<string, ApartmentPricingConfig> =
     defaultMaxNights: 60
   },
   "Saint Roko": {
-    cleaningFee: 40,
+    cleaningFee: 35,
     defaultPrice: 154, // Peak price
     defaultStayLengthDiscounts: [
       { length: 7, discount: -0.1 },
@@ -368,7 +366,7 @@ export const APARTMENT_PRICING_CONFIGS: Record<string, ApartmentPricingConfig> =
     defaultMinNights: 2,
     defaultMaxNights: 60
   },
-  "Lavander": {
+  "Lavender": {
     cleaningFee: 80,
     defaultPrice: 231, // Peak price
     defaultStayLengthDiscounts: [
@@ -399,7 +397,7 @@ export const APARTMENT_PRICING_CONFIGS: Record<string, ApartmentPricingConfig> =
     defaultMaxNights: 60
   },
   "Sea": {
-    cleaningFee: 40,
+    cleaningFee: 35,
     defaultPrice: 110, // Peak price
     defaultStayLengthDiscounts: [
       { length: 7, discount: -0.1 },
@@ -409,7 +407,7 @@ export const APARTMENT_PRICING_CONFIGS: Record<string, ApartmentPricingConfig> =
     defaultMaxNights: 60
   },
   "Nika": {
-    cleaningFee: 60,
+    cleaningFee: 80,
     defaultPrice: 200, // Peak price
     defaultStayLengthDiscounts: [
       { length: 7, discount: -0.1 },
@@ -419,7 +417,7 @@ export const APARTMENT_PRICING_CONFIGS: Record<string, ApartmentPricingConfig> =
     defaultMaxNights: 60
   },
   "Lara": {
-    cleaningFee: 45,
+    cleaningFee: 30,
     defaultPrice: 100, // Peak price
     defaultStayLengthDiscounts: [
       { length: 7, discount: -0.1 },
@@ -468,9 +466,7 @@ export function getApartmentPricingConfig(apartment: Apartment): ApartmentPricin
       { length: 30, discount: -0.4 }
     ],
     defaultMinNights: 2,
-    defaultMaxNights: 60,
-    ruleSetPeriods: [],
-    pricePeriods: []
+    defaultMaxNights: 60
   };
 }
 
@@ -665,8 +661,8 @@ export function calculateStayPrice(
   // Calculate total
   const total = discountedSubtotal + cleaningFee;
   
-  // Calculate average price per night (after discounts)
-  const averagePerNight = totalNights > 0 ? Math.round(total / totalNights) : 0;
+  // Calculate average price per night (after discounts, excluding cleaning fee)
+  const averagePerNight = totalNights > 0 ? Math.round(discountedSubtotal / totalNights) : 0;
   
   // Prepare discount info
   let discountInfo;

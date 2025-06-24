@@ -1,0 +1,35 @@
+1. In the pricing.ts file, remove from APARTMENT_PRICING_CONFIGS: 
+
+a. ruleSetPeriods - and put that into separate variable where for each apartment there are rule set periods,
+b. pricePeriods - and put that into separate variable where for each apartment there are prices for certain time periods
+
+2. Next, please insert correct rule sets inside GLOBAL_RULE_SETS variable, and those are:
+5 rules for Ivancevic apartments (Magical Oasis, Saint Roco, Ismaelli, Lavander, Sun, Beach, Sea):
+ivancevic-off, ivancevic-low, ivancevic-mid, ivancevic-high, ivancevic-peak, and 4 rules for Giuliani apartments (Nika, Lara): giuliani-off, giuliani-low, giuliani-top, giuliani-full. For each of them name should be accordingly: ivancevic-off -> Off season, ivancevic-low -> Low season, giuliani-top -> Top season, and so on. For 7 rules that are not ivancevic-off and giuliani-off, priceModifier should be 0.2 (20% price increase). For ivancevic-off, giuliani-off: there is 40% monthly discount, for ivancevic-low, giuliani-low there is 50% monthly discount. For ivancevic-off, giuliani-off there is 5% weekly discount, for ivancevic-low, ivancevic-mid, ivancevic-high, giuliani-low, giuliani-top there is 22% weekly discount. For each of them other than ivancevic-off, giuliani-off there is another discount without name for 4 days of 5%. For each rule, minimum stay is 3 days, maximum is none.
+
+3. Next, insert correct prices for each apartment. For each Ivancevic apartments (Magical Oasis, Saint Roco, Ismaelli, Lavander, Sun, Beach, Sea) time periods are:
+time period.           season
+01.10.-25.04.25		out           
+26.4.-29.05.		low 
+30.05.-20.06.		mid 
+21.06.-11.07.		high 
+12.07.-22.08.		peak 
+23.08.-12.09.		high 
+13.09.-03.10.		mid 
+4.10.-31.10.		low 
+01.11.-24.04.26		out
+For each apartment there is a price for the peak season, and it is:
+Magical Oasis - 187, Saint Roco - 154, Ismaelli - 440, Lavander - 231, Sun - 182, Beach - 132, Sea - 110. For each season, price is the fraction of the price for peak season: peak 100%, high 85%, mid 70%, low 55%, off 40%. 
+
+For Giuliani apartments (Nika, Lara) time periods are:
+time period.            season
+01.10.-25.04.25		out
+26.4.-06.06.		low 
+7.06.-11.07.		top 
+12.07.-22.08.		full 
+23.08.-26.09.		top 
+27.09.-24.10.		low 
+25.10.-24.04.26		out
+For each apartment there is a price for the peak season, and it is: Lara - 100, Nika - 200. For each season, price is the fraction of the price for peak season: full 100%, top 75%, low 60%, out 45%. 
+
+Please calculate prices absolutely based on rules and put them in pricing.ts file, don't put percentages. 

@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import SeasonPriceGrid from "@/components/ui/SeasonPriceGrid";
 import { calculateStayPrice, getSeasonalPrices, getStayLimits } from "@/lib/pricing";
+import { useState } from "react";
 
 /**
  * The booking calendar component shows availability and allows date selection
@@ -99,9 +100,11 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
     total: number;
     averagePerNight: number;
   } | null>(null);
+  
+  const [stayLimits, setStayLimits] = useState<{minNights: number; maxNights: number} | null>(null);
 
-  // Calculate seasonal prices
-  const seasonalPrices = getSeasonalPrices(apartmentWithDefaults);
+  // Calculate seasonal prices - will be loaded async
+  const [seasonalPrices, setSeasonalPrices] = useState<Record<string, number>>({});
   
   // Convert booking dates from strings to Date objects if needed
   const parsedBookings = bookings.map(booking => ({
@@ -152,21 +155,21 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
   };
 
   // Check if a stay length is valid (within min/max nights constraints)
-  const isValidStayLength = (startDate: Date, endDate: Date) => {
+  const isValidStayLength = async (startDate: Date, endDate: Date) => {
     const nights = differenceInDays(endDate, startDate);
-    const limits = getStayLimits(apartmentWithDefaults, startDate);
+    const limits = await getStayLimits(apartmentWithDefaults, startDate);
     
     return nights >= limits.minNights && nights <= limits.maxNights;
   };
 
   // Check if a date can be selected as end date (considering min/max nights)
-  const canSelectAsEndDate = (date: Date, startDate: Date) => {
+  const canSelectAsEndDate = async (date: Date, startDate: Date) => {
     if (!startDate) return true;
     
     const nights = differenceInDays(date, startDate);
     if (nights <= 0) return false; // Can't select same day or earlier
     
-    const limits = getStayLimits(apartmentWithDefaults, startDate);
+    const limits = await getStayLimits(apartmentWithDefaults, startDate);
     return nights >= limits.minNights && nights <= limits.maxNights;
   };
 
@@ -192,7 +195,7 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
   };
   
   // Handle date selection
-  const handleDateClick = (date: Date) => {
+  const handleDateClick = async (date: Date) => {
     if (!isDateSelectable(date)) return;
     
     if (!selectedStartDate || (selectedStartDate && selectedEndDate)) {
@@ -225,7 +228,8 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
       }
       
       // Check if the stay length is valid (within min/max nights constraints)
-      if (!isValidStayLength(newStartDate, newEndDate)) {
+      const isValid = await isValidStayLength(newStartDate, newEndDate);
+      if (!isValid) {
         // Don't allow selection of invalid stay lengths
         return;
       }
@@ -254,12 +258,13 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
         const rangeEnd = selectedStartDate < date ? date : selectedStartDate;
         
         // Only update hover state if the range is valid
-        if (!hasBookedDatesInRange(rangeStart, rangeEnd) && 
-            isValidStayLength(rangeStart, rangeEnd)) {
-          setHoverDate(date);
-        } else {
-          setHoverDate(null);
-        }
+        isValidStayLength(rangeStart, rangeEnd).then(isValid => {
+          if (!hasBookedDatesInRange(rangeStart, rangeEnd) && isValid) {
+            setHoverDate(date);
+          } else {
+            setHoverDate(null);
+          }
+        });
       } else {
         setHoverDate(date);
       }
@@ -300,35 +305,61 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
     t("calendar.days.sun")
   ];
 
+  // Load seasonal prices and stay limits
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const prices = await getSeasonalPrices(apartmentWithDefaults);
+        setSeasonalPrices(prices);
+        
+        if (selectedStartDate) {
+          const limits = await getStayLimits(apartmentWithDefaults, selectedStartDate);
+          setStayLimits(limits);
+        }
+      } catch (error) {
+        console.error('Error loading pricing data:', error);
+      }
+    };
+    
+    loadData();
+  }, [apartmentWithDefaults, selectedStartDate]);
+
   // Calculate price summary when selection changes
   useEffect(() => {
-    console.log("In useEffect booking-calendar.tsx")
-    if (selectedStartDate && selectedEndDate) {
-      // Calculate the price summary
-      const summary = calculateStayPrice(apartmentWithDefaults, selectedStartDate, selectedEndDate);
-      
-      // Only update price summary if it's different from the current one
-      // to avoid unnecessary re-renders
-      const newPriceSummary = {
-        totalNights: summary.totalNights,
-        subtotal: summary.subtotal,
-        cleaningFee: summary.cleaningFee,
-        total: summary.total,
-        averagePerNight: summary.averagePerNight
-      };
-      
-      // Deep comparison to avoid unnecessary updates
-      const shouldUpdate = !priceSummary || 
-        priceSummary.totalNights !== newPriceSummary.totalNights ||
-        priceSummary.subtotal !== newPriceSummary.subtotal ||
-        priceSummary.total !== newPriceSummary.total;
-      
-      if (shouldUpdate) {
-        setPriceSummary(newPriceSummary);
+    const calculatePrices = async () => {
+      if (selectedStartDate && selectedEndDate) {
+        try {
+          // Calculate the price summary
+          const summary = await calculateStayPrice(apartmentWithDefaults, selectedStartDate, selectedEndDate);
+          
+          // Only update price summary if it's different from the current one
+          // to avoid unnecessary re-renders
+          const newPriceSummary = {
+            totalNights: summary.totalNights,
+            subtotal: summary.subtotal,
+            cleaningFee: summary.cleaningFee,
+            total: summary.total,
+            averagePerNight: summary.averagePerNight
+          };
+          
+          // Deep comparison to avoid unnecessary updates
+          const shouldUpdate = !priceSummary || 
+            priceSummary.totalNights !== newPriceSummary.totalNights ||
+            priceSummary.subtotal !== newPriceSummary.subtotal ||
+            priceSummary.total !== newPriceSummary.total;
+          
+          if (shouldUpdate) {
+            setPriceSummary(newPriceSummary);
+          }
+        } catch (error) {
+          console.error('Error calculating stay price:', error);
+        }
+      } else if (priceSummary !== null) {
+        setPriceSummary(null);
       }
-    } else if (priceSummary !== null) {
-      setPriceSummary(null);
-    }
+    };
+    
+    calculatePrices();
   }, [selectedStartDate, selectedEndDate, apartment, apartmentWithDefaults, priceSummary]);
 
 
@@ -384,9 +415,8 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
           const inRange = isInSelectedRange(day);
           const isCurrentDay = isToday(day);
           
-          // Check if this date would violate min/max nights if selected as end date
-          const violatesStayLimits = selectedStartDate && !selectedEndDate && 
-            selectable && !canSelectAsEndDate(day, selectedStartDate);
+          // Note: violatesStayLimits check moved to async useEffect below
+          const violatesStayLimits = false; // Will be updated by useEffect
           
           let bgColorClass    = 'bg-white';
           let priceClass      = 'text-gray-700';
@@ -474,17 +504,14 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
           {t("apartments.calendarInstructions")}
           {selectedStartDate && !selectedEndDate && (
             <div className="mt-2 p-2 bg-blue-50 rounded border border-blue-200">
-              {(() => {
-                const limits = getStayLimits(apartmentWithDefaults, selectedStartDate);
-                return (
-                  <span className="text-blue-700">
-                    {t("apartments.stayLimits", { 
-                      minNights: limits.minNights, 
-                      maxNights: limits.maxNights 
-                    })}
-                  </span>
-                );
-              })()}
+              {stayLimits && (
+                <span className="text-blue-700">
+                  {t("apartments.stayLimits", { 
+                    minNights: stayLimits.minNights, 
+                    maxNights: stayLimits.maxNights 
+                  })}
+                </span>
+              )}
             </div>
           )}
         </div>

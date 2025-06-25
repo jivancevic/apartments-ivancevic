@@ -68,108 +68,13 @@ async function loadPricingData() {
   }
 }
 
-// 5. Apartment-specific configurations with calculated cleaning fees
-export const APARTMENT_PRICING_CONFIGS: Record<string, ApartmentPricingConfig> = {
-  "Magical Oasis": {
-    cleaningFee: 50,
-    defaultPrice: 187, // Peak price
-    defaultStayLengthDiscounts: [
-      { length: 7, discount: -0.1 },
-      { length: 30, discount: -0.4 }
-    ],
-    defaultMinNights: 2,
-    defaultMaxNights: 60
-  },
-  "Saint Roko": {
-    cleaningFee: 35,
-    defaultPrice: 154, // Peak price
-    defaultStayLengthDiscounts: [
-      { length: 7, discount: -0.1 },
-      { length: 30, discount: -0.4 }
-    ],
-    defaultMinNights: 2,
-    defaultMaxNights: 60
-  },
-  "Ismaelli Palace": {
-    cleaningFee: 80,
-    defaultPrice: 440, // Peak price
-    defaultStayLengthDiscounts: [
-      { length: 7, discount: -0.1 },
-      { length: 30, discount: -0.4 }
-    ],
-    defaultMinNights: 2,
-    defaultMaxNights: 60
-  },
-  "Lavender": {
-    cleaningFee: 80,
-    defaultPrice: 231, // Peak price
-    defaultStayLengthDiscounts: [
-      { length: 7, discount: -0.1 },
-      { length: 30, discount: -0.4 }
-    ],
-    defaultMinNights: 2,
-    defaultMaxNights: 60
-  },
-  "Sun": {
-    cleaningFee: 70,
-    defaultPrice: 182, // Peak price
-    defaultStayLengthDiscounts: [
-      { length: 7, discount: -0.1 },
-      { length: 30, discount: -0.4 }
-    ],
-    defaultMinNights: 2,
-    defaultMaxNights: 60
-  },
-  "Beach": {
-    cleaningFee: 50,
-    defaultPrice: 132, // Peak price
-    defaultStayLengthDiscounts: [
-      { length: 7, discount: -0.1 },
-      { length: 30, discount: -0.4 }
-    ],
-    defaultMinNights: 2,
-    defaultMaxNights: 60
-  },
-  "Sea": {
-    cleaningFee: 35,
-    defaultPrice: 110, // Peak price
-    defaultStayLengthDiscounts: [
-      { length: 7, discount: -0.1 },
-      { length: 30, discount: -0.4 }
-    ],
-    defaultMinNights: 2,
-    defaultMaxNights: 60
-  },
-  "Nika": {
-    cleaningFee: 80,
-    defaultPrice: 200, // Peak price
-    defaultStayLengthDiscounts: [
-      { length: 7, discount: -0.1 },
-      { length: 30, discount: -0.4 }
-    ],
-    defaultMinNights: 2,
-    defaultMaxNights: 60
-  },
-  "Lara": {
-    cleaningFee: 30,
-    defaultPrice: 100, // Peak price
-    defaultStayLengthDiscounts: [
-      { length: 7, discount: -0.1 },
-      { length: 30, discount: -0.4 }
-    ],
-    defaultMinNights: 2,
-    defaultMaxNights: 60
-  }
-};
+// Ensure pricing data is loaded before using
+async function ensurePricingDataLoaded() {
+  await loadPricingData();
+}
 
-// Helper functions for the new pricing system
-
-/**
- * Helper to create dates from string format "YYYY-MM-DD"
- */
 export function parseDate(dateStr: string): Date {
-  const [year, month, day] = dateStr.split('-').map(Number);
-  return new Date(year, month - 1, day);
+  return new Date(dateStr + 'T00:00:00.000Z');
 }
 
 /**
@@ -216,20 +121,19 @@ async function getBasePriceForDate(apartment: Apartment, date: Date): Promise<nu
   const pricePeriods = APARTMENT_PRICE_PERIODS[apartment.nameEn];
   
   if (!pricePeriods) {
-    console.log("Price periods not found for apartment:",)
-    const config = getApartmentPricingConfig(apartment);
+    const config = await getApartmentPricingConfig(apartment);
     return config.defaultPrice;
   }
-  
-  // Find matching price period
+
+  // Find the price period that contains this date
   for (const period of pricePeriods) {
     if (dateStr >= period.start && dateStr <= period.end) {
       return period.price;
     }
   }
-  
-  // Fallback to default price
-  const config = getApartmentPricingConfig(apartment);
+
+  // If no price period found, fall back to apartment's default price
+  const config = await getApartmentPricingConfig(apartment);
   return config.defaultPrice;
 }
 
@@ -245,14 +149,14 @@ async function getRuleSetForDate(apartment: Apartment, date: Date): Promise<Rule
   if (!ruleSetPeriods) {
     return null;
   }
-  
-  // Find matching rule set period
+
+  // Find the rule set period that contains this date
   for (const period of ruleSetPeriods) {
     if (dateStr >= period.start && dateStr <= period.end) {
       return GLOBAL_RULE_SETS[period.ruleSet] || null;
     }
   }
-  
+
   return null;
 }
 
@@ -260,35 +164,30 @@ async function getRuleSetForDate(apartment: Apartment, date: Date): Promise<Rule
  * Get stay length discounts for a given number of nights
  */
 function getStayLengthDiscount(discounts: StayLengthDiscount[], nights: number): number {
-  let bestDiscount = 0;
+  // Find the applicable discount (highest threshold that the stay meets)
+  let applicableDiscount = 0;
   
-  // Find the best applicable discount
   for (const discount of discounts) {
-    if (nights >= discount.length && discount.discount < bestDiscount) {
-      bestDiscount = discount.discount;
+    if (nights >= discount.length) {
+      applicableDiscount = discount.discount;
     }
   }
   
-  return bestDiscount;
+  return applicableDiscount;
 }
 
 /**
  * Calculates the price for an apartment on a given date
  */
-export function calculateNightlyPrice(apartment: Apartment, date: Date): number {
-  // Get base price for this date
-  const basePrice = getBasePriceForDate(apartment, date);
-  console.log("Base price for", date, "is", basePrice)
-  
-  // Get rule set for this date
-  const ruleSet = getRuleSetForDate(apartment, date);
+export async function calculateNightlyPrice(apartment: Apartment, date: Date): Promise<number> {
+  const basePrice = await getBasePriceForDate(apartment, date);
+  const ruleSet = await getRuleSetForDate(apartment, date);
   
   if (!ruleSet) {
-    // No rule set found, return base price
-    return Math.round(basePrice);
+    return basePrice;
   }
-  
-  // Apply price modifier from rule set
+
+  // Apply price modifier
   const modifiedPrice = basePrice * (1 + ruleSet.priceModifier);
   
   return Math.round(modifiedPrice);
@@ -305,14 +204,14 @@ export async function getCleaningFee(apartment: Apartment): Promise<number> {
 /**
  * Gets minimum and maximum nights for a stay starting on a given date
  */
-export function getStayLimits(apartment: Apartment, startDate: Date): { minNights: number; maxNights: number } {
-  const config = getApartmentPricingConfig(apartment);
-  const ruleSet = getRuleSetForDate(apartment, startDate);
+export async function getStayLimits(apartment: Apartment, startDate: Date): Promise<{ minNights: number; maxNights: number }> {
+  const ruleSet = await getRuleSetForDate(apartment, startDate);
+  const config = await getApartmentPricingConfig(apartment);
   
-  if (ruleSet && (ruleSet.minNights !== undefined || ruleSet.maxNights !== undefined)) {
+  if (ruleSet && ruleSet.minNights !== undefined && ruleSet.maxNights !== undefined) {
     return {
-      minNights: ruleSet.minNights || config.defaultMinNights,
-      maxNights: ruleSet.maxNights || config.defaultMaxNights
+      minNights: ruleSet.minNights,
+      maxNights: ruleSet.maxNights
     };
   }
   
@@ -341,11 +240,11 @@ export interface PriceSummary {
   };
 }
 
-export function calculateStayPrice(
+export async function calculateStayPrice(
   apartment: Apartment, 
   startDate: Date, 
   endDate: Date
-): PriceSummary {
+): Promise<PriceSummary> {
   // Normalize dates to midnight
   const start = new Date(startDate);
   start.setHours(0, 0, 0, 0);
@@ -370,14 +269,14 @@ export function calculateStayPrice(
     };
   }
   
-  const config = getApartmentPricingConfig(apartment);
+  const config = await getApartmentPricingConfig(apartment);
   
   // Calculate price for each night
   const nightlyPrices: {date: Date, price: number}[] = [];
   let currentDate = new Date(start);
   
   for (let i = 0; i < totalNights; i++) {
-    const price = calculateNightlyPrice(apartment, currentDate);
+    const price = await calculateNightlyPrice(apartment, currentDate);
     nightlyPrices.push({
       date: new Date(currentDate),
       price
@@ -389,7 +288,7 @@ export function calculateStayPrice(
   const subtotal = nightlyPrices.reduce((sum, night) => sum + night.price, 0);
   
   // Get applicable stay length discounts
-  const startRuleSet = getRuleSetForDate(apartment, start);
+  const startRuleSet = await getRuleSetForDate(apartment, start);
   const applicableDiscounts = startRuleSet?.stayLengthDiscounts || config.defaultStayLengthDiscounts;
   
   // Calculate stay length discount
@@ -398,7 +297,7 @@ export function calculateStayPrice(
   const discountedSubtotal = subtotal - stayLengthDiscountAmount;
   
   // Get cleaning fee
-  const cleaningFee = getCleaningFee(apartment);
+  const cleaningFee = await getCleaningFee(apartment);
   
   // Calculate total
   const total = discountedSubtotal + cleaningFee;
@@ -437,12 +336,10 @@ export function calculateStayPrice(
 /**
  * Gets pricing table for different seasons (backward compatibility)
  */
-export function getSeasonalPrices(apartment: Apartment): Record<string, number> {
-  console.log("Getting seasonal prices for", apartment.nameEn)
-  
-  // Sample dates for different periods to show price variations
+export async function getSeasonalPrices(apartment: Apartment): Promise<Record<string, number>> {
+  // Sample dates for different seasons
   const sampleDates = {
-    'Out of Season': new Date(2024, 10, 1), // November 1, 2024
+    'Off Season': new Date(2025, 0, 15),     // January 15, 2025
     'Low Season': new Date(2025, 4, 1),     // May 1, 2025
     'High Season': new Date(2025, 6, 1),    // July 1, 2025
     'Peak Season': new Date(2025, 7, 15)    // August 15, 2025
@@ -451,9 +348,8 @@ export function getSeasonalPrices(apartment: Apartment): Record<string, number> 
   const prices: Record<string, number> = {};
   
   for (const [seasonName, date] of Object.entries(sampleDates)) {
-    prices[seasonName] = getBasePriceForDate(apartment, date);
+    prices[seasonName] = await getBasePriceForDate(apartment, date);
   }
   
   return prices;
 }
-

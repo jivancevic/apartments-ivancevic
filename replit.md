@@ -103,12 +103,14 @@ This is a full-stack vacation rental platform for Apartments Ivančević, a fami
 
 ## Recent Changes
 
+✓ Moved all pricing data logic from client to server (June 25, 2025)
+✓ Created server/pricing.ts with complete pricing data configuration
+✓ Refactored client pricing functions to load data from /api/pricing-data endpoint
+✓ Updated booking calendar to handle async pricing calculations
+✓ Enhanced min/max nights validation with proper async handling
+✓ Maintained separation between data (server) and calculation logic (client)
 ✓ Restructured pricing system with separate rule sets and price periods (June 24, 2025)
-✓ Implemented Airbnb-style dynamic pricing with flexible apartment-specific configurations  
-✓ Added global rule sets for Ivancevic and Giuliani apartment families
-✓ Created separate variables for rule set periods and price periods for better maintainability
-✓ Calculated exact prices based on peak season percentages (off 40%, low 55%, mid 70%, high 85%, peak 100% for Ivancevic; off 45%, low 60%, top 75%, full 100% for Giuliani)
-✓ Enhanced stay length discounts with 20% price modifiers and seasonal min/max night restrictions
+✓ Implemented Airbnb-style dynamic pricing with flexible apartment-specific configurations
 
 ## Changelog
 

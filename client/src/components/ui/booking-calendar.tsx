@@ -303,23 +303,22 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
     t("calendar.days.sun")
   ];
 
-  // Load seasonal prices and stay limits
+  // Load stay limits when start date changes
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        const prices = await getSeasonalPrices(apartmentWithDefaults);
-        setSeasonalPrices(prices);
-        
-        if (selectedStartDate) {
+    const loadStayLimits = async () => {
+      if (selectedStartDate) {
+        try {
           const limits = await getStayLimits(apartmentWithDefaults, selectedStartDate);
           setStayLimits(limits);
+        } catch (error) {
+          console.error('Error loading stay limits:', error);
         }
-      } catch (error) {
-        console.error('Error loading pricing data:', error);
+      } else {
+        setStayLimits(null);
       }
     };
     
-    loadData();
+    loadStayLimits();
   }, [apartmentWithDefaults, selectedStartDate]);
 
   // Calculate price summary when selection changes

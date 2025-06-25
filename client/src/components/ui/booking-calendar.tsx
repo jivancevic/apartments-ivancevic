@@ -99,10 +99,8 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
     total: number;
     averagePerNight: number;
   } | null>(null);
-
-
-  // Calculate seasonal prices - will be loaded async
-  const [seasonalPrices, setSeasonalPrices] = useState<Record<string, number>>({});
+  
+  const [stayLimits, setStayLimits] = useState<{minNights: number; maxNights: number} | null>(null);
   
   // Convert booking dates from strings to Date objects if needed
   const parsedBookings = bookings.map(booking => ({

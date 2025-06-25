@@ -296,6 +296,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // Pricing data endpoint
+  app.get('/api/pricing-data', async (req: Request, res: Response) => {
+    try {
+      const { 
+        GLOBAL_RULE_SETS, 
+        APARTMENT_RULE_SET_PERIODS, 
+        APARTMENT_PRICE_PERIODS, 
+        APARTMENT_PRICING_CONFIGS 
+      } = await import('./pricing');
+      
+      res.json({
+        globalRuleSets: GLOBAL_RULE_SETS,
+        apartmentRuleSetPeriods: APARTMENT_RULE_SET_PERIODS,
+        apartmentPricePeriods: APARTMENT_PRICE_PERIODS,
+        apartmentPricingConfigs: APARTMENT_PRICING_CONFIGS
+      });
+    } catch (error) {
+      console.error('Error loading pricing data:', error);
+      res.status(500).json({ error: 'Failed to load pricing data' });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

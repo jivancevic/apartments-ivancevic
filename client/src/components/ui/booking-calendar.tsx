@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import SeasonPriceGrid from "@/components/ui/SeasonPriceGrid";
 import { calculateStayPrice, getSeasonalPrices, getStayLimits } from "@/lib/pricing";
-import { useState } from "react";
 
 /**
  * The booking calendar component shows availability and allows date selection
@@ -100,8 +99,7 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
     total: number;
     averagePerNight: number;
   } | null>(null);
-  
-  const [stayLimits, setStayLimits] = useState<{minNights: number; maxNights: number} | null>(null);
+
 
   // Calculate seasonal prices - will be loaded async
   const [seasonalPrices, setSeasonalPrices] = useState<Record<string, number>>({});

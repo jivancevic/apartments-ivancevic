@@ -44,6 +44,7 @@ const hrTranslation = {
   "apartments.dateRange": "Raspon datuma",
   "apartments.sendInquiry": "Pošaljite upit",
   "apartments.calendarInstructions": "Kliknite da odaberete datum dolaska i odlaska. Pogledajte trenutni izračun cijene ispod.",
+  "apartments.stayLimits": "Za ovaj datum dolaska: minimum {{minNights}} noći, maksimum {{maxNights}} noći",
   "apartment.maxGuests_one": "{{count}} gost",
   "apartment.maxGuests_few": "{{count}} gosta",
   "apartment.maxGuests_other": "{{count}} gostiju",

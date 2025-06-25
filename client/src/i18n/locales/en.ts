@@ -39,6 +39,7 @@ const enTranslation = {
   "apartments.dateRange": "Date Range",
   "apartments.sendInquiry": "Send Inquiry",
   "apartments.calendarInstructions": "Click to select your check-in and check-out dates. See instant price calculation below.",
+  "apartments.stayLimits": "For this check-in date: minimum {{minNights}} nights, maximum {{maxNights}} nights",
   "apartment.maxGuests_one": "{{count}} Guest",
   "apartment.maxGuests_other": "{{count}} Guests",
   "apartments.nights_one": "{{count}} night",

@@ -148,7 +148,7 @@ export const APARTMENT_RULE_SET_PERIODS: Record<string, RuleSetPeriod[]> = {
     { start: "2025-10-04", end: "2025-10-31", ruleSet: "ivancevic-low" },
     { start: "2025-11-01", end: "2026-04-24", ruleSet: "ivancevic-off" }
   ],
-  "Ismaelli": [
+  "Ismaelli Palace": [
     { start: "2024-10-01", end: "2025-04-25", ruleSet: "ivancevic-off" },
     { start: "2025-04-26", end: "2025-05-29", ruleSet: "ivancevic-low" },
     { start: "2025-05-30", end: "2025-06-20", ruleSet: "ivancevic-mid" },
@@ -249,7 +249,7 @@ export const APARTMENT_PRICE_PERIODS: Record<string, PricePeriod[]> = {
     { start: "2025-10-04", end: "2025-10-31", price: 85 }, // 55% of 154
     { start: "2025-11-01", end: "2026-04-24", price: 62 } // 40% of 154
   ],
-  "Ismaelli": [ // Peak: 440
+  "Ismaelli Palace": [ // Peak: 440
     { start: "2024-10-01", end: "2025-04-25", price: 176 }, // 40% of 440
     { start: "2025-04-26", end: "2025-05-29", price: 242 }, // 55% of 440
     { start: "2025-05-30", end: "2025-06-20", price: 308 }, // 70% of 440
@@ -356,7 +356,7 @@ export const APARTMENT_PRICING_CONFIGS: Record<string, ApartmentPricingConfig> =
     defaultMinNights: 2,
     defaultMaxNights: 60
   },
-  "Ismaelli": {
+  "Ismaelli Palace": {
     cleaningFee: 80,
     defaultPrice: 440, // Peak price
     defaultStayLengthDiscounts: [
@@ -433,7 +433,7 @@ export const APARTMENT_PRICING_CONFIGS: Record<string, ApartmentPricingConfig> =
 /**
  * Helper to create dates from string format "YYYY-MM-DD"
  */
-function parseDate(dateStr: string): Date {
+export function parseDate(dateStr: string): Date {
   const [year, month, day] = dateStr.split('-').map(Number);
   return new Date(year, month - 1, day);
 }
@@ -478,6 +478,7 @@ function getBasePriceForDate(apartment: Apartment, date: Date): number {
   const pricePeriods = APARTMENT_PRICE_PERIODS[apartment.nameEn];
   
   if (!pricePeriods) {
+    console.log("Price periods not found for apartment:",)
     const config = getApartmentPricingConfig(apartment);
     return config.defaultPrice;
   }
@@ -537,6 +538,7 @@ function getStayLengthDiscount(discounts: StayLengthDiscount[], nights: number):
 export function calculateNightlyPrice(apartment: Apartment, date: Date): number {
   // Get base price for this date
   const basePrice = getBasePriceForDate(apartment, date);
+  console.log("Base price for", date, "is", basePrice)
   
   // Get rule set for this date
   const ruleSet = getRuleSetForDate(apartment, date);
@@ -696,7 +698,7 @@ export function calculateStayPrice(
  * Gets pricing table for different seasons (backward compatibility)
  */
 export function getSeasonalPrices(apartment: Apartment): Record<string, number> {
-  const config = getApartmentPricingConfig(apartment);
+  console.log("Getting seasonal prices for", apartment.nameEn)
   
   // Sample dates for different periods to show price variations
   const sampleDates = {
@@ -709,43 +711,9 @@ export function getSeasonalPrices(apartment: Apartment): Record<string, number> 
   const prices: Record<string, number> = {};
   
   for (const [seasonName, date] of Object.entries(sampleDates)) {
-    prices[seasonName] = calculateNightlyPrice(apartment, date);
+    prices[seasonName] = getBasePriceForDate(apartment, date);
   }
   
   return prices;
-}
-
-// Legacy support - export old enum for backward compatibility
-export enum SeasonType {
-  OUT_OF_SEASON = 'OUT_OF_SEASON',
-  LOW_SEASON = 'LOW_SEASON', 
-  HIGH_SEASON = 'HIGH_SEASON',
-  PEAK_SEASON = 'PEAK_SEASON'
-}
-
-// Legacy function for backward compatibility
-export function getSeasonType(date: Date): SeasonType {
-  const dateStr = formatDate(date);
-  
-  // Map to seasons based on date ranges
-  if (dateStr >= "2024-10-25" && dateStr <= "2025-04-25") return SeasonType.OUT_OF_SEASON;
-  if (dateStr >= "2025-04-26" && dateStr <= "2025-06-06") return SeasonType.LOW_SEASON;
-  if (dateStr >= "2025-06-07" && dateStr <= "2025-07-11") return SeasonType.HIGH_SEASON;
-  if (dateStr >= "2025-07-12" && dateStr <= "2025-08-22") return SeasonType.PEAK_SEASON;
-  if (dateStr >= "2025-08-23" && dateStr <= "2025-09-26") return SeasonType.HIGH_SEASON;
-  if (dateStr >= "2025-09-27" && dateStr <= "2025-10-24") return SeasonType.LOW_SEASON;
-  
-  return SeasonType.OUT_OF_SEASON;
-}
-
-// Legacy function for backward compatibility
-export function getSeasonName(seasonType: SeasonType): string {
-  switch (seasonType) {
-    case SeasonType.OUT_OF_SEASON: return 'Out of Season';
-    case SeasonType.LOW_SEASON: return 'Low Season';
-    case SeasonType.HIGH_SEASON: return 'High Season';
-    case SeasonType.PEAK_SEASON: return 'Peak Season';
-    default: return 'Unknown Season';
-  }
 }
 

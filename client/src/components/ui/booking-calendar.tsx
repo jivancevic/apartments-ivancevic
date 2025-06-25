@@ -3,13 +3,14 @@ import { useTranslation } from "react-i18next";
 import { Apartment, Booking } from "@/types";
 import { 
   format, addMonths, startOfMonth, endOfMonth, eachDayOfInterval, 
-  getDay, isSameDay, isAfter, isBefore, differenceInDays, isToday 
+  getDay, isSameDay, isToday, isAfter, isBefore, differenceInDays 
 } from "date-fns";
+import clsx from 'clsx';
 import { ChevronLeft, ChevronRight, X, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { calculateNightlyPrice, calculateStayPrice, getSeasonType, getSeasonalPrices, SeasonType, getSeasonName } from "@/lib/pricing";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import SeasonPriceGrid from "@/components/ui/SeasonPriceGrid";
+import { calculateStayPrice, getSeasonalPrices, getStayLimits } from "@/lib/pricing";
 
 /**
  * The booking calendar component shows availability and allows date selection
@@ -150,6 +151,25 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
     return daysInRange.some(day => isDateBooked(day));
   };
 
+  // Check if a stay length is valid (within min/max nights constraints)
+  const isValidStayLength = (startDate: Date, endDate: Date) => {
+    const nights = differenceInDays(endDate, startDate);
+    const limits = getStayLimits(apartmentWithDefaults, startDate);
+    
+    return nights >= limits.minNights && nights <= limits.maxNights;
+  };
+
+  // Check if a date can be selected as end date (considering min/max nights)
+  const canSelectAsEndDate = (date: Date, startDate: Date) => {
+    if (!startDate) return true;
+    
+    const nights = differenceInDays(date, startDate);
+    if (nights <= 0) return false; // Can't select same day or earlier
+    
+    const limits = getStayLimits(apartmentWithDefaults, startDate);
+    return nights >= limits.minNights && nights <= limits.maxNights;
+  };
+
   // Check if a date is in the selected range (days between selected start and end)
   const isInSelectedRange = (date: Date) => {
     if (!selectedStartDate) return false;
@@ -204,6 +224,12 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
         return;
       }
       
+      // Check if the stay length is valid (within min/max nights constraints)
+      if (!isValidStayLength(newStartDate, newEndDate)) {
+        // Don't allow selection of invalid stay lengths
+        return;
+      }
+      
       // Update the state with validated dates
       if (isBefore(date, selectedStartDate)) {
         setSelectedEndDate(selectedStartDate);
@@ -222,14 +248,17 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
   // Handle date hover for range preview
   const handleDateHover = (date: Date) => {
     if (selectedStartDate && !selectedEndDate) {
-      // Check if the potential range contains any booked dates
+      // Check if the potential range contains any booked dates and meets min/max nights
       if (selectedStartDate && date) {
         const rangeStart = selectedStartDate < date ? selectedStartDate : date;
         const rangeEnd = selectedStartDate < date ? date : selectedStartDate;
         
-        // Only update hover state if the range doesn't contain booked dates
-        if (!hasBookedDatesInRange(rangeStart, rangeEnd)) {
+        // Only update hover state if the range is valid
+        if (!hasBookedDatesInRange(rangeStart, rangeEnd) && 
+            isValidStayLength(rangeStart, rangeEnd)) {
           setHoverDate(date);
+        } else {
+          setHoverDate(null);
         }
       } else {
         setHoverDate(date);
@@ -273,6 +302,7 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
 
   // Calculate price summary when selection changes
   useEffect(() => {
+    console.log("In useEffect booking-calendar.tsx")
     if (selectedStartDate && selectedEndDate) {
       // Calculate the price summary
       const summary = calculateStayPrice(apartmentWithDefaults, selectedStartDate, selectedEndDate);
@@ -306,24 +336,7 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
   return (
     <div>
       {/* Season Prices */}
-      <div className="mb-4 grid grid-cols-4 gap-2 text-xs">
-        <div className="bg-blue-50 p-2 rounded text-center">
-          <div className="font-medium text-gray-700">{getSeasonName(SeasonType.OUT_OF_SEASON)}</div>
-          <div className="font-bold text-blue-600">€{seasonalPrices[SeasonType.OUT_OF_SEASON]}</div>
-        </div>
-        <div className="bg-green-50 p-2 rounded text-center">
-          <div className="font-medium text-gray-700">{getSeasonName(SeasonType.LOW_SEASON)}</div>
-          <div className="font-bold text-green-600">€{seasonalPrices[SeasonType.LOW_SEASON]}</div>
-        </div>
-        <div className="bg-yellow-50 p-2 rounded text-center">
-          <div className="font-medium text-gray-700">{getSeasonName(SeasonType.HIGH_SEASON)}</div>
-          <div className="font-bold text-amber-600">€{seasonalPrices[SeasonType.HIGH_SEASON]}</div>
-        </div>
-        <div className="bg-orange-50 p-2 rounded text-center">
-          <div className="font-medium text-gray-700">{getSeasonName(SeasonType.PEAK_SEASON)}</div>
-          <div className="font-bold text-orange-600">€{seasonalPrices[SeasonType.PEAK_SEASON]}</div>
-        </div>
-      </div>
+      <SeasonPriceGrid apartmentName={apartmentWithDefaults.nameEn} />
 
       <div className="flex justify-between items-center mb-2">
         <Button 
@@ -362,83 +375,79 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
         
         {/* Days of the month */}
         {monthDays.map(day => {
+          const dayNum = format(day, 'd');   // cache day string
           const isBooked = isDateBooked(day);
           const isPast = isDatePast(day);
           const selectable = isDateSelectable(day);
-          const price = calculateNightlyPrice(apartmentWithDefaults, day);
-          const seasonType = getSeasonType(day);
           const isStart = selectedStartDate && isSameDay(day, selectedStartDate);
           const isEnd = selectedEndDate && isSameDay(day, selectedEndDate);
           const inRange = isInSelectedRange(day);
           const isCurrentDay = isToday(day);
           
-          let bgColorClass = 'bg-white';
-          let priceColorClass = 'text-gray-700';
-          // Position-based styling for range effect
-          let positionClass = '';
+          // Check if this date would violate min/max nights if selected as end date
+          const violatesStayLimits = selectedStartDate && !selectedEndDate && 
+            selectable && !canSelectAsEndDate(day, selectedStartDate);
+          
+          let bgColorClass    = 'bg-white';
+          let priceClass      = 'text-gray-700';
+          let positionClass   = '';
 
           if (isPast) {
             bgColorClass = 'bg-gray-100';
-            priceColorClass = 'text-gray-400';
+            priceClass = 'text-gray-400';
           }
           else if (isBooked) {
-            bgColorClass = 'bg-red-100';
-            priceColorClass = 'text-red-500';
+            priceClass = 'text-gray-300 line-through';
+          } else if (violatesStayLimits) {
+            // Style for dates that would violate min/max nights
+            bgColorClass = 'bg-orange-50 border border-orange-200';
+            priceClass = 'text-orange-400';
           } else if (isStart) {
             // Start date styling with rounded left
             bgColorClass = 'bg-primary border-2 border-primary';
-            priceColorClass = 'text-white font-bold';
+            priceClass = 'text-white font-bold';
             positionClass = selectedEndDate ? 'rounded-l-lg rounded-r-none border-r-0' : '';
           } else if (isEnd) {
             // End date styling with rounded right
             bgColorClass = 'bg-primary border-2 border-primary';
-            priceColorClass = 'text-white font-bold';
+            priceClass = 'text-white font-bold';
             positionClass = 'rounded-r-lg rounded-l-none border-l-0';
           } else if (inRange) {
             // Make the in-between days clearly visible with a connected appearance
             bgColorClass = 'bg-blue-100 border-t-2 border-b-2 border-blue-300';
-            priceColorClass = 'text-blue-800';
+            priceClass = 'text-blue-800';
             positionClass = 'border-l-0 border-r-0'; // No side borders for connected effect
           }
           
           return (
             <div 
-              key={format(day, 'd')}
-              className={`calendar-day relative text-xs p-1 ${bgColorClass} ${positionClass} ${
-                selectable ? 'cursor-pointer hover:border hover:border-primary' : 'cursor-not-allowed'
-              } ${isCurrentDay ? 'border border-blue-500' : ''} transition-colors overflow-hidden`}
-              onClick={() => selectable && handleDateClick(day)}
-              onMouseEnter={() => selectable && handleDateHover(day)}
+              key={dayNum}
+              className={clsx(
+                 'calendar-day relative text-xs p-1 transition-colors overflow-hidden',
+                 bgColorClass,
+                 positionClass,
+                 isCurrentDay && 'border border-blue-500',
+                 selectable ? 'cursor-pointer hover:border hover:border-primary' : 'cursor-not-allowed'
+               )}
+              onClick={() => (selectable && !violatesStayLimits) && handleDateClick(day)}
+              onMouseEnter={() => (selectable && !violatesStayLimits) && handleDateHover(day)}
             >
-              {/* Add check-in/out label for selected dates */}
-              {isStart && (
-                <div className="absolute top-0 left-0 right-0 text-[8px] bg-blue-700 text-white px-1 text-center font-bold">
-                  {t("search.checkIn")}
-                </div>
-              )}
-              {isEnd && (
-                <div className="absolute top-0 left-0 right-0 text-[8px] bg-blue-900 text-white px-1 text-center font-bold">
-                  {t("search.checkOut")}
-                </div>
-              )}
               
               <div className="min-h-[36px] sm:min-h-[42px] relative flex items-center justify-center">
-                {/* For check-in/check-out days, show the label at the top */}
                 {(isStart || isEnd) ? (
-                  <div className="w-full text-center font-medium mt-3">
-                    {format(day, 'd')}
+                  <div className={clsx("w-full text-center font-medium", priceClass)}>
+                    {dayNum}
                   </div>
                 ) : inRange ? (
                   <div className="text-xs font-medium relative">
-                    <span className="relative z-10">{format(day, 'd')}</span>
-                    {/* Add a subtle highlight effect for days in the selected range */}
+                    <span className={clsx("relative z-10", priceClass)}>{dayNum}</span>
                     <span className="absolute inset-0 flex items-center justify-center">
                       <span className="w-5 h-5 rounded-full bg-blue-200 opacity-50"></span>
                     </span>
                   </div>
                 ) : (
-                  <div className="text-xs font-medium">
-                    {format(day, 'd')}
+                  <div className={clsx("text-xs font-bold", priceClass)}>
+                    {dayNum}
                   </div>
                 )}
               </div>
@@ -463,6 +472,21 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
         <Info className="h-4 w-4 flex-shrink-0 mt-0.5" />
         <div>
           {t("apartments.calendarInstructions")}
+          {selectedStartDate && !selectedEndDate && (
+            <div className="mt-2 p-2 bg-blue-50 rounded border border-blue-200">
+              {(() => {
+                const limits = getStayLimits(apartmentWithDefaults, selectedStartDate);
+                return (
+                  <span className="text-blue-700">
+                    {t("apartments.stayLimits", { 
+                      minNights: limits.minNights, 
+                      maxNights: limits.maxNights 
+                    })}
+                  </span>
+                );
+              })()}
+            </div>
+          )}
         </div>
       </div>
       

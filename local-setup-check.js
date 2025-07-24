@@ -84,7 +84,7 @@ console.log('\n' + '='.repeat(50));
 if (allGood || checks.filter(check => check.status === '❌').length === 0) {
   console.log('🎉 Setup looks good! You can run: npm run dev');
   console.log('\nThe app will be available at: http://localhost:5000');
-  console.log('(Uses IPv4 127.0.0.1 binding for macOS compatibility)');
+  console.log('(Automatically selects best network interface for macOS)');
 } else {
   console.log('⚠️  Some issues found. Please fix them before running npm run dev');
   console.log('\nNext steps:');

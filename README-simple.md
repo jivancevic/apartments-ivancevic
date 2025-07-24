@@ -16,6 +16,8 @@ npm run dev
 
 That's it! The app runs at **http://localhost:5000**
 
+> **Note**: The app uses `localhost` for local development (instead of `0.0.0.0`) to work properly on macOS.
+
 ## Optional: Email Functionality
 
 If you want to test email sending:

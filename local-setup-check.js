@@ -81,23 +81,19 @@ const allGood = checks.every(check => check.status === '✅');
 
 console.log('\n' + '='.repeat(50));
 
-if (allGood) {
-  console.log('🎉 All checks passed! You can run: npm run dev');
+if (allGood || checks.filter(check => check.status === '❌').length === 0) {
+  console.log('🎉 Setup looks good! You can run: npm run dev');
+  console.log('\nThe app will be available at: http://localhost:5000');
+  console.log('(Uses IPv4 127.0.0.1 binding for macOS compatibility)');
 } else {
   console.log('⚠️  Some issues found. Please fix them before running npm run dev');
   console.log('\nNext steps:');
   
   checks.filter(check => check.status === '❌').forEach(check => {
-    if (check.name === '.env file') {
-      console.log('• Copy .env.example to .env and fill in your values');
-    } else if (check.name === 'PostgreSQL') {
-      console.log('• Install PostgreSQL: brew install postgresql@16');
-    } else if (check.name === 'PostgreSQL Service') {
-      console.log('• Start PostgreSQL: brew services start postgresql@16');
-    } else if (check.name === 'Dependencies') {
+    if (check.name === 'Dependencies') {
       console.log('• Install dependencies: npm install');
-    } else if (check.name.includes('_URL') || check.name.includes('_KEY')) {
-      console.log(`• Add ${check.name} to your .env file`);
+    } else if (check.name === 'Node.js version') {
+      console.log('• Update Node.js to version 18 or higher');
     }
   });
 }

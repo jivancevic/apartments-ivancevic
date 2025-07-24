@@ -16,7 +16,7 @@ npm run dev
 
 That's it! The app runs at **http://localhost:5000**
 
-> **Note**: The app uses `localhost` for local development (instead of `0.0.0.0`) to work properly on macOS.
+> **Note**: The app uses IPv4 (127.0.0.1) for local development to work properly on macOS systems that have IPv6 issues.
 
 ## Optional: Email Functionality
 

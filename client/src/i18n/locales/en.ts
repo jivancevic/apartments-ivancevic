@@ -142,6 +142,10 @@ const enTranslation = {
   "calendar.days.fri": "Fr",
   "calendar.days.sat": "Sa",
   "calendar.days.sun": "Su",
+  "seasons.off": "Out of Season",
+  "seasons.low": "Low Season",
+  "seasons.high": "High Season",
+  "seasons.peak": "Peak Season",
 
   // About Page
   "about.title": "About us",

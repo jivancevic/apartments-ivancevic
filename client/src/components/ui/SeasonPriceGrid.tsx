@@ -1,81 +1,68 @@
-import {
-  parseDate,
-  PricePeriod
-} from "@/lib/pricing";            // adjust path if necessary
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { parseDate, PricePeriod } from "@/lib/pricing";
 
 interface SeasonPriceGridProps {
   apartmentName: string;
 }
 
-/** fixed sample dates & colour-classes for every season */
 const SEASONS = [
-  {
-    label: "Out of Season",
-    date: "2025-11-01",               // 1 Nov 2025
-    bg: "bg-blue-50",
-    text: "text-blue-600",
-  },
-  {
-    label: "Low Season",
-    date: "2025-05-15",               // 15 May 2025
-    bg: "bg-green-50",
-    text: "text-green-600",
-  },
-  {
-    label: "High Season",
-    date: "2025-07-01",               // 1 Jul 2025
-    bg: "bg-yellow-50",
-    text: "text-amber-600",
-  },
-  {
-    label: "Peak Season",
-    date: "2025-08-01",               // 1 Aug 2025
-    bg: "bg-orange-50",
-    text: "text-orange-600",
-  },
+  { key: "seasons.off",  date: "2025-11-01", bg: "bg-blue-50",  text: "text-blue-600"  },
+  { key: "seasons.low",  date: "2025-05-15", bg: "bg-green-50", text: "text-green-600" },
+  { key: "seasons.high", date: "2025-07-01", bg: "bg-yellow-50", text: "text-amber-600" },
+  { key: "seasons.peak", date: "2025-08-01", bg: "bg-orange-50", text: "text-orange-600" }
 ];
 
 const SeasonPriceGrid = ({ apartmentName }: SeasonPriceGridProps) => {
-  let APARTMENT_PRICE_PERIODS: Record<string, PricePeriod[]> = {};
+  const { t } = useTranslation(); 
+  /* 1️⃣ state for the pricing periods of the *current* apartment */
+  const [pricePeriods, setPricePeriods] = useState<PricePeriod[] | null>(null); // null = loading
 
-  // Load pricing data from server
-  async function loadPricingData() {
-    try {
-      const response = await fetch('/api/pricing-data');
-      if (!response.ok) {
-        throw new Error('Failed to fetch pricing data');
+  /* 2️⃣ fetch once (whenever apartmentName changes) */
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchPricing() {
+      try {
+        const res = await fetch("/api/pricing-data");
+        if (!res.ok) throw new Error("Network error");
+        const data = await res.json();
+
+        if (!cancelled) {
+          const periods: Record<string, PricePeriod[]> =
+            data.apartmentPricePeriods ?? {};
+          setPricePeriods(periods[apartmentName] ?? []);
+        }
+      } catch (err) {
+        console.error("Failed to load prices", err);
+        if (!cancelled) setPricePeriods([]); // show “–”
       }
-
-      const data = await response.json();
-      APARTMENT_PRICE_PERIODS = data.apartmentPricePeriods;
-    } catch (error) {
-      console.error('Error loading pricing data:', error);
-      // Fallback to empty data
-      APARTMENT_PRICE_PERIODS = {};
     }
+
+    fetchPricing();
+    return () => { cancelled = true; }; // guard against late setState
+  }, [apartmentName]);
+
+  /* still loading? */
+  if (pricePeriods === null) {
+    return <div className="text-sm italic">Loading prices…</div>;
   }
 
-  // Ensure pricing data is loaded before using
-  async function ensurePricingDataLoaded() {
-    await loadPricingData();
-  }
-
-  const pricePeriods = APARTMENT_PRICE_PERIODS[apartmentName] ?? [];
-
-  /** helper: find the nightly price valid on a specific date string */
-  const priceForDate = (isoDate: string): number | "–" => {
-    const d = parseDate(isoDate);
-    const pp = pricePeriods.find(
+  /* helper */
+  const priceForDate = (iso: string): number | "–" => {
+    const d = parseDate(iso);
+    const match = pricePeriods!.find(
       (p) => d >= parseDate(p.start) && d <= parseDate(p.end)
     );
-    return pp?.price ?? "–";
+    return match?.price ?? "–";
   };
 
   return (
     <div className="mb-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-xs">
-      {SEASONS.map(({ label, date, bg, text }) => (
-        <div key={label} className={`${bg} p-2 rounded text-center`}>
-          <div className="font-medium text-gray-700">{label}</div>
+      {SEASONS.map(({ key, date, bg, text }) => (
+        <div key={key} className={`${bg} p-2 rounded text-center`}>
+          {/* 🔑 translate the label */}
+          <div className="font-medium text-gray-700">{t(key)}</div>
           <div className={`font-bold ${text}`}>€{priceForDate(date)}</div>
         </div>
       ))}

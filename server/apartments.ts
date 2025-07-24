@@ -197,10 +197,10 @@ export const apartmentData: Apartment[] = [
     ],
     location: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1200!2d17.130864458988793!3d42.9616473522362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134a503a094e1455%3A0xa0fbe34d9990f304!2sApartment%20St.%20Roko!5e0!3m2!1sen!2shr!4v1747837157249!5m2!1sen!2shr",
     bookingUrl: "https://www.booking.com/hotel/hr/old-town-st-roko.html",
-    airbnbUrl: "https://airbnb.com/h/old-town-st-roko-apartment",
+    airbnbUrl: "https://airbnb.com/h/apartment-st-roko",
     icalUrls: [
-      "https://www.airbnb.com/calendar/ical/963637876908533485.ics?s=d53e2124eed9fbea95b5d2dcc398220",
-      "https://www.airbnb.com/calendar/ical/948402641830434452.ics?s=4b8b7dd4cd0dbd2911faab332fcfd90"
+      "https://airbnb.com/calendar/ical/1464339348196756738.ics?s=ac984c0abc2db6e63af3721318241e52",
+      "https://ical.booking.com/v1/export?t=80af3713-fc99-4a39-9bf3-5d33e0bb1b9b"
     ],
     basePeakPrice: 165,
     priceMultiplier: "1.00",
@@ -358,20 +358,25 @@ export const apartmentData: Apartment[] = [
     nameEn: "Sun",
     nameHr: "Sunce",
     descriptionEn: `Welcome to Apartment Sun – a bright, charming retreat just steps from Korčula's historic Old Town. 
+    
     This modern two-bedroom apartment for up to four guests offers all the comforts of home with a touch of Mediterranean charm. Inside, you'll find a spacious open-plan living area filled with natural light and tasteful decor. Relax on the comfortable sofa and unwind with a movie on the flat-screen TV, or enjoy a meal at the dining table by the balcony. The living area flows into a fully equipped kitchen with modern appliances and all the cookware you need to prepare your favorite meals. You'll also appreciate amenities like air conditioning to keep you cool and high-speed Wi-Fi to keep you connected. 
+
     Upstairs, two cozy bedrooms promise a restful night's sleep. One offers a plush double bed under a skylight – perfect for stargazing – while the second has two twin beds ideal for children or friends. Quality linens and ample storage are provided so you can settle in comfortably. A clean, modern bathroom is also upstairs, featuring a bathtub/shower combo, fresh towels, and even a washing machine for your convenience. One of the highlights of Apartment Sun is the private balcony. Step outside with your morning coffee or an evening glass of wine and take in views of the neighborhood's red-tiled rooftops and green hills. The balcony's bistro set offers a lovely spot to relax and soak up the island atmosphere – from sunny breakfasts to romantic sunset toasts. 
+    
     Location is everything, and Apartment Sun delivers. Tucked away on a quiet street, it's only a short stroll from the ancient walls of Korčula Old Town. In minutes you can wander the maze of cobblestone streets, explore historic landmarks, and dine at seafront cafes. The waterfront, markets, and ferry port are also within easy reach. Despite being so close to the sights, the apartment offers a peaceful haven to return to at the end of each day. 
+    
     Whether you're a couple seeking a romantic getaway or a family on holiday, you'll feel right at home at Apartment Sun. It's the perfect blend of comfort, charm, and convenience – and we can't wait to host you for an unforgettable stay in Korčula!`,
     descriptionHr: `Dobrodošli u Apartman Sunce – svijetlu i šarmantnu oazu smještenu tek nekoliko koraka od povijesne jezgre starog grada Korčule.
-Ovaj moderni dvosobni apartman za do četiri osobe nudi sve udobnosti doma uz dašak mediteranskog šarma. Unutra vas očekuje prostrani dnevni boravak otvorenog tipa ispunjen prirodnim svjetlom i ukusnim detaljima. Opustite se na udobnom kauču uz film na ravnom ekranu ili uživajte u obroku za stolom uz balkon. Dnevni prostor povezan je s potpuno opremljenom kuhinjom koja sadrži sve potrebne aparate i posuđe za pripremu omiljenih jela. Klimatizacija će vas rashladiti tijekom toplijih dana, a brzi Wi-Fi omogućit će vam da ostanete povezani.
 
-Na katu se nalaze dvije ugodne spavaće sobe koje jamče miran san. Jedna ima udoban bračni krevet smješten ispod krovnog prozora – idealno za promatranje zvijezda – dok druga sadrži dva odvojena kreveta, savršena za djecu ili prijatelje. Na raspolaganju su vam kvalitetna posteljina i dovoljno prostora za odlaganje stvari. Kat uključuje i moderno uređenu kupaonicu s kadom/tušem, svježim ručnicima te perilicom rublja za dodatnu praktičnost.
+    Ovaj moderni dvosobni apartman za do četiri osobe nudi sve udobnosti doma uz dašak mediteranskog šarma. Unutra vas očekuje prostrani dnevni boravak otvorenog tipa ispunjen prirodnim svjetlom i ukusnim detaljima. Opustite se na udobnom kauču uz film na ravnom ekranu ili uživajte u obroku za stolom uz balkon. Dnevni prostor povezan je s potpuno opremljenom kuhinjom koja sadrži sve potrebne aparate i posuđe za pripremu omiljenih jela. Klimatizacija će vas rashladiti tijekom toplijih dana, a brzi Wi-Fi omogućit će vam da ostanete povezani.
 
-Jedan od najljepših dijelova apartmana je privatni balkon. Izađite s jutarnjom kavom ili čašom vina pri zalasku sunca i uživajte u pogledu na crvene krovove i zelene brežuljke okolice. S garniturom za sjedenje na balkonu možete uživati u opuštenoj atmosferi otoka – od sunčanih doručaka do romantičnih večeri.
+    Na katu se nalaze dvije ugodne spavaće sobe koje jamče miran san. Jedna ima udoban bračni krevet smješten ispod krovnog prozora – idealno za promatranje zvijezda – dok druga sadrži dva odvojena kreveta, savršena za djecu ili prijatelje. Na raspolaganju su vam kvalitetna posteljina i dovoljno prostora za odlaganje stvari. Kat uključuje i moderno uređenu kupaonicu s kadom/tušem, svježim ručnicima te perilicom rublja za dodatnu praktičnost.
 
-Lokacija je savršena – apartman se nalazi u mirnoj ulici, a svega je nekoliko minuta hoda udaljen od starogradskih zidina Korčule. U trenu ste u srcu grada, gdje vas čekaju kamene uličice, povijesne znamenitosti i restorani uz more. U blizini su i riva, tržnica te trajektna luka. Iako je smješten tako blizu centra, apartman nudi mirno utočište nakon dana istraživanja.
+    Jedan od najljepših dijelova apartmana je privatni balkon. Izađite s jutarnjom kavom ili čašom vina pri zalasku sunca i uživajte u pogledu na crvene krovove i zelene brežuljke okolice. S garniturom za sjedenje na balkonu možete uživati u opuštenoj atmosferi otoka – od sunčanih doručaka do romantičnih večeri.
 
-Bilo da dolazite u dvoje na romantičan odmor ili s obitelji na ljetovanje, u Apartmanu Sunce ćete se osjećati kao kod kuće. To je idealan spoj udobnosti, šarma i odlične lokacije – veselimo se što ćemo vas ugostiti za nezaboravan boravak na Korčuli!`,
+    Lokacija je savršena – apartman se nalazi u mirnoj ulici, a svega je nekoliko minuta hoda udaljen od starogradskih zidina Korčule. U trenu ste u srcu grada, gdje vas čekaju kamene uličice, povijesne znamenitosti i restorani uz more. U blizini su i riva, tržnica te trajektna luka. Iako je smješten tako blizu centra, apartman nudi mirno utočište nakon dana istraživanja.
+
+    Bilo da dolazite u dvoje na romantičan odmor ili s obitelji na ljetovanje, u Apartmanu Sunce ćete se osjećati kao kod kuće. To je idealan spoj udobnosti, šarma i odlične lokacije – veselimo se što ćemo vas ugostiti za nezaboravan boravak na Korčuli!`,
     images: [
       "/images/apartments/sun/living1.webp",
       "/images/apartments/sun/balcony1.webp",

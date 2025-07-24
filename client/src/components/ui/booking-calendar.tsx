@@ -198,6 +198,10 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
       // No dates selected yet, or both already selected (start fresh)
       setSelectedStartDate(date);
       setSelectedEndDate(null);
+
+      setHoverDate(null);
+      setStayLimits(null);
+      setPriceSummary(null);
       
       // Notify parent component of date change
       if (onDatesChange) {
@@ -429,7 +433,7 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
             priceClass = 'text-orange-400';
           } else if (isStart) {
             // Start date styling with rounded left
-            bgColorClass = 'bg-primary border-2 border-primary';
+            bgColorClass = 'bg-primary border-2 border-primary rounded-full';
             priceClass = 'text-white font-bold';
             positionClass = selectedEndDate ? 'rounded-l-lg rounded-r-none border-r-0' : '';
           } else if (isEnd) {
@@ -439,7 +443,7 @@ const BookingCalendar = ({ bookings, apartment, initialStartDate, initialEndDate
             positionClass = 'rounded-r-lg rounded-l-none border-l-0';
           } else if (inRange) {
             // Make the in-between days clearly visible with a connected appearance
-            bgColorClass = 'bg-blue-100 border-t-2 border-b-2 border-blue-300';
+            bgColorClass = 'bg-blue-100 border-t-2 border-b-2 border-blue-300 rounded-full';
             priceClass = 'text-blue-800';
             positionClass = 'border-l-0 border-r-0'; // No side borders for connected effect
           }

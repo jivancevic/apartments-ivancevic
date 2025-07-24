@@ -160,6 +160,10 @@ const hrTranslation = {
   "calendar.days.fri": "Pe",
   "calendar.days.sat": "Su",
   "calendar.days.sun": "Ne",
+  "seasons.off": "Van sezone",
+  "seasons.low": "Niska sezona",
+  "seasons.high": "Visoka sezona",
+  "seasons.peak": "Špica sezone",
 
   // About Page
   "about.title": "O nama",

@@ -15,8 +15,19 @@ interface InquiryData {
   message?: string | null;
 }
 
-// Initialize Resend with API key
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend with API key (lazy initialization)
+let resend: Resend | null = null;
+
+const getResend = (): Resend => {
+  if (!resend) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY environment variable is required to send emails');
+    }
+    resend = new Resend(apiKey);
+  }
+  return resend;
+};
 
 // Constants for email configuration
 const OWNER_EMAIL = 'info@apartmentsivancevic.com';
@@ -38,6 +49,12 @@ export async function sendOwnerNotification(
   apartment?: Apartment,
 ): Promise<boolean> {
   try {
+    // Check if email service is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.log('⚠️  Email not sent: RESEND_API_KEY not configured');
+      console.log('📧 Would have sent email to owner about inquiry from:', inquiry.name);
+      return false;
+    }
     // Create email content
     const subject = `New Inquiry: ${inquiry.name} (${apartment ? `${apartment.nameEn}, ` : ''}${formatDate(inquiry.checkIn)} - ${formatDate(inquiry.checkOut)})`;
     
@@ -54,7 +71,7 @@ export async function sendOwnerNotification(
     `;
     
     // Send email using Resend
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResend().emails.send({
       from: `${BRAND_NAME} <${FROM_EMAIL}>`,
       to: OWNER_EMAIL,
       subject,
@@ -83,6 +100,12 @@ export async function sendCustomerConfirmation(
   apartment?: Apartment,
 ): Promise<boolean> {
   try {
+    // Check if email service is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.log('⚠️  Email not sent: RESEND_API_KEY not configured');
+      console.log('📧 Would have sent confirmation email to:', inquiry.email);
+      return false;
+    }
     // Create email content
     const subject = `Your Inquiry at ${BRAND_NAME} - Confirmation`;
     
@@ -114,7 +137,7 @@ export async function sendCustomerConfirmation(
     `;
     
     // Send email using Resend
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResend().emails.send({
       from: `${BRAND_NAME} <${FROM_EMAIL}>`,
       to: inquiry.email,
       subject,

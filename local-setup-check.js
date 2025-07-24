@@ -36,38 +36,32 @@ if (existsSync('.env')) {
     const hasDatabase = envContent.includes('DATABASE_URL=');
     const hasResend = envContent.includes('RESEND_API_KEY=');
     
+    // DATABASE_URL not needed for this app
     checks.push({ 
       name: 'DATABASE_URL', 
-      status: hasDatabase ? '✅' : '❌', 
-      details: hasDatabase ? 'Set' : 'Missing from .env' 
+      status: '✅', 
+      details: 'Not needed (in-memory storage)' 
     });
     
     checks.push({ 
       name: 'RESEND_API_KEY', 
-      status: hasResend ? '✅' : '❌', 
-      details: hasResend ? 'Set' : 'Missing from .env' 
+      status: hasResend ? '✅' : '⚠️', 
+      details: hasResend ? 'Set' : 'Optional - emails will show as console logs' 
     });
   } catch (error) {
     checks.push({ name: '.env parsing', status: '❌', details: 'Cannot read .env file' });
   }
 } else {
-  checks.push({ name: '.env file', status: '❌', details: 'Missing (copy from .env.example)' });
+  checks.push({ name: '.env file', status: '⚠️', details: 'Optional - only needed for email functionality' });
+  checks.push({ 
+    name: 'RESEND_API_KEY', 
+    status: '⚠️', 
+    details: 'Optional - emails will show as console logs' 
+  });
 }
 
-// Check PostgreSQL
-try {
-  execSync('which psql', { stdio: 'ignore' });
-  checks.push({ name: 'PostgreSQL', status: '✅', details: 'Installed' });
-  
-  try {
-    execSync('pg_isready', { stdio: 'ignore' });
-    checks.push({ name: 'PostgreSQL Service', status: '✅', details: 'Running' });
-  } catch (error) {
-    checks.push({ name: 'PostgreSQL Service', status: '❌', details: 'Not running (try: brew services start postgresql@16)' });
-  }
-} catch (error) {
-  checks.push({ name: 'PostgreSQL', status: '❌', details: 'Not installed (try: brew install postgresql@16)' });
-}
+// PostgreSQL not needed - app uses in-memory storage
+checks.push({ name: 'Database', status: '✅', details: 'In-memory storage (no setup needed)' });
 
 // Check if node_modules exists
 if (existsSync('node_modules')) {

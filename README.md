@@ -74,13 +74,15 @@ The application will be available at:
 - Full Application: http://localhost:5000 (both frontend and API)
 - Backend API only: http://localhost:5000/api/*
 
-## Required Environment Variables
+## Environment Variables
 
 | Variable | Description | Required | Example |
 |----------|-------------|----------|---------|
-| `DATABASE_URL` | PostgreSQL connection string | Yes | `postgresql://user:pass@localhost:5432/apartments_db` |
-| `RESEND_API_KEY` | Email service API key | Yes | `re_xxxxxxxxx` |
+| `RESEND_API_KEY` | Email service API key | Optional* | `re_xxxxxxxxx` |
 | `NODE_ENV` | Environment mode | No | `development` |
+| `PORT` | Custom port number | No | `3001` |
+
+**\*Note**: `RESEND_API_KEY` is only needed if you want to test email functionality. The app runs fine without it - emails just won't be sent (you'll see console logs instead).
 
 ## Getting API Keys
 

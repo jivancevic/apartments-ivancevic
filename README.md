@@ -35,9 +35,14 @@ createdb apartments_db
 
 ### 3. Environment Configuration
 
-Copy the example environment file:
+For **local development only**, copy the example environment file:
 ```bash
 cp .env.example .env
+```
+
+Then install dotenv for local development:
+```bash
+npm install dotenv
 ```
 
 Edit `.env` file with your local settings:

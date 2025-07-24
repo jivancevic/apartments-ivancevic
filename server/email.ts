@@ -2,6 +2,9 @@ import { Resend } from 'resend';
 import { Inquiry, Apartment } from '../shared/schema';
 import { format } from 'date-fns';
 
+import dotenv from "dotenv";
+dotenv.config();
+
 // Define InquiryData interface to match the inquiry submission data
 interface InquiryData {
   name: string;

@@ -62,12 +62,11 @@ app.use((req, res, next) => {
   // Use PORT from environment or default to 5000
   // For local development, you can set PORT=3001 in .env if 5000 is busy
   const port = process.env.PORT ? parseInt(process.env.PORT) : 5000;
-  
-  // For macOS compatibility, use different host settings
-  const isMac = process.platform === 'darwin';
-  const host = isMac ? '127.0.0.1' : '0.0.0.0';
-  
-  server.listen(port, host, () => {
-    log(`serving on http://${host}:${port}`);
+  server.listen({
+    port,
+    host: "0.0.0.0",
+    reusePort: true,
+  }, () => {
+    log(`serving on port ${port}`);
   });
 })();

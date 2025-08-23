@@ -3,27 +3,41 @@ import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { Bed, Wifi, Wind, Tv, Mountain, Car, Palmtree, Users, Mail, Ban, ParkingSquare } from "lucide-react";
+import {
+  Bed,
+  Wifi,
+  Wind,
+  Tv,
+  Mountain,
+  Car,
+  Palmtree,
+  Users,
+  Mail,
+  Ban,
+  ParkingSquare,
+} from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import { calculateStayPrice } from "@/lib/pricing";
+import { calculateStayPrice, type PriceSummary } from "@/lib/pricing";
 import { Apartment, Booking } from "@/types";
 import { getQueryFn } from "@/lib/queryClient";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+
 // Mapping of apartment IDs to slugs
 const APARTMENT_SLUGS: Record<number, string> = {
-  1: 'magical-oasis',
-  2: 'saint-roko',
-  3: 'ismaelli',
-  4: 'lavander',
-  5: 'sun',
-  6: 'sea',
-  7: 'beach',
-  8: 'nika',
-  9: 'lara'
+  1: "magical-oasis",
+  2: "saint-roko",
+  3: "ismaelli",
+  4: "lavander",
+  5: "sun",
+  6: "sea",
+  7: "beach",
+  8: "nika",
+  9: "lara",
 };
 
 // Get apartment slug from ID
@@ -42,51 +56,57 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
   const currentLanguage = i18n.language;
   // For redirecting to contact page with prefilled info - moved to top level
   const [, setLocation] = useLocation();
-  
+
   const [filteredApartments, setFilteredApartments] = useState<Apartment[]>([]);
-  
+  const [priceSummaries, setPriceSummaries] = useState<
+    Record<number, PriceSummary>
+  >({});
+
   // Control minimum loading time with these states
   const [controlledLoading, setControlledLoading] = useState(true);
   const loadingTimerRef = useRef<NodeJS.Timeout | null>(null);
   const searchStartTimeRef = useRef<number>(Date.now());
 
   // Fetch all apartments
-  const { data: apartments, isLoading: isLoadingApartments } = useQuery({
+  const { data: apartments, isLoading: isLoadingApartments } = useQuery<
+    Apartment[] | null
+  >({
     queryKey: ["/api/apartments"],
-    queryFn: getQueryFn({ on401: "returnNull" })
+    queryFn: getQueryFn({ on401: "returnNull" }),
   });
 
   // Fetch all bookings (across all apartments for simplicity)
   const fetchAllBookings = async () => {
     if (!apartments || !Array.isArray(apartments)) return [];
-    
+
     // Record search start time when we begin fetching bookings
     searchStartTimeRef.current = Date.now();
-    
-    const bookingsPromises = apartments.map((apartment: Apartment) => 
-      fetch(`/api/apartments/${apartment.id}/bookings`).then(res => res.json())
+
+    const bookingsPromises = apartments.map((apartment: Apartment) =>
+      fetch(`${API_BASE_URL}/api/apartments/${apartment.id}/bookings`, {
+        credentials: "include",
+      }).then((res) => res.json())
     );
-    
-    const icalBookingsPromises = apartments.map((apartment: Apartment) => 
-      fetch(`/api/apartments/${apartment.id}/ical-bookings`).then(res => res.json())
+
+    const icalBookingsPromises = apartments.map((apartment: Apartment) =>
+      fetch(`${API_BASE_URL}/api/apartments/${apartment.id}/ical-bookings`, {
+        credentials: "include",
+      }).then((res) => res.json())
     );
-    
+
     const [bookings, icalBookings] = await Promise.all([
       Promise.all(bookingsPromises),
-      Promise.all(icalBookingsPromises)
+      Promise.all(icalBookingsPromises),
     ]);
-    
+
     // Combine all bookings and flatten the array
-    return [
-      ...bookings.flat(), 
-      ...icalBookings.flat()
-    ];
+    return [...bookings.flat(), ...icalBookings.flat()];
   };
 
   const { data: allBookings, isLoading: isLoadingBookings } = useQuery({
     queryKey: ["allBookings"],
     queryFn: fetchAllBookings,
-    enabled: !!apartments
+    enabled: !!apartments,
   });
 
   // Effect to clean up timer when component unmounts
@@ -97,7 +117,7 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
       }
     };
   }, []);
-  
+
   // Reset controlled loading state when search parameters change
   useEffect(() => {
     // Always show loading when parameters change
@@ -105,20 +125,20 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
     // Restart the search timer
     searchStartTimeRef.current = Date.now();
   }, [checkIn, checkOut, guests]);
-  
+
   // Handle the controlled loading state based on query status
   useEffect(() => {
     // If we're not loading data anymore, check the minimum time requirement
     if (!isLoadingApartments && !isLoadingBookings && controlledLoading) {
       const elapsedTime = Date.now() - searchStartTimeRef.current;
       const remainingTime = Math.max(0, 500 - elapsedTime);
-      
+
       if (remainingTime > 0) {
         // If we need to show loading state longer, set a timer
         if (loadingTimerRef.current) {
           clearTimeout(loadingTimerRef.current);
         }
-        
+
         loadingTimerRef.current = setTimeout(() => {
           setControlledLoading(false);
         }, remainingTime);
@@ -129,8 +149,37 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
     }
   }, [isLoadingApartments, isLoadingBookings, controlledLoading]);
 
+  // Compute prices for each apartment when list or dates change
   useEffect(() => {
-    if (!apartments || !Array.isArray(apartments) || !allBookings || !Array.isArray(allBookings)) {
+    let cancelled = false;
+    async function computePrices() {
+      if (!apartments || !Array.isArray(apartments)) return;
+      const entries: Array<[number, PriceSummary]> = [];
+      for (const apt of apartments as Apartment[]) {
+        try {
+          const summary = await calculateStayPrice(apt, checkIn, checkOut);
+          entries.push([apt.id, summary]);
+        } catch (_e) {
+          // ignore pricing errors per apartment
+        }
+      }
+      if (!cancelled) {
+        setPriceSummaries(Object.fromEntries(entries));
+      }
+    }
+    computePrices();
+    return () => {
+      cancelled = true;
+    };
+  }, [apartments, checkIn, checkOut]);
+
+  useEffect(() => {
+    if (
+      !apartments ||
+      !Array.isArray(apartments) ||
+      !allBookings ||
+      !Array.isArray(allBookings)
+    ) {
       setFilteredApartments([]);
       return;
     }
@@ -149,35 +198,40 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
       // Check for booking conflicts
       const isAvailable = !apartmentBookings.some((booking: Booking) => {
         // Ensure we have Date objects for comparison
-        const bookingStart = booking.startDate instanceof Date 
-          ? booking.startDate 
-          : new Date(booking.startDate);
-        
-        const bookingEnd = booking.endDate instanceof Date 
-          ? booking.endDate 
-          : new Date(booking.endDate);
-          
+        const bookingStart =
+          booking.startDate instanceof Date
+            ? booking.startDate
+            : new Date(booking.startDate);
+
+        const bookingEnd =
+          booking.endDate instanceof Date
+            ? booking.endDate
+            : new Date(booking.endDate);
+
         // Reset hours to compare dates only, not times
         const normalizedCheckIn = new Date(checkIn);
         normalizedCheckIn.setHours(0, 0, 0, 0);
-        
+
         const normalizedCheckOut = new Date(checkOut);
         normalizedCheckOut.setHours(0, 0, 0, 0);
-        
+
         const normalizedBookingStart = new Date(bookingStart);
         normalizedBookingStart.setHours(0, 0, 0, 0);
-        
+
         const normalizedBookingEnd = new Date(bookingEnd);
         normalizedBookingEnd.setHours(0, 0, 0, 0);
-        
+
         // Check if there's an overlap between the booking and the selected dates
         return (
           // Check-in during a booking
-          (normalizedCheckIn >= normalizedBookingStart && normalizedCheckIn < normalizedBookingEnd) || 
+          (normalizedCheckIn >= normalizedBookingStart &&
+            normalizedCheckIn < normalizedBookingEnd) ||
           // Check-out during a booking
-          (normalizedCheckOut > normalizedBookingStart && normalizedCheckOut <= normalizedBookingEnd) || 
+          (normalizedCheckOut > normalizedBookingStart &&
+            normalizedCheckOut <= normalizedBookingEnd) ||
           // Selected dates completely contain a booking
-          (normalizedCheckIn <= normalizedBookingStart && normalizedCheckOut >= normalizedBookingEnd)
+          (normalizedCheckIn <= normalizedBookingStart &&
+            normalizedCheckOut >= normalizedBookingEnd)
         );
       });
 
@@ -226,7 +280,7 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
       <h2 className="text-2xl font-bold">
         {t("search.resultsFound", { count: filteredApartments.length })}
       </h2>
-      
+
       <div className="space-y-4">
         {filteredApartments.map((apartment) => {
           // Calculate price for the stay
@@ -238,26 +292,30 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
             priceMultiplier: apartment.priceMultiplier || "1.0",
             cleaningFee: apartment.cleaningFee || 40,
             maxGuests: apartment.maxGuests || 4,
-            icalUrls: apartment.icalUrls || null
+            icalUrls: apartment.icalUrls || null,
           };
-          const priceSummary = calculateStayPrice(apartmentWithDefaults, checkIn, checkOut);
-          const averageNightlyPrice = priceSummary.averagePerNight;
-          
-          const apartmentName = currentLanguage === "hr" 
-            ? apartment.nameHr 
-            : apartment.nameEn;
-          
-          const apartmentDescription = currentLanguage === "hr"
-            ? apartment.descriptionHr
-            : apartment.descriptionEn;
-          
+          const priceSummary = priceSummaries[apartment.id];
+          const averageNightlyPrice = priceSummary?.averagePerNight ?? 0;
+
+          const apartmentName =
+            currentLanguage === "hr" ? apartment.nameHr : apartment.nameEn;
+
+          const apartmentDescription =
+            currentLanguage === "hr"
+              ? apartment.descriptionHr
+              : apartment.descriptionEn;
+
           // Get first image as main image or use the mainImage if specified
-          const mainImage = apartment.mainImage || (apartment.images && apartment.images.length > 0 ? apartment.images[0] : undefined);
-          
+          const mainImage =
+            apartment.mainImage ||
+            (apartment.images && apartment.images.length > 0
+              ? apartment.images[0]
+              : undefined);
+
           // Format dates for clean URL parameters (YYYY-MM-DD)
-          const formattedCheckIn = format(checkIn, 'yyyy-MM-dd');
-          const formattedCheckOut = format(checkOut, 'yyyy-MM-dd');
-          
+          const formattedCheckIn = format(checkIn, "yyyy-MM-dd");
+          const formattedCheckOut = format(checkOut, "yyyy-MM-dd");
+
           // Create URL for contact page with prefilled data - using clean date format
           const contactSearchParams = new URLSearchParams({
             apartmentId: apartment.id.toString(),
@@ -265,31 +323,33 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
             checkOut: formattedCheckOut,
           });
           const contactUrl = `/contact?${contactSearchParams.toString()}`;
-          
+
           // Create URL for apartment page with dates - using clean date format
           const apartmentSearchParams = new URLSearchParams({
             checkIn: formattedCheckIn,
             checkOut: formattedCheckOut,
           });
           const apartmentUrl = `/apartments?${apartmentSearchParams.toString()}#${getApartmentSlug(apartment.id)}`;
-          
+
           return (
             <Card key={apartment.id} className="overflow-hidden">
               <div className="flex flex-col md:flex-row">
                 <div className="h-48 md:h-auto md:w-1/3 overflow-hidden">
                   {mainImage ? (
-                    <img 
-                      src={mainImage} 
-                      alt={apartmentName} 
+                    <img
+                      src={mainImage}
+                      alt={apartmentName}
                       className="w-full h-full object-cover"
                     />
                   ) : (
                     <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                      <span className="text-gray-500">{t("common.noImage")}</span>
+                      <span className="text-gray-500">
+                        {t("common.noImage")}
+                      </span>
                     </div>
                   )}
                 </div>
-                
+
                 <CardContent className="flex-1 p-4">
                   <div className="mb-4">
                     <h3 className="text-xl font-bold mb-1">{apartmentName}</h3>
@@ -297,83 +357,115 @@ const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
                       {apartmentDescription}
                     </p>
                   </div>
-                  
+
                   <div className="flex flex-wrap gap-2 mb-4">
                     {apartment.maxGuests && (
-                      <Badge variant="outline" className="flex items-center gap-1">
+                      <Badge
+                        variant="outline"
+                        className="flex items-center gap-1"
+                      >
                         <Users className="h-3 w-3" />
-                        {t("apartment.maxGuests", { count: apartment.maxGuests })}
+                        {t("apartment.maxGuests", {
+                          count: apartment.maxGuests,
+                        })}
                       </Badge>
                     )}
                     {apartment.hasWifi && (
-                      <Badge variant="outline" className="flex items-center gap-1">
+                      <Badge
+                        variant="outline"
+                        className="flex items-center gap-1"
+                      >
                         <Wifi className="h-3 w-3" />
                         {t("amenities.wifi")}
                       </Badge>
                     )}
                     {apartment.hasAC && (
-                      <Badge variant="outline" className="flex items-center gap-1">
+                      <Badge
+                        variant="outline"
+                        className="flex items-center gap-1"
+                      >
                         <Wind className="h-3 w-3" />
                         {t("amenities.ac")}
                       </Badge>
                     )}
                     {apartment.hasTV && (
-                      <Badge variant="outline" className="flex items-center gap-1">
+                      <Badge
+                        variant="outline"
+                        className="flex items-center gap-1"
+                      >
                         <Tv className="h-3 w-3" />
                         {t("amenities.tv")}
                       </Badge>
                     )}
                     {apartment.hasSeaView && (
-                      <Badge variant="outline" className="flex items-center gap-1">
+                      <Badge
+                        variant="outline"
+                        className="flex items-center gap-1"
+                      >
                         <Mountain className="h-3 w-3" />
                         {t("amenities.seaView")}
                       </Badge>
                     )}
                     {apartment.parkingType === "free" && (
-                      <Badge variant="outline" className="flex items-center gap-1">
+                      <Badge
+                        variant="outline"
+                        className="flex items-center gap-1"
+                      >
                         <Car className="h-3 w-3" />
                         {t("amenities.freeParking", "Free parking")}
                       </Badge>
                     )}
                     {apartment.parkingType === "private" && (
-                      <Badge variant="outline" className="flex items-center gap-1">
+                      <Badge
+                        variant="outline"
+                        className="flex items-center gap-1"
+                      >
                         <ParkingSquare className="h-3 w-3" />
                         {t("amenities.privateParking", "Private parking")}
                       </Badge>
                     )}
                     {apartment.hasGarden && (
-                      <Badge variant="outline" className="flex items-center gap-1">
+                      <Badge
+                        variant="outline"
+                        className="flex items-center gap-1"
+                      >
                         <Palmtree className="h-3 w-3" />
                         {t("amenities.garden")}
                       </Badge>
                     )}
                   </div>
-                  
+
                   <div className="flex flex-col md:flex-row items-stretch md:items-end justify-between mt-auto">
                     <div className="text-sm mb-3 md:mb-0">
                       <div className="text-gray-600">
-                        {format(checkIn, "MMM d")} – {format(checkOut, "MMM d, yyyy")}
+                        {format(checkIn, "MMM d")} –{" "}
+                        {format(checkOut, "MMM d, yyyy")}
                         <span className="mx-1">•</span>
-                        {t("apartments.nights", { count: priceSummary.totalNights })}
+                        {t("apartments.nights", {
+                          count: priceSummary?.totalNights ?? 0,
+                        })}
                       </div>
                       <div className="font-bold text-lg">
-                        €{Math.round(averageNightlyPrice)} <span className="text-xs font-normal">{t("search.perNight")}</span>
+                        €{Math.round(averageNightlyPrice)}{" "}
+                        <span className="text-xs font-normal">
+                          {t("search.perNight")}
+                        </span>
                       </div>
                       <div className="text-xs text-gray-500">
-                        €{priceSummary.total} {t("search.totalPrice")}
+                        €{priceSummary?.total ?? 0} {t("search.totalPrice")}
                       </div>
                     </div>
-                    
+
                     <div className="flex flex-wrap gap-2">
-                      <Link 
+                      <Link
                         to={contactUrl}
                         className="flex items-center gap-1 bg-white border border-primary text-primary px-3 py-2 rounded-md hover:bg-gray-50 transition"
                       >
                         <Mail className="h-4 w-4" />
                         {t("search.sendInquiry")}
                       </Link>
-                      
-                      <Link 
+
+                      <Link
                         to={apartmentUrl}
                         className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition"
                       >

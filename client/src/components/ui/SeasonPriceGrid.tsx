@@ -1,3 +1,4 @@
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { parseDate, PricePeriod } from "@/lib/pricing";
@@ -7,14 +8,34 @@ interface SeasonPriceGridProps {
 }
 
 const SEASONS = [
-  { key: "seasons.off",  date: "2025-11-01", bg: "bg-blue-50",  text: "text-blue-600"  },
-  { key: "seasons.low",  date: "2025-05-15", bg: "bg-green-50", text: "text-green-600" },
-  { key: "seasons.high", date: "2025-07-01", bg: "bg-yellow-50", text: "text-amber-600" },
-  { key: "seasons.peak", date: "2025-08-01", bg: "bg-orange-50", text: "text-orange-600" }
+  {
+    key: "seasons.off",
+    date: "2025-11-01",
+    bg: "bg-blue-50",
+    text: "text-blue-600",
+  },
+  {
+    key: "seasons.low",
+    date: "2025-05-15",
+    bg: "bg-green-50",
+    text: "text-green-600",
+  },
+  {
+    key: "seasons.high",
+    date: "2025-07-01",
+    bg: "bg-yellow-50",
+    text: "text-amber-600",
+  },
+  {
+    key: "seasons.peak",
+    date: "2025-08-01",
+    bg: "bg-orange-50",
+    text: "text-orange-600",
+  },
 ];
 
 const SeasonPriceGrid = ({ apartmentName }: SeasonPriceGridProps) => {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
   /* 1️⃣ state for the pricing periods of the *current* apartment */
   const [pricePeriods, setPricePeriods] = useState<PricePeriod[] | null>(null); // null = loading
 
@@ -24,7 +45,9 @@ const SeasonPriceGrid = ({ apartmentName }: SeasonPriceGridProps) => {
 
     async function fetchPricing() {
       try {
-        const res = await fetch("/api/pricing-data");
+        const res = await fetch(`${API_BASE_URL}/api/pricing-data`, {
+          credentials: "include",
+        });
         if (!res.ok) throw new Error("Network error");
         const data = await res.json();
 
@@ -40,7 +63,9 @@ const SeasonPriceGrid = ({ apartmentName }: SeasonPriceGridProps) => {
     }
 
     fetchPricing();
-    return () => { cancelled = true; }; // guard against late setState
+    return () => {
+      cancelled = true;
+    }; // guard against late setState
   }, [apartmentName]);
 
   /* still loading? */

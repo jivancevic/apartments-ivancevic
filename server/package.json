@@ -8,8 +8,8 @@
     "dev": "NODE_ENV=development tsx src/index.ts",
     "build": "esbuild src/index.ts --platform=node --packages=external --bundle --format=esm --outfile=dist/server.js",
     "start": "NODE_ENV=production node dist/server.js",
-    "start:pm2": "pm2 startOrReload ecosystem.config.js",
-    "start:pm2:runtime": "pm2-runtime ecosystem.config.js"
+    "start:pm2": "pm2 startOrReload ecosystem.config.cjs",
+    "start:pm2:runtime": "pm2-runtime ecosystem.config.cjs"
   },
   "dependencies": {
     "pm2": "^5.4.2",

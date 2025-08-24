@@ -13,6 +13,8 @@ import apiRouter from "./api/routes";
 
 const app = express();
 app.set("trust proxy", 1);
+const isProduction =
+  (process.env.NODE_ENV || "").toLowerCase() === "production";
 
 // CORS (env-driven)
 const originsRaw = (
@@ -53,8 +55,17 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      sameSite: "none",
-      secure: (process.env.COOKIE_SECURE || "true").toLowerCase() === "true",
+      sameSite: (() => {
+        const value = (process.env.COOKIE_SAMESITE || "None").toLowerCase();
+        if (value === "lax" || value === "strict" || value === "none")
+          return value as "lax" | "strict" | "none";
+        return "none";
+      })(),
+      secure:
+        (
+          (process.env.COOKIE_SECURE ??
+            (isProduction ? "true" : "false")) as string
+        ).toLowerCase() === "true",
       domain: process.env.COOKIE_DOMAIN || undefined,
       maxAge: 1000 * 60 * 60 * 24 * 30,
     },
@@ -82,6 +93,12 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 
 const port = process.env.PORT ? parseInt(process.env.PORT) : 8080;
 const host = process.env.NODE_ENV === "production" ? "0.0.0.0" : undefined;
-app.listen(port, host, () => {
-  console.log(`serving on ${host ?? "localhost"}:${port}`);
-});
+if (host) {
+  app.listen(port, host, () => {
+    console.log(`serving on ${host}:${port}`);
+  });
+} else {
+  app.listen(port, () => {
+    console.log(`serving on localhost:${port}`);
+  });
+}

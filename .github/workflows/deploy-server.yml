@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install & Build server
         working-directory: server
@@ -25,28 +25,52 @@ jobs:
           npm ci
           npm run build
 
+      - name: Prepare SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DO_SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_do
+          chmod 600 ~/.ssh/id_do
+          ssh-keyscan -T 15 -H ${{ vars.DO_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Debug SSH connectivity
+        run: |
+          ssh -i ~/.ssh/id_do -p 22 \
+          -o BatchMode=yes -o StrictHostKeyChecking=yes \
+          ${{ vars.DO_USER }}@${{ vars.DO_HOST }} \
+          'echo "SSH OK on $(hostname)"; uname -a'
+
+
       - name: Rsync to droplet
-        uses: burnett01/rsync-deployments@6.0.0
-        with:
-          switches: -avzr --delete --exclude 'node_modules'
-          path: server/
-          remote_path: /root/projects/apartments-ivancevic/server
-          remote_host: ${{ secrets.DO_HOST }}
-          remote_user: ${{ secrets.DO_USER }}
-          remote_key: ${{ secrets.DO_SSH_PRIVATE_KEY }}
+        run: |
+          rsync -avzr --delete \
+            --exclude 'node_modules' \
+            --exclude '.env' \
+            --exclude '.env.*' \
+            --exclude '.pm2' \
+            --exclude 'logs' \
+            --exclude 'logs/*' \
+            -e "ssh -i ~/.ssh/id_do -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
+            server/ \
+            ${{ vars.DO_USER }}@${{ vars.DO_HOST }}:/root/projects/apartments-ivancevic/server
 
       - name: Restart PM2
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.DO_HOST }}
-          username: ${{ secrets.DO_USER }}
+          host: ${{ vars.DO_HOST }}
+          username: ${{ vars.DO_USER }}
           key: ${{ secrets.DO_SSH_PRIVATE_KEY }}
           script: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
             cd /root/projects/apartments-ivancevic/server
             npm ci --omit=dev
             export PM2_HOME="$PWD/.pm2"
+            echo "Stopping and deleting old PM2 process..."
+            pm2 delete apartments-ivancevic-server || true
+            echo "Clearing old PM2 metadata..."
+            rm -rf .pm2
             mkdir -p "$PM2_HOME"
-            echo "Reloading PM2..."
-            pm2 startOrReload ecosystem.config.cjs --env production --update-env
+            echo "Starting new PM2 process..."
+            pm2 start ecosystem.config.cjs --env production
             pm2 save
             echo "Deployment successful!"

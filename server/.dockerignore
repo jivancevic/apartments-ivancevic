@@ -4,6 +4,7 @@ Dockerfile
 .dockerignore
 dist
 .env
+.env.*
 client
 shared
 **/.DS_Store

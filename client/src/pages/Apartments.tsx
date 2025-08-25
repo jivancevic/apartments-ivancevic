@@ -5,13 +5,20 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import { Apartment } from "@/types";
+import { useRoute } from "wouter";
 
 const Apartments = () => {
   const { t } = useTranslation();
-  
+  const [match, params] = useRoute("/apartments/:slug");
+  const activeSlug = match ? params?.slug : undefined;
+
   // Fetch apartments data
-  const { data: apartments, isLoading, error } = useQuery<Apartment[]>({
-    queryKey: ['/api/apartments'],
+  const {
+    data: apartments,
+    isLoading,
+    error,
+  } = useQuery<Apartment[]>({
+    queryKey: ["/api/apartments"],
   });
 
   return (
@@ -20,7 +27,7 @@ const Apartments = () => {
         <h2 className="font-heading font-bold text-3xl md:text-4xl text-center mb-8">
           {t("apartments.title")}
         </h2>
-        
+
         {isLoading && (
           <div className="space-y-4">
             <Skeleton className="h-8 w-full max-w-lg mx-auto" />
@@ -31,7 +38,7 @@ const Apartments = () => {
             </div>
           </div>
         )}
-        
+
         {error && (
           <Alert variant="destructive" className="max-w-lg mx-auto">
             <AlertCircle className="h-4 w-4" />
@@ -40,9 +47,9 @@ const Apartments = () => {
             </AlertDescription>
           </Alert>
         )}
-        
+
         {apartments && (
-          <ApartmentTabs apartments={apartments} />
+          <ApartmentTabs apartments={apartments} activeSlug={activeSlug} />
         )}
       </div>
     </section>

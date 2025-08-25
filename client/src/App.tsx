@@ -28,6 +28,7 @@ function Router() {
       <main className="flex-grow">
         <Switch>
           <Route path="/" component={Home} />
+          <Route path="/apartments/:slug" component={Apartments} />
           <Route path="/apartments" component={Apartments} />
           <Route path="/about" component={About} />
           <Route path="/visit/:slug" component={Visit} />

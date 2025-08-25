@@ -1,26 +1,29 @@
-import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import VisitCards from './VisitCards';
-import { Location } from '../../types';
-import { categories, CATEGORY_TO_TYPE_MAP } from '../../lib/categories';
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import VisitCards from "./VisitCards";
+import { Location } from "../../types";
+import { categories, CATEGORY_TO_TYPE_MAP } from "../../lib/categories";
+import { useLocation } from "wouter";
 
 // Mapping of category slugs to their keys
 const CATEGORY_SLUGS: Record<string, string> = {
-  'attractions-old-town': 'attraction-old-town',
-  'attractions-island': 'attraction-island', 
-  'activities': 'activity',
-  'excursions': 'excursion',
-  'restaurants': 'restaurant'
+  "attractions-old-town": "attraction-old-town",
+  "attractions-island": "attraction-island",
+  activities: "activity",
+  excursions: "excursion",
+  restaurants: "restaurant",
 };
 
 interface VisitTabsProps {
   locations: Location[];
+  activeSlug?: string;
 }
 
-export function VisitTabs({ locations }: VisitTabsProps) {
+export function VisitTabs({ locations, activeSlug }: VisitTabsProps) {
   const { t, i18n } = useTranslation();
-  const [activeTab, setActiveTab] = useState('attraction-old-town');
-  const isEnglish = i18n.language === 'en';
+  const [activeTab, setActiveTab] = useState("attraction-old-town");
+  const [, navigate] = useLocation();
+  const isEnglish = i18n.language === "en";
 
   // Group locations by type
   const locationsByType = locations.reduce((acc, location) => {
@@ -34,53 +37,50 @@ export function VisitTabs({ locations }: VisitTabsProps) {
 
   // Available categories in order
   const categories_list = [
-    { key: 'attraction-old-town', slug: 'attractions-old-town', nameEn: categories.attractionsOldTown.en, nameHr: categories.attractionsOldTown.hr },
-    { key: 'attraction-island', slug: 'attractions-island', nameEn: categories.attractionsIsland.en, nameHr: categories.attractionsIsland.hr },
-    { key: 'activity', slug: 'activities', nameEn: categories.activities.en, nameHr: categories.activities.hr },
-    { key: 'excursion', slug: 'excursions', nameEn: categories.excursions.en, nameHr: categories.excursions.hr },
-    { key: 'restaurant', slug: 'restaurants', nameEn: categories.restaurants.en, nameHr: categories.restaurants.hr }
+    {
+      key: "attraction-old-town",
+      slug: "attractions-old-town",
+      nameEn: categories.attractionsOldTown.en,
+      nameHr: categories.attractionsOldTown.hr,
+    },
+    {
+      key: "attraction-island",
+      slug: "attractions-island",
+      nameEn: categories.attractionsIsland.en,
+      nameHr: categories.attractionsIsland.hr,
+    },
+    {
+      key: "activity",
+      slug: "activities",
+      nameEn: categories.activities.en,
+      nameHr: categories.activities.hr,
+    },
+    {
+      key: "excursion",
+      slug: "excursions",
+      nameEn: categories.excursions.en,
+      nameHr: categories.excursions.hr,
+    },
+    {
+      key: "restaurant",
+      slug: "restaurants",
+      nameEn: categories.restaurants.en,
+      nameHr: categories.restaurants.hr,
+    },
   ];
 
-  // Handle URL hash changes for tab selection
+  // Sync from route slug when present
   useEffect(() => {
-    const handleHashChange = () => {
-      const currentUrl = window.location.href;
-      const hashMatch = currentUrl.match(/#([^?&]+)/);
-      const hash = hashMatch ? hashMatch[1] : '';
-      
-      // Check if hash matches a category slug
-      if (hash && CATEGORY_SLUGS[hash]) {
-        setActiveTab(CATEGORY_SLUGS[hash]);
-      }
-    };
-
-    // Handle hash on initial load
-    handleHashChange();
-    
-    // Listen for hash changes
-    window.addEventListener('hashchange', handleHashChange);
-    
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange);
-    };
-  }, []);
+    if (activeSlug && CATEGORY_SLUGS[activeSlug]) {
+      setActiveTab(CATEGORY_SLUGS[activeSlug]);
+    }
+  }, [activeSlug]);
 
   const handleTabClick = (categoryKey: string) => {
     setActiveTab(categoryKey);
-    
-    // Update URL hash - find slug by category key
-    const category = categories_list.find(cat => cat.key === categoryKey);
+    const category = categories_list.find((cat) => cat.key === categoryKey);
     const slug = category ? category.slug : categoryKey;
-    
-    // Preserve query parameters when changing the hash
-    const urlWithoutHash = window.location.href.split('#')[0];
-    
-    // Update the hash using history.replaceState to avoid page reload
-    window.history.replaceState(
-      null, 
-      '', 
-      `${urlWithoutHash}#${slug}`
-    );
+    navigate(`/visit/${slug}`);
   };
 
   return (
@@ -105,22 +105,24 @@ export function VisitTabs({ locations }: VisitTabsProps) {
           ))}
         </div>
       </div>
-      
-      {/* Tab Content */}
+
+      {/* Tab Content: render only active category to avoid preloading all images */}
       <div className="tab-content-container">
-        {categories_list.map((category) => (
-          <div
-            key={category.key}
-            className={activeTab === category.key ? "block" : "hidden"}
-          >
-            <h2 className="text-2xl font-semibold mb-6">
-              {isEnglish ? category.nameEn : category.nameHr}
-            </h2>
-            <VisitCards 
-              locations={locationsByType[category.key] || []} 
-            />
-          </div>
-        ))}
+        {(() => {
+          const activeCategory =
+            categories_list.find((c) => c.key === activeTab) ||
+            categories_list[0];
+          return (
+            <div key={activeCategory.key}>
+              <h2 className="text-2xl font-semibold mb-6">
+                {isEnglish ? activeCategory.nameEn : activeCategory.nameHr}
+              </h2>
+              <VisitCards
+                locations={locationsByType[activeCategory.key] || []}
+              />
+            </div>
+          );
+        })()}
       </div>
     </div>
   );

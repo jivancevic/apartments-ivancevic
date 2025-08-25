@@ -5,13 +5,20 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import { Location } from "@/types";
+import { useRoute } from "wouter";
 
 const Visit = () => {
   const { t } = useTranslation();
-  
+  const [match, params] = useRoute("/visit/:slug");
+  const activeSlug = match ? params?.slug : undefined;
+
   // Fetch locations data
-  const { data: locations, isLoading, error } = useQuery<Location[]>({
-    queryKey: ['/api/locations'],
+  const {
+    data: locations,
+    isLoading,
+    error,
+  } = useQuery<Location[]>({
+    queryKey: ["/api/locations"],
   });
 
   return (
@@ -20,7 +27,7 @@ const Visit = () => {
         <h2 className="font-heading font-bold text-3xl md:text-4xl text-center mb-8">
           {t("visit.title")}
         </h2>
-        
+
         {isLoading && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
             <Skeleton className="h-64 w-full" />
@@ -28,7 +35,7 @@ const Visit = () => {
             <Skeleton className="h-64 w-full" />
           </div>
         )}
-        
+
         {error && (
           <Alert variant="destructive" className="max-w-lg mx-auto mt-10">
             <AlertCircle className="h-4 w-4" />
@@ -37,9 +44,9 @@ const Visit = () => {
             </AlertDescription>
           </Alert>
         )}
-        
+
         {locations && locations.length > 0 && (
-          <VisitTabs locations={locations} />
+          <VisitTabs locations={locations} activeSlug={activeSlug} />
         )}
       </div>
     </section>

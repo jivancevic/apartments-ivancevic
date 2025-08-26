@@ -6,16 +6,14 @@ const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-primary text-white py-10">
+    <footer className="bg-primary text-white pt-10 pb-4">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-8 md:mb-0">
             <div className="font-heading font-bold text-2xl mb-4">
               {t("home.hero.welcome")}
             </div>
-            <p className="max-w-md">
-              {t("footer.description")}
-            </p>
+            <p className="max-w-md">{t("footer.description")}</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
@@ -75,15 +73,29 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-blue-400 text-center text-sm">
-          <p>{t("footer.copyright")}</p>
-          <div className="mt-2 flex justify-center space-x-4">
-            <Link href="/privacy-policy" className="hover:underline">
-              {t("footer.privacy", "Privacy Policy")}
-            </Link>
-            <Link href="/terms-of-service" className="hover:underline">
-              {t("footer.terms", "Terms of Service")}
-            </Link>
+        <div className="mt-8 pt-4 border-t border-blue-400 text-sm">
+          <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-3">
+            {/* Left on desktop, bottom on mobile */}
+            <div className="order-3 md:order-none text-center md:text-left md:justify-self-start">
+              <p>{t("footer.copyright")}</p>
+            </div>
+
+            {/* Center on both */}
+            <div className="order-2 md:order-none md:justify-self-center">
+              <div className="flex justify-center space-x-6">
+                <Link href="/privacy-policy" className="hover:underline">
+                  {t("footer.privacy", "Privacy Policy")}
+                </Link>
+                <Link href="/terms-of-service" className="hover:underline">
+                  {t("footer.terms", "Terms of Service")}
+                </Link>
+              </div>
+            </div>
+
+            {/* Right on desktop, top on mobile */}
+            <div className="order-1 md:order-none text-center md:text-right md:justify-self-end">
+              <p>Developed by: Josip Ivančević</p>
+            </div>
           </div>
         </div>
       </div>

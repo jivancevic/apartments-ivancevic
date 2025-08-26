@@ -69,7 +69,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
       </div>
       
       {/* Details */}
-      <div>
+      <div className="pt-4">
         <div className="flex items-center mb-1 text-amber-500">
           {Array.from({ length: getApartmentStars(apartment.id) }).map((_, index) => (
             <AmenityIcon key={index} icon="star" size={12} className="mr-0.5 text-current fill-current" />

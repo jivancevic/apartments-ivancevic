@@ -6,7 +6,10 @@ interface ApartmentGalleryProps {
   images?: string[];
 }
 
-const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryProps) => {
+const ApartmentGallery = ({
+  mainImage,
+  images: propImages,
+}: ApartmentGalleryProps) => {
   const [images, setImages] = useState<string[]>(propImages || []);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -15,12 +18,12 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
   const thumbnailsContainerRef = useRef<HTMLDivElement>(null);
   const thumbnailRefs = useRef<(HTMLDivElement | null)[]>([]);
   const galleryRef = useRef<HTMLDivElement>(null);
-  
+
   // Initialize thumbnailRefs with the correct length
   useEffect(() => {
     thumbnailRefs.current = Array(images.length).fill(null);
   }, [images.length]);
-  
+
   // Set images when propImages change
   useEffect(() => {
     if (propImages && propImages.length > 0) {
@@ -34,9 +37,9 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
     const selectedThumbnail = thumbnailRefs.current[currentImageIndex];
     if (selectedThumbnail && thumbnailsContainerRef.current) {
       selectedThumbnail.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center'
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
       });
     }
   }, [currentImageIndex]);
@@ -46,17 +49,17 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!showModal && galleryRef.current) {
         // Only handle keyboard events when the gallery is in focus/viewport
-        if (event.key === 'ArrowLeft') {
+        if (event.key === "ArrowLeft") {
           handlePrevious();
-        } else if (event.key === 'ArrowRight') {
+        } else if (event.key === "ArrowRight") {
           handleNext();
         }
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [showModal, currentImageIndex]);
 
@@ -65,52 +68,52 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
     if (showModal) {
       // Function to prevent default for arrow keys only
       const handleModalKeyDown = (event: KeyboardEvent) => {
-        if (event.key === 'Escape') {
+        if (event.key === "Escape") {
           setShowModal(false);
-        } else if (event.key === 'ArrowLeft') {
+        } else if (event.key === "ArrowLeft") {
           // Only prevent default for arrow keys
           event.preventDefault();
           handlePrevious();
-        } else if (event.key === 'ArrowRight') {
+        } else if (event.key === "ArrowRight") {
           // Only prevent default for arrow keys
           event.preventDefault();
           handleNext();
         }
       };
-      
-      // Add the keydown event listener 
-      window.addEventListener('keydown', handleModalKeyDown);
-      
+
+      // Add the keydown event listener
+      window.addEventListener("keydown", handleModalKeyDown);
+
       return () => {
         // Remove listener
-        window.removeEventListener('keydown', handleModalKeyDown);
+        window.removeEventListener("keydown", handleModalKeyDown);
       };
     }
   }, [showModal, currentImageIndex]);
-  
+
   // Create a modal overlay when the modal is shown
   useEffect(() => {
     if (showModal) {
       // Create a modal overlay using regular DOM
       // This ensures it appears over maps and calendars
-      const modalRoot = document.createElement('div');
-      modalRoot.id = 'gallery-modal-root';
-      modalRoot.style.position = 'fixed';
-      modalRoot.style.top = '0';
-      modalRoot.style.left = '0';
-      modalRoot.style.right = '0';
-      modalRoot.style.bottom = '0';
-      modalRoot.style.zIndex = '9998';
-      
+      const modalRoot = document.createElement("div");
+      modalRoot.id = "gallery-modal-root";
+      modalRoot.style.position = "fixed";
+      modalRoot.style.top = "0";
+      modalRoot.style.left = "0";
+      modalRoot.style.right = "0";
+      modalRoot.style.bottom = "0";
+      modalRoot.style.zIndex = "9998";
+
       // Use transparent background so we don't add another dark layer
-      modalRoot.style.background = 'transparent'; 
-      modalRoot.style.pointerEvents = 'none'; // Don't block clicks
-      
+      modalRoot.style.background = "transparent";
+      modalRoot.style.pointerEvents = "none"; // Don't block clicks
+
       document.body.appendChild(modalRoot);
-      
+
       return () => {
         // Clean up when component unmounts
-        const root = document.getElementById('gallery-modal-root');
+        const root = document.getElementById("gallery-modal-root");
         if (root && root.parentNode) {
           root.parentNode.removeChild(root);
         }
@@ -136,7 +139,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
       e.preventDefault();
       e.stopPropagation();
     }
-    setCurrentImageIndex((prevIndex) => 
+    setCurrentImageIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   };
@@ -146,7 +149,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
       e.preventDefault();
       e.stopPropagation();
     }
-    setCurrentImageIndex((prevIndex) => 
+    setCurrentImageIndex((prevIndex) =>
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
   };
@@ -155,7 +158,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
     setShowModal(true);
     // Add focus to the modal container to ensure keyboard events work properly
     window.setTimeout(() => {
-      const modalElement = document.querySelector('.gallery-modal');
+      const modalElement = document.querySelector(".gallery-modal");
       if (modalElement) {
         (modalElement as HTMLElement).focus();
       }
@@ -180,7 +183,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
       </div>
     );
   }
-  
+
   if (images.length === 0) {
     return (
       <div className="aspect-video bg-neutral mb-4 rounded-lg flex items-center justify-center">
@@ -190,7 +193,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
   }
 
   return (
-    <div ref={galleryRef} className="gallery-container pt-4 md:pt-6">
+    <div ref={galleryRef} className="gallery-container pt-4">
       {/* Main Image with Navigation Arrows */}
       <div className="relative w-full aspect-video bg-neutral mb-4 rounded-lg overflow-hidden group">
         <img
@@ -199,9 +202,9 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
           className="w-full h-full object-cover cursor-pointer"
           onClick={openModal}
         />
-        
+
         {/* Navigation Arrows */}
-        <button 
+        <button
           onClick={(e) => handlePrevious(e)}
           onMouseDown={(e) => e.preventDefault()}
           className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white/90 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -209,8 +212,8 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         >
           <ChevronLeft className="h-6 w-6 text-primary" />
         </button>
-        
-        <button 
+
+        <button
           onClick={(e) => handleNext(e)}
           onMouseDown={(e) => e.preventDefault()}
           className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white/90 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -218,26 +221,28 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         >
           <ChevronRight className="h-6 w-6 text-primary" />
         </button>
-        
+
         {/* Image Counter */}
         <div className="absolute bottom-2 right-2 bg-black/60 text-white text-sm px-2 py-1 rounded">
           {currentImageIndex + 1} / {images.length}
         </div>
       </div>
-      
+
       {/* Single row of scrollable thumbnails */}
       <div className="w-full">
         <div className="relative overflow-hidden w-full">
-          <div 
+          <div
             ref={thumbnailsContainerRef}
-            className="flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 pb-3 w-full"
+            className="flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 pb-1 mb-2 w-full"
           >
             {images.map((image: string, index: number) => (
               <div
                 key={index}
-                ref={el => thumbnailRefs.current[index] = el}
-                className={`flex-none w-[calc(25%-1.5px)] sm:w-[calc(20%-1.6px)] md:w-[calc(16.66%-1.7px)] xl:w-[calc(14.28%-1.7px)] bg-neutral rounded-lg overflow-hidden cursor-pointer transition-all ${
-                  currentImageIndex === index ? "ring-2 ring-primary scale-95" : "hover:scale-95"
+                ref={(el) => (thumbnailRefs.current[index] = el)}
+                className={`flex-none w-[calc(25%-1.5px)] sm:w-[calc(20%-1.6px)] md:w-[calc(16.66%-1.7px)] lg:w-[calc(20%-1.7px)] xl:w-[calc(11%-1.7px)] bg-neutral rounded-lg overflow-hidden cursor-pointer transition-all ${
+                  currentImageIndex === index
+                    ? "ring-2 ring-primary scale-95"
+                    : "hover:scale-95"
                 }`}
                 onClick={() => handleThumbnailClick(index)}
               >
@@ -257,9 +262,11 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
       {/* Full screen modal overlay - covers everything including header */}
       <div
         className={`fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300 ease-in-out ${
-          showModal ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          showModal
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
-        style={{ isolation: 'isolate' }}
+        style={{ isolation: "isolate" }}
         onClick={handleModalBackdropClick}
         tabIndex={0}
         aria-modal="true"
@@ -280,7 +287,6 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
           <ChevronLeft className="h-12 w-12" />
         </button>
 
-        
         {/* Right Arrow - at the right edge of the screen */}
         <button
           onClick={(e) => {
@@ -294,11 +300,11 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
         >
           <ChevronRight className="h-12 w-12" />
         </button>
-        
+
         {/* Main Image Container */}
-        <div 
+        <div
           className={`relative w-auto h-auto max-w-[90vw] max-h-[90vh] transition-transform duration-300 ${
-            showModal ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+            showModal ? "scale-100 opacity-100" : "scale-95 opacity-0"
           }`}
           onClick={(e) => e.stopPropagation()}
         >
@@ -314,7 +320,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
           >
             <X className="h-6 w-6" />
           </button>
-          
+
           {/* Main image */}
           <img
             src={currentImage}
@@ -322,7 +328,7 @@ const ApartmentGallery = ({ mainImage, images: propImages }: ApartmentGalleryPro
             className="max-w-full max-h-[calc(100vh-var(--header-height)-2rem)] object-contain rounded-lg shadow-xl select-none"
             onDragStart={(e) => e.preventDefault()}
           />
-          
+
           {/* Image Counter */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/60 text-white text-sm px-3 py-1 rounded-full z-10">
             {currentImageIndex + 1} / {images.length}

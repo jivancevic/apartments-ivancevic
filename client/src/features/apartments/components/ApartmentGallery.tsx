@@ -12,6 +12,7 @@ const ApartmentGallery = ({
 }: ApartmentGalleryProps) => {
   const [images, setImages] = useState<string[]>(propImages || []);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const thumbUrl = (url: string) => url.replace(/\.webp$/, "_thumb.webp");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const currentImage = images[currentImageIndex] || "";
@@ -197,7 +198,7 @@ const ApartmentGallery = ({
       {/* Main Image with Navigation Arrows */}
       <div className="relative w-full aspect-video bg-neutral mb-4 rounded-lg overflow-hidden group">
         <img
-          src={currentImage}
+          src={thumbUrl(currentImage)}
           alt="Apartment view"
           className="w-full h-full object-cover cursor-pointer"
           onClick={openModal}
@@ -248,9 +249,10 @@ const ApartmentGallery = ({
               >
                 <div className="aspect-square w-full">
                   <img
-                    src={image}
+                    src={thumbUrl(image)}
                     alt={`Apartment thumbnail ${index + 1}`}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
               </div>

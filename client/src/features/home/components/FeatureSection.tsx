@@ -1,15 +1,14 @@
 import { useTranslation } from "react-i18next";
 import { Feature } from "@/types";
 import AmenityIcon from "@/components/ui/AmenityIcon";
-import useLanguage from "@/hooks/useLanguage";
+import { localize } from "@/lib/localize";
 
 interface FeatureSectionProps {
   features: Feature[];
 }
 
 const FeatureSection = ({ features }: FeatureSectionProps) => {
-  const { t } = useTranslation();
-  const { currentLanguage } = useLanguage();
+  const { i18n } = useTranslation();
 
   return (
     <section className="py-16 bg-neutral">
@@ -21,10 +20,10 @@ const FeatureSection = ({ features }: FeatureSectionProps) => {
                 <AmenityIcon icon={feature.icon} className="text-3xl text-white" />
               </div>
               <h3 className="font-heading font-semibold text-xl mb-2">
-                {currentLanguage === "en" ? feature.titleEn : feature.titleHr}
+                {localize(feature, "title", i18n.language)}
               </h3>
               <p className="text-gray-600">
-                {currentLanguage === "en" ? feature.descriptionEn : feature.descriptionHr}
+                {localize(feature, "description", i18n.language)}
               </p>
             </div>
           ))}

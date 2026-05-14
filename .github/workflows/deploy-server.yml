@@ -19,10 +19,11 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install & Build server
+      - name: Install & Check server
         working-directory: server
         run: |
           npm ci
+          npm run typecheck
           npm run build
 
       - name: Prepare SSH key

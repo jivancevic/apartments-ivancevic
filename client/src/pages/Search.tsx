@@ -2,8 +2,8 @@ import { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
 
-import SearchBar from "@/components/search/SearchBar";
-import SearchResults from "@/components/search/SearchResults";
+import SearchBar from "@/features/search/components/SearchBar";
+import SearchResults from "@/features/search/components/SearchResults";
 
 const Search = () => {
   const { t } = useTranslation();

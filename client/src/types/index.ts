@@ -1,67 +1,16 @@
-// Apartment type definitions
-export interface Apartment {
-  id: number;
-  nameEn: string;
-  nameHr: string;
-  descriptionEn: string;
-  descriptionHr: string;
-  mainImage?: string; // Client-only field
-  images: string[];
-  location: string;
-  // Dynamic pricing fields
-  basePeakPrice: number;
-  priceMultiplier: string;
-  cleaningFee: number;
-  // Guest capacity
-  maxGuests: number;
-  // Apartment details
-  type: "apartment" | "studio" | "room";
-  roomSizeM2: number;
-  bedrooms: {
-    nameEn: string;
-    nameHr: string;
-    beds: {
-      type: string;
-      count: number;
-    }[];
-  }[];
-  bathrooms: number;
-  // Amenities
-  hasWifi: boolean;
-  hasKitchen: boolean;
-  hasAC: boolean;
-  hasTV: boolean;
-  hasBalcony: boolean;
-  hasSeaView: boolean;
-  hasCityView: boolean;
-  hasDishwasher: boolean;
-  hasCoffeeMachine: boolean;
-  hasHairDryer: boolean;
-  hasMicrowave: boolean;
-  hasSmoothieMaker: boolean;
-  washingMachineType: "both" | "washing" | "none";
-  parkingType: "none" | "free" | "private";
-  parkingDetails?: {
-    pricePerDay: number;
-    reservationRequired: boolean;
-  };
-  hasGarden: boolean;
-  otherAmenities: string[] | null;
-  // Booking links
-  bookingUrl: string | null;
-  airbnbUrl: string | null;
-  icalUrls: string[] | null;
-}
+export type {
+  Apartment,
+  ApartmentSearchResult,
+  Booking,
+  Location,
+  PriceSummary,
+  StayLengthDiscount,
+  RuleSet,
+  RuleSetPeriod,
+  PricePeriod,
+  ApartmentPricingConfig,
+} from "../../../shared/types";
 
-// Booking type definitions
-export interface Booking {
-  id: number;
-  apartmentId: number;
-  startDate: string | Date;
-  endDate: string | Date;
-}
-
-// Inquiry form data
 export interface InquiryFormData {
   name: string;
   email: string;
@@ -72,27 +21,6 @@ export interface InquiryFormData {
   message?: string;
 }
 
-// Location type definitions
-export interface Location {
-  id: number;
-  typeEn: string;
-  typeHr: string;
-  nameEn: string;
-  nameHr: string;
-  descriptionEn: string;
-  descriptionHr: string;
-  image: string;
-  location?: string; // Google Maps URL
-  distance?: {
-    minutes: number;
-    mean: "walk" | "car" | "ferry";
-  };
-  link?: string; // Optional website link
-  featureEn?: string;
-  featureHr?: string;
-}
-
-// Feature type for home page
 export interface Feature {
   icon: string;
   titleEn: string;

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "wouter";
-import SearchBar from "@/components/search/SearchBar";
+import SearchBar from "@/features/search/components/SearchBar";
 
 const HeroSection = () => {
   const { t } = useTranslation();

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import VisitCards from "./VisitCards";
-import { Location } from "../../types";
-import { categories, CATEGORY_TO_TYPE_MAP } from "../../lib/categories";
+import { Location } from "@/types";
+import { localize } from "@/lib/localize";
+import { categories, CATEGORY_TO_TYPE_MAP } from "@/lib/categories";
 import { useLocation } from "wouter";
 
 // Mapping of category slugs to their keys
@@ -99,7 +100,7 @@ export function VisitTabs({ locations, activeSlug }: VisitTabsProps) {
               onClick={() => handleTabClick(category.key)}
             >
               <div className="flex flex-col items-center">
-                {isEnglish ? category.nameEn : category.nameHr}
+                {localize(category, "name", i18n.language)}
               </div>
             </button>
           ))}

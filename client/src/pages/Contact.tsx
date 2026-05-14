@@ -1,14 +1,15 @@
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
-import ContactForm from "@/components/contact/ContactForm";
-import ContactInfo from "@/components/contact/ContactInfo";
+import { type Apartment } from "@/types";
+import ContactForm from "@/features/contact/components/ContactForm";
+import ContactInfo from "@/features/contact/components/ContactInfo";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 const Contact = () => {
   const { t } = useTranslation();
-  
-  // Fetch apartments for the dropdown
-  const { data: apartments } = useQuery({
-    queryKey: ['/api/apartments'],
+
+  const { data: apartments } = useQuery<Apartment[]>({
+    queryKey: ["/api/apartments"],
   });
 
   return (
@@ -17,12 +18,11 @@ const Contact = () => {
         <h2 className="font-heading font-bold text-3xl md:text-4xl text-center mb-8">
           {t("contact.title")}
         </h2>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <ContactForm apartments={apartments || []} />
-          
-          {/* Contact Info and Map */}
+          <ErrorBoundary fallback={<p className="text-sm text-red-600">The contact form failed to load. Please refresh.</p>}>
+            <ContactForm apartments={apartments || []} />
+          </ErrorBoundary>
           <ContactInfo />
         </div>
       </div>

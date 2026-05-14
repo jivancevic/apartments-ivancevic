@@ -115,6 +115,10 @@ const enTranslation = {
   "contact.form.required": "* Required fields",
   "contact.form.success": "Thank you for your inquiry! We will get back to you as soon as possible.",
   "contact.form.error": "There was an error submitting your inquiry. Please try again.",
+  "contact.form.invalidDateSelection": "Invalid date selection",
+  "contact.form.invalidDateDesc": "Please select at least a one-night stay.",
+  "contact.form.unavailableDates": "Selected dates are not available",
+  "contact.form.unavailableDatesDesc": "Please select alternative dates or a different apartment.",
   "contact.notice": "We currently do not offer online booking. Please send an inquiry and we will respond as soon as possible.",
 
   // Contact Information

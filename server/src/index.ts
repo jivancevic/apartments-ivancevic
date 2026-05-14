@@ -7,14 +7,10 @@ import express, {
 // @ts-ignore
 import("../load-env.js");
 import cors from "cors";
-import session from "express-session";
-import passport from "passport";
 import apiRouter from "./api/routes";
 
 const app = express();
 app.set("trust proxy", 1);
-const isProduction =
-  (process.env.NODE_ENV || "").toLowerCase() === "production";
 
 // CORS (env-driven)
 const originsRaw = (
@@ -43,48 +39,15 @@ const corsOptions = { origin: corsOrigin, credentials: true } as const;
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
-// Body parsers after cors
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Session + Passport
-app.use(
-  session({
-    name: process.env.COOKIE_NAME || "sid",
-    secret: process.env.SESSION_SECRET || "changeme",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      sameSite: (() => {
-        const value = (process.env.COOKIE_SAMESITE || "None").toLowerCase();
-        if (value === "lax" || value === "strict" || value === "none")
-          return value as "lax" | "strict" | "none";
-        return "none";
-      })(),
-      secure:
-        (
-          (process.env.COOKIE_SECURE ??
-            (isProduction ? "true" : "false")) as string
-        ).toLowerCase() === "true",
-      domain: process.env.COOKIE_DOMAIN || undefined,
-      maxAge: 1000 * 60 * 60 * 24 * 30,
-    },
-  })
-);
-passport.serializeUser((user: any, done) => done(null, user));
-passport.deserializeUser((obj: any, done) => done(null, obj));
-app.use(passport.initialize());
-app.use(passport.session());
-
-// API routes
 app.use("/api", apiRouter);
 
-// Health check
 app.get("/health", (_req: Request, res: Response) => {
   res.status(200).send("ok");
 });
 
-// Error handler
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   const status = err.status || err.statusCode || 500;
   const message = err.message || "Internal Server Error";

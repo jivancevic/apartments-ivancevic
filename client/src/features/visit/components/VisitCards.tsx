@@ -3,7 +3,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Footprints, Car, Ship, Clock, MapPin, ExternalLink } from "lucide-react";
-import { Location } from '../../types';
+import { Location } from '@/types';
+import { localize } from "@/lib/localize";
 
 interface VisitCardsProps {
   locations: Location[];
@@ -46,7 +47,7 @@ export function VisitCards({ locations }: VisitCardsProps) {
           >
             <img
               src={location.image}
-              alt={isEnglish ? location.nameEn : location.nameHr}
+              alt={localize(location, "name", i18n.language)}
               className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
             />
           </div>
@@ -55,17 +56,17 @@ export function VisitCards({ locations }: VisitCardsProps) {
               className="cursor-pointer hover:text-primary"
               onClick={() => handleLocationClick(location)}
             >
-              {isEnglish ? location.nameEn : location.nameHr}
+              {localize(location, "name", i18n.language)}
             </CardTitle>
           </CardHeader>
           <CardContent className="flex-grow">
             <CardDescription className="text-sm mb-4">
-              {isEnglish ? location.descriptionEn : location.descriptionHr}
+              {localize(location, "description", i18n.language)}
             </CardDescription>
             
             {(location.featureEn || location.featureHr) && (
               <Badge variant="outline" className="bg-primary/10 text-primary mb-2">
-                {isEnglish ? location.featureEn : location.featureHr}
+                {localize(location, "feature", i18n.language)}
               </Badge>
             )}
           </CardContent>
@@ -84,7 +85,7 @@ export function VisitCards({ locations }: VisitCardsProps) {
                   variant="outline" 
                   size="sm" 
                   className="p-1 h-8 w-8"
-                  onClick={() => window.open(location.location, '_blank', 'noopener,noreferrer')}
+                  onClick={() => window.open(location.location ?? undefined, '_blank', 'noopener,noreferrer')}
                   title={t("visit.viewOnMap")}
                 >
                   <MapPin className="h-4 w-4" />
@@ -95,7 +96,7 @@ export function VisitCards({ locations }: VisitCardsProps) {
                   variant="outline" 
                   size="sm" 
                   className="p-1 h-8 w-8"
-                  onClick={() => window.open(location.link, '_blank', 'noopener,noreferrer')}
+                  onClick={() => window.open(location.link ?? undefined, '_blank', 'noopener,noreferrer')}
                   title={t("visit.visitWebsite")}
                 >
                   <ExternalLink className="h-4 w-4" />

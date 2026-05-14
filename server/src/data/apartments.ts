@@ -4,6 +4,8 @@ import type { Apartment } from "../types";
 export const apartmentData: Apartment[] = [
   {
     id: 1,
+    slug: "magical-oasis",
+    stars: 3,
     nameEn: "Magical Oasis",
     nameHr: "Magical Oasis",
     descriptionEn: `Nestled in a hidden lane of Korčula’s medieval Old Town, Magical Oasis is a charming retreat perfect for two. 
@@ -94,6 +96,8 @@ export const apartmentData: Apartment[] = [
   },
   {
     id: 2,
+    slug: "ismaelli",
+    stars: 4,
     nameEn: "Ismaelli Palace",
     nameHr: "Palača Ismaelli",
     descriptionEn: `Indulge in a one-of-a-kind stay at the Sunset Palace Apartment, set within the 600-year-old Ismaelli Palace next to Korčula’s St. Mark’s Cathedral. 
@@ -205,6 +209,8 @@ export const apartmentData: Apartment[] = [
   },
   {
     id: 3,
+    slug: "saint-roko",
+    stars: 4,
     nameEn: "Saint Roko",
     nameHr: "Sveti Roko",
     descriptionEn: `Experience the charm of Korčula’s Old Town at Apartment St. Roko, an authentic stone residence nestled on the main cobbled street within the city walls. 
@@ -286,6 +292,8 @@ export const apartmentData: Apartment[] = [
   },
   {
     id: 4,
+    slug: "lavander",
+    stars: 4,
     nameEn: "Lavender",
     nameHr: "Lavanda",
     descriptionEn: `Apartment Lavender welcomes you with a blend of modern comfort and Mediterranean charm. 
@@ -405,6 +413,8 @@ export const apartmentData: Apartment[] = [
   },
   {
     id: 5,
+    slug: "sun",
+    stars: 4,
     nameEn: "Sun",
     nameHr: "Sunce",
     descriptionEn: `Welcome to Apartment Sun – a bright, charming retreat just steps from Korčula's historic Old Town. 
@@ -529,6 +539,8 @@ export const apartmentData: Apartment[] = [
   },
   {
     id: 6,
+    slug: "sea",
+    stars: 4,
     nameEn: "Sea",
     nameHr: "More",
     descriptionEn: `Apartment Viva Sea is a stylish studio for two, offering breathtaking vistas and a serene atmosphere. Perched above the bay, this open-plan retreat maximizes space with a comfortable double bed, a compact kitchenette, and a modern bathroom. The décor is contemporary with touches of coastal charm, letting the sparkling sea view take center stage. Step out onto the private balcony and you’re greeted by an expansive panorama of the crystal-clear bay and the majestic Pelješac mountains across the channel. It’s the perfect spot to sip local wine at sunset or start your day with breakfast in the fresh sea air. Apartment Viva Sea comes equipped with all the essentials: air conditioning, free WiFi, satellite TV, and even a washing machine for your convenience. Adventure is close at hand – the calm bay below is great for swimming and snorkeling, and the area is known for windsurfing and scenic cycling routes. Korčula’s famous Old Town is around 1 km away (about a 15–20 minute walk), so you can enjoy both tranquility and cultural sights with ease. Guests consistently praise the panoramic views and peaceful location in their reviews, noting how rejuvenating their stay in Viva Sea was and applauding the attentive, friendly hosts. Whether you’re a couple seeking romance or a solo traveler longing for a quiet seaside escape, Viva Sea offers an unforgettable Korčula experience.`,
@@ -599,6 +611,8 @@ export const apartmentData: Apartment[] = [
   },
   {
     id: 7,
+    slug: "beach",
+    stars: 4,
     nameEn: "Beach",
     nameHr: "Plaža",
     descriptionEn: `Apartment Viva Beach is a charming seaside hideaway perfect for a romantic escape or a peaceful retreat for two. Nestled on the ground floor, this one-bedroom apartment boasts its own private courtyard terrace (about 22 m²) surrounded by lush greenery – including fragrant orange and lemon trees that provide natural shade. The cozy interior is thoughtfully arranged, featuring a comfortable double bed, a compact but well-equipped kitchen (with a dishwasher for added convenience), and a modern bathroom with a walk-in shower. The indoor living space seamlessly connects to the outdoor terrace, where you can lounge, sunbathe in privacy, or enjoy al fresco dining with the sound of the sea in the background. A few stone steps lead directly from the property down to a secluded pebble beach known for its crystal-clear water and uncrowded atmosphere – it’s almost like having your own private beach. Despite the tucked-away feel, Korčula’s Old Town is only a short drive or a pleasant 20-minute walk along the coast. Guests often remark in reviews that Apartment Viva Beach’s shady terrace is a highlight of their stay, calling it an “oasis of calm,” and they love the spotless cleanliness and the hospitality of the hosts. If you’re seeking tranquility by the sea with all the comforts of home, Viva Beach delivers an unforgettable experience.`,
@@ -680,6 +694,8 @@ export const apartmentData: Apartment[] = [
   },
   {
     id: 8,
+    slug: "nika",
+    stars: 3,
     nameEn: "Nika",
     nameHr: "Nika",
     descriptionEn: `Apartment Nika offers a bright and comfortable escape just outside Korčula’s medieval Old Town. Located a leisurely 10-minute walk from the historic center (and only a few minutes from a hidden local beach), Nika rewards guests with a stunning panoramic view of the sea, mountains, and red-roofed Old Town from its private balcony. Inside, the apartment is modern and inviting: there’s a cozy living area with a sofa and flat-screen TV, a dining corner, and a fully equipped kitchen where you can prepare everything from morning coffee to dinner with ease. The separate bedroom features a comfortable double bed dressed in crisp linens, promising a good night’s sleep. Air-conditioning and free Wi-Fi are provided, and guests also have access to a washing machine for convenience. Nestled in a quiet residential neighborhood, the apartment provides peace and relaxation after a day of sightseeing, while still giving you easy access to shops, cafes, the ferry port and all the charms of town. The friendly hosts (the Giuliani family) are highly praised for their warm welcome and helpful local recommendations – they’ll make sure you feel right at home. With its lovely balcony views, well-appointed interior, and convenient location, Apartment Nika has everything you need for a charming and hassle-free stay on Korčula.`,
@@ -765,6 +781,8 @@ export const apartmentData: Apartment[] = [
   },
   {
     id: 9,
+    slug: "lara",
+    stars: 3,
     nameEn: "Lara",
     nameHr: "Lara",
     descriptionEn: `Apartment Lara is a cozy Korčula getaway with a delightful local touch. Just a short 10-minute stroll from the Old Town gates (and a few minutes from a small pebble beach), Lara enjoys a peaceful setting and lovely partial sea views. Step outside to your own little patio – the perfect spot to sip morning coffee while gazing at the turquoise Adriatic. Inside, the apartment is clean, bright and outfitted with everything you need. The living area includes a comfortable sofa (ideal for relaxing after a day of exploring) and a flat-screen TV, and opens into a compact kitchen equipped with all the essentials for cooking – from a stovetop and fridge to cookware and a coffee maker. The tranquil bedroom offers a cozy double bed with quality linens to ensure restful nights, and the bathroom is modern, stocked with fresh towels and toiletries. Air-conditioning and free Wi-Fi are provided, and guests of Lara can also use a shared washing machine during longer stays. Tucked in a friendly residential neighborhood just outside the tourist bustle, Apartment Lara lets you experience Korčula like a local – quiet nights, easy walks to town and beach, and authentic charm. Hosts Marija and her family are praised for their warmth and attentiveness; they’ll gladly offer tips on where to eat, swim, and sightsee. Whether you’re enjoying a glass of wine on the patio or unwinding in the comfy living room, Apartment Lara offers charm, comfort, and convenience for your island stay.`,

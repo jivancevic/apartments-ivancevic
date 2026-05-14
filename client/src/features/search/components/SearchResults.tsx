@@ -1,0 +1,228 @@
+import { useTranslation } from "react-i18next";
+import { Link } from "wouter";
+import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
+import {
+  Wifi,
+  Wind,
+  Tv,
+  Mountain,
+  Car,
+  Palmtree,
+  Users,
+  Mail,
+  ParkingSquare,
+} from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ApartmentSearchResult } from "@/types";
+import { API_BASE_URL } from "@/lib/queryClient";
+import { localize } from "@/lib/localize";
+
+interface SearchResultsProps {
+  checkIn: Date;
+  checkOut: Date;
+  guests: number;
+}
+
+const SearchResults = ({ checkIn, checkOut, guests }: SearchResultsProps) => {
+  const { t, i18n } = useTranslation();
+
+  const formattedCheckIn = format(checkIn, "yyyy-MM-dd");
+  const formattedCheckOut = format(checkOut, "yyyy-MM-dd");
+
+  const { data: apartments = [], isLoading } = useQuery<ApartmentSearchResult[]>({
+    queryKey: ["/api/apartments", formattedCheckIn, formattedCheckOut, guests],
+    queryFn: async () => {
+      const params = new URLSearchParams({
+        checkIn: formattedCheckIn,
+        checkOut: formattedCheckOut,
+        guests: guests.toString(),
+      });
+      const res = await fetch(`${API_BASE_URL}/api/apartments?${params}`, {
+        credentials: "include",
+      });
+      if (!res.ok) throw new Error(`${res.status}`);
+      return res.json();
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold mb-4">{t("search.loading")}</h2>
+        {[1, 2, 3].map((i) => (
+          <Card key={i} className="overflow-hidden">
+            <div className="flex flex-col md:flex-row">
+              <Skeleton className="h-48 md:h-auto md:w-1/3 rounded-l" />
+              <CardContent className="flex-1 p-4">
+                <Skeleton className="h-8 w-3/4 mb-2" />
+                <Skeleton className="h-4 w-5/6 mb-4" />
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {[1, 2, 3, 4].map((j) => (
+                    <Skeleton key={j} className="h-6 w-16" />
+                  ))}
+                </div>
+                <Skeleton className="h-6 w-1/4 mt-auto" />
+              </CardContent>
+            </div>
+          </Card>
+        ))}
+      </div>
+    );
+  }
+
+  if (apartments.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <h2 className="text-2xl font-bold mb-4">{t("search.noResults")}</h2>
+        <p className="text-gray-600 mb-6">{t("search.tryDifferent")}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold">
+        {t("search.resultsFound", { count: apartments.length })}
+      </h2>
+
+      <div className="space-y-4">
+        {apartments.map((apartment) => {
+          const { priceSummary } = apartment;
+          const apartmentName = localize(apartment, "name", i18n.language);
+          const apartmentDescription = localize(apartment, "description", i18n.language);
+          const mainImage = apartment.images?.[0];
+
+          const contactUrl = `/contact?${new URLSearchParams({
+            apartmentId: apartment.id.toString(),
+            checkIn: formattedCheckIn,
+            checkOut: formattedCheckOut,
+          })}`;
+          const apartmentUrl = `/apartments/${apartment.slug}?${new URLSearchParams({
+            checkIn: formattedCheckIn,
+            checkOut: formattedCheckOut,
+          })}`;
+
+          return (
+            <Card key={apartment.id} className="overflow-hidden">
+              <div className="flex flex-col md:flex-row">
+                <div className="h-48 md:h-auto md:w-1/3 overflow-hidden">
+                  {mainImage ? (
+                    <img
+                      src={mainImage}
+                      alt={apartmentName}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                      <span className="text-gray-500">{t("common.noImage")}</span>
+                    </div>
+                  )}
+                </div>
+
+                <CardContent className="flex-1 p-4">
+                  <div className="mb-4">
+                    <h3 className="text-xl font-bold mb-1">{apartmentName}</h3>
+                    <p className="text-gray-600 text-sm line-clamp-2 mb-2">
+                      {apartmentDescription}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {apartment.maxGuests && (
+                      <Badge variant="outline" className="flex items-center gap-1">
+                        <Users className="h-3 w-3" />
+                        {t("apartment.maxGuests", { count: apartment.maxGuests })}
+                      </Badge>
+                    )}
+                    {apartment.hasWifi && (
+                      <Badge variant="outline" className="flex items-center gap-1">
+                        <Wifi className="h-3 w-3" />
+                        {t("amenities.wifi")}
+                      </Badge>
+                    )}
+                    {apartment.hasAC && (
+                      <Badge variant="outline" className="flex items-center gap-1">
+                        <Wind className="h-3 w-3" />
+                        {t("amenities.ac")}
+                      </Badge>
+                    )}
+                    {apartment.hasTV && (
+                      <Badge variant="outline" className="flex items-center gap-1">
+                        <Tv className="h-3 w-3" />
+                        {t("amenities.tv")}
+                      </Badge>
+                    )}
+                    {apartment.hasSeaView && (
+                      <Badge variant="outline" className="flex items-center gap-1">
+                        <Mountain className="h-3 w-3" />
+                        {t("amenities.seaView")}
+                      </Badge>
+                    )}
+                    {apartment.parkingType === "free" && (
+                      <Badge variant="outline" className="flex items-center gap-1">
+                        <Car className="h-3 w-3" />
+                        {t("amenities.freeParking", "Free parking")}
+                      </Badge>
+                    )}
+                    {apartment.parkingType === "private" && (
+                      <Badge variant="outline" className="flex items-center gap-1">
+                        <ParkingSquare className="h-3 w-3" />
+                        {t("amenities.privateParking", "Private parking")}
+                      </Badge>
+                    )}
+                    {apartment.hasGarden && (
+                      <Badge variant="outline" className="flex items-center gap-1">
+                        <Palmtree className="h-3 w-3" />
+                        {t("amenities.garden")}
+                      </Badge>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col md:flex-row items-stretch md:items-end justify-between mt-auto">
+                    <div className="text-sm mb-3 md:mb-0">
+                      <div className="text-gray-600">
+                        {format(checkIn, "MMM d")} – {format(checkOut, "MMM d, yyyy")}
+                        <span className="mx-1">•</span>
+                        {t("apartments.nights", { count: priceSummary.totalNights })}
+                      </div>
+                      <div className="font-bold text-lg">
+                        €{Math.round(priceSummary.averagePerNight)}{" "}
+                        <span className="text-xs font-normal">{t("search.perNight")}</span>
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        €{priceSummary.total} {t("search.totalPrice")}
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      <Link
+                        to={contactUrl}
+                        className="flex items-center gap-1 bg-white border border-primary text-primary px-3 py-2 rounded-md hover:bg-gray-50 transition"
+                      >
+                        <Mail className="h-4 w-4" />
+                        {t("search.sendInquiry")}
+                      </Link>
+                      <Link
+                        to={apartmentUrl}
+                        className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition"
+                      >
+                        {t("search.viewDetails")}
+                      </Link>
+                    </div>
+                  </div>
+                </CardContent>
+              </div>
+            </Card>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default SearchResults;

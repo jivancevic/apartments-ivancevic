@@ -4,14 +4,13 @@ import { Apartment, Booking } from "@/types";
 import ApartmentGallery from "./ApartmentGallery";
 import BookingCalendar from "@/components/ui/booking-calendar";
 import AmenityIcon from "@/components/ui/AmenityIcon";
-import useLanguage from "@/hooks/useLanguage";
-import { useIcalFeeds } from "@/hooks/useIcalFeeds";
+import { localize } from "@/lib/localize";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useMemo, useState } from "react";
-import { getApartmentStars } from "./ApartmentTabs";
-import { format, parse } from 'date-fns';
+import { useState } from "react";
+import { format } from 'date-fns';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 interface SelectedDates {
   checkIn?: Date;
@@ -24,8 +23,7 @@ interface ApartmentDetailProps {
 }
 
 const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: ApartmentDetailProps) => {
-  const { t } = useTranslation();
-  const { currentLanguage } = useLanguage();
+  const { t, i18n } = useTranslation();
   
   // Helper function to format dates consistently for URL parameters
   const formatDateForUrl = (date: Date | undefined): string | null => {
@@ -36,27 +34,9 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
   // Track selected dates internally to handle calendar selection
   const [currentSelectedDates, setCurrentSelectedDates] = useState<SelectedDates>(initialSelectedDates || {});
   
-  // Fetch bookings for this apartment from API
-  const { data: apiBookings, isLoading: isLoadingApi } = useQuery<Booking[]>({
+  const { data: allBookings = [], isLoading } = useQuery<Booking[]>({
     queryKey: [`/api/apartments/${apartment.id}/bookings`],
   });
-  
-  // Fetch bookings from iCal feeds if available
-  const { 
-    icalBookings, 
-    isLoading: isLoadingIcal, 
-    error: icalError 
-  } = useIcalFeeds(apartment.id, apartment.icalUrls || []);
-  
-  // Determine if we're loading any bookings data
-  const isLoading = isLoadingApi || isLoadingIcal;
-  
-  // Combine bookings from API and iCal feeds
-  const allBookings = useMemo(() => {
-    const api = apiBookings || [];
-    const merged = [...api, ...icalBookings];
-    return merged;
-  }, [apiBookings, icalBookings]);
 
 
   return (
@@ -71,15 +51,15 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
       {/* Details */}
       <div className="pt-4">
         <div className="flex items-center mb-1 text-amber-500">
-          {Array.from({ length: getApartmentStars(apartment.id) }).map((_, index) => (
+          {Array.from({ length: apartment.stars }).map((_, index) => (
             <AmenityIcon key={index} icon="star" size={12} className="mr-0.5 text-current fill-current" />
           ))}
         </div>
         <h3 className="font-heading font-bold text-2xl mb-4">
-          {currentLanguage === "en" ? apartment.nameEn : apartment.nameHr}
+          {localize(apartment, "name", i18n.language)}
         </h3>
         <div className="mb-6 whitespace-pre-wrap">
-          {currentLanguage === "en" ? apartment.descriptionEn : apartment.descriptionHr}
+          {localize(apartment, "description", i18n.language)}
         </div>
         
         {/* Guest Capacity and Layout */}
@@ -122,7 +102,7 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
               {apartment.bedrooms.map((bedroom, index) => (
                 <div key={index} className="bg-white rounded-md">
                   <p className="font-medium mb-1">
-                    {currentLanguage === "en" ? bedroom.nameEn : bedroom.nameHr}
+                    {localize(bedroom, "name", i18n.language)}
                   </p>
                   <div className="space-y-1 pl-2">
                     {bedroom.beds.map((bed, bedIndex) => (
@@ -373,25 +353,21 @@ const ApartmentDetail = ({ apartment, selectedDates: initialSelectedDates }: Apa
             <Skeleton className="h-32 w-full" />
           ) : (
             <div className="bg-neutral p-4 rounded-lg">
-              {icalError && (
-                <div className="flex items-center gap-2 text-red-500 text-sm mb-3 p-2 bg-red-50 rounded">
-                  <AmenityIcon icon="alert" size={16} />
-                  <span>Error loading external calendars: {icalError}</span>
-                </div>
-              )}
               <div className="booking-calendar-wrapper">
-                <BookingCalendar 
-                  bookings={allBookings} 
-                  apartment={apartment} 
-                  initialStartDate={initialSelectedDates?.checkIn}
-                  initialEndDate={initialSelectedDates?.checkOut}
-                  onDatesChange={(startDate, endDate) => {
-                    setCurrentSelectedDates({
-                      checkIn: startDate || undefined,
-                      checkOut: endDate || undefined
-                    });
-                  }}
-                />
+                <ErrorBoundary fallback={<p className="text-sm text-red-600">Calendar failed to load. Please refresh.</p>}>
+                  <BookingCalendar
+                    bookings={allBookings}
+                    apartment={apartment}
+                    initialStartDate={initialSelectedDates?.checkIn}
+                    initialEndDate={initialSelectedDates?.checkOut}
+                    onDatesChange={(startDate, endDate) => {
+                      setCurrentSelectedDates({
+                        checkIn: startDate || undefined,
+                        checkOut: endDate || undefined
+                      });
+                    }}
+                  />
+                </ErrorBoundary>
               </div>
             </div>
           )}

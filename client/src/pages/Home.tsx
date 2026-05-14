@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import HeroSection from "@/components/home/HeroSection";
-import FeatureSection from "@/components/home/FeatureSection";
+import HeroSection from "@/features/home/components/HeroSection";
+import FeatureSection from "@/features/home/components/FeatureSection";
 import { Feature } from "@/types";
 import { UmbrellaIcon, Volume2Icon, ParkingMeter, MountainIcon } from "lucide-react";
 

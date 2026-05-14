@@ -1,6 +1,7 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Apartment, Booking } from "@/types";
+import { Apartment, Booking, PriceSummary } from "@/types";
+import { apiRequest } from "@/lib/queryClient";
 import {
   format,
   addMonths,
@@ -19,11 +20,6 @@ import { ChevronLeft, ChevronRight, X, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import SeasonPriceGrid from "@/components/ui/SeasonPriceGrid";
-import {
-  calculateStayPrice,
-  getSeasonalPrices,
-  getStayLimits,
-} from "@/lib/pricing";
 
 /**
  * The booking calendar component shows availability and allows date selection
@@ -57,53 +53,6 @@ const BookingCalendar = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Create a complete apartment object with all required properties to pass to pricing functions
-  const apartmentWithDefaults = useMemo(
-    () => ({
-      ...apartment,
-      // Required fields with default values if not provided
-      id: apartment.id,
-      type: apartment.type,
-      nameEn: apartment.nameEn,
-      nameHr: apartment.nameHr,
-      descriptionEn: apartment.descriptionEn,
-      descriptionHr: apartment.descriptionHr,
-      images: apartment.images,
-      location: apartment.location || "",
-      basePeakPrice: apartment.basePeakPrice || 110,
-      priceMultiplier: apartment.priceMultiplier || "1.0",
-      cleaningFee: apartment.cleaningFee || 40,
-      maxGuests: apartment.maxGuests,
-      roomSizeM2: apartment.roomSizeM2,
-      bedrooms: apartment.bedrooms,
-      bathrooms: apartment.bathrooms,
-      hasWifi: apartment.hasWifi,
-      hasKitchen: apartment.hasKitchen,
-      hasAC: apartment.hasAC,
-      hasTV: apartment.hasTV,
-      hasBalcony: apartment.hasBalcony,
-      hasSeaView: apartment.hasSeaView,
-      hasCityView: apartment.hasCityView,
-      hasDishwasher: apartment.hasDishwasher,
-      hasCoffeeMachine: apartment.hasCoffeeMachine,
-      hasHairDryer: apartment.hasHairDryer,
-      hasMicrowave: apartment.hasMicrowave,
-      hasSmoothieMaker: apartment.hasSmoothieMaker,
-      washingMachineType: apartment.washingMachineType,
-      parkingType: apartment.parkingType,
-      // Create a default parkingDetails if not provided
-      parkingDetails: apartment.parkingDetails || {
-        pricePerDay: 0,
-        reservationRequired: false,
-      },
-      hasGarden: apartment.hasGarden,
-      otherAmenities: apartment.otherAmenities,
-      bookingUrl: apartment.bookingUrl,
-      airbnbUrl: apartment.airbnbUrl,
-      icalUrls: apartment.icalUrls,
-    }),
-    [apartment]
-  );
   const { t } = useTranslation();
   // If initial dates are provided, set the current month to the month of the initial start date
   const [currentDate, setCurrentDate] = useState(() => {
@@ -186,23 +135,11 @@ const BookingCalendar = ({
     return daysInRange.some((day) => isDateBooked(day));
   };
 
-  // Check if a stay length is valid (within min/max nights constraints)
-  const isValidStayLength = async (startDate: Date, endDate: Date) => {
+  // Check if a stay length is valid using cached stay limits
+  const isValidStayLength = (startDate: Date, endDate: Date): boolean => {
     const nights = differenceInDays(endDate, startDate);
-    const limits = await getStayLimits(apartmentWithDefaults, startDate);
-
-    return nights >= limits.minNights && nights <= limits.maxNights;
-  };
-
-  // Check if a date can be selected as end date (considering min/max nights)
-  const canSelectAsEndDate = async (date: Date, startDate: Date) => {
-    if (!startDate) return true;
-
-    const nights = differenceInDays(date, startDate);
-    if (nights <= 0) return false; // Can't select same day or earlier
-
-    const limits = await getStayLimits(apartmentWithDefaults, startDate);
-    return nights >= limits.minNights && nights <= limits.maxNights;
+    if (!stayLimits) return true;
+    return nights >= stayLimits.minNights && nights <= stayLimits.maxNights;
   };
 
   // Check if a date is in the selected range (days between selected start and end)
@@ -267,17 +204,7 @@ const BookingCalendar = ({
         }
 
         // Check if the stay length is valid (within min/max nights constraints)
-        let isValid = false;
-        try {
-          isValid = await isValidStayLength(newStartDate, newEndDate);
-        } catch (err) {
-          setCalendarError(
-            "Error validating stay length: " +
-              (err instanceof Error ? err.message : String(err))
-          );
-          console.error("Error validating stay length:", err);
-          return;
-        }
+        const isValid = isValidStayLength(newStartDate, newEndDate);
         if (!isValid) {
           setCalendarError(
             "Selected stay does not meet min/max nights requirements."
@@ -317,22 +244,12 @@ const BookingCalendar = ({
         const rangeEnd = selectedStartDate < date ? date : selectedStartDate;
 
         // Only update hover state if the range is valid
-        isValidStayLength(rangeStart, rangeEnd)
-          .then((isValid) => {
-            if (!hasBookedDatesInRange(rangeStart, rangeEnd) && isValid) {
-              setHoverDate(date);
-            } else {
-              setHoverDate(null);
-            }
-          })
-          .catch((err) => {
-            setCalendarError(
-              "Error validating hover stay length: " +
-                (err instanceof Error ? err.message : String(err))
-            );
-            console.error("Error validating hover stay length:", err);
-            setHoverDate(null);
-          });
+        const isValid = isValidStayLength(rangeStart, rangeEnd);
+        if (!hasBookedDatesInRange(rangeStart, rangeEnd) && isValid) {
+          setHoverDate(date);
+        } else {
+          setHoverDate(null);
+        }
       } else {
         setHoverDate(date);
       }
@@ -375,52 +292,30 @@ const BookingCalendar = ({
 
   // Load stay limits when start date changes
   useEffect(() => {
-    const loadStayLimits = async () => {
-      if (selectedStartDate) {
-        try {
-          const limits = await getStayLimits(
-            apartmentWithDefaults,
-            selectedStartDate
-          );
-          setStayLimits(limits);
-        } catch (error) {
-          setCalendarError(
-            "Error loading stay limits: " +
-              (error instanceof Error ? error.message : String(error))
-          );
-          console.error("Error loading stay limits:", error);
-        }
-      } else {
-        setStayLimits(null);
-      }
-    };
+    if (!selectedStartDate) {
+      setStayLimits(null);
+      return;
+    }
+    const checkIn = format(selectedStartDate, "yyyy-MM-dd");
+    apiRequest("GET", `/api/pricing/limits/${apartment.id}?checkIn=${checkIn}`)
+      .then((res) => res.json())
+      .then((limits) => setStayLimits(limits))
+      .catch((error) => {
+        console.error("Error loading stay limits:", error);
+      });
+  }, [apartment.id, selectedStartDate]);
 
-    loadStayLimits();
-  }, [apartmentWithDefaults, selectedStartDate]);
-
-  // Calculate price summary when selection changes
+  // Calculate price summary when selection changes — server is authoritative
   useEffect(() => {
     const calculatePrices = async () => {
-      if (!selectedStartDate || !selectedEndDate) {
-        return;
-      }
-
+      if (!selectedStartDate || !selectedEndDate) return;
       try {
-        const summary = await calculateStayPrice(
-          apartmentWithDefaults,
-          selectedStartDate,
-          selectedEndDate
-        );
-
-        if (
-          !summary ||
-          !summary.totalNights ||
-          !summary.subtotal ||
-          !summary.total
-        ) {
-          throw new Error("Invalid summary returned");
-        }
-
+        const res = await apiRequest("POST", "/api/pricing/calculate", {
+          apartmentId: apartment.id,
+          checkIn: format(selectedStartDate, "yyyy-MM-dd"),
+          checkOut: format(selectedEndDate, "yyyy-MM-dd"),
+        });
+        const summary = (await res.json()) as PriceSummary;
         setPriceSummary({
           totalNights: summary.totalNights,
           subtotal: summary.subtotal,
@@ -438,7 +333,7 @@ const BookingCalendar = ({
     };
 
     calculatePrices();
-  }, [selectedStartDate, selectedEndDate]);
+  }, [apartment.id, selectedStartDate, selectedEndDate]);
 
 
   return (
@@ -450,7 +345,7 @@ const BookingCalendar = ({
         </div>
       )}
       {/* Season Prices */}
-      <SeasonPriceGrid apartmentName={apartmentWithDefaults.nameEn} />
+      <SeasonPriceGrid apartmentId={apartment.id} />
 
       <div className="flex justify-between items-center mb-2">
         <Button

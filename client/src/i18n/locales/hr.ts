@@ -131,6 +131,10 @@ const hrTranslation = {
     "Hvala na vašem upitu! Odgovorit ćemo vam u najkraćem mogućem roku.",
   "contact.form.error":
     "Došlo je do pogreške prilikom slanja upita. Molimo pokušajte ponovno.",
+  "contact.form.invalidDateSelection": "Nevažeći odabir datuma",
+  "contact.form.invalidDateDesc": "Molimo odaberite boravak od najmanje jedne noći.",
+  "contact.form.unavailableDates": "Odabrani datumi nisu dostupni",
+  "contact.form.unavailableDatesDesc": "Molimo odaberite alternativne datume ili drugi apartman.",
   "contact.notice":
     "Trenutno ne nudimo online rezervacije. Molimo pošaljite upit i odgovorit ćemo u najkraćem mogućem roku.",
 

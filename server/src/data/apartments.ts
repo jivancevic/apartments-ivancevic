@@ -255,7 +255,7 @@ export const apartmentData: Apartment[] = [
     priceMultiplier: "1.00",
     cleaningFee: 40,
     // Apartment details
-    maxGuests: 4,
+    maxGuests: 2,
     type: "studio",
     roomSizeM2: 26,
     bedrooms: [
@@ -292,7 +292,7 @@ export const apartmentData: Apartment[] = [
   },
   {
     id: 4,
-    slug: "lavander",
+    slug: "lavender",
     stars: 4,
     nameEn: "Lavender",
     nameHr: "Lavanda",
@@ -406,7 +406,7 @@ export const apartmentData: Apartment[] = [
     hasSmoothieMaker: false,
     parkingType: "private",
     parkingDetails: {
-      pricePerDay: 8,
+      pricePerDay: 10,
       reservationRequired: true,
     },
     otherAmenities: [],
@@ -532,7 +532,7 @@ export const apartmentData: Apartment[] = [
     hasSmoothieMaker: false,
     parkingType: "private",
     parkingDetails: {
-      pricePerDay: 8,
+      pricePerDay: 10,
       reservationRequired: true,
     },
     otherAmenities: [],
@@ -604,7 +604,7 @@ export const apartmentData: Apartment[] = [
     hasSmoothieMaker: false,
     parkingType: "private",
     parkingDetails: {
-      pricePerDay: 8,
+      pricePerDay: 10,
       reservationRequired: true,
     },
     otherAmenities: [],
@@ -687,7 +687,7 @@ export const apartmentData: Apartment[] = [
     hasSmoothieMaker: false,
     parkingType: "private",
     parkingDetails: {
-      pricePerDay: 8,
+      pricePerDay: 10,
       reservationRequired: true,
     },
     otherAmenities: ["Satellite TV", "Hair Dryer", "Terrace with Sea View"],
